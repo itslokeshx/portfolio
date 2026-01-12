@@ -3,6 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
 import { Preload } from "@react-three/drei";
 import useStore from "@/store/useStore";
+import Hero from "@/features/hero/Hero";
 
 export default function Scene() {
     const loaded = useStore((state) => state.loaded);
