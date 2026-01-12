@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Loader from "@/components/ui/Loader";
 import HeroOverlay from "@/features/hero/HeroOverlay";
 import AboutHTML from "@/features/about/AboutHTML";
+import SkillsHTML from "@/features/skills/SkillsHTML";
 
 // Dynamic import for Scene to avoid SSR issues with Canvas
 const Scene = dynamic(() => import("@/components/canvas/Scene"), {
@@ -19,6 +20,7 @@ export default function Home() {
       <div className="content-overlay">
         <HeroOverlay />
         <AboutHTML />
+        <SkillsHTML />
         {/* Sections will be added here */}
       </div>
 

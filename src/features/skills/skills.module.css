@@ -1,0 +1,31 @@
+.skillsSection {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 5rem;
+    pointer-events: none;
+    /* Let clicks pass to canvas */
+}
+
+.content {
+    text-align: center;
+    z-index: 10;
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: 0.5rem;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.subtitle {
+    color: var(--color-cyan);
+    font-family: monospace;
+    margin-top: 1rem;
+    opacity: 0.8;
+}
