@@ -30,7 +30,7 @@ export default function Scene() {
                 <Suspense fallback={null}>
                     <CameraManager />
                     <Hero />
-                    <group position={[0, -15, 0]}>
+                    {/* <group position={[0, -15, 0]}>
                         <About3D />
                     </group>
                     <group position={[0, -35, 0]}>
@@ -44,7 +44,7 @@ export default function Scene() {
                     </group>
                     <group position={[0, -200, 0]}>
                         <ContactAvatar />
-                    </group>
+                    </group> */}
                     <Preload all />
                 </Suspense>
             </Canvas>
