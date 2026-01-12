@@ -2,6 +2,7 @@
 import { Suspense } from "react";
 import Portal from "./Portal";
 import Starfield from "./Starfield";
+import HeroText from "./HeroText";
 import { Float, Text3D, Center } from "@react-three/drei";
 
 export default function Hero() {
