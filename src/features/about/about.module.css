@@ -25,16 +25,49 @@
 .card {
     width: 500px;
     max-width: 90vw;
-    padding: 3rem;
-    background: rgba(21, 21, 21, 0.6);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(10, 10, 30, 0.8), rgba(20, 20, 50, 0.6));
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(0, 240, 255, 0.3);
+    border-radius: 20px;
+    padding: 2.5rem;
+    min-width: 400px;
+    max-width: 500px;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.5),
+        0 0 40px rgba(0, 240, 255, 0.2),
+        inset 0 0 20px rgba(0, 240, 255, 0.05);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
     color: #fff;
     opacity: 0;
     transform: translateY(60px);
     animation: fadeUp 1s forwards 0.5s;
     /* Simple enter animation, or controlled by GSAP */
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.card:hover::before {
+    left: 100%;
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: rgba(0, 240, 255, 0.6);
+    box-shadow:
+        0 12px 48px rgba(0, 0, 0, 0.7),
+        0 0 60px rgba(0, 240, 255, 0.4),
+        inset 0 0 30px rgba(0, 240, 255, 0.1);
 }
 
 /* We should control card animations with GSAP Stagger in the component instead of CSS animation for sync */
@@ -47,6 +80,24 @@
     top: -2rem;
     left: -1rem;
     z-index: -1;
+}
+
+.cardTitle {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--color-cyan), #0088ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    text-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+}
+
+.cardText {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.8;
+    font-size: 1.1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .title {

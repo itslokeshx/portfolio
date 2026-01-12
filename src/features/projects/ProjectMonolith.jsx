@@ -35,11 +35,12 @@ export default function ProjectMonolith({ project, position, rotation, onClick }
 
             {/* Title Text Floating Above */}
             <Text
-                position={[0, 2.5, 0]}
-                fontSize={0.2}
+                position={[0, 2.5, 0.2]}
+                fontSize={0.3}
                 color="white"
                 anchorX="center"
                 anchorY="middle"
+                rotation={[0, 0, 0]}
             >
                 {project.title}
             </Text>

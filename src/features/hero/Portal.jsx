@@ -10,8 +10,8 @@ export default function Portal() {
     const uniforms = useMemo(
         () => ({
             uTime: { value: 0 },
-            uColorStart: { value: new THREE.Color("#006680") },
-            uColorEnd: { value: new THREE.Color("#660044") },
+            uColorStart: { value: new THREE.Color("#00f0ff") }, // Bright cyan
+            uColorEnd: { value: new THREE.Color("#ff00aa") },   // Vibrant magenta
         }),
         []
     );
@@ -27,7 +27,7 @@ export default function Portal() {
     });
 
     return (
-        <mesh ref={mesh} position={[0, 0, 0]} scale={[2, 2, 2]}>
+        <mesh ref={mesh} position={[0, 0, 0]} scale={[3, 3, 3]}>
             <torusGeometry args={[1, 0.4, 64, 128]} />
             <shaderMaterial
                 vertexShader={typeof vertexShader === 'string' ? vertexShader : vertexShader.default}

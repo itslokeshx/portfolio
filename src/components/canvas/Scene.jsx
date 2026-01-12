@@ -23,9 +23,12 @@ export default function Scene() {
             >
                 <color attach="background" args={['#0a0a0a']} />
 
-                {/* Ambient setup */}
-                <ambientLight intensity={0.2} />
-                <fog attach="fog" args={['#0a0a0a', 5, 15]} />
+                {/* Enhanced Lighting */}
+                <ambientLight intensity={0.5} />
+                <directionalLight position={[10, 10, 5]} intensity={1} />
+                <pointLight position={[-10, -10, -5]} intensity={0.5} color="#00f0ff" />
+                <spotLight position={[0, 10, 0]} intensity={0.3} angle={0.3} penumbra={1} />
+                <fog attach="fog" args={['#0a0a0a', 10, 50]} />
 
                 <Suspense fallback={null}>
                     <CameraManager />
