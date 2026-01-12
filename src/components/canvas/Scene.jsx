@@ -21,11 +21,7 @@ export default function Scene() {
                 <fog attach="fog" args={['#0a0a0a', 5, 15]} />
 
                 <Suspense fallback={null}>
-                    {/* Content will go here */}
-                    <mesh position={[0, 0, 0]}>
-                        <boxGeometry />
-                        <meshStandardMaterial color="hotpink" />
-                    </mesh>
+                    <Hero />
                     <Preload all />
                 </Suspense>
             </Canvas>
