@@ -7,17 +7,131 @@
 
 .stickyHeader {
     position: sticky;
-    top: 2rem;
-    width: 100%;
+    top: 0;
+    padding: 2rem;
     text-align: center;
-    color: #fff;
-    z-index: 10;
-    pointer-events: none;
+    z-index: 5;
+    background: linear-gradient(180deg, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0) 100%);
+    backdrop-filter: blur(10px);
 }
 
 .stickyHeader h2 {
-    font-size: 1rem;
-    letter-spacing: 0.5rem;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    background: linear-gradient(135deg, var(--color-cyan), var(--color-magenta));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 40px rgba(0, 240, 255, 0.5);
+    margin-bottom: 0.5rem;
+}
+
+.stickyHeader p {
+    font-size: 1.125rem;
+    color: var(--color-text-dim);
+    letter-spacing: 0.1em;
+}
+
+.projectsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    pointer-events: auto;
+}
+
+.projectCard {
+    background: rgba(10, 10, 10, 0.9);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(0, 240, 255, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.projectCard:hover {
+    border-color: var(--color-cyan);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 240, 255, 0.4);
+}
+
+.cardHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.projectTitle {
+    font-size: 1.75rem;
+    font-weight: 700;
     color: var(--color-cyan);
-    opacity: 0.5;
+    letter-spacing: 0.05em;
+}
+
+.projectRole {
+    font-size: 0.875rem;
+    color: var(--color-magenta);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.projectDesc {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.7;
+    font-size: 1rem;
+    flex-grow: 1;
+}
+
+.techStack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.techBadge {
+    background: rgba(0, 240, 255, 0.15);
+    border: 1px solid rgba(0, 240, 255, 0.4);
+    color: var(--color-cyan);
+    padding: 0.4rem 0.9rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.techBadge:hover {
+    background: rgba(0, 240, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.projectLink {
+    color: var(--color-cyan);
+    font-weight: 700;
+    margin-top: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.projectLink:hover {
+    color: var(--color-magenta);
+    transform: translateX(8px);
+}
+
+@media (max-width: 768px) {
+    .projectsGrid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
 }
