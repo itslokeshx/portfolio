@@ -7,6 +7,7 @@ import Hero from "@/features/hero/Hero";
 import CameraManager from "./CameraManager";
 import About3D from "@/features/about/About3D";
 import SkillsPhysics from "@/features/skills/SkillsPhysics";
+import Gallery from "@/features/projects/Gallery";
 
 export default function Scene() {
     const loaded = useStore((state) => state.loaded);
@@ -32,6 +33,9 @@ export default function Scene() {
                     </group>
                     <group position={[0, -35, 0]}>
                         <SkillsPhysics />
+                    </group>
+                    <group position={[0, -60, 0]}>
+                        <Gallery />
                     </group>
                     <Preload all />
                 </Suspense>

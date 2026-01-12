@@ -67,6 +67,20 @@ export default function CameraManager() {
             }
         });
 
+        // 3. Skills to Projects (Transition to Gallery Start)
+        // Move to Y = -60
+        gsap.to(camera.position, {
+            y: -60,
+            x: -10, // Start of curve in Gallery.jsx
+            z: 0,
+            scrollTrigger: {
+                trigger: "#projects-trigger",
+                start: "top bottom",
+                end: "top top",
+                scrub: 1
+            }
+        });
+
         return () => {
             ScrollTrigger.getAll().forEach(t => t.kill());
         };
