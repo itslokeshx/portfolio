@@ -36,12 +36,12 @@ export default function Scene() {
                     <group position={[0, -15, 0]}>
                         <About3D />
                     </group>
-                    <group position={[0, -35, 0]}>
+                    {/* <group position={[0, -35, 0]}>
                         <SkillsPhysics />
-                    </group>
-                    <group position={[0, -60, 0]}>
+                    </group> */}
+                    {/* <group position={[0, -60, 0]}>
                         <Gallery />
-                    </group>
+                    </group> */}
                     <group position={[0, -100, 0]}>
                         <Experience />
                     </group>

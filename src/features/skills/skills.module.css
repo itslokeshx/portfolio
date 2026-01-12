@@ -1,13 +1,10 @@
 .skillsSection {
-    width: 100vw;
-    height: 100vh;
-    position: relative;
+    min-height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding-top: 5rem;
-    pointer-events: none;
-    /* Let clicks pass to canvas */
+    flex-direction: column;
+    position: relative;
+    background: linear-gradient(180deg, rgba(10, 10, 10, 0.98) 0%, rgba(10, 10, 10, 0.95) 100%);
+    padding: 4rem 0;
 }
 
 .content {
@@ -86,17 +83,37 @@
     align-items: center;
     gap: 1rem;
     padding: 1.25rem;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.skillCard::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 240, 255, 0.3) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.skillCard:hover::after {
+    width: 300px;
+    height: 300px;
 }
 
 .skillCard:hover {
-    transform: translateY(-4px);
-    border-color: rgba(0, 240, 255, 0.5);
-    box-shadow: 0 4px 16px rgba(0, 240, 255, 0.2);
-    background: rgba(0, 0, 0, 0.6);
+    transform: translateY(-6px) scale(1.05);
+    border-color: rgba(0, 240, 255, 0.6);
+    box-shadow: 0 8px 24px rgba(0, 240, 255, 0.3);
+    background: rgba(0, 0, 0, 0.7);
 }
 
 .skillIcon {
