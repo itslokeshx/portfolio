@@ -1,6 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
 import Loader from "@/components/ui/Loader";
+import HeroOverlay from "@/features/hero/HeroOverlay";
 
 // Dynamic import for Scene to avoid SSR issues with Canvas
 const Scene = dynamic(() => import("@/components/canvas/Scene"), {
@@ -15,6 +16,7 @@ export default function Home() {
 
       {/* HTML Content Overlay (Scrollable) */}
       <div className="content-overlay">
+        <HeroOverlay />
         {/* Sections will be added here */}
       </div>
 
