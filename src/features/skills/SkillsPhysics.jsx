@@ -1,7 +1,7 @@
 "use client";
 import { useRef, useState, useMemo } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { Physics, RigidBody, CuboidCollider, InstancedRigidBodies } from "@react-three/rapier";
+import { Physics, RigidBody, CuboidCollider, BallCollider, InstancedRigidBodies } from "@react-three/rapier";
 import { MeshTransmissionMaterial, Text, Html } from "@react-three/drei";
 import * as THREE from "three";
 import { skills } from "./data";
@@ -173,7 +173,7 @@ function MouseRepulsor() {
 
     return (
         <RigidBody ref={api} type="kinematicPosition" colliders={false}>
-            <ballCollider args={[1.5]} /> {/* Large repulsor radius */}
+            <BallCollider args={[1.5]} /> {/* Large repulsor radius */}
         </RigidBody>
     );
 }
