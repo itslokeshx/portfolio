@@ -81,6 +81,23 @@ export default function CameraManager() {
             }
         });
 
+        // 4. Projects to Experience
+        // First transition to start of Experience (Y = -100)
+        // Or assume Gallery ends near there? Gallery was at Y=-60.
+        // Let's create a transition to Y=-100 then descend.
+
+        gsap.to(camera.position, {
+            y: -150, // Final depth
+            x: 0, // Reset X to center
+            z: 10, // Pull back Z slightly for wide view
+            scrollTrigger: {
+                trigger: "#experience-trigger",
+                start: "top bottom",
+                end: "bottom bottom",
+                scrub: 1
+            }
+        });
+
         return () => {
             ScrollTrigger.getAll().forEach(t => t.kill());
         };

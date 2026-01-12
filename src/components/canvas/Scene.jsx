@@ -8,6 +8,7 @@ import CameraManager from "./CameraManager";
 import About3D from "@/features/about/About3D";
 import SkillsPhysics from "@/features/skills/SkillsPhysics";
 import Gallery from "@/features/projects/Gallery";
+import Experience from "@/features/experience/Experience";
 
 export default function Scene() {
     const loaded = useStore((state) => state.loaded);
@@ -36,6 +37,9 @@ export default function Scene() {
                     </group>
                     <group position={[0, -60, 0]}>
                         <Gallery />
+                    </group>
+                    <group position={[0, -100, 0]}>
+                        <Experience />
                     </group>
                     <Preload all />
                 </Suspense>
