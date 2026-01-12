@@ -98,6 +98,19 @@ export default function CameraManager() {
             }
         });
 
+        // 5. Experience to Contact
+        gsap.to(camera.position, {
+            y: -200,
+            x: 0,
+            z: 5, // Closer for intimacy
+            scrollTrigger: {
+                trigger: "#contact-trigger",
+                start: "top bottom",
+                end: "bottom bottom",
+                scrub: 1
+            }
+        });
+
         return () => {
             ScrollTrigger.getAll().forEach(t => t.kill());
         };

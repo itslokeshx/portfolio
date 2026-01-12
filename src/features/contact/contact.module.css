@@ -1,0 +1,94 @@
+.contactSection {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Centered form */
+    position: relative;
+    z-index: 10;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 3rem;
+    border: 1px solid rgba(0, 240, 255, 0.1);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    pointer-events: auto;
+    /* Enable interaction */
+    /* Shift slightly left or right to balance with Avatar? 
+     Let's center it for now, and have Avatar behind or above */
+}
+
+.title {
+    text-align: center;
+    font-size: 2rem;
+    letter-spacing: 0.3rem;
+    color: var(--color-cyan);
+    margin-bottom: 1rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.group label {
+    font-size: 0.8rem;
+    color: #888;
+    letter-spacing: 0.1rem;
+}
+
+.input,
+.textarea {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    color: #fff;
+    font-family: inherit;
+    /* Inter */
+}
+
+.input:focus,
+.textarea:focus {
+    outline: none;
+    border-color: var(--color-cyan);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.button {
+    background: var(--color-cyan);
+    color: #000;
+    border: none;
+    padding: 1rem;
+    font-weight: bold;
+    letter-spacing: 0.2rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 1rem;
+}
+
+.button:hover {
+    background: #fff;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+}
+
+.footer {
+    text-align: center;
+    color: #444;
+    font-size: 0.7rem;
+    margin-top: 2rem;
+}
