@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Immersive 3D Portfolio
+
+A high-performance, immersive 3D portfolio website built with **Next.js 14+**, **React Three Fiber**, and **GSAP**. This project features a continuous narrative journey through space, showcasing skills and projects with interactive WebGL experiences.
+
+## Core Technologies
+
+- **Framework**: Next.js 14 (App Router)
+- **3D Engine**: React Three Fiber (Three.js)
+- **Physics**: React Three Rapier (Rapier.js)
+- **Animation**: GSAP (ScrollTrigger) & Framer Motion
+- **Styling**: CSS Modules (Vanilla) & Tailwind (Optional)
+- **State Management**: Zustand
+- **Smooth Scroll**: Lenis
+
+## Features
+
+- **Hero Portal**: Custom GLSL shaders creating a warp-speed effect.
+- **Narrative Scroll**: Seamless transition from vertical scroll to horizontal panning.
+- **Physics Playground**: Interactive glass cube with gravity-enabled skill spheres.
+- **Curved Gallery**: Catmull-Rom spline path camera navigation for projects.
+- **Deep Space Dive**: Vertical timeline flight for experience section.
+- **Interactive Avatar**: Procedural 3D head tracking mouse movements.
 
 ## Getting Started
 
-First, run the development server:
+1. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+2. **Run Development Server**:
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) to view the project.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. **Build for Production**:
+   ```bash
+   npm run build
+   ```
+   *Note: This project uses a custom Webpack configuration for GLSL shaders. The build script is configured to use `next build --webpack`.*
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Refer to [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed instructions on deploying to Vercel or Netlify.
 
-## Learn More
+## License
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
