@@ -1,15 +1,17 @@
 "use client";
+import { useState } from 'react';
 import styles from './projects.module.css';
-import { projects } from './data';
+import { projects, categorizedProjects } from './data';
 
 export default function ProjectsHTML() {
     return (
         <section id="projects-trigger" className={styles.projectsSection}>
             <div className={styles.stickyHeader}>
-                <h2>SELECTED WORKS</h2>
-                <p>Real-world applications built with MERN Stack</p>
+                <h2>FEATURED WORKS</h2>
+                <p>Selected high-impact applications</p>
             </div>
 
+            {/* Featured Projects Grid */}
             <div className={styles.projectsGrid}>
                 {projects.map((project) => (
                     <div key={project.id} className={styles.projectCard}>
@@ -39,6 +41,54 @@ export default function ProjectsHTML() {
                     </div>
                 ))}
             </div>
+
+            {/* More Projects Section - Categorized */}
+            <div className={styles.moreProjectsSection}>
+                <div className={styles.stickyHeader}>
+                    <h2>MORE PROJECTS</h2>
+                    <p>Archive by Language & Technology</p>
+                </div>
+
+                <div className={styles.accordionContainer}>
+                    {Object.entries(categorizedProjects).map(([category, items]) => (
+                        <AccordionItem key={category} title={category} items={items} />
+                    ))}
+                </div>
+            </div>
         </section>
+    );
+}
+
+function AccordionItem({ title, items }) {
+    const [isOpen, setIsOpen] = useState(false);
+
+    return (
+        <div className={`${styles.accordionItem} ${isOpen ? styles.open : ''}`}>
+            <button
+                className={styles.accordionHeader}
+                onClick={() => setIsOpen(!isOpen)}
+            >
+                <span className={styles.accordionTitle}>{title}</span>
+                <span className={styles.accordionIcon}>{isOpen ? '−' : '+'}</span>
+            </button>
+
+            <div className={styles.accordionContent}>
+                <div className={styles.accordionInner}>
+                    {items.map((project, i) => (
+                        <a
+                            key={i}
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.miniProjectRow}
+                        >
+                            <span className={styles.miniTitle}>{project.name}</span>
+                            <span className={styles.miniDesc}>{project.desc}</span>
+                            <span className={styles.miniArrow}>↗</span>
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </div>
     );
 }
