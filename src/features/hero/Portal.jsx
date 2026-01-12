@@ -30,8 +30,8 @@ export default function Portal() {
         <mesh ref={mesh} position={[0, 0, 0]} scale={[2, 2, 2]}>
             <torusGeometry args={[1, 0.4, 64, 128]} />
             <shaderMaterial
-                vertexShader={vertexShader}
-                fragmentShader={fragmentShader}
+                vertexShader={typeof vertexShader === 'string' ? vertexShader : vertexShader.default}
+                fragmentShader={typeof fragmentShader === 'string' ? fragmentShader : fragmentShader.default}
                 uniforms={uniforms}
                 side={THREE.DoubleSide}
                 // transparent={true}

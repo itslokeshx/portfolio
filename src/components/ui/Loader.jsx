@@ -4,50 +4,60 @@ import { useProgress } from "@react-three/drei";
 import useStore from "@/store/useStore";
 
 export default function Loader() {
-    const { progress } = useProgress();
-    const setLoaded = useStore((state) => state.setLoaded);
-    const [shown, setShown] = useState(true);
-    const [displayProgress, setDisplayProgress] = useState(0);
+  const { progress } = useProgress();
+  const setLoaded = useStore((state) => state.setLoaded);
+  const [shown, setShown] = useState(true);
+  const [displayProgress, setDisplayProgress] = useState(0);
 
-    useEffect(() => {
-        // Smoother progress visual
-        const interval = setInterval(() => {
-            setDisplayProgress((old) => {
-                if (old < progress) {
-                    return Math.min(old + 1, 100);
-                }
-                return old;
-            });
-        }, 20);
-        return () => clearInterval(interval);
-    }, [progress]);
-
-    useEffect(() => {
-        if (displayProgress === 100) {
-            // Artificial delay for "Moment of satisfaction"
-            setTimeout(() => {
-                setLoaded(true);
-                setTimeout(() => setShown(false), 500); // Fade out duration
-            }, 500);
+  useEffect(() => {
+    // Smoother progress visual
+    const interval = setInterval(() => {
+      setDisplayProgress((old) => {
+        const target = progress; // use real progress
+        if (old < target) {
+          return Math.min(old + 1, 100);
         }
-    }, [displayProgress, setLoaded]);
+        return old;
+      });
+    }, 20);
+    return () => clearInterval(interval);
+  }, [progress]);
 
-    if (!shown) return null;
+  // Safety Timeout to prevent infinite load
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      console.warn("Loader timed out. Forcing load.");
+      setDisplayProgress(100);
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, []);
 
-    return (
-        <div className={`loader-container ${displayProgress === 100 ? "fade-out" : ""}`}>
-            <div className="loader-content">
-                <h1 className="loader-logo">LD</h1> {/* Monogram/Logo */}
-                <div className="loader-bar-container">
-                    <div
-                        className="loader-bar"
-                        style={{ width: `${displayProgress}%` }}
-                    />
-                </div>
-                <p className="loader-text">{Math.floor(displayProgress)}%</p>
-            </div>
+  useEffect(() => {
+    if (displayProgress === 100) {
+      // Artificial delay for "Moment of satisfaction"
+      setTimeout(() => {
+        setLoaded(true);
+        setTimeout(() => setShown(false), 500); // Fade out duration
+      }, 500);
+    }
+  }, [displayProgress, setLoaded]);
 
-            <style jsx>{`
+  if (!shown) return null;
+
+  return (
+    <div className={`loader-container ${displayProgress === 100 ? "fade-out" : ""}`}>
+      <div className="loader-content">
+        <h1 className="loader-logo">LD</h1> {/* Monogram/Logo */}
+        <div className="loader-bar-container">
+          <div
+            className="loader-bar"
+            style={{ width: `${displayProgress}%` }}
+          />
+        </div>
+        <p className="loader-text">{Math.floor(displayProgress)}%</p>
+      </div>
+
+      <style jsx>{`
         .loader-container {
           position: fixed;
           top: 0;
@@ -97,6 +107,6 @@ export default function Loader() {
           font-size: 0.9rem;
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 }
