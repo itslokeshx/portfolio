@@ -4,6 +4,8 @@ import { Suspense } from "react";
 import { Preload } from "@react-three/drei";
 import useStore from "@/store/useStore";
 import Hero from "@/features/hero/Hero";
+import CameraManager from "./CameraManager";
+import About3D from "@/features/about/About3D";
 
 export default function Scene() {
     const loaded = useStore((state) => state.loaded);
@@ -22,7 +24,11 @@ export default function Scene() {
                 <fog attach="fog" args={['#0a0a0a', 5, 15]} />
 
                 <Suspense fallback={null}>
+                    <CameraManager />
                     <Hero />
+                    <group position={[0, -15, 0]}>
+                        <About3D />
+                    </group>
                     <Preload all />
                 </Suspense>
             </Canvas>
