@@ -6,6 +6,7 @@ import useStore from "@/store/useStore";
 import Hero from "@/features/hero/Hero";
 import CameraManager from "./CameraManager";
 import About3D from "@/features/about/About3D";
+import SkillsPhysics from "@/features/skills/SkillsPhysics";
 
 export default function Scene() {
     const loaded = useStore((state) => state.loaded);
@@ -28,6 +29,9 @@ export default function Scene() {
                     <Hero />
                     <group position={[0, -15, 0]}>
                         <About3D />
+                    </group>
+                    <group position={[0, -35, 0]}>
+                        <SkillsPhysics />
                     </group>
                     <Preload all />
                 </Suspense>

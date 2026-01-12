@@ -56,8 +56,16 @@ export default function CameraManager() {
             }
         });
 
-        // 2. While pinned in About, typically camera Y stays constant (handled by lack of trigger).
-        // The "Horizontal" move is handled inside About3D listening to the same trigger progress.
+        // 2. About to Skills
+        gsap.to(camera.position, {
+            y: -35,
+            scrollTrigger: {
+                trigger: "#skills-trigger",
+                start: "top bottom",
+                end: "top top",
+                scrub: 2
+            }
+        });
 
         return () => {
             ScrollTrigger.getAll().forEach(t => t.kill());
