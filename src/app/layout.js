@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/ui/CustomCursor";
+import AudioManager from "@/components/ui/AudioManager";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <SmoothScroll>
           <CustomCursor />
+          <AudioManager />
           {children}
         </SmoothScroll>
       </body>
