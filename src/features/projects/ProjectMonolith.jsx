@@ -33,14 +33,15 @@ export default function ProjectMonolith({ project, position, rotation, onClick }
                 />
             </mesh>
 
-            {/* Title Text Floating Above */}
+            {/* Title Text Floating Above - Billboard to always face camera */}
             <Text
                 position={[0, 2.5, 0.2]}
-                fontSize={0.3}
+                fontSize={0.4}
                 color="white"
                 anchorX="center"
                 anchorY="middle"
-                rotation={[0, 0, 0]}
+                outlineWidth={0.02}
+                outlineColor="#000000"
             >
                 {project.title}
             </Text>

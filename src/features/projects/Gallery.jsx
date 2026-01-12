@@ -112,7 +112,7 @@ export default function Gallery() {
                         key={proj.id}
                         project={proj}
                         position={[pos.x, 0, pos.z]}
-                        rotation={[0, rotationY + (i % 2 === 0 ? -0.5 : 0.5), 0]} // Face towards path roughly
+                        rotation={[0, 0, 0]} // Face forward - no rotation to prevent mirrored text
                     />
                 );
             })}
