@@ -25,6 +25,7 @@ export function HeroSection() {
     let width = 0
     let height = 0
     let isLocked = false
+    let textOpacity = 0
 
     const PARTICLE_SIZE = 2
     const PARTICLE_GAP = 5
@@ -73,20 +74,9 @@ export function HeroSection() {
         return Math.abs(dx) < 0.5 && Math.abs(dy) < 0.5
       }
 
+      // No longer used directly in new loop logic, but kept for reference or fallback
       draw(context: CanvasRenderingContext2D, locked: boolean) {
-        const opacity = locked ? 1 : 0.8
-
-        if (locked) {
-          context.shadowBlur = 8
-          context.shadowColor = `rgba(${COLOR}, 0.6)`
-        }
-
-        context.fillStyle = `rgba(${COLOR}, ${opacity})`
-        context.fillRect(this.x, this.y, this.size, this.size)
-
-        if (locked) {
-          context.shadowBlur = 0
-        }
+        // ... (Replaced by direct loop drawing)
       }
     }
 
@@ -127,14 +117,43 @@ export function HeroSection() {
       ctx.clearRect(0, 0, width, height)
 
       let lockedCount = 0
-      particles.forEach(p => {
-        const settled = p.update(mouseRef.current)
-        if (settled) lockedCount++
-        p.draw(ctx, isLocked)
-      })
 
-      if (lockedCount > particles.length * 0.9) {
+      // 1. Draw Particles (Fade out if locked)
+      if (textOpacity < 1) {
+        particles.forEach(p => {
+          const settled = p.update(mouseRef.current)
+          if (settled) lockedCount++
+
+          const particleOpacity = isLocked ? 1 - textOpacity : 0.8
+          ctx.fillStyle = `rgba(${COLOR}, ${particleOpacity})`
+          ctx.fillRect(p.x, p.y, p.size, p.size)
+        })
+      }
+
+      // 2. Check Lock State
+      if (lockedCount > particles.length * 0.95) {
         isLocked = true
+      }
+
+      // 3. Draw Solid Text (Fade in if locked)
+      if (isLocked) {
+        if (textOpacity < 1) textOpacity += 0.02
+
+        ctx.save()
+        ctx.globalAlpha = textOpacity
+        // Use the Cyan color instead of white to match particles
+        ctx.fillStyle = `rgb(${COLOR})`
+        const fontSize = width < 768 ? 60 : 120
+        ctx.font = `900 ${fontSize}px "Space Grotesk", sans-serif`
+        ctx.textAlign = "center"
+        ctx.textBaseline = "middle"
+
+        // Softer Glow Effect (Reduced from 0.8 / 20)
+        ctx.shadowColor = `rgba(${COLOR}, 0.5)`
+        ctx.shadowBlur = 10
+
+        ctx.fillText("LOKESH", width / 2, height / 2 - 50)
+        ctx.restore()
       }
 
       animationFrameId = requestAnimationFrame(animate)
