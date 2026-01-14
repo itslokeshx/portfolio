@@ -16,8 +16,10 @@ const config: Config = {
                     400: '#00F0FF',
                 },
                 plasma: '#0077FF',
+                violet: '#9D00FF',
                 mist: '#E2E8F0',
                 carbon: '#94A3B8',
+                gold: '#FFD700',
             },
             fontFamily: {
                 sans: ['var(--font-inter)', 'sans-serif'],

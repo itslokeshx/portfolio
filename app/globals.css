@@ -6,8 +6,10 @@
   --titanium: #121212;
   --cyan: #00F0FF;
   --plasma: #0077FF;
+  --violet: #9D00FF;
   --mist: #E2E8F0;
   --carbon: #94A3B8;
+  --gold: #FFD700;
 }
 
 @theme inline {
@@ -15,8 +17,10 @@
   --color-titanium: var(--titanium);
   --color-cyan: var(--cyan);
   --color-plasma: var(--plasma);
+  --color-violet: var(--violet);
   --color-mist: var(--mist);
   --color-carbon: var(--carbon);
+  --color-gold: var(--gold);
 }
 
 * {
@@ -128,4 +132,62 @@ body {
 canvas {
   display: block;
   background: var(--void);
+}
+
+/* Custom Cursor */
+body {
+  cursor: none;
+}
+
+a,
+button,
+[role="button"] {
+  cursor: none;
+}
+
+/* Gradient Animation */
+@keyframes gradient {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient {
+  animation: gradient 3s ease infinite;
+}
+
+/* 3D Transform Utilities */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Performance Optimizations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
