@@ -257,7 +257,13 @@ export default function HologramCarousel({ onViewAll }: HologramCarouselProps) {
                             project={project}
                             index={index}
                             isExpanded={expandedFeatured === index}
-                            onToggle={() => setExpandedFeatured(expandedFeatured === index ? null : index)}
+                            onToggle={() => {
+                                // If opening a project, close the archive
+                                if (expandedFeatured !== index) {
+                                    setShowArchive(false);
+                                }
+                                setExpandedFeatured(expandedFeatured === index ? null : index);
+                            }}
                         />
                     ))}
                 </div>
@@ -267,29 +273,38 @@ export default function HologramCarousel({ onViewAll }: HologramCarouselProps) {
                     <div
                         onMouseEnter={() => setIsArchiveTriggerHovered(true)}
                         onMouseLeave={() => setIsArchiveTriggerHovered(false)}
-                        onClick={() => setShowArchive(!showArchive)}
-                        className="
+                        onClick={() => {
+                            // If opening archive, close any expanded project
+                            if (!showArchive) {
+                                setExpandedFeatured(null);
+                            }
+                            setShowArchive(!showArchive);
+                        }}
+                        className={`
                             group relative
                             py-8 px-4
                             cursor-pointer
                             transition-all duration-300
-                            hover:bg-white/[0.02]
-                        "
+                            ${showArchive ? 'bg-white/[0.02]' : 'hover:bg-white/[0.02]'}
+                        `}
                     >
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-8">
-                                <span className="font-mono text-sm text-cyan group-hover:text-white transition-colors">
+                                <span className={`font-mono transition-colors text-sm ${showArchive || isArchiveTriggerHovered ? 'text-cyan' : 'text-slate-600'}`}>
                                     // ARCHIVE
                                 </span>
                                 <ShuffleText
                                     text="VIEW FULL DATABASE"
                                     isActive={isArchiveTriggerHovered}
-                                    className="text-3xl font-bold text-slate-400 group-hover:text-cyan transition-colors"
+                                    className={`
+                                        font-bold transition-colors text-3xl md:text-5xl
+                                        ${showArchive || isArchiveTriggerHovered ? 'text-white' : 'text-slate-400'}
+                                    `}
                                 />
                             </div>
                             <motion.div
                                 animate={{ rotate: showArchive ? 180 : 0 }}
-                                className="text-xl text-slate-600 group-hover:text-cyan transition-colors"
+                                className={`text-xl transition-colors ${showArchive || isArchiveTriggerHovered ? 'text-cyan' : 'text-slate-600'}`}
                             >
                                 ↓
                             </motion.div>
@@ -309,16 +324,17 @@ export default function HologramCarousel({ onViewAll }: HologramCarouselProps) {
                         >
                             <div className="px-4 py-12">
                                 {/* Filter Tabs */}
-                                <div className="flex flex-wrap gap-4 mb-12">
+                                <div className="flex flex-wrap gap-4 mb-16">
                                     {categories.map((cat) => (
                                         <button
                                             key={cat}
                                             onClick={() => setActiveFilter(cat)}
                                             className={`
-                                                px-4 py-2 rounded-full text-xs font-mono border transition-all duration-300
+                                                px-6 py-3 rounded-full text-sm font-bold font-mono border transition-all duration-300
+                                                uppercase tracking-wide
                                                 ${activeFilter === cat
-                                                    ? "bg-cyan/10 border-cyan text-cyan hover:shadow-[0_0_15px_rgba(0,240,255,0.3)]"
-                                                    : "bg-transparent border-white/10 text-slate-500 hover:border-white/30 hover:text-slate-300"}
+                                                    ? "bg-cyan text-black border-cyan shadow-[0_0_20px_rgba(0,240,255,0.4)]"
+                                                    : "bg-transparent border-white/10 text-slate-500 hover:border-cyan/50 hover:text-cyan"}
                                             `}
                                         >
                                             {cat}
@@ -326,7 +342,7 @@ export default function HologramCarousel({ onViewAll }: HologramCarouselProps) {
                                     ))}
                                 </div>
 
-                                {/* Archive Grid of Cards */}
+                                {/* Link to Archive Grid */}
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                     {filteredProjects.map((project) => (
                                         <ArchiveCard key={`archive-${project.id}`} project={project} />
@@ -349,10 +365,14 @@ interface ProjectRowProps {
     index: number;
     isExpanded: boolean;
     onToggle: () => void;
+    size?: "large" | "small";
 }
 
-function ProjectRow({ project, index, isExpanded, onToggle }: ProjectRowProps) {
+function ProjectRow({ project, index, isExpanded, onToggle, size = "large" }: ProjectRowProps) {
     const [isHovered, setIsHovered] = useState(false);
+
+    // User requested "Same size" for both Archive ("small") and featured
+    // So we use the large text size for both.
 
     return (
         <div className="border-b border-white/5">
@@ -361,32 +381,35 @@ function ProjectRow({ project, index, isExpanded, onToggle }: ProjectRowProps) {
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
                 onClick={onToggle}
-                className="
+                className={`
                     group relative
                     py-8 px-4
                     cursor-pointer
                     transition-all duration-300
-                    hover:bg-white/[0.02]
-                "
+                    ${isExpanded ? 'bg-white/[0.02]' : 'hover:bg-white/[0.02]'}
+                `}
             >
                 <div className="flex items-center justify-between">
                     {/* Left Side */}
                     <div className="flex items-center gap-8">
-                        <span className="font-mono text-slate-600 group-hover:text-cyan transition-colors text-sm">
+                        <span className={`font-mono transition-colors text-sm ${isExpanded || isHovered ? 'text-cyan' : 'text-slate-600'}`}>
                             {index < 9 ? `0${index + 1}` : index + 1}
                         </span>
 
                         <div className="flex items-center gap-6">
                             <ShuffleText
                                 text={project.title}
-                                isActive={isHovered}
-                                className="font-bold text-slate-400 group-hover:text-white transition-colors text-3xl md:text-5xl"
+                                isActive={isHovered} // Enabled shuffle even when expanded
+                                className={`
+                                    font-bold transition-colors text-3xl md:text-5xl
+                                    ${isExpanded || isHovered ? 'text-white' : 'text-slate-400'}
+                                `}
                             />
 
-                            {/* Preview Thumbnail - Visible on Hover */}
+                            {/* Preview Thumbnail - Visible on Hover ONLY if NOT expanded */}
                             <div className="w-32 h-24 flex-shrink-0">
                                 <motion.div
-                                    animate={{ opacity: isHovered ? 1 : 0 }}
+                                    animate={{ opacity: (isHovered && !isExpanded) ? 1 : 0 }}
                                     transition={{ duration: 0.2 }}
                                     className="
                                         w-full h-full
@@ -396,8 +419,8 @@ function ProjectRow({ project, index, isExpanded, onToggle }: ProjectRowProps) {
                                         relative
                                     "
                                     style={{
-                                        borderColor: isHovered ? project.color : 'transparent',
-                                        boxShadow: isHovered ? `0 0 15px ${project.color}20` : 'none',
+                                        borderColor: (isHovered && !isExpanded) ? project.color : 'transparent',
+                                        boxShadow: (isHovered && !isExpanded) ? `0 0 15px ${project.color}20` : 'none',
                                     }}
                                 >
                                     {(project.image.startsWith('/') || project.image.startsWith('http')) ? (
@@ -417,7 +440,7 @@ function ProjectRow({ project, index, isExpanded, onToggle }: ProjectRowProps) {
                         </span>
                         <motion.div
                             animate={{ rotate: isExpanded ? 45 : 0 }}
-                            className="text-slate-600 group-hover:text-cyan transition-colors text-2xl"
+                            className={`transition-colors text-2xl ${isExpanded || isHovered ? 'text-cyan' : 'text-slate-600'}`}
                         >
                             +
                         </motion.div>
@@ -425,7 +448,7 @@ function ProjectRow({ project, index, isExpanded, onToggle }: ProjectRowProps) {
                 </div>
             </div>
 
-            {/* Expanded Details with Large Image */}
+            {/* Expanded Details with Side-by-Side Layout */}
             <AnimatePresence>
                 {isExpanded && (
                     <motion.div
@@ -436,50 +459,79 @@ function ProjectRow({ project, index, isExpanded, onToggle }: ProjectRowProps) {
                         className="overflow-hidden"
                     >
                         <div className="px-4 pb-8 pt-4 bg-white/[0.01]">
-                            <div className="max-w-6xl">
-                                {/* Large Image Banner */}
-                                <div className="w-full h-64 md:h-96 rounded-xl overflow-hidden mb-8 relative border border-white/10 group">
-                                    {(project.image.startsWith('/') || project.image.startsWith('http')) ? (
-                                        <img
-                                            src={project.image}
-                                            alt={project.title}
-                                            className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700"
-                                        />
-                                    ) : (
-                                        <div className="w-full h-full flex items-center justify-center bg-white/5 text-6xl">
-                                            {project.image}
-                                        </div>
-                                    )}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-60" />
+                            <div className="grid md:grid-cols-12 gap-8 items-start">
+                                {/* Left: Project Image (Contained) */}
+                                <div className="md:col-span-5">
+                                    <div className="aspect-video w-full rounded-xl overflow-hidden border border-white/10 relative group bg-black/50">
+                                        {(project.image.startsWith('/') || project.image.startsWith('http')) ? (
+                                            <img
+                                                src={project.image}
+                                                alt={project.title}
+                                                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                                            />
+                                        ) : (
+                                            <div className="w-full h-full flex items-center justify-center bg-white/5 text-4xl">
+                                                {project.image}
+                                            </div>
+                                        )}
+                                        {/* Overlay gradient */}
+                                        <div className="absolute inset-0 bg-gradient-to-tr from-black/40 to-transparent pointer-events-none" />
+                                    </div>
                                 </div>
 
-                                <div className="grid md:grid-cols-2 gap-8">
+                                {/* Right: Details & Actions */}
+                                <div className="md:col-span-7 flex flex-col gap-6">
                                     <div>
-                                        <h4 className="text-xs text-cyan uppercase tracking-wider mb-2 font-mono">// DETAILS</h4>
-                                        <p className="text-base text-slate-300 leading-relaxed mb-6 border-l-2 border-cyan/30 pl-4">
+                                        <h4 className="text-xs text-cyan uppercase tracking-wider mb-3 font-mono border-b border-cyan/20 pb-2 inline-block">
+                                            // DOSSIER
+                                        </h4>
+                                        <p className="text-sm md:text-base text-slate-300 leading-relaxed">
                                             {project.description}
                                         </p>
                                     </div>
 
                                     <div className="space-y-6">
                                         <div>
-                                            <h4 className="text-xs text-cyan uppercase tracking-wider mb-2 font-mono">// TECH_STACK</h4>
+                                            <h4 className="text-[10px] text-slate-500 uppercase tracking-wider mb-2 font-mono">
+                                                // TECHNOLOGY_MATRIX
+                                            </h4>
                                             <div className="flex flex-wrap gap-2">
                                                 {project.stack.map((tech: string) => (
-                                                    <span key={tech} className="text-xs px-3 py-1 bg-cyan/5 border border-cyan/20 rounded font-mono text-cyan">
+                                                    <span key={tech} className="text-[10px] md:text-xs px-2 py-1 bg-white/5 border border-white/10 rounded font-mono text-cyan hover:bg-cyan/10 transition-colors">
                                                         {tech}
                                                     </span>
                                                 ))}
                                             </div>
                                         </div>
 
-                                        <div className="flex gap-4">
-                                            <a href={project.github} target="_blank" className="px-6 py-3 border border-white/20 rounded hover:bg-white/5 hover:border-cyan text-sm flex items-center gap-2 text-white transition-all">
-                                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" /></svg>
-                                                GITHUB REPO
+                                        <div className="flex gap-4 pt-2">
+                                            <a
+                                                href={project.github}
+                                                target="_blank"
+                                                className="
+                                                    px-5 py-2.5
+                                                    border border-white/10 bg-white/[0.02] rounded-lg
+                                                    hover:bg-white/10 hover:border-cyan/50 text-slate-200
+                                                    text-xs font-bold font-mono tracking-wide
+                                                    flex items-center gap-2 transition-all group/btn
+                                                "
+                                            >
+                                                <svg className="w-4 h-4 text-slate-400 group-hover/btn:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" /></svg>
+                                                SOURCE_CODE
                                             </a>
-                                            <a href={project.demo} target="_blank" className="px-6 py-3 bg-cyan text-black font-bold rounded hover:bg-white hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] text-sm flex items-center gap-2 transition-all">
-                                                LIVE DEMO →
+                                            <a
+                                                href={project.demo}
+                                                target="_blank"
+                                                className="
+                                                    px-5 py-2.5
+                                                    bg-cyan text-black rounded-lg
+                                                    hover:bg-white hover:shadow-[0_0_20px_rgba(0,240,255,0.4)]
+                                                    text-xs font-bold font-mono tracking-wide
+                                                    flex items-center gap-2 transition-all
+                                                "
+                                            >
+                                                LIVE_DEPLOY
+                                                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                                             </a>
                                         </div>
                                     </div>
