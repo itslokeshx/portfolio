@@ -1,59 +1,53 @@
-import type { Metadata } from "next";
-import { Space_Grotesk, Inter, Fira_Code } from "next/font/google";
-import "./globals.css";
-import NoiseOverlay from "@/components/NoiseOverlay";
-import ErrorBoundary from "@/components/ErrorBoundary";
+import type React from "react"
+import type { Metadata, Viewport } from "next"
+import { Space_Grotesk, Fira_Code, Inter } from "next/font/google"
+import { Analytics } from "@vercel/analytics/next"
+import "./globals.css"
 
 const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
   variable: "--font-space-grotesk",
-  subsets: ["latin"],
-  weight: ["400", "700"],
   display: "swap",
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  display: "swap",
-});
+})
 
 const firaCode = Fira_Code({
-  variable: "--font-fira-code",
   subsets: ["latin"],
-  weight: ["400", "500"],
+  variable: "--font-fira-code",
   display: "swap",
-});
+})
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
-  title: "Lokesh | Full Stack Developer",
-  description: "Award-winning portfolio of Lokesh, a Full Stack MERN Developer specializing in modern web applications with cutting-edge technologies.",
-  keywords: ["Full Stack Developer", "MERN Stack", "React", "Node.js", "Portfolio", "Web Development"],
+  title: "Lokesh | Full Stack MERN Developer",
+  description:
+    "Full-stack developer specializing in MERN stack, React, and building digital experiences that feel alive.",
+  keywords: ["Full Stack Developer", "MERN Stack", "React", "Node.js", "Portfolio"],
   authors: [{ name: "Lokesh" }],
-  viewport: "width=device-width, initial-scale=1",
-  themeColor: "#00F0FF",
-  openGraph: {
-    title: "Lokesh | Full Stack Developer",
-    description: "Award-winning portfolio showcasing modern web development projects",
-    type: "website",
-  },
-};
+    generator: 'v0.app'
+}
+
+export const viewport: Viewport = {
+  themeColor: "#050505",
+  width: "device-width",
+  initialScale: 1,
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body
-        className={`${spaceGrotesk.variable} ${inter.variable} ${firaCode.variable} antialiased bg-void text-mist`}
-      >
-        <ErrorBoundary>
-          <NoiseOverlay />
-          {children}
-        </ErrorBoundary>
+    <html lang="en" className={`${spaceGrotesk.variable} ${firaCode.variable} ${inter.variable}`}>
+      <body className="font-sans antialiased bg-void text-mist overflow-x-hidden">
+        {children}
+        <Analytics />
       </body>
     </html>
-  );
+  )
 }

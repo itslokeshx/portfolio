@@ -1,75 +1,40 @@
-'use client';
+"use client"
 
-import { useState, useEffect } from 'react';
-import Preloader from '@/components/Preloader';
-import ParticleHero from '@/components/ParticleHero';
-import NeuralAbout from '@/components/NeuralAbout';
-import QuantumSkills from '@/components/QuantumSkills';
-import HologramCarousel from '@/components/HologramCarousel';
-import ProjectsGrid from '@/components/ProjectsGrid';
-import Contact from '@/components/Contact';
-import CustomCursor from '@/components/CustomCursor';
-import SmoothScroll from '@/components/SmoothScroll';
-import NoiseOverlay from '@/components/NoiseOverlay';
-import ScrollProgress from '@/components/ScrollProgress';
+import { useState } from "react"
+import { AnimatePresence } from "framer-motion"
+import { CustomCursor } from "@/components/custom-cursor"
+import { NoiseOverlay } from "@/components/noise-overlay"
+import { ScrollProgress } from "@/components/scroll-progress"
+import { BootSequence } from "@/components/boot-sequence"
+import { HeroSection } from "@/components/hero-section"
+import { AboutSection } from "@/components/about-section"
+import { SkillsSection } from "@/components/skills-section"
+import { FeaturedProjects } from "@/components/featured-projects"
+import { ContactSection } from "@/components/contact-section"
 
 export default function Home() {
-  const [loadingProgress, setLoadingProgress] = useState(0);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [showProjectsGrid, setShowProjectsGrid] = useState(false);
-
-  useEffect(() => {
-    // Simulate progressive loading
-    let currentProgress = 0;
-
-    const interval = setInterval(() => {
-      currentProgress += 2;
-      setLoadingProgress(Math.min(currentProgress, 100));
-
-      if (currentProgress >= 100) {
-        clearInterval(interval);
-        setTimeout(() => setIsLoaded(true), 500);
-      }
-    }, 50);
-
-    return () => clearInterval(interval);
-  }, []);
+  const [isLoading, setIsLoading] = useState(true)
 
   return (
     <>
-      {!isLoaded && (
-        <Preloader progress={loadingProgress} isComplete={loadingProgress >= 100} />
+      <CustomCursor />
+      <NoiseOverlay />
+
+      <AnimatePresence>{isLoading && <BootSequence onComplete={() => setIsLoading(false)} />}</AnimatePresence>
+
+      {!isLoading && (
+        <>
+          <ScrollProgress />
+
+          <main className="relative">
+            <HeroSection />
+            <AboutSection />
+            <SkillsSection />
+            <FeaturedProjects onViewAll={() => {}} />
+            <ContactSection />
+          </main>
+        </>
       )}
-
-      <SmoothScroll>
-        <ScrollProgress />
-        <main className="relative">
-          {/* Global Effects */}
-          <CustomCursor />
-          <NoiseOverlay />
-
-          {/* Hero Section */}
-          <ParticleHero />
-
-          {/* About Section */}
-          <NeuralAbout />
-
-          {/* Skills Section */}
-          <QuantumSkills />
-
-          {/* Featured Projects */}
-          <HologramCarousel onViewAll={() => setShowProjectsGrid(true)} />
-
-          {/* Contact Section */}
-          <Contact />
-
-          {/* Projects Grid Modal */}
-          <ProjectsGrid
-            isOpen={showProjectsGrid}
-            onClose={() => setShowProjectsGrid(false)}
-          />
-        </main>
-      </SmoothScroll>
     </>
-  );
+  )
 }
