@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+/* CSS Variables for Cyber-Core Palette */
+:root {
+  --void: #050505;
+  --titanium: #121212;
+  --cyan: #00F0FF;
+  --plasma: #0077FF;
+  --mist: #E2E8F0;
+  --carbon: #94A3B8;
+}
+
+@theme inline {
+  --color-void: var(--void);
+  --color-titanium: var(--titanium);
+  --color-cyan: var(--cyan);
+  --color-plasma: var(--plasma);
+  --color-mist: var(--mist);
+  --color-carbon: var(--carbon);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--void);
+  color: var(--mist);
+  font-family: var(--font-inter), sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Glassmorphism Utility */
+.glass {
+  background: rgba(18, 18, 18, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Glow Effects */
+.cyan-glow {
+  box-shadow:
+    0 0 20px rgba(0, 240, 255, 0.4),
+    0 0 40px rgba(0, 240, 255, 0.2),
+    0 0 60px rgba(0, 240, 255, 0.1);
+}
+
+.cyan-glow-intense {
+  box-shadow:
+    0 0 30px rgba(0, 240, 255, 0.6),
+    0 0 60px rgba(0, 240, 255, 0.4),
+    0 0 90px rgba(0, 240, 255, 0.2);
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.2);
+    opacity: 0.6;
+  }
+}
+
+.pulse-dot {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Preloader Exit Animation */
+@keyframes splitExit {
+  0% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  100% {
+    clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+  }
+}
+
+.split-exit {
+  animation: splitExit 0.8s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--void);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--cyan);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--plasma);
+}
+
+/* Selection Styling */
+::selection {
+  background: var(--cyan);
+  color: var(--void);
+}
+
+::-moz-selection {
+  background: var(--cyan);
+  color: var(--void);
+}
+
+/* Canvas Seamless Blend */
+canvas {
+  display: block;
+  background: var(--void);
+}
