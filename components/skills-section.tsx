@@ -17,6 +17,14 @@ interface Skill {
   vy: number
 }
 
+const JS_SKILL = {
+  name: "JavaScript",
+  proficiency: 98,
+  experience: "4+ Years",
+  projects: ["All Projects", "Core Logic"],
+  orbit: "center",
+}
+
 const SKILLS_DATA = [
   {
     name: "React",
@@ -116,6 +124,16 @@ export function SkillsSection() {
           return
         }
       }
+
+      // Check for sun hover
+      const sunDist = Math.sqrt((hoverX - centerX) ** 2 + (hoverY - centerY) ** 2)
+      if (sunDist < 40) {
+        if (hoveredSkill?.name !== JS_SKILL.name) {
+          setHoveredSkill(JS_SKILL)
+        }
+        return
+      }
+
       setHoveredSkill(null)
     },
     [dimensions, hoveredSkill],
@@ -177,7 +195,7 @@ export function SkillsSection() {
       }
 
       // Draw orbit paths
-      ctx.strokeStyle = "rgba(0, 240, 255, 0.1)"
+      ctx.strokeStyle = "rgba(0, 240, 255, 0.4)"
       ctx.lineWidth = 1
       ctx.setLineDash([5, 10])
       ctx.beginPath()
@@ -188,7 +206,7 @@ export function SkillsSection() {
       ctx.stroke()
       ctx.setLineDash([])
 
-      const rotationSpeed = hoveredSkill ? 0.0003 : 0.001
+      const rotationSpeed = hoveredSkill ? 0.0005 : 0.002
 
       skillsRef.current.forEach((skill) => {
         // Update angle with consistent rotation

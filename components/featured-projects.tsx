@@ -218,38 +218,32 @@ function ProjectRow({
             </span>
 
             <h3
-              className={`font-bold text-2xl md:text-4xl transition-colors ${isExpanded || isHovered ? "text-white" : "text-slate-400"}`}
+              className={`font-bold text-3xl md:text-5xl transition-colors ${isExpanded || isHovered ? "text-white" : "text-slate-400"}`}
             >
               <ShuffleText text={project.title} isActive={isHovered} />
             </h3>
           </div>
 
           {/* Inline Image Preview (Static, appears on hover) */}
-          <AnimatePresence>
-            {(isHovered || isExpanded) && (
-              <motion.div
-                initial={{ opacity: 0, width: 0 }}
-                animate={{ opacity: 1, width: "auto" }}
-                exit={{ opacity: 0, width: 0 }}
-                transition={{ duration: 0.3 }}
-                className="hidden md:block flex-shrink-0"
-              >
-                <div
-                  className="w-40 h-24 rounded-lg overflow-hidden border-2 relative flex-shrink-0"
-                  style={{ borderColor: project.color, boxShadow: `0 0 20px ${project.color}40` }}
-                >
-                  <img
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan/5 to-transparent animate-scan" />
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          {/* Inline Image Preview (Static, reserved space) */}
+          <div className="hidden md:block w-40 h-24 flex-shrink-0 relative">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: isHovered && !isExpanded ? 1 : 0 }}
+              transition={{ duration: 0.3 }}
+              className="absolute inset-0 rounded-lg overflow-hidden border-2"
+              style={{ borderColor: project.color, boxShadow: `0 0 20px ${project.color}40` }}
+            >
+              <img
+                src={project.image || "/placeholder.svg"}
+                alt={project.title}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan/5 to-transparent animate-scan" />
+              </div>
+            </motion.div>
+          </div>
 
           {/* Right Side */}
           <div className="flex items-center gap-4 flex-shrink-0">
@@ -430,19 +424,19 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
   const filteredProjects =
     activeFilter === "ALL"
       ? allProjects.filter((p) =>
-          searchQuery === ""
+        searchQuery === ""
+          ? true
+          : p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          p.stack.some((s) => s.toLowerCase().includes(searchQuery.toLowerCase())),
+      )
+      : allProjects.filter(
+        (p) =>
+          p.category === activeFilter &&
+          (searchQuery === ""
             ? true
             : p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-              p.stack.some((s) => s.toLowerCase().includes(searchQuery.toLowerCase())),
-        )
-      : allProjects.filter(
-          (p) =>
-            p.category === activeFilter &&
-            (searchQuery === ""
-              ? true
-              : p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                p.stack.some((s) => s.toLowerCase().includes(searchQuery.toLowerCase()))),
-        )
+            p.stack.some((s) => s.toLowerCase().includes(searchQuery.toLowerCase()))),
+      )
 
   return (
     <section id="projects" className="relative py-32 bg-[#050505] overflow-hidden">
@@ -552,10 +546,9 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
                       onClick={() => setActiveFilter(cat)}
                       className={`
                         px-6 py-3 rounded-full text-sm font-bold font-mono border transition-all duration-300 uppercase tracking-wide
-                        ${
-                          activeFilter === cat
-                            ? "bg-cyan text-black border-cyan shadow-[0_0_20px_rgba(0,240,255,0.4)]"
-                            : "bg-transparent border-white/10 text-slate-500 hover:border-cyan/50 hover:text-cyan"
+                        ${activeFilter === cat
+                          ? "bg-cyan text-black border-cyan shadow-[0_0_20px_rgba(0,240,255,0.4)]"
+                          : "bg-transparent border-white/10 text-slate-500 hover:border-cyan/50 hover:text-cyan"
                         }
                       `}
                     >
