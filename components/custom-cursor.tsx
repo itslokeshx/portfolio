@@ -10,10 +10,6 @@ export function CustomCursor() {
   const cursorX = useMotionValue(0)
   const cursorY = useMotionValue(0)
 
-  const springConfig = { damping: 25, stiffness: 700 }
-  const ringX = useSpring(cursorX, springConfig)
-  const ringY = useSpring(cursorY, springConfig)
-
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
       cursorX.set(e.clientX)
@@ -79,8 +75,8 @@ export function CustomCursor() {
       <motion.div
         className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] border border-cyan"
         style={{
-          x: ringX,
-          y: ringY,
+          x: cursorX,
+          y: cursorY,
           translateX: "-50%",
           translateY: "-50%",
           width: isHovering ? 48 : 32,
