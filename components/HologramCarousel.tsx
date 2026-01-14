@@ -7,13 +7,13 @@ interface HologramCarouselProps {
     onViewAll: () => void;
 }
 
-// PROJECT DATA
-const projects = [
+// --- FULL PROJECT DATA ---
+const featuredProjects = [
     {
         id: 1,
         title: "Second Brain",
         category: "MERN STACK",
-        description: "A complete knowledge management system to store and organize thoughts. Features a self-hosted backend, offline-first sync architecture, and full data ownership.",
+        description: "A complete knowledge management system to store, organize, and retrieve thoughts efficiently.",
         stack: ["MongoDB", "Express", "React", "Node.js"],
         image: "/assets/projects/project-placeholder.png",
         color: "#00F0FF",
@@ -23,9 +23,9 @@ const projects = [
     {
         id: 2,
         title: "MemeHub",
-        category: "SOCIAL PLATFORM",
-        description: "A community-driven platform for sharing and discovering memes. Includes an infinite scroll feed, image optimization pipeline, and social engagement features.",
-        stack: ["React", "Tailwind", "Cloudinary", "Framer"],
+        category: "MERN STACK",
+        description: "A social platform for sharing and discovering memes with a community-driven feed.",
+        stack: ["React", "Express", "MongoDB", "Tailwind"],
         image: "/assets/projects/project-placeholder.png",
         color: "#9D00FF",
         github: "https://github.com/itslokeshx/MemeHub",
@@ -34,9 +34,9 @@ const projects = [
     {
         id: 3,
         title: "WhatsApp API",
-        category: "BACKEND SYSTEM",
-        description: "A robust Node.js backend to schedule and automate WhatsApp messages. Built for business loyalty programs to handle customer engagement automatically.",
-        stack: ["Node.js", "REST API", "Cron Jobs", "Auth"],
+        category: "NODE.JS",
+        description: "A backend system to schedule & automate WhatsApp messages for business loyalty programs.",
+        stack: ["Node.js", "Express", "REST API"],
         image: "/assets/projects/project-placeholder.png",
         color: "#00FF94",
         github: "https://github.com/itslokeshx/Automated-whatsapp-message",
@@ -44,10 +44,21 @@ const projects = [
     },
     {
         id: 4,
+        title: "SaveMyTab",
+        category: "CHROME EXT",
+        description: "A browser extension to save and organize active tabs to boost productivity.",
+        stack: ["JavaScript", "Chrome API", "HTML/CSS"],
+        image: "/assets/projects/project-placeholder.png",
+        color: "#FF9F00",
+        github: "https://github.com/itslokeshx/SaveMyTab",
+        demo: "#"
+    },
+    {
+        id: 5,
         title: "CV Application",
-        category: "PRODUCTIVITY",
-        description: "A real-time resume builder with a reactive drag-and-drop interface. Users can edit layouts live and export pixel-perfect PDFs instantly.",
-        stack: ["React", "Vite", "Tailwind", "PDF.js"],
+        category: "REACT",
+        description: "A dynamic resume builder application allowing real-time editing and preview.",
+        stack: ["React", "Vite", "Tailwind"],
         image: "/assets/projects/project-placeholder.png",
         color: "#FF0055",
         github: "https://github.com/itslokeshx/CV-application",
@@ -55,8 +66,177 @@ const projects = [
     },
 ];
 
+const allProjects = [
+    ...featuredProjects,
+    {
+        id: 6,
+        title: "Travel Journal",
+        category: "REACT",
+        description: "A digital travel diary built with React components.",
+        stack: ["React", "HTML", "CSS"],
+        image: "/assets/projects/project-placeholder.png",
+        color: "#61DAFB",
+        github: "https://github.com/itslokeshx/Travel-journal",
+        demo: "#"
+    },
+    {
+        id: 7,
+        title: "Business Card",
+        category: "REACT",
+        description: "A digital business card portfolio component.",
+        stack: ["React", "CSS"],
+        image: "/assets/projects/project-placeholder.png",
+        color: "#61DAFB",
+        github: "https://github.com/itslokeshx/Business-card",
+        demo: "#"
+    },
+    {
+        id: 8,
+        title: "YaaziCut",
+        category: "TYPESCRIPT",
+        description: "Desktop Video Editor utility built with Electron & TypeScript.",
+        stack: ["Electron", "TypeScript", "Node.js"],
+        image: "/assets/projects/project-placeholder.png",
+        color: "#3178C6",
+        github: "https://github.com/itslokeshx/YaaziCut",
+        demo: "#"
+    },
+    {
+        id: 9,
+        title: "QR Code Gen",
+        category: "NODE.JS",
+        description: "Generate QR codes programmatically using Node.js.",
+        stack: ["Node.js", "Inquirer"],
+        image: "/assets/projects/project-placeholder.png",
+        color: "#68A063",
+        github: "https://github.com/itslokeshx/QR-Code-Generator",
+        demo: "#"
+    },
+    {
+        id: 10,
+        title: "Github Users",
+        category: "NODE.JS",
+        description: "Fetch and display user data using GitHub API.",
+        stack: ["Node.js", "Axios", "GitHub API"],
+        image: "/assets/projects/project-placeholder.png",
+        color: "#68A063",
+        github: "https://github.com/itslokeshx/Github_user_details",
+        demo: "#"
+    },
+    {
+        id: 11,
+        title: "Advice Gen",
+        category: "NODE.JS",
+        description: "API integration project fetching random advice.",
+        stack: ["Node.js", "API"],
+        image: "/assets/projects/project-placeholder.png",
+        color: "#68A063",
+        github: "https://github.com/itslokeshx/Advice-Generator",
+        demo: "#"
+    },
+    {
+        id: 12,
+        title: "Cat Meme App",
+        category: "JAVASCRIPT",
+        description: "Interactive meme generator application.",
+        stack: ["JavaScript", "HTML", "CSS"],
+        image: "/assets/projects/project-placeholder.png",
+        color: "#F7DF1E",
+        github: "https://github.com/itslokeshx/Cat-Meme-App",
+        demo: "#"
+    },
+    {
+        id: 13,
+        title: "Otakumens",
+        category: "JAVASCRIPT",
+        description: "Anime discovery and listing application.",
+        stack: ["JavaScript", "API"],
+        image: "/assets/projects/project-placeholder.png",
+        color: "#F7DF1E",
+        github: "https://github.com/itslokeshx/otakumens",
+        demo: "#"
+    },
+    {
+        id: 14,
+        title: "Ordering App",
+        category: "JAVASCRIPT",
+        description: "Food ordering system simulated interface.",
+        stack: ["JavaScript", "DOM"],
+        image: "/assets/projects/project-placeholder.png",
+        color: "#F7DF1E",
+        github: "https://github.com/itslokeshx/ordering-app",
+        demo: "#"
+    },
+    {
+        id: 15,
+        title: "MindfulAI",
+        category: "PYTHON",
+        description: "AI-based project focused on mindfulness/mental health.",
+        stack: ["Python", "AI/ML"],
+        image: "/assets/projects/project-placeholder.png",
+        color: "#3776AB",
+        github: "https://github.com/itslokeshx/mindfulAI",
+        demo: "#"
+    },
+    {
+        id: 16,
+        title: "Hostel Mgmt",
+        category: "PHP & SQL",
+        description: "Full management system for hostel allocation.",
+        stack: ["PHP", "MySQL", "HTML"],
+        image: "/assets/projects/project-placeholder.png",
+        color: "#777BB4",
+        github: "https://github.com/itslokeshx/hostelmanagement",
+        demo: "#"
+    },
+    {
+        id: 17,
+        title: "Tesla Clone",
+        category: "HTML/CSS",
+        description: "Pixel-perfect clone of Tesla's homepage.",
+        stack: ["HTML", "CSS"],
+        image: "/assets/projects/project-placeholder.png",
+        color: "#E34F26",
+        github: "https://github.com/itslokeshx/Tesla",
+        demo: "#"
+    },
+    {
+        id: 18,
+        title: "News Home",
+        category: "HTML/CSS",
+        description: "Responsive news layout with complex CSS Grid.",
+        stack: ["HTML", "CSS Grid"],
+        image: "/assets/projects/project-placeholder.png",
+        color: "#E34F26",
+        github: "https://github.com/itslokeshx/News-Homepage",
+        demo: "#"
+    },
+    {
+        id: 19,
+        title: "Newsletter Sub",
+        category: "HTML/CSS",
+        description: "Form validation and layout design.",
+        stack: ["HTML", "CSS", "JS"],
+        image: "/assets/projects/project-placeholder.png",
+        color: "#E34F26",
+        github: "https://github.com/itslokeshx/Newsletter-Subscription",
+        demo: "#"
+    }
+];
+
 export default function HologramCarousel({ onViewAll }: HologramCarouselProps) {
-    const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+    const [expandedFeatured, setExpandedFeatured] = useState<number | null>(null);
+    const [showArchive, setShowArchive] = useState(false);
+    const [isArchiveTriggerHovered, setIsArchiveTriggerHovered] = useState(false);
+    const [activeFilter, setActiveFilter] = useState("ALL");
+
+    // Extract unique categories for filter tabs
+    const categories = ["ALL", "MERN STACK", "REACT", "NODE.JS", "JAVASCRIPT", "TYPESCRIPT", "PYTHON", "PHP & SQL", "HTML/CSS"];
+
+    // Filter projects based on active tab
+    const filteredProjects = activeFilter === "ALL"
+        ? allProjects
+        : allProjects.filter(p => p.category === activeFilter);
 
     return (
         <section className="relative py-32 bg-[#050505] overflow-hidden">
@@ -69,45 +249,103 @@ export default function HologramCarousel({ onViewAll }: HologramCarouselProps) {
                     </h2>
                 </div>
 
-                {/* Project List */}
-                <div className="space-y-0">
-                    {projects.map((project, index) => (
+                {/* FEATURED PROJECTS LIST */}
+                <div className="space-y-0 mb-16">
+                    {featuredProjects.map((project, index) => (
                         <ProjectRow
-                            key={project.id}
+                            key={`featured-${project.id}`}
                             project={project}
                             index={index}
-                            isExpanded={expandedIndex === index}
-                            onToggle={() => setExpandedIndex(expandedIndex === index ? null : index)}
+                            isExpanded={expandedFeatured === index}
+                            onToggle={() => setExpandedFeatured(expandedFeatured === index ? null : index)}
                         />
                     ))}
                 </div>
 
-                {/* View All Button */}
-                <div className="flex justify-center mt-16">
-                    <motion.button
-                        onClick={onViewAll}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.98 }}
+                {/* ALL ARCHIVES TRIGGER */}
+                <div className="border-t border-b border-white/5 bg-[#050505] relative z-20">
+                    <div
+                        onMouseEnter={() => setIsArchiveTriggerHovered(true)}
+                        onMouseLeave={() => setIsArchiveTriggerHovered(false)}
+                        onClick={() => setShowArchive(!showArchive)}
                         className="
-                            px-8 py-4
-                            border-2 border-cyan
-                            rounded-xl
-                            text-cyan text-sm font-bold uppercase tracking-wider
-                            hover:bg-cyan/10
+                            group relative
+                            py-8 px-4
+                            cursor-pointer
                             transition-all duration-300
+                            hover:bg-white/[0.02]
                         "
                     >
-                        Access Full Archive →
-                    </motion.button>
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-8">
+                                <span className="font-mono text-sm text-cyan group-hover:text-white transition-colors">
+                                    // ARCHIVE
+                                </span>
+                                <ShuffleText
+                                    text="VIEW FULL DATABASE"
+                                    isActive={isArchiveTriggerHovered}
+                                    className="text-3xl font-bold text-slate-400 group-hover:text-cyan transition-colors"
+                                />
+                            </div>
+                            <motion.div
+                                animate={{ rotate: showArchive ? 180 : 0 }}
+                                className="text-xl text-slate-600 group-hover:text-cyan transition-colors"
+                            >
+                                ↓
+                            </motion.div>
+                        </div>
+                    </div>
                 </div>
+
+                {/* ARCHIVE GRID SECTION */}
+                <AnimatePresence>
+                    {showArchive && (
+                        <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.5, ease: "easeInOut" }}
+                            className="overflow-hidden bg-[#0a0a0a]"
+                        >
+                            <div className="px-4 py-12">
+                                {/* Filter Tabs */}
+                                <div className="flex flex-wrap gap-4 mb-12">
+                                    {categories.map((cat) => (
+                                        <button
+                                            key={cat}
+                                            onClick={() => setActiveFilter(cat)}
+                                            className={`
+                                                px-4 py-2 rounded-full text-xs font-mono border transition-all duration-300
+                                                ${activeFilter === cat
+                                                    ? "bg-cyan/10 border-cyan text-cyan hover:shadow-[0_0_15px_rgba(0,240,255,0.3)]"
+                                                    : "bg-transparent border-white/10 text-slate-500 hover:border-white/30 hover:text-slate-300"}
+                                            `}
+                                        >
+                                            {cat}
+                                        </button>
+                                    ))}
+                                </div>
+
+                                {/* Archive Grid of Cards */}
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    {filteredProjects.map((project) => (
+                                        <ArchiveCard key={`archive-${project.id}`} project={project} />
+                                    ))}
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
         </section>
     );
 }
 
-// PROJECT ROW COMPONENT
+// --- SUB COMPONENTS ---
+
+// 1. FEATURED PROJECT ROW (With large image expand)
 interface ProjectRowProps {
-    project: typeof projects[0];
+    project: any;
     index: number;
     isExpanded: boolean;
     onToggle: () => void;
@@ -118,7 +356,7 @@ function ProjectRow({ project, index, isExpanded, onToggle }: ProjectRowProps) {
 
     return (
         <div className="border-b border-white/5">
-            {/* Main Row */}
+            {/* Clickable Header */}
             <div
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
@@ -132,91 +370,62 @@ function ProjectRow({ project, index, isExpanded, onToggle }: ProjectRowProps) {
                 "
             >
                 <div className="flex items-center justify-between">
-                    {/* Left: Index + Title + Preview Space */}
+                    {/* Left Side */}
                     <div className="flex items-center gap-8">
-                        <span className="font-mono text-sm text-slate-600 group-hover:text-cyan transition-colors">
-                            0{index + 1}
+                        <span className="font-mono text-slate-600 group-hover:text-cyan transition-colors text-sm">
+                            {index < 9 ? `0${index + 1}` : index + 1}
                         </span>
 
-                        {/* Title with reserved preview space */}
                         <div className="flex items-center gap-6">
                             <ShuffleText
                                 text={project.title}
                                 isActive={isHovered}
-                                className="text-3xl md:text-5xl font-bold text-slate-400 group-hover:text-white transition-colors"
+                                className="font-bold text-slate-400 group-hover:text-white transition-colors text-3xl md:text-5xl"
                             />
 
-                            {/* Reserved Preview Space - always takes up space */}
+                            {/* Preview Thumbnail - Visible on Hover */}
                             <div className="w-32 h-24 flex-shrink-0">
                                 <motion.div
-                                    animate={{
-                                        opacity: isHovered ? 1 : 0,
-                                    }}
+                                    animate={{ opacity: isHovered ? 1 : 0 }}
                                     transition={{ duration: 0.2 }}
                                     className="
                                         w-full h-full
-                                        rounded-lg
-                                        overflow-hidden
-                                        border-2
-                                        shadow-lg
-                                        bg-gradient-to-br from-titanium to-void
-                                        flex items-center justify-center
+                                        rounded overflow-hidden
+                                        border border-white/10
+                                        bg-white/5
                                         relative
                                     "
                                     style={{
-                                        borderColor: project.color,
-                                        boxShadow: isHovered ? `0 0 20px ${project.color}40` : 'none',
+                                        borderColor: isHovered ? project.color : 'transparent',
+                                        boxShadow: isHovered ? `0 0 15px ${project.color}20` : 'none',
                                     }}
                                 >
-                                    {/* Preview Content */}
                                     {(project.image.startsWith('/') || project.image.startsWith('http')) ? (
-                                        <img
-                                            src={project.image}
-                                            alt={project.title}
-                                            className="w-full h-full object-cover"
-                                        />
+                                        <img src={project.image} alt="" className="w-full h-full object-cover" />
                                     ) : (
-                                        <div className="text-5xl">
-                                            {project.image}
-                                        </div>
+                                        <div className="w-full h-full flex items-center justify-center text-xl">{project.image}</div>
                                     )}
-
-                                    {/* Scanline overlay */}
-                                    <div className="
-                                        absolute inset-0
-                                        bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(0,240,255,0.05)_2px,rgba(0,240,255,0.05)_4px)]
-                                        pointer-events-none
-                                        z-10
-                                    " />
                                 </motion.div>
                             </div>
                         </div>
                     </div>
 
-                    {/* Right: Category + Arrow */}
-                    <div className="flex items-center gap-6">
-                        <span
-                            className="
-                                hidden md:block
-                                font-mono text-xs text-cyan/70 uppercase tracking-wider
-                                opacity-0 -translate-x-4
-                                group-hover:opacity-100 group-hover:translate-x-0
-                                transition-all duration-500
-                            "
-                        >
-                            [{project.category}]
+                    {/* Right Side */}
+                    <div className="flex items-center gap-4">
+                        <span className="hidden md:block font-mono text-cyan/50 tracking-wider text-xs">
+                            {project.category}
                         </span>
                         <motion.div
-                            animate={{ rotate: isExpanded ? 90 : 0 }}
-                            className="text-xl text-slate-600 group-hover:text-cyan transition-colors"
+                            animate={{ rotate: isExpanded ? 45 : 0 }}
+                            className="text-slate-600 group-hover:text-cyan transition-colors text-2xl"
                         >
-                            →
+                            +
                         </motion.div>
                     </div>
                 </div>
             </div>
 
-            {/* Expanded Dossier */}
+            {/* Expanded Details with Large Image */}
             <AnimatePresence>
                 {isExpanded && (
                     <motion.div
@@ -227,83 +436,52 @@ function ProjectRow({ project, index, isExpanded, onToggle }: ProjectRowProps) {
                         className="overflow-hidden"
                     >
                         <div className="px-4 pb-8 pt-4 bg-white/[0.01]">
-                            <div className="grid md:grid-cols-2 gap-8 max-w-4xl">
-                                {/* Left: Description */}
-                                <div>
-                                    <h4 className="text-xs text-cyan uppercase tracking-wider mb-3 font-mono">
-                                        // DESCRIPTION
-                                    </h4>
-                                    <p className="text-sm text-slate-400 leading-relaxed">
-                                        {project.description}
-                                    </p>
+                            <div className="max-w-6xl">
+                                {/* Large Image Banner */}
+                                <div className="w-full h-64 md:h-96 rounded-xl overflow-hidden mb-8 relative border border-white/10 group">
+                                    {(project.image.startsWith('/') || project.image.startsWith('http')) ? (
+                                        <img
+                                            src={project.image}
+                                            alt={project.title}
+                                            className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700"
+                                        />
+                                    ) : (
+                                        <div className="w-full h-full flex items-center justify-center bg-white/5 text-6xl">
+                                            {project.image}
+                                        </div>
+                                    )}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-60" />
                                 </div>
 
-                                {/* Right: Tech + Links */}
-                                <div className="space-y-6">
-                                    {/* Tech Stack */}
+                                <div className="grid md:grid-cols-2 gap-8">
                                     <div>
-                                        <h4 className="text-xs text-cyan uppercase tracking-wider mb-3 font-mono">
-                                            // TECH_STACK
-                                        </h4>
-                                        <div className="flex flex-wrap gap-2">
-                                            {project.stack.map((tech) => (
-                                                <span
-                                                    key={tech}
-                                                    className="
-                                                        px-3 py-1
-                                                        bg-cyan/10 border border-cyan/30
-                                                        rounded-md
-                                                        text-xs text-cyan font-mono
-                                                    "
-                                                >
-                                                    {tech}
-                                                </span>
-                                            ))}
-                                        </div>
+                                        <h4 className="text-xs text-cyan uppercase tracking-wider mb-2 font-mono">// DETAILS</h4>
+                                        <p className="text-base text-slate-300 leading-relaxed mb-6 border-l-2 border-cyan/30 pl-4">
+                                            {project.description}
+                                        </p>
                                     </div>
 
-                                    {/* Links */}
-                                    <div className="flex gap-4">
-                                        <a
-                                            href={project.github}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            onClick={(e) => e.stopPropagation()}
-                                            className="
-                                                flex items-center gap-2
-                                                px-4 py-2
-                                                border border-cyan/40
-                                                rounded-lg
-                                                text-xs text-cyan
-                                                hover:bg-cyan/10
-                                                transition-all duration-300
-                                            "
-                                        >
-                                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                                            </svg>
-                                            GitHub
-                                        </a>
-                                        <a
-                                            href={project.demo}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            onClick={(e) => e.stopPropagation()}
-                                            className="
-                                                flex items-center gap-2
-                                                px-4 py-2
-                                                bg-gradient-to-r from-cyan to-violet
-                                                rounded-lg
-                                                text-xs text-void font-bold
-                                                hover:shadow-[0_0_20px_rgba(0,240,255,0.5)]
-                                                transition-all duration-300
-                                            "
-                                        >
-                                            Live Demo
-                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                            </svg>
-                                        </a>
+                                    <div className="space-y-6">
+                                        <div>
+                                            <h4 className="text-xs text-cyan uppercase tracking-wider mb-2 font-mono">// TECH_STACK</h4>
+                                            <div className="flex flex-wrap gap-2">
+                                                {project.stack.map((tech: string) => (
+                                                    <span key={tech} className="text-xs px-3 py-1 bg-cyan/5 border border-cyan/20 rounded font-mono text-cyan">
+                                                        {tech}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        <div className="flex gap-4">
+                                            <a href={project.github} target="_blank" className="px-6 py-3 border border-white/20 rounded hover:bg-white/5 hover:border-cyan text-sm flex items-center gap-2 text-white transition-all">
+                                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" /></svg>
+                                                GITHUB REPO
+                                            </a>
+                                            <a href={project.demo} target="_blank" className="px-6 py-3 bg-cyan text-black font-bold rounded hover:bg-white hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] text-sm flex items-center gap-2 transition-all">
+                                                LIVE DEMO →
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -315,14 +493,67 @@ function ProjectRow({ project, index, isExpanded, onToggle }: ProjectRowProps) {
     );
 }
 
-// SHUFFLE TEXT COMPONENT (FASTER)
-interface ShuffleTextProps {
-    text: string;
-    isActive: boolean;
-    className?: string;
+// 2. ARCHIVE CARD (Grid Item)
+function ArchiveCard({ project }: { project: any }) {
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -5 }}
+            className="group relative bg-white/[0.03] border border-white/5 rounded-xl overflow-hidden hover:border-cyan/30 hover:bg-white/[0.05] transition-all duration-300 flex flex-col h-full"
+        >
+            {/* Card Image */}
+            <div className="h-48 w-full relative overflow-hidden bg-black/50">
+                {(project.image.startsWith('/') || project.image.startsWith('http')) ? (
+                    <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 opacity-80 group-hover:opacity-100"
+                    />
+                ) : (
+                    <div className="w-full h-full flex items-center justify-center text-4xl">{project.image}</div>
+                )}
+
+                {/* Overlay Links - Appear on Hover */}
+                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 backdrop-blur-sm">
+                    <a href={project.github} target="_blank" className="p-3 bg-white/10 rounded-full hover:bg-cyan hover:text-black text-white transition-colors" title="View Code">
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" /></svg>
+                    </a>
+                    <a href={project.demo} target="_blank" className="p-3 bg-white/10 rounded-full hover:bg-cyan hover:text-black text-white transition-colors" title="Live Demo">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                    </a>
+                </div>
+            </div>
+
+            {/* Card Content */}
+            <div className="p-6 flex flex-col flex-grow">
+                <div className="flex items-start justify-between mb-3">
+                    <h3 className="text-xl font-bold text-slate-200 group-hover:text-cyan transition-colors">{project.title}</h3>
+                    <span className="text-[10px] font-mono text-cyan/70 border border-cyan/20 px-2 py-1 rounded">{project.category}</span>
+                </div>
+
+                <p className="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">
+                    {project.description}
+                </p>
+
+                <div className="flex flex-wrap gap-2 mt-auto">
+                    {project.stack.slice(0, 3).map((tech: string) => (
+                        <span key={tech} className="text-[10px] text-slate-500 bg-white/5 px-2 py-1 rounded font-mono">
+                            {tech}
+                        </span>
+                    ))}
+                    {project.stack.length > 3 && (
+                        <span className="text-[10px] text-slate-500 bg-white/5 px-2 py-1 rounded font-mono">+{project.stack.length - 3}</span>
+                    )}
+                </div>
+            </div>
+        </motion.div>
+    );
 }
 
-function ShuffleText({ text, isActive, className }: ShuffleTextProps) {
+// SHUFFLE TEXT COMPONENT
+function ShuffleText({ text, isActive, className }: { text: string; isActive: boolean; className?: string }) {
     const [displayText, setDisplayText] = useState(text);
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
@@ -335,26 +566,18 @@ function ShuffleText({ text, isActive, className }: ShuffleTextProps) {
         let frame = 0;
         const interval = setInterval(() => {
             setDisplayText(
-                text
-                    .split("")
-                    .map((char, index) => {
-                        if (char === " ") return " ";
-                        if (frame > index) {
-                            return text[index];
-                        }
-                        return chars[Math.floor(Math.random() * chars.length)];
-                    })
-                    .join("")
+                text.split("").map((char, index) => {
+                    if (char === " ") return " ";
+                    if (frame > index) return text[index];
+                    return chars[Math.floor(Math.random() * chars.length)];
+                }).join("")
             );
-
-            // Accelerate: Reveal 3 characters per frame for super fast 1/3 sec feel
-            frame += 3;
-
+            frame += 1;
             if (frame > text.length + 5) {
                 clearInterval(interval);
                 setDisplayText(text);
             }
-        }, 30); // 30ms with +3 increment = ~300ms total for typical titles
+        }, 30);
 
         return () => clearInterval(interval);
     }, [isActive, text]);
