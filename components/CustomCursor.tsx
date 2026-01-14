@@ -1,15 +1,25 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useSpring } from 'framer-motion';
 
 export default function CustomCursor() {
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     const [isHovering, setIsHovering] = useState(false);
+
+    // Spring animation for smooth cursor movement
+    const cursorX = useSpring(0, { stiffness: 500, damping: 28 });
+    const cursorY = useSpring(0, { stiffness: 500, damping: 28 });
+
+    // Delayed ring position for lag effect
+    const ringX = useSpring(0, { stiffness: 150, damping: 15, mass: 0.1 });
+    const ringY = useSpring(0, { stiffness: 150, damping: 15, mass: 0.1 });
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
-            setMousePosition({ x: e.clientX, y: e.clientY });
+            cursorX.set(e.clientX);
+            cursorY.set(e.clientY);
+            ringX.set(e.clientX);
+            ringY.set(e.clientY);
         };
 
         const handleMouseOver = (e: MouseEvent) => {
@@ -19,7 +29,8 @@ export default function CustomCursor() {
                 target.tagName === 'BUTTON' ||
                 target.getAttribute('role') === 'button' ||
                 target.closest('a') ||
-                target.closest('button')
+                target.closest('button') ||
+                target.classList.contains('cursor-pointer')
             ) {
                 setIsHovering(true);
             } else {
@@ -34,41 +45,42 @@ export default function CustomCursor() {
             window.removeEventListener('mousemove', handleMouseMove);
             document.removeEventListener('mouseover', handleMouseOver);
         };
-    }, []);
+    }, [cursorX, cursorY, ringX, ringY]);
 
     return (
         <>
-            {/* Dot */}
+            {/* Main cursor dot */}
             <motion.div
-                className="fixed top-0 left-0 w-2 h-2 bg-cyan rounded-full pointer-events-none z-[9999]"
+                className="fixed top-0 left-0 w-[2px] h-[2px] bg-cyan rounded-full pointer-events-none z-[9999]"
                 style={{
+                    x: cursorX,
+                    y: cursorY,
+                    translateX: '-1px',
+                    translateY: '-1px',
                     boxShadow: '0 0 10px rgba(0, 240, 255, 0.8)',
-                }}
-                animate={{
-                    x: mousePosition.x - 4,
-                    y: mousePosition.y - 4,
-                }}
-                transition={{
-                    type: 'spring',
-                    damping: 50,
-                    stiffness: 1000,
-                    mass: 0.1,
                 }}
             />
 
-            {/* Ring */}
+            {/* Cursor ring with lag effect */}
             <motion.div
-                className={`fixed top-0 left-0 border-2 border-cyan/50 rounded-full pointer-events-none z-[9998] transition-all duration-150 ${isHovering ? 'w-12 h-12' : 'w-8 h-8'
-                    }`}
+                className="fixed top-0 left-0 border-2 border-cyan/50 rounded-full pointer-events-none z-[9998]"
+                style={{
+                    x: ringX,
+                    y: ringY,
+                    translateX: isHovering ? '-6px' : '-4px',
+                    translateY: isHovering ? '-6px' : '-4px',
+                }}
                 animate={{
-                    x: mousePosition.x - (isHovering ? 24 : 16),
-                    y: mousePosition.y - (isHovering ? 24 : 16),
+                    width: isHovering ? '12px' : '8px',
+                    height: isHovering ? '12px' : '8px',
+                    borderColor: isHovering ? 'rgba(0, 240, 255, 0.8)' : 'rgba(0, 240, 255, 0.5)',
+                    boxShadow: isHovering
+                        ? '0 0 20px rgba(0, 240, 255, 0.8)'
+                        : '0 0 10px rgba(0, 240, 255, 0.4)',
                 }}
                 transition={{
-                    type: 'spring',
-                    damping: 30,
-                    stiffness: 200,
-                    mass: 0.5,
+                    duration: 0.2,
+                    ease: 'easeOut',
                 }}
             />
         </>

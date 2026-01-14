@@ -169,10 +169,11 @@ export default function ParticleHero() {
                     const dy = planeIntersect.y - positions[i3 + 1];
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
-                    if (distance < 20) {
-                        const force = (20 - distance) / 20;
-                        positions[i3] += dx * force * 0.01;
-                        positions[i3 + 1] += dy * force * 0.01;
+                    // Increased radius to 200px with inverse square law
+                    if (distance < 200) {
+                        const force = Math.pow((200 - distance) / 200, 2); // Inverse square law
+                        positions[i3] += dx * force * 0.02;
+                        positions[i3 + 1] += dy * force * 0.02;
                     }
                 }
                 geometry.attributes.position.needsUpdate = true;
@@ -255,6 +256,9 @@ export default function ParticleHero() {
                 animate={{ y: [0, 15, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
                 className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+                style={{
+                    opacity: typeof window !== 'undefined' && window.scrollY > window.innerHeight * 0.1 ? 0 : 1,
+                }}
             >
                 <div className="w-6 h-10 border-2 border-cyan/40 rounded-full flex justify-center p-2">
                     <motion.div

@@ -1,39 +1,60 @@
 'use client';
 
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { getOptimalFrameCount } from '@/utils/deviceDetection';
 
 interface PreloaderProps {
     progress: number;
     isComplete: boolean;
 }
 
+const TERMINAL_LINES = [
+    '> INITIALIZING_NEURAL_LINK...',
+    '> LOADING_SYSTEMS...',
+    '> CALIBRATING_VIEWPORT...',
+    '> READY.',
+];
+
 export default function Preloader({ progress, isComplete }: PreloaderProps) {
-    const [terminalText, setTerminalText] = useState('INITIALIZING_NEURAL_LINK...');
+    const [currentLineIndex, setCurrentLineIndex] = useState(0);
+    const [displayedText, setDisplayedText] = useState('');
+    const [showCursor, setShowCursor] = useState(true);
     const [isExiting, setIsExiting] = useState(false);
 
-    const totalFrames = useMemo(() => {
-        const baseFrames = 240;
-        const sections = 3;
-        return getOptimalFrameCount(baseFrames) * sections;
+    // Typing animation effect
+    useEffect(() => {
+        if (currentLineIndex >= TERMINAL_LINES.length) return;
+
+        const currentLine = TERMINAL_LINES[currentLineIndex];
+        const typingSpeed = 30; // ms per character
+
+        if (displayedText.length < currentLine.length) {
+            const timeout = setTimeout(() => {
+                setDisplayedText(currentLine.slice(0, displayedText.length + 1));
+            }, typingSpeed);
+            return () => clearTimeout(timeout);
+        } else {
+            // Line complete, move to next after delay
+            const timeout = setTimeout(() => {
+                setCurrentLineIndex(prev => prev + 1);
+                setDisplayedText('');
+            }, 400);
+            return () => clearTimeout(timeout);
+        }
+    }, [displayedText, currentLineIndex]);
+
+    // Cursor blink effect
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setShowCursor(prev => !prev);
+        }, 500);
+        return () => clearInterval(interval);
     }, []);
 
-    useEffect(() => {
-        if (progress < 30) {
-            setTerminalText('INITIALIZING_NEURAL_LINK...');
-        } else if (progress < 90) {
-            setTerminalText(`LOADING_ASSETS [${Math.floor((progress / 100) * totalFrames)}/${totalFrames} FRAMES]...`);
-        } else if (progress < 100) {
-            setTerminalText('CALIBRATING_VIEWPORT...');
-        } else {
-            setTerminalText('SYSTEM_READY');
-        }
-    }, [progress, totalFrames]);
-
+    // Handle exit animation
     useEffect(() => {
         if (isComplete) {
-            setTimeout(() => setIsExiting(true), 500);
+            setTimeout(() => setIsExiting(true), 300);
         }
     }, [isComplete]);
 
@@ -43,43 +64,60 @@ export default function Preloader({ progress, isComplete }: PreloaderProps) {
 
     return (
         <AnimatePresence>
-            <motion.div
-                initial={{ opacity: 1 }}
-                exit={{
-                    clipPath: 'polygon(0 0, 50% 0, 50% 100%, 0 100%)',
-                    transition: { duration: 0.8, ease: [0.645, 0.045, 0.355, 1] }
-                }}
-                className="fixed inset-0 z-[100] bg-void flex flex-col items-center justify-center"
-            >
-                {/* Loading Bar */}
-                <div className="w-[400px] max-w-[80vw] mb-8">
-                    <div className="h-[2px] bg-titanium rounded-full overflow-hidden">
+            {!isExiting && (
+                <motion.div
+                    initial={{ opacity: 1 }}
+                    exit={{
+                        clipPath: [
+                            'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+                            'polygon(0 0, 50% 0, 50% 100%, 0 100%)',
+                        ],
+                        transition: { duration: 0.8, ease: [0.645, 0.045, 0.355, 1] },
+                    }}
+                    className="fixed inset-0 z-[100] bg-void flex flex-col items-center justify-center"
+                >
+                    {/* Loading Bar */}
+                    <div className="w-[400px] max-w-[80vw] mb-8">
                         <motion.div
-                            className="h-full bg-cyan-400"
-                            initial={{ width: '0%' }}
-                            animate={{ width: `${progress}%` }}
-                            transition={{ duration: 0.3, ease: 'easeOut' }}
+                            className="h-[2px] bg-cyan rounded-full"
+                            initial={{ width: '0%', boxShadow: '0 0 20px rgba(0,240,255,0.8)' }}
+                            animate={{
+                                width: `${progress}%`,
+                                boxShadow: '0 0 20px rgba(0,240,255,0.8)',
+                            }}
+                            transition={{ duration: 0.3, ease: 'linear' }}
                         />
                     </div>
-                </div>
 
-                {/* Terminal Text */}
-                <div className="font-mono text-cyan-400/60 text-sm tracking-wider">
-                    <motion.p
-                        key={terminalText}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.2 }}
-                    >
-                        &gt; {terminalText}
-                    </motion.p>
-                </div>
+                    {/* Terminal Text */}
+                    <div className="font-mono text-cyan/60 text-sm tracking-wider min-h-[100px]">
+                        {TERMINAL_LINES.slice(0, currentLineIndex).map((line, index) => (
+                            <motion.p
+                                key={index}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                className="mb-1"
+                            >
+                                {line}
+                            </motion.p>
+                        ))}
+                        {currentLineIndex < TERMINAL_LINES.length && (
+                            <p className="mb-1">
+                                {displayedText}
+                                <span
+                                    className={`inline-block w-2 h-4 bg-cyan ml-1 ${showCursor ? 'opacity-100' : 'opacity-0'
+                                        }`}
+                                />
+                            </p>
+                        )}
+                    </div>
 
-                {/* Progress Percentage */}
-                <div className="mt-4 font-mono text-cyan-400 text-xs">
-                    {Math.floor(progress)}%
-                </div>
-            </motion.div>
+                    {/* Progress Percentage */}
+                    <div className="mt-4 font-mono text-cyan text-xs">
+                        {Math.floor(progress)}%
+                    </div>
+                </motion.div>
+            )}
         </AnimatePresence>
     );
 }

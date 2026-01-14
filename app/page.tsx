@@ -11,6 +11,7 @@ import Contact from '@/components/Contact';
 import CustomCursor from '@/components/CustomCursor';
 import SmoothScroll from '@/components/SmoothScroll';
 import NoiseOverlay from '@/components/NoiseOverlay';
+import ScrollProgress from '@/components/ScrollProgress';
 
 export default function Home() {
   const [loadingProgress, setLoadingProgress] = useState(0);
@@ -41,6 +42,7 @@ export default function Home() {
       )}
 
       <SmoothScroll>
+        <ScrollProgress />
         <main className="relative">
           {/* Global Effects */}
           <CustomCursor />

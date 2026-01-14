@@ -80,6 +80,7 @@ export default function HologramCarousel({ onViewAll }: HologramCarouselProps) {
                       bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(0,240,255,0.1)_2px,rgba(0,240,255,0.1)_4px)]
                       opacity-0 group-hover:opacity-100
                       transition-opacity duration-300
+                      animate-scan-line
                     " />
 
                                         {/* Glitch Effect */}
@@ -87,9 +88,14 @@ export default function HologramCarousel({ onViewAll }: HologramCarouselProps) {
                                             <motion.div
                                                 animate={{
                                                     x: [0, 2, -2, 0],
-                                                    opacity: [1, 0.8, 1],
+                                                    opacity: [1, 0.8, 0.9, 1],
                                                 }}
-                                                transition={{ duration: 0.3, repeat: Infinity, repeatDelay: 3 }}
+                                                transition={{
+                                                    duration: 0.3,
+                                                    repeat: Infinity,
+                                                    repeatDelay: 3,
+                                                    ease: 'easeInOut',
+                                                }}
                                                 className="absolute inset-0 border-2 border-cyan/20 rounded-3xl"
                                             />
                                         )}

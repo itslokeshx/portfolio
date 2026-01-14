@@ -2,6 +2,24 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { PROJECTS } from '@/utils/projectData';
+
+// Helper function to get related projects for a skill
+const getRelatedProjects = (skillName: string): string[] => {
+    const skillMap: { [key: string]: string[] } = {
+        'React': ['Second Brain', 'MemeHub', 'CV Application'],
+        'Node.js': ['Second Brain', 'MemeHub', 'Automated WhatsApp API'],
+        'MongoDB': ['Second Brain', 'MemeHub'],
+        'Express': ['Second Brain', 'Automated WhatsApp API'],
+        'TypeScript': ['YaaziCut', 'Portfolio v3'],
+        'Tailwind': ['MemeHub', 'CV Application', 'Portfolio v3'],
+        'Git': ['All Projects'],
+        'Python': ['MindfulAI'],
+        'Next.js': ['Portfolio v3'],
+        'Framer Motion': ['Portfolio v3'],
+    };
+    return skillMap[skillName] || ['Multiple Projects'];
+};
 
 interface SkillData {
     name: string;
@@ -324,9 +342,22 @@ export default function QuantumSkills() {
                                 </div>
                                 <span className="text-xl font-bold text-mist">{hoveredSkill.proficiency}%</span>
                             </div>
-                            <p className="text-sm text-carbon">
+                            <p className="text-sm text-carbon mb-4">
                                 Used in {Math.floor(hoveredSkill.proficiency / 20)}+ production projects
                             </p>
+
+                            {/* Related Projects */}
+                            <div className="mt-4 pt-4 border-t border-cyan/20">
+                                <p className="text-xs text-carbon uppercase mb-2">Featured In:</p>
+                                <div className="space-y-1">
+                                    {getRelatedProjects(hoveredSkill.name).slice(0, 3).map((project, index) => (
+                                        <div key={index} className="flex items-center gap-2">
+                                            <div className="w-1 h-1 bg-cyan rounded-full" />
+                                            <span className="text-sm text-mist/70">{project}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                         </motion.div>
                     )}
                 </AnimatePresence>
