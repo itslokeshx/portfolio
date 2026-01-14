@@ -92,8 +92,8 @@ class Skill {
         this.vx *= 0.98;
         this.vy *= 0.98;
 
-        // Update orbit angle
-        this.angle += 0.002;
+        // Update orbit angle - Increased speed
+        this.angle += 0.002; // Changed from 0.0002 to 0.001 (5x faster)
     }
 
     draw(ctx: CanvasRenderingContext2D) {
@@ -138,7 +138,7 @@ class Skill {
 
 export default function QuantumSkills() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(null);
+    const mousePosRef = useRef<{ x: number; y: number } | null>(null);
     const [hoveredSkill, setHoveredSkill] = useState<Skill | null>(null);
     const skillsRef = useRef<Skill[]>([]);
 
@@ -251,7 +251,7 @@ export default function QuantumSkills() {
             drawSun(time);
 
             skillsRef.current.forEach(skill => {
-                skill.update(centerX, centerY, skillsRef.current, mousePos);
+                skill.update(centerX, centerY, skillsRef.current, mousePosRef.current);
                 skill.draw(ctx);
             });
 
@@ -260,7 +260,7 @@ export default function QuantumSkills() {
         };
 
         animate();
-    }, [mousePos]);
+    }, []); // Removed mousePos dependency to prevent restart
 
     const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
         const canvas = canvasRef.current;
@@ -270,7 +270,7 @@ export default function QuantumSkills() {
         const x = ((e.clientX - rect.left) / rect.width) * canvas.width / (window.devicePixelRatio || 1);
         const y = ((e.clientY - rect.top) / rect.height) * canvas.height / (window.devicePixelRatio || 1);
 
-        setMousePos({ x, y });
+        mousePosRef.current = { x, y };
 
         // Check for hover
         const hovered = skillsRef.current.find(skill => {
@@ -306,7 +306,7 @@ export default function QuantumSkills() {
                         ref={canvasRef}
                         className="w-full h-auto cursor-crosshair"
                         onMouseMove={handleMouseMove}
-                        onMouseLeave={() => setMousePos(null)}
+                        onMouseLeave={() => { mousePosRef.current = null; setHoveredSkill(null); }}
                     />
 
                     {/* Proficiency Legend */}
