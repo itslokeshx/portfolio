@@ -74,23 +74,23 @@ class Skill {
             }
         });
 
-        // Mouse attraction
-        if (mousePos) {
-            const dx = mousePos.x - this.x;
-            const dy = mousePos.y - this.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 200) {
-                const force = (200 - dist) / 200;
-                this.vx += (dx / dist) * force * 2;
-                this.vy += (dy / dist) * force * 2;
-            }
-        }
+        // Mouse attraction - DISABLED to prevent chaotic movement
+        // if (mousePos) {
+        //     const dx = mousePos.x - this.x;
+        //     const dy = mousePos.y - this.y;
+        //     const dist = Math.sqrt(dx * dx + dy * dy);
+        //     if (dist < 100) {
+        //         const force = (100 - dist) / 100;
+        //         this.vx += (dx / dist) * force * 0.3;
+        //         this.vy += (dy / dist) * force * 0.3;
+        //     }
+        // }
 
         // Apply velocity with damping
         this.x += this.vx;
         this.y += this.vy;
-        this.vx *= 0.95;
-        this.vy *= 0.95;
+        this.vx *= 0.98;
+        this.vy *= 0.98;
 
         // Update orbit angle
         this.angle += 0.002;
@@ -150,14 +150,29 @@ export default function QuantumSkills() {
         if (!ctx) return;
 
         const dpr = window.devicePixelRatio || 1;
-        canvas.width = 1000 * dpr;
-        canvas.height = 700 * dpr;
-        canvas.style.width = '1000px';
-        canvas.style.height = '700px';
-        ctx.scale(dpr, dpr);
 
-        const centerX = 500;
-        const centerY = 350;
+        // Make canvas responsive
+        const updateCanvasSize = () => {
+            const container = canvas.parentElement;
+            if (!container) return;
+
+            const width = Math.min(container.clientWidth, 1000);
+            const height = 700;
+
+            canvas.width = width * dpr;
+            canvas.height = height * dpr;
+            canvas.style.width = `${width}px`;
+            canvas.style.height = `${height}px`;
+            ctx.scale(dpr, dpr);
+
+            return { width, height };
+        };
+
+        const size = updateCanvasSize();
+        if (!size) return;
+
+        const centerX = size.width / 2;
+        const centerY = size.height / 2;
 
         // Initialize skills
         const skillData: SkillData[] = [
@@ -252,8 +267,8 @@ export default function QuantumSkills() {
         if (!canvas) return;
 
         const rect = canvas.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 1000;
-        const y = ((e.clientY - rect.top) / rect.height) * 700;
+        const x = ((e.clientX - rect.left) / rect.width) * canvas.width / (window.devicePixelRatio || 1);
+        const y = ((e.clientY - rect.top) / rect.height) * canvas.height / (window.devicePixelRatio || 1);
 
         setMousePos({ x, y });
 

@@ -8,6 +8,18 @@ import { gsap } from 'gsap';
 export default function ParticleHero() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [isFormed, setIsFormed] = useState(false);
+    const [scrollIndicatorVisible, setScrollIndicatorVisible] = useState(true);
+
+    // Handle scroll indicator visibility
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollThreshold = window.innerHeight * 0.1;
+            setScrollIndicatorVisible(window.scrollY <= scrollThreshold);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     useEffect(() => {
         if (!canvasRef.current) return;
@@ -257,7 +269,8 @@ export default function ParticleHero() {
                 transition={{ duration: 2, repeat: Infinity }}
                 className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
                 style={{
-                    opacity: typeof window !== 'undefined' && window.scrollY > window.innerHeight * 0.1 ? 0 : 1,
+                    opacity: scrollIndicatorVisible ? 1 : 0,
+                    transition: 'opacity 0.3s ease',
                 }}
             >
                 <div className="w-6 h-10 border-2 border-cyan/40 rounded-full flex justify-center p-2">

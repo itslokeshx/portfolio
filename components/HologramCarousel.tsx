@@ -54,7 +54,7 @@ export default function HologramCarousel({ onViewAll }: HologramCarouselProps) {
                                     key={project.id}
                                     className={`
                     absolute top-0 left-1/2 -translate-x-1/2
-                    w-[90%] md:w-[500px] h-[600px]
+                    w-[90%] md:w-[500px] h-[550px]
                     cursor-pointer
                     transition-all duration-700
                     ${isActive ? 'z-10' : 'z-0'}
@@ -101,37 +101,38 @@ export default function HologramCarousel({ onViewAll }: HologramCarouselProps) {
                                         )}
 
                                         {/* Content */}
-                                        <div className="relative z-10 p-6 md:p-10 h-full flex flex-col">
+                                        <div className="relative z-10 p-4 md:p-6 h-full flex flex-col">
                                             {/* Icon & Title */}
-                                            <div className="flex items-start gap-4 mb-6">
-                                                <div className="text-5xl md:text-6xl filter drop-shadow-[0_0_20px_rgba(0,240,255,0.6)]">
+                                            <div className="flex items-start gap-3 mb-4">
+                                                <div className="text-4xl md:text-5xl filter drop-shadow-[0_0_20px_rgba(0,240,255,0.6)]">
                                                     {project.icon}
                                                 </div>
-                                                <div>
+                                                <div className="flex-1 min-w-0">
                                                     <h3 className={`
-                            text-3xl md:text-4xl font-black mb-1
+                            text-2xl md:text-3xl font-black mb-1
                             text-transparent bg-clip-text bg-gradient-to-r ${project.gradient}
+                            truncate
                           `}>
                                                         {project.title}
                                                     </h3>
-                                                    <p className="text-sm text-cyan/70 uppercase tracking-widest">
+                                                    <p className="text-xs text-cyan/70 uppercase tracking-widest truncate">
                                                         {project.tagline}
                                                     </p>
                                                 </div>
                                             </div>
 
                                             {/* Description */}
-                                            <p className="text-mist/80 leading-relaxed mb-6 text-sm md:text-base">
+                                            <p className="text-sm text-mist/80 leading-relaxed mb-4 line-clamp-3">
                                                 {project.description}
                                             </p>
 
                                             {/* Tech Stack */}
-                                            <div className="flex flex-wrap gap-2 mb-6">
-                                                {project.tech.map(tech => (
+                                            <div className="flex flex-wrap gap-2 mb-4">
+                                                {project.tech.slice(0, 4).map(tech => (
                                                     <span
                                                         key={tech}
                                                         className="
-                              px-3 py-1
+                              px-2 py-1
                               bg-cyan/10 border border-cyan/30
                               rounded-full
                               text-xs text-cyan
@@ -145,11 +146,11 @@ export default function HologramCarousel({ onViewAll }: HologramCarouselProps) {
 
                                             {/* Features */}
                                             {project.features && (
-                                                <div className="grid grid-cols-2 gap-2 mb-6">
-                                                    {project.features.map(feat => (
-                                                        <div key={feat} className="flex items-center gap-2">
-                                                            <div className="w-1.5 h-1.5 bg-cyan rounded-full animate-pulse" />
-                                                            <span className="text-xs text-carbon">{feat}</span>
+                                                <div className="grid grid-cols-2 gap-2 mb-4">
+                                                    {project.features.slice(0, 4).map(feat => (
+                                                        <div key={feat} className="flex items-center gap-1.5">
+                                                            <div className="w-1.5 h-1.5 bg-cyan rounded-full animate-pulse flex-shrink-0" />
+                                                            <span className="text-xs text-carbon truncate">{feat}</span>
                                                         </div>
                                                     ))}
                                                 </div>
@@ -157,29 +158,29 @@ export default function HologramCarousel({ onViewAll }: HologramCarouselProps) {
 
                                             {/* Stats */}
                                             {project.stats && (
-                                                <div className="grid grid-cols-3 gap-4 mb-6 mt-auto">
+                                                <div className="grid grid-cols-3 gap-2 mb-4 mt-auto">
                                                     {Object.entries(project.stats).map(([key, value]) => (
                                                         <div key={key} className="text-center">
-                                                            <div className="text-xl md:text-2xl font-black text-cyan">{value}</div>
-                                                            <div className="text-xs text-carbon uppercase">{key}</div>
+                                                            <div className="text-lg md:text-xl font-black text-cyan">{value}</div>
+                                                            <div className="text-xs text-carbon uppercase truncate">{key}</div>
                                                         </div>
                                                     ))}
                                                 </div>
                                             )}
 
                                             {/* CTA Buttons */}
-                                            <div className="flex gap-3">
+                                            <div className="flex gap-2 mt-auto">
                                                 <a
                                                     href={project.link}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                     className="
-                            flex-1 py-3 text-center
+                            flex-1 py-2 text-center text-sm
                             bg-gradient-to-r from-cyan to-plasma
                             text-void font-bold
-                            rounded-xl
-                            shadow-[0_0_30px_rgba(0,240,255,0.5)]
-                            hover:shadow-[0_0_50px_rgba(0,240,255,0.8)]
+                            rounded-lg
+                            shadow-[0_0_20px_rgba(0,240,255,0.4)]
+                            hover:shadow-[0_0_30px_rgba(0,240,255,0.6)]
                             transition-all duration-300
                             hover:scale-105
                           "
