@@ -28,80 +28,6 @@ A modern, interactive portfolio website showcasing my journey as a web developer
 - **Icons**: Lucide React
 - **Fonts**: Space Grotesk, Orbitron
 
-## 📂 Project Structure
-
-```
-portfolio/
-├── app/
-│   ├── layout.tsx          # Root layout with metadata
-│   ├── page.tsx             # Main page component
-│   └── globals.css          # Global styles
-├── components/
-│   ├── hero-section.tsx     # Particle animation hero
-│   ├── about-section.tsx    # Orbital constellation
-│   ├── skills-section.tsx   # Skills constellation
-│   ├── featured-projects.tsx # Projects showcase
-│   ├── contact-section.tsx  # Contact form
-│   └── ...                  # Utility components
-└── public/                  # Static assets
-```
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js 18+ 
-- npm or yarn
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/itslokeshx/portfolio.git
-   cd portfolio
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Run development server**
-   ```bash
-   npm run dev
-   ```
-
-4. **Open in browser**
-   ```
-   http://localhost:3000
-   ```
-
-### Build for Production
-
-```bash
-npm run build
-npm start
-```
-
-## 📦 Deployment
-
-### Deploy to Vercel (Recommended)
-
-1. Push your code to GitHub
-2. Visit [vercel.com](https://vercel.com)
-3. Import your repository
-4. Vercel auto-detects Next.js settings
-5. Click "Deploy"
-
-Your site will be live at `https://your-project.vercel.app`
-
-### Deploy via Vercel CLI
-
-```bash
-npm i -g vercel
-vercel login
-vercel --prod
-```
 
 ## 🎯 Key Sections
 
@@ -152,9 +78,6 @@ To customize with your own data, update:
 - `components/featured-projects.tsx` - Projects data
 - `components/contact-section.tsx` - Contact info, social links
 
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
 
 ## 🤝 Connect
 
@@ -165,4 +88,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-**Built with 💙 by Lokesh** | Kanchipuram, Tamil Nadu
+**Built with 💙 by Lokesh** |

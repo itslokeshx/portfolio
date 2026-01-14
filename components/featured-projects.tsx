@@ -1,7 +1,7 @@
 "use client"
 import { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Github, ExternalLink, Plus, ChevronDown, Search, X } from "lucide-react"
+import { Github, ExternalLink, Plus, ChevronDown } from "lucide-react"
 
 interface Project {
   id: number
@@ -23,7 +23,7 @@ const featuredProjects: Project[] = [
     description:
       "A complete knowledge management system to store, organize, and retrieve thoughts efficiently.",
     stack: ["MongoDB", "Express", "React", "Node.js", "IndexedDB"],
-    image: "/knowledge-management-dashboard-dark-theme.jpg",
+    image: "/Project_images/second-brain.png",
     color: "#0F172A",
     github: "https://github.com/itslokeshx/Second-Brain",
     demo: "https://second-brain-hub.vercel.app/",
@@ -35,7 +35,7 @@ const featuredProjects: Project[] = [
     description:
       "A social platform for sharing and discovering memes with a community-driven feed.",
     stack: ["MongoDB", "Express", "React", "Node.js", "Cloudinary"],
-    image: "/meme-social-platform-dark-theme-neon.jpg",
+    image: "/Project_images/memehub.png",
     color: "#111827",
     github: "https://github.com/itslokeshx/MemeHub",
     demo: "https://memehub-m4gy.onrender.com/",
@@ -43,14 +43,14 @@ const featuredProjects: Project[] = [
   {
     id: 3,
     title: "Automated WA Messenger",
-    category: "NODE.JS",
+    category: "NODE/EXPRESS",
     description:
       "A backend system to schedule & automate WhatsApp messages for business loyalty programs.",
     stack: ["Node.js", "Express", "Cron", "WhatsApp Cloud API"],
-    image: "/whatsapp-api-dashboard-automation-dark.jpg",
+    image: "/Project_images/Whatsapp_Automation.png",
     color: "#00FF94",
     github: "https://github.com/itslokeshx/Automated-whatsapp-message",
-    demo: "#",
+    demo: "https://github.com/itslokeshx/Automated-whatsapp-message",
   },
   {
     id: 4,
@@ -58,10 +58,10 @@ const featuredProjects: Project[] = [
     category: "CHROME EXT",
     description: "A browser extension to save and organize active tabs to boost productivity.",
     stack: ["JavaScript", "Chrome API", "HTML/CSS"],
-    image: "/chrome-extension-tab-manager-dark-theme.jpg",
+    image: "/Project_images/SaveMyTab.jpeg",
     color: "#FF9F00",
     github: "https://github.com/itslokeshx/SaveMyTab",
-    demo: "#",
+    demo: "https://github.com/itslokeshx/SaveMyTab",
   },
   {
     id: 5,
@@ -69,7 +69,7 @@ const featuredProjects: Project[] = [
     category: "REACT",
     description: "A dynamic resume builder application allowing real-time editing and preview.",
     stack: ["React", "Vite"],
-    image: "/resume-builder-application-dark-modern.jpg",
+    image: "/Project_images/CV.jpeg",
     color: "#9333EA",
     github: "https://github.com/itslokeshx/CV-application",
     demo: "https://cv-application-nine-gamma.vercel.app/",
@@ -85,7 +85,7 @@ const allProjects: Project[] = [
     category: "REACT",
     description: "A digital travel diary built with React components to document trips.",
     stack: ["React", "HTML", "CSS"],
-    image: "/travel-journal-app.jpg",
+    image: "/Project_images/Trave_journal.png",
     color: "#61DAFB",
     github: "https://github.com/itslokeshx/Travel-journal",
     demo: "https://travel-journal-eight-rho.vercel.app/",
@@ -96,7 +96,7 @@ const allProjects: Project[] = [
     category: "REACT",
     description: "A digital business card portfolio component built with React.",
     stack: ["React", "CSS"],
-    image: "/travel-journal-app.jpg",
+    image: "/Project_images/BusinessCard.png",
     color: "#61DAFB",
     github: "https://github.com/itslokeshx/Business-card",
     demo: "https://business-card-chi-plum.vercel.app/",
@@ -108,10 +108,10 @@ const allProjects: Project[] = [
     category: "TYPESCRIPT",
     description: "Desktop Video Editor utility built with Electron & TypeScript.",
     stack: ["Electron", "TypeScript", "Node.js"],
-    image: "/video-editor-desktop-app.jpg",
+    image: "/Project_images/YaaziCut.png",
     color: "#3178C6",
     github: "https://github.com/itslokeshx/YaaziCut",
-    demo: "#",
+    demo: "https://github.com/itslokeshx/YaaziCut",
   },
   {
     id: 9,
@@ -119,7 +119,7 @@ const allProjects: Project[] = [
     category: "TYPESCRIPT",
     description: "TypeScript repository for billing or invoice management.",
     stack: ["TypeScript", "Node.js"],
-    image: "/video-editor-desktop-app.jpg",
+    image: "/Project_images/Billzy.png",
     color: "#3178C6",
     github: "https://github.com/itslokeshx/Billzy",
     demo: "https://billzy-psi.vercel.app/",
@@ -128,21 +128,21 @@ const allProjects: Project[] = [
   {
     id: 10,
     title: "QR Code Generator",
-    category: "NODE.JS",
+    category: "NODE/EXPRESS",
     description: "Generate QR codes programmatically using Node.js.",
     stack: ["Node.js", "Inquirer"],
-    image: "/qr-code-generator-app.jpg",
+    image: "/Project_images/QR.jpeg",
     color: "#68A063",
     github: "https://github.com/itslokeshx/QR-Code-Generator",
-    demo: "#",
+    demo: "https://github.com/itslokeshx/QR-Code-Generator",
   },
   {
     id: 11,
     title: "Github User Details",
-    category: "NODE.JS",
+    category: "API",
     description: "Fetch and display user data using GitHub API.",
-    stack: ["Node.js", "API"],
-    image: "/qr-code-generator-app.jpg",
+    stack: ["JavaScript", "API"],
+    image: "/Project_images/GIthub_user_details.jpeg",
     color: "#68A063",
     github: "https://github.com/itslokeshx/Github_user_details",
     demo: "https://itslokeshx.github.io/Github_user_details/",
@@ -150,10 +150,10 @@ const allProjects: Project[] = [
   {
     id: 12,
     title: "Advice Generator",
-    category: "NODE.JS",
+    category: "API",
     description: "API integration project fetching random advice via REST API.",
-    stack: ["Node.js", "API"],
-    image: "/qr-code-generator-app.jpg",
+    stack: ["JavaScript", "API"],
+    image: "/Project_images/Advice_Gen.jpeg",
     color: "#68A063",
     github: "https://github.com/itslokeshx/Advice-Generator",
     demo: "https://itslokeshx.github.io/Advice-Generator/",
@@ -165,7 +165,7 @@ const allProjects: Project[] = [
     category: "JAVASCRIPT",
     description: "A fun application for generating and viewing cat memes.",
     stack: ["JavaScript", "HTML", "CSS"],
-    image: "/travel-journal-app.jpg",
+    image: "/Project_images/cat_meme.png",
     color: "#F7DF1E",
     github: "https://github.com/itslokeshx/Cat-Meme-App",
     demo: "https://itslokeshx.github.io/Cat-Meme-App/",
@@ -176,7 +176,7 @@ const allProjects: Project[] = [
     category: "JAVASCRIPT",
     description: "A community-focused site for anime and manga enthusiasts.",
     stack: ["JavaScript", "HTML", "CSS"],
-    image: "/travel-journal-app.jpg",
+    image: "/Project_images/Otakumens.png",
     color: "#F7DF1E",
     github: "https://github.com/itslokeshx/otakumens",
     demo: "https://itslokeshx.github.io/otakumens/",
@@ -187,7 +187,7 @@ const allProjects: Project[] = [
     category: "JAVASCRIPT",
     description: "A digital ordering system interface for food or services.",
     stack: ["JavaScript", "HTML", "CSS"],
-    image: "/travel-journal-app.jpg",
+    image: "/Project_images/ordering-app.png",
     color: "#F7DF1E",
     github: "https://github.com/itslokeshx/ordering-app",
     demo: "https://itslokeshx.github.io/ordering-app/",
@@ -198,7 +198,7 @@ const allProjects: Project[] = [
     category: "JAVASCRIPT",
     description: "A website dedicated to fitness routines and health tracking.",
     stack: ["JavaScript", "HTML", "CSS"],
-    image: "/travel-journal-app.jpg",
+    image: "/Project_images/fitness_site.png",
     color: "#F7DF1E",
     github: "https://github.com/itslokeshx/fitness-site",
     demo: "https://itslokeshx.github.io/fitness-site/",
@@ -209,7 +209,7 @@ const allProjects: Project[] = [
     category: "JAVASCRIPT",
     description: "A simple interactive counter application.",
     stack: ["JavaScript", "HTML", "CSS"],
-    image: "/travel-journal-app.jpg",
+    image: "/Project_images/counter.png",
     color: "#F7DF1E",
     github: "https://github.com/itslokeshx/counter",
     demo: "https://itslokeshx.github.io/counter/",
@@ -220,7 +220,7 @@ const allProjects: Project[] = [
     category: "JAVASCRIPT",
     description: "A resource sharing hub for Semester 3 class materials.",
     stack: ["JavaScript", "HTML", "CSS"],
-    image: "/travel-journal-app.jpg",
+    image: "/Project_images/Sem3.png",
     color: "#F7DF1E",
     github: "https://github.com/itslokeshx/sem3",
     demo: "https://ucekcse.github.io/sem3/",
@@ -231,7 +231,7 @@ const allProjects: Project[] = [
     category: "JAVASCRIPT",
     description: "SEM 4 Study Hub - A site to share PYQs, assignments, and study resources.",
     stack: ["JavaScript", "HTML", "CSS"],
-    image: "/travel-journal-app.jpg",
+    image: "/Project_images/Sem4.png",
     color: "#F7DF1E",
     github: "https://github.com/itslokeshx/sem4",
     demo: "https://ucekcse.github.io/sem4/",
@@ -243,7 +243,7 @@ const allProjects: Project[] = [
     category: "JAVASCRIPT",
     description: "A utility tool to generate secure, random passwords.",
     stack: ["JavaScript", "HTML", "CSS"],
-    image: "/travel-journal-app.jpg",
+    image: "/Project_images/Password_gen.png",
     color: "#F7DF1E",
     github: "https://github.com/itslokeshx/passwordgenerator",
     demo: "https://itslokeshx.github.io/passwordgenerator/",
@@ -254,7 +254,7 @@ const allProjects: Project[] = [
     category: "JAVASCRIPT",
     description: "A task management tool to organize daily activities.",
     stack: ["JavaScript", "HTML", "CSS"],
-    image: "/travel-journal-app.jpg",
+    image: "/Project_images/To_Do.png",
     color: "#F7DF1E",
     github: "https://github.com/itslokeshx/To-Do",
     demo: "https://itslokeshx.github.io/To-Do/",
@@ -265,7 +265,7 @@ const allProjects: Project[] = [
     category: "JAVASCRIPT",
     description: "A tool to generate and switch background colors dynamically.",
     stack: ["JavaScript", "HTML", "CSS"],
-    image: "/travel-journal-app.jpg",
+    image: "/Project_images/Color_flipper.png",
     color: "#F7DF1E",
     github: "https://github.com/itslokeshx/color-flipper",
     demo: "https://itslokeshx.github.io/color-flipper/",
@@ -273,10 +273,10 @@ const allProjects: Project[] = [
   {
     id: 23,
     title: "Color Scheme Generator",
-    category: "JAVASCRIPT",
+    category: "API",
     description: "A tool to create and visualize color palettes using APIs.",
     stack: ["JavaScript", "API"],
-    image: "/travel-journal-app.jpg",
+    image: "/Project_images/Color_scheme.png",
     color: "#F7DF1E",
     github: "https://github.com/itslokeshx/color-scheme-generator",
     demo: "https://itslokeshx.github.io/color-scheme-generator/",
@@ -287,7 +287,7 @@ const allProjects: Project[] = [
     category: "JAVASCRIPT",
     description: "A utility to calculate exact age based on date of birth.",
     stack: ["JavaScript", "HTML", "CSS"],
-    image: "/travel-journal-app.jpg",
+    image: "/Project_images/Age_cal.jpeg",
     color: "#F7DF1E",
     github: "https://github.com/itslokeshx/Age-Calculator",
     demo: "https://itslokeshx.github.io/Age-Calculator/",
@@ -298,7 +298,7 @@ const allProjects: Project[] = [
     category: "JAVASCRIPT",
     description: "A calculator for estimating electricity bills based on units consumed.",
     stack: ["JavaScript", "HTML", "CSS"],
-    image: "/travel-journal-app.jpg",
+    image: "/Project_images/EB_BILL.jpeg",
     color: "#F7DF1E",
     github: "https://github.com/itslokeshx/EB-Bill-Calculator",
     demo: "https://itslokeshx.github.io/EB-Bill-Calculator/",
@@ -309,21 +309,10 @@ const allProjects: Project[] = [
     category: "JAVASCRIPT",
     description: "A fun JS-based application to calculate compatibility percentages.",
     stack: ["JavaScript", "HTML", "CSS"],
-    image: "/travel-journal-app.jpg",
+    image: "/Project_images/Love_Cal.jpeg",
     color: "#F7DF1E",
     github: "https://github.com/itslokeshx/love-calce-2.0",
     demo: "https://itslokeshx.github.io/love-calce-2.0/",
-  },
-  {
-    id: 27,
-    title: "Segment Calculator",
-    category: "JAVASCRIPT",
-    description: "A specialized calculator for specific mathematical segments.",
-    stack: ["JavaScript", "HTML", "CSS"],
-    image: "/travel-journal-app.jpg",
-    color: "#F7DF1E",
-    github: "https://github.com/itslokeshx/Segment-calculator",
-    demo: "https://itslokeshx.github.io/Segment-calculator/",
   },
   {
     id: 28,
@@ -331,7 +320,7 @@ const allProjects: Project[] = [
     category: "JAVASCRIPT",
     description: "A general purpose mathematical calculator.",
     stack: ["JavaScript", "HTML", "CSS"],
-    image: "/travel-journal-app.jpg",
+    image: "/Project_images/Math_cal.png",
     color: "#F7DF1E",
     github: "https://github.com/itslokeshx/math-calce",
     demo: "https://itslokeshx.github.io/math-calce/",
@@ -342,7 +331,7 @@ const allProjects: Project[] = [
     category: "JAVASCRIPT",
     description: "A utility to convert temperatures between Celsius, Fahrenheit, and Kelvin.",
     stack: ["JavaScript", "HTML", "CSS"],
-    image: "/travel-journal-app.jpg",
+    image: "/Project_images/Temp_Cal.jpeg",
     color: "#F7DF1E",
     github: "https://github.com/itslokeshx/temperature-calculator",
     demo: "https://itslokeshx.github.io/temperature-calculator/",
@@ -354,7 +343,7 @@ const allProjects: Project[] = [
     category: "HTML/CSS",
     description: "A tribute landing page inspired by Tesla's design.",
     stack: ["HTML", "CSS"],
-    image: "/tesla-website-clone.jpg",
+    image: "/Project_images/Tesla.jpeg",
     color: "#E34F26",
     github: "https://github.com/itslokeshx/Tesla",
     demo: "https://itslokeshx.github.io/Tesla/",
@@ -365,7 +354,7 @@ const allProjects: Project[] = [
     category: "HTML/CSS",
     description: "Responsive news layout with complex CSS Grid.",
     stack: ["HTML", "CSS"],
-    image: "/tesla-website-clone.jpg",
+    image: "/Project_images/News_page.jpeg",
     color: "#E34F26",
     github: "https://github.com/itslokeshx/News-Homepage",
     demo: "https://itslokeshx.github.io/News-Homepage/",
@@ -376,7 +365,7 @@ const allProjects: Project[] = [
     category: "HTML/CSS",
     description: "Modern card component layout challenge.",
     stack: ["HTML", "CSS"],
-    image: "/tesla-website-clone.jpg",
+    image: "/Project_images/result.jpeg",
     color: "#E34F26",
     github: "https://github.com/itslokeshx/Result-summary-page",
     demo: "https://itslokeshx.github.io/Result-summary-page/",
@@ -387,7 +376,7 @@ const allProjects: Project[] = [
     category: "HTML/CSS",
     description: "Form validation and layout design for newsletters.",
     stack: ["HTML", "CSS"],
-    image: "/tesla-website-clone.jpg",
+    image: "/Project_images/newsLetter.jpeg",
     color: "#E34F26",
     github: "https://github.com/itslokeshx/Newsletter-Subscription",
     demo: "https://itslokeshx.github.io/Newsletter-Subscription/",
@@ -398,7 +387,7 @@ const allProjects: Project[] = [
     category: "HTML/CSS",
     description: "The initial HTML/CSS version of the compatibility calculator.",
     stack: ["HTML", "CSS"],
-    image: "/tesla-website-clone.jpg",
+    image: "/Project_images/Love_Cale_1.0.png",
     color: "#E34F26",
     github: "https://github.com/itslokeshx/love-calce-1.0",
     demo: "https://itslokeshx.github.io/love-calce-1.0/",
@@ -410,21 +399,10 @@ const allProjects: Project[] = [
     category: "PHP & SQL",
     description: "Full management system for hostel allocation and student data.",
     stack: ["PHP", "MySQL", "HTML"],
-    image: "/hostel-management-system.jpg",
+    image: "/Project_images/hostel_management.png",
     color: "#777BB4",
     github: "https://github.com/itslokeshx/hostelmanagement",
-    demo: "#",
-  },
-  {
-    id: 36,
-    title: "Finance Tracker",
-    category: "PHP & SQL",
-    description: "Personal finance tracking application using SQL for database management.",
-    stack: ["PHP", "MySQL"],
-    image: "/hostel-management-system.jpg",
-    color: "#777BB4",
-    github: "https://github.com/itslokeshx/finance_tracker",
-    demo: "#",
+    demo: "https://github.com/itslokeshx/hostelmanagement",
   },
   // Python
   {
@@ -433,10 +411,10 @@ const allProjects: Project[] = [
     category: "PYTHON",
     description: "AI-based project focused on mindfulness and mental health.",
     stack: ["Python", "AI/ML"],
-    image: "/ai-mental-health-app.jpg",
+    image: "/Project_images/MindfullAI.png",
     color: "#3776AB",
     github: "https://github.com/itslokeshx/mindfulAI",
-    demo: "#",
+    demo: "https://mindfulai-cggh.onrender.com/",
   },
 ]
 
@@ -568,7 +546,12 @@ function ProjectRow({
               <div className="grid md:grid-cols-12 gap-8 items-start">
                 {/* Left: Project Image */}
                 <div className="md:col-span-5">
-                  <div className="aspect-video w-full rounded-xl overflow-hidden border border-white/10 relative group bg-black/50">
+                  <div
+                    className={`aspect-video w-full rounded-xl overflow-hidden relative group bg-black/50 ${project.id === 1 || project.id === 2
+                      ? 'border-2 border-cyan shadow-[0_0_20px_rgba(0,240,255,0.6),0_0_40px_rgba(0,240,255,0.4)] animate-pulse-glow'
+                      : 'border border-white/10'
+                      }`}
+                  >
                     <img
                       src={project.image || "/placeholder.svg"}
                       alt={project.title}
@@ -720,27 +703,11 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
   const [expandedFeatured, setExpandedFeatured] = useState<number | null>(null)
   const [showArchive, setShowArchive] = useState(false)
   const [isArchiveTriggerHovered, setIsArchiveTriggerHovered] = useState(false)
-  const [searchQuery, setSearchQuery] = useState("")
-  const [activeFilter, setActiveFilter] = useState("ALL")
+  const [activeFilter, setActiveFilter] = useState("HTML/CSS")
 
-  const categories = ["ALL", "MERN STACK", "REACT", "NODE.JS", "TYPESCRIPT", "JAVASCRIPT", "PYTHON", "PHP & SQL", "HTML/CSS"]
+  const categories = ["HTML/CSS", "JAVASCRIPT", "API", "REACT", "NODE/EXPRESS", "TYPESCRIPT", "MERN STACK", "PHP & SQL", "PYTHON"]
 
-  const filteredProjects =
-    activeFilter === "ALL"
-      ? allProjects.filter((p) =>
-        searchQuery === ""
-          ? true
-          : p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          p.stack.some((s) => s.toLowerCase().includes(searchQuery.toLowerCase())),
-      )
-      : allProjects.filter(
-        (p) =>
-          p.category === activeFilter &&
-          (searchQuery === ""
-            ? true
-            : p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            p.stack.some((s) => s.toLowerCase().includes(searchQuery.toLowerCase()))),
-      )
+  const filteredProjects = allProjects.filter((p) => p.category === activeFilter)
 
   return (
     <section id="projects" className="relative py-32 bg-[#050505] overflow-hidden">
@@ -821,26 +788,6 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
               className="overflow-hidden bg-[#0a0a0a]"
             >
               <div className="px-4 py-12">
-                <div className="mb-8 max-w-xl">
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-cyan/40" />
-                    <input
-                      type="text"
-                      placeholder="Search by title or tech stack..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 bg-transparent border border-cyan/20 rounded-lg font-mono text-sm text-white placeholder:text-cyan/30 focus:border-cyan focus:outline-none transition-colors"
-                    />
-                    {searchQuery && (
-                      <button
-                        onClick={() => setSearchQuery("")}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-cyan/40 hover:text-cyan transition-colors"
-                      >
-                        <X size={18} />
-                      </button>
-                    )}
-                  </div>
-                </div>
 
                 {/* Filter Tabs */}
                 <div className="flex flex-wrap gap-4 mb-16">
@@ -849,7 +796,7 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
                       key={cat}
                       onClick={() => setActiveFilter(cat)}
                       className={`
-                        px-6 py-3 rounded-full text-sm font-bold font-mono border transition-all duration-300 uppercase tracking-wide
+                        px-7 py-3 rounded-full text-xs font-bold font-mono border transition-all duration-300 uppercase tracking-wide whitespace-nowrap
                         ${activeFilter === cat
                           ? "bg-cyan text-black border-cyan shadow-[0_0_20px_rgba(0,240,255,0.4)]"
                           : "bg-transparent border-white/10 text-slate-500 hover:border-cyan/50 hover:text-cyan"

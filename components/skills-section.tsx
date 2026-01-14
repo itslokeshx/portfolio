@@ -81,7 +81,7 @@ const SKILLS_DATA = [
     name: "SQL / MySQL",
     proficiency: 50,
     experience: "Beginner",
-    projects: ["Finance Tracker", "Hostel Management"],
+    projects: ["Hostel Management"],
     orbit: "outer",
   },
   {
