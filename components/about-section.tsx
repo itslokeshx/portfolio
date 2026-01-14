@@ -14,18 +14,18 @@ interface OrbitNode {
 }
 
 const ORBIT_NODES: OrbitNode[] = [
-  { id: "mern", label: "MERN_Stack", icon: "layers", angle: Math.PI * 0.8, orbitRadius: 180, speed: 0.0008 },
-  { id: "react", label: "React.js", icon: "code", angle: Math.PI * 0.2, orbitRadius: 180, speed: 0.0008 },
-  { id: "ux", label: "UX_Design", icon: "pen", angle: Math.PI * 1.3, orbitRadius: 180, speed: 0.0008 },
-  { id: "node", label: "Node_DB", icon: "database", angle: Math.PI * 1.7, orbitRadius: 180, speed: 0.0008 },
-  { id: "cloud", label: "Cloud", icon: "cloud", angle: Math.PI * 0.5, orbitRadius: 140, speed: 0.001 },
+  { id: "html", label: "HTML / CSS", icon: "pen", angle: Math.PI * 0.8, orbitRadius: 180, speed: 0.0008 },
+  { id: "js", label: "JavaScript", icon: "code", angle: Math.PI * 0.2, orbitRadius: 180, speed: 0.0008 },
+  { id: "mern", label: "MERN Stack", icon: "layers", angle: Math.PI * 1.3, orbitRadius: 180, speed: 0.0008 },
+  { id: "api", label: "REST APIs", icon: "cloud", angle: Math.PI * 1.7, orbitRadius: 180, speed: 0.0008 },
+  { id: "github", label: "GitHub", icon: "database", angle: Math.PI * 0.5, orbitRadius: 140, speed: 0.001 },
 ]
 
 const STATS = [
-  { value: "3+", label: "YEARS EXP", icon: Clock },
-  { value: "20+", label: "LIVE PROJECTS", icon: Rocket },
-  { value: "100%", label: "DELIVERY RATE", icon: Settings },
-  { value: "MERN", label: "STACK MASTERY", icon: Database },
+  { value: "2+", label: "YEARS OF PROGRAMMING", icon: Clock },
+  { value: "35+", label: "PROJECTS", icon: Rocket },
+  { value: "1500+", label: "HOURS OF CODING", icon: Settings },
+  { value: "5+", label: "REAL WORLD PRODUCTS", icon: Database },
 ]
 
 export function AboutSection() {
@@ -37,7 +37,7 @@ export function AboutSection() {
   const nodesRef = useRef<OrbitNode[]>([...ORBIT_NODES])
   const [typedText, setTypedText] = useState("")
 
-  const fullText = "> System Architect // Full Stack Dev"
+  const fullText = "> Frontend Engineer // MERN Stack Learner"
 
   // Typing effect
   useEffect(() => {
@@ -256,7 +256,7 @@ export function AboutSection() {
                 <div className="flex items-center gap-2 text-cyan">
                   <span className="text-green-400">→</span>
                   <span className="text-mist/60">~</span>
-                  <span className="text-cyan">whoami</span>
+                  <span className="text-cyan">About Me!</span>
                 </div>
                 <div className="mt-2 text-mist/80">
                   {typedText}
@@ -279,9 +279,7 @@ export function AboutSection() {
             {/* Description */}
             <div className="border-l-2 border-cyan/50 pl-4">
               <p className="text-mist/70 leading-relaxed">
-                I don&apos;t just write code; I engineer living digital ecosystems. Specializing in high-performance
-                MERN applications that blend computational logic with artistic fluidity. My mission is to bridge the
-                void between human intent and machine execution.
+                I am a web developer with 2+ years of experience in HTML, CSS and JavaScript and growing experience in React, Node.js, Express and MongoDB. I have strong fundamentals in programming and problem-solving, actively build real-world projects, maintain open-source repositories, and continuously improve my engineering skills through hands-on development.
               </p>
             </div>
 

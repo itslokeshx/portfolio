@@ -19,41 +19,91 @@ interface Skill {
 
 const JS_SKILL = {
   name: "JavaScript",
-  proficiency: 98,
-  experience: "4+ Years",
-  projects: ["All Projects", "Core Logic"],
+  proficiency: 75,
+  experience: "Intermediate",
+  projects: [
+    "Study Hub sem4",
+    "Ordering App",
+    "Fitness Site",
+    "Password Generator",
+    "EB Bill Calculator",
+    "Segment Calculator",
+    "Color Flipper",
+  ],
   orbit: "center",
 }
 
 const SKILLS_DATA = [
   {
+    name: "HTML",
+    proficiency: 90,
+    experience: "Advanced",
+    projects: ["Tesla", "News Homepage", "Newsletter Subscription", "Love Calce 1.0", "Study Hub sem3", "Study Hub sem4"],
+    orbit: "inner",
+  },
+  {
+    name: "CSS",
+    proficiency: 80,
+    experience: "Intermediate",
+    projects: ["News Homepage", "Result Summary", "Newsletter Subscription"],
+    orbit: "inner",
+  },
+  {
     name: "React",
-    proficiency: 95,
-    experience: "3+ Years",
-    projects: ["Second Brain", "MemeHub", "CV App"],
+    proficiency: 60,
+    experience: "Beginner",
+    projects: ["CV Application", "Travel Journal", "Business Card", "MemeHub", "Second Brain"],
     orbit: "inner",
   },
   {
     name: "Node.js",
-    proficiency: 90,
-    experience: "3+ Years",
-    projects: ["WhatsApp API", "QR Generator"],
+    proficiency: 55,
+    experience: "Beginner",
+    projects: ["Automated WhatsApp Messager", "QR Code Generator", "Advice Generator"],
     orbit: "inner",
   },
-  { name: "Express", proficiency: 88, experience: "3+ Years", projects: ["Second Brain", "MemeHub"], orbit: "inner" },
+  {
+    name: "Express.js",
+    proficiency: 55,
+    experience: "Beginner",
+    projects: ["Automated WhatsApp Messager", "Second Brain", "MemeHub"],
+    orbit: "outer",
+  },
   {
     name: "MongoDB",
-    proficiency: 85,
-    experience: "2+ Years",
-    projects: ["Second Brain", "Hostel Mgmt"],
-    orbit: "inner",
+    proficiency: 55,
+    experience: "Beginner",
+    projects: ["Second Brain", "MemeHub"],
+    orbit: "outer",
   },
-  { name: "TypeScript", proficiency: 80, experience: "2+ Years", projects: ["YaaziCut"], orbit: "outer" },
-  { name: "Tailwind", proficiency: 92, experience: "2+ Years", projects: ["All Projects"], orbit: "outer" },
-  { name: "Git", proficiency: 87, experience: "3+ Years", projects: ["All Projects"], orbit: "outer" },
-  { name: "Next.js", proficiency: 90, experience: "2+ Years", projects: ["Portfolio"], orbit: "outer" },
-  { name: "Python", proficiency: 75, experience: "1+ Year", projects: ["MindfulAI"], orbit: "outer" },
-  { name: "Three.js", proficiency: 78, experience: "1+ Year", projects: ["Portfolio"], orbit: "outer" },
+  {
+    name: "SQL / MySQL",
+    proficiency: 50,
+    experience: "Beginner",
+    projects: ["Finance Tracker", "Hostel Management"],
+    orbit: "outer",
+  },
+  {
+    name: "C",
+    proficiency: 50,
+    experience: "Beginner",
+    projects: ["DSA Practice"],
+    orbit: "outer",
+  },
+  {
+    name: "Python",
+    proficiency: 50,
+    experience: "Beginner",
+    projects: ["MindfulAI"],
+    orbit: "outer",
+  },
+  {
+    name: "Git / GitHub",
+    proficiency: 85,
+    experience: "Intermediate",
+    projects: ["All Projects"],
+    orbit: "outer",
+  },
 ]
 
 export function SkillsSection() {
@@ -283,7 +333,7 @@ export function SkillsSection() {
   }, [isInView, dimensions, hoveredSkill])
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen py-20 px-4 md:px-8 overflow-hidden bg-void">
+    <section id="skills" ref={sectionRef} className="relative min-h-screen py-20 px-4 md:px-8 overflow-hidden bg-void">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}

@@ -23,12 +23,12 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Lokesh | Full Stack MERN Developer",
+  title: "Lokesh | Web Developer",
   description:
-    "Full-stack developer specializing in MERN stack, React, and building digital experiences that feel alive.",
-  keywords: ["Full Stack Developer", "MERN Stack", "React", "Node.js", "Portfolio"],
+    "Web developer building real-world web products with strong foundations in HTML, CSS and JavaScript and growing experience in backend systems.",
+  keywords: ["MERN Stack", "Web Developer", "HTML", "CSS", "JavaScript", "React Developer", "Node.js", "MongoDB", "REST APIs", "GitHub", "Zoho Internship"],
   authors: [{ name: "Lokesh" }],
-    generator: 'v0.app'
+  generator: 'v0.app'
 }
 
 export const viewport: Viewport = {

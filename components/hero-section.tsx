@@ -209,8 +209,10 @@ export function HeroSection() {
         </div>
 
         <div className="hidden md:flex items-center gap-12 font-mono text-[10px] tracking-[0.2em] font-bold text-slate-400">
-          <a href="#projects" className="hover:text-cyan transition-colors">WORK</a>
+          <a href="#" className="hover:text-cyan transition-colors">HOME</a>
           <a href="#about" className="hover:text-cyan transition-colors">ABOUT</a>
+          <a href="#skills" className="hover:text-cyan transition-colors">SKILLS</a>
+          <a href="#projects" className="hover:text-cyan transition-colors">PROJECTS</a>
           <a href="#contact" className="hover:text-cyan transition-colors">CONTACT</a>
         </div>
 
@@ -226,7 +228,7 @@ export function HeroSection() {
           className="text-[10px] font-mono text-cyan/20 tracking-widest"
           style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
         >
-          SYS.ID: 4892-X // CORE
+          SYS.ID: LK-047 // CORE
         </div>
       </div>
 
@@ -245,11 +247,11 @@ export function HeroSection() {
           <div className="absolute inset-0 bg-gradient-to-b from-cyan/5 to-transparent opacity-30" />
 
           <h2 className="text-xl md:text-2xl font-black text-cyan tracking-[0.3em] uppercase text-center relative z-10 drop-shadow-[0_0_10px_rgba(0,240,255,0.3)]">
-            Full Stack Developer
+            Web Developer
           </h2>
 
           <div className="flex flex-wrap justify-center gap-4 relative z-10">
-            {["MERN_STACK", "REACT.JS", "NODE", "THREE.JS"].map((skill) => (
+            {["HTML_CSS", "JAVASCRIPT", "REACT.JS", "MERN_STACK"].map((skill) => (
               <div key={skill} className="px-4 py-2 border border-cyan/10 bg-cyan/5 rounded text-[10px] md:text-xs font-mono text-cyan tracking-widest">
                 [ {skill} ]
               </div>
@@ -263,7 +265,7 @@ export function HeroSection() {
           <div className="w-4 h-4 text-cyan/50 animate-spin" style={{ borderTop: '1px solid currentColor', borderRadius: '50%' }} />
         </div>
         <div className="text-[10px] font-mono text-cyan/30 flex flex-col gap-1">
-          <span>COORD: 34.05, -118.24</span>
+          <span>COORD: 12.7890° N, 79.0030° E</span>
           <span className="text-cyan/50">SECTOR: 7G // [LIVE]</span>
         </div>
       </div>

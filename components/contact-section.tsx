@@ -8,8 +8,8 @@ import { Github, Linkedin, Twitter, Mail, MapPin, Send } from "lucide-react"
 
 const SOCIAL_LINKS = [
   { name: "GitHub", icon: Github, url: "https://github.com/itslokeshx", handle: "@itslokeshx" },
-  { name: "LinkedIn", icon: Linkedin, url: "https://linkedin.com/in/lokesh", handle: "/in/lokesh" },
-  { name: "X (Twitter)", icon: Twitter, url: "https://twitter.com/itslokeshx", handle: "@itslokeshx" },
+  { name: "LinkedIn", icon: Linkedin, url: "https://www.linkedin.com/in/itslokeshx/", handle: "/in/itslokeshx" },
+  { name: "X (Twitter)", icon: Twitter, url: "https://x.com/itslokeshx", handle: "@itslokeshx" },
 ]
 
 function MagneticButton({ children, href, label }: { children: React.ReactNode; href: string; label: string }) {
@@ -160,8 +160,8 @@ export function ContactSection() {
                   </div>
                   <div>
                     <span className="text-[10px] text-mist/40 uppercase tracking-wider block">EMAIL</span>
-                    <a href="mailto:lokesh@example.com" className="text-sm text-mist hover:text-cyan transition-colors">
-                      lokesh@example.com
+                    <a href="mailto:itslokeshx@gmail.com" className="text-sm text-mist hover:text-cyan transition-colors">
+                      itslokeshx@gmail.com
                     </a>
                   </div>
                 </div>
@@ -171,14 +171,14 @@ export function ContactSection() {
                   </div>
                   <div>
                     <span className="text-[10px] text-mist/40 uppercase tracking-wider block">LOCATION</span>
-                    <span className="text-sm text-mist">Tiruchirappalli, Tamil Nadu</span>
+                    <span className="text-sm text-mist">Kanchipuram, Tamil Nadu</span>
                   </div>
                 </div>
               </div>
 
               <div className="flex items-center justify-center md:justify-end">
                 <a
-                  href="mailto:lokesh@example.com"
+                  href="mailto:itslokeshx@gmail.com"
                   className="group flex items-center gap-3 px-8 py-4 bg-cyan text-void font-bold rounded-xl hover:bg-white hover:shadow-[0_0_40px_rgba(0,240,255,0.5)] transition-all"
                 >
                   <Send
@@ -213,7 +213,7 @@ export function ContactSection() {
           className="text-center mt-12 space-y-2"
         >
           <p className="text-sm text-mist/40 font-mono">
-            Designed & Engineered by <span className="text-cyan">LOKESH</span>
+            Designed & Developed by <span className="text-cyan">LOKESH</span>
           </p>
           <p className="text-xs text-mist/20 font-mono">SYS.VER.2.0 // 2026 // ALL_SYSTEMS_NOMINAL</p>
         </motion.div>
