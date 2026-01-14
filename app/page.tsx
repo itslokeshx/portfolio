@@ -2,20 +2,23 @@
 
 import { useState, useEffect } from 'react';
 import Preloader from '@/components/Preloader';
-import HeroCanvas from '@/components/canvas/HeroCanvas';
-import EducationCanvas from '@/components/canvas/EducationCanvas';
-import SkillsCanvas from '@/components/canvas/SkillsCanvas';
-import FeaturedProjects from '@/components/FeaturedProjects';
+import ParticleHero from '@/components/ParticleHero';
+import NeuralAbout from '@/components/NeuralAbout';
+import QuantumSkills from '@/components/QuantumSkills';
+import HologramCarousel from '@/components/HologramCarousel';
+import ProjectsGrid from '@/components/ProjectsGrid';
 import Contact from '@/components/Contact';
-import { getOptimalFrameCount } from '@/utils/deviceDetection';
+import CustomCursor from '@/components/CustomCursor';
+import SmoothScroll from '@/components/SmoothScroll';
+import NoiseOverlay from '@/components/NoiseOverlay';
 
 export default function Home() {
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showProjectsGrid, setShowProjectsGrid] = useState(false);
 
   useEffect(() => {
     // Simulate progressive loading
-    const totalFrames = getOptimalFrameCount(240) * 3;
     let currentProgress = 0;
 
     const interval = setInterval(() => {
@@ -37,22 +40,34 @@ export default function Home() {
         <Preloader progress={loadingProgress} isComplete={loadingProgress >= 100} />
       )}
 
-      <main className="relative">
-        {/* Hero Section - 0-20% scroll */}
-        <HeroCanvas />
+      <SmoothScroll>
+        <main className="relative">
+          {/* Global Effects */}
+          <CustomCursor />
+          <NoiseOverlay />
 
-        {/* Education Section - 20-50% scroll */}
-        <EducationCanvas />
+          {/* Hero Section */}
+          <ParticleHero />
 
-        {/* Skills Section - 50-80% scroll */}
-        <SkillsCanvas />
+          {/* About Section */}
+          <NeuralAbout />
 
-        {/* Featured Projects - 80-95% scroll */}
-        <FeaturedProjects />
+          {/* Skills Section */}
+          <QuantumSkills />
 
-        {/* Contact Section - 95-100% scroll */}
-        <Contact />
-      </main>
+          {/* Featured Projects */}
+          <HologramCarousel onViewAll={() => setShowProjectsGrid(true)} />
+
+          {/* Contact Section */}
+          <Contact />
+
+          {/* Projects Grid Modal */}
+          <ProjectsGrid
+            isOpen={showProjectsGrid}
+            onClose={() => setShowProjectsGrid(false)}
+          />
+        </main>
+      </SmoothScroll>
     </>
   );
 }
