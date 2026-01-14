@@ -269,7 +269,7 @@ export default function HologramCarousel({ onViewAll }: HologramCarouselProps) {
                 </div>
 
                 {/* ALL ARCHIVES TRIGGER */}
-                <div className="border-t border-b border-white/5 bg-[#050505] relative z-20">
+                <div className="border-b border-white/5 bg-[#050505] relative z-20">
                     <div
                         onMouseEnter={() => setIsArchiveTriggerHovered(true)}
                         onMouseLeave={() => setIsArchiveTriggerHovered(false)}
@@ -294,7 +294,7 @@ export default function HologramCarousel({ onViewAll }: HologramCarouselProps) {
                                     // ARCHIVE
                                 </span>
                                 <ShuffleText
-                                    text="VIEW FULL DATABASE"
+                                    text="VIEW ALL PROJECTS"
                                     isActive={isArchiveTriggerHovered}
                                     className={`
                                         font-bold transition-colors text-3xl md:text-5xl
@@ -343,7 +343,7 @@ export default function HologramCarousel({ onViewAll }: HologramCarouselProps) {
                                 </div>
 
                                 {/* Link to Archive Grid */}
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                     {filteredProjects.map((project) => (
                                         <ArchiveCard key={`archive-${project.id}`} project={project} />
                                     ))}
