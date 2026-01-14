@@ -503,8 +503,18 @@ function ProjectRow({
               initial={{ opacity: 0 }}
               animate={{ opacity: isHovered && !isExpanded ? 1 : 0 }}
               transition={{ duration: 0.3 }}
-              className="absolute inset-0 rounded-lg overflow-hidden border-2"
-              style={{ borderColor: project.color, boxShadow: `0 0 20px ${project.color}40` }}
+              className={`absolute inset-0 rounded-lg overflow-hidden border-2 ${project.id === 1
+                ? 'border-cyan shadow-[0_0_20px_rgba(0,240,255,0.25)]'
+                : project.id === 2
+                  ? 'border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.25)]'
+                  : project.id === 5
+                    ? 'border-slate-600 shadow-[0_0_20px_rgba(71,85,105,0.25)]'
+                    : ''
+                }`}
+              style={{
+                borderColor: project.id === 1 || project.id === 2 ? undefined : project.color,
+                boxShadow: project.id === 1 || project.id === 2 ? undefined : `0 0 20px ${project.color}40`
+              }}
             >
               <img
                 src={project.image || "/placeholder.svg"}
@@ -546,12 +556,7 @@ function ProjectRow({
               <div className="grid md:grid-cols-12 gap-8 items-start">
                 {/* Left: Project Image */}
                 <div className="md:col-span-5">
-                  <div
-                    className={`aspect-video w-full rounded-xl overflow-hidden relative group bg-black/50 ${project.id === 1 || project.id === 2
-                      ? 'border-2 border-cyan shadow-[0_0_20px_rgba(0,240,255,0.6),0_0_40px_rgba(0,240,255,0.4)] animate-pulse-glow'
-                      : 'border border-white/10'
-                      }`}
-                  >
+                  <div className="aspect-video w-full rounded-xl overflow-hidden border border-white/10 relative group bg-black/50">
                     <img
                       src={project.image || "/placeholder.svg"}
                       alt={project.title}
@@ -628,7 +633,7 @@ function ProjectRow({
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </div >
   )
 }
 
