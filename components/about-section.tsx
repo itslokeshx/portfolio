@@ -13,6 +13,7 @@ interface OrbitNode {
   speed: number
 }
 
+// Base orbit radii for desktop
 const ORBIT_NODES: OrbitNode[] = [
   { id: "html", label: "HTML / CSS", icon: "pen", angle: Math.PI * 0.8, orbitRadius: 180, speed: 0.0008 },
   { id: "js", label: "JavaScript", icon: "code", angle: Math.PI * 0.2, orbitRadius: 180, speed: 0.0008 },
@@ -33,6 +34,7 @@ export function AboutSection() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const isInView = useInView(sectionRef, { once: false, margin: "-20%" })
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
+  const [isMobile, setIsMobile] = useState(false)
   const animationRef = useRef<number>(0)
   const nodesRef = useRef<OrbitNode[]>([...ORBIT_NODES])
   const [typedText, setTypedText] = useState("")
@@ -58,6 +60,8 @@ export function AboutSection() {
     const updateDimensions = () => {
       if (canvasRef.current && canvasRef.current.parentElement) {
         const rect = canvasRef.current.parentElement.getBoundingClientRect()
+        const mobile = window.innerWidth < 768
+        setIsMobile(mobile)
         setDimensions({ width: rect.width, height: rect.height })
         canvasRef.current.width = rect.width
         canvasRef.current.height = rect.height
@@ -76,6 +80,11 @@ export function AboutSection() {
 
     const centerX = dimensions.width / 2
     const centerY = dimensions.height / 2
+
+    // Scale orbit radii for mobile
+    const scaleFactor = isMobile ? 0.75 : 1
+    const outerOrbitRadius = 180 * scaleFactor
+    const innerOrbitRadius = 140 * scaleFactor
 
     const drawIcon = (x: number, y: number, iconType: string, size: number) => {
       ctx.strokeStyle = "#E2E8F0"
@@ -154,17 +163,18 @@ export function AboutSection() {
       ctx.lineWidth = 1
       ctx.setLineDash([5, 10])
       ctx.beginPath()
-      ctx.arc(centerX, centerY, 180, 0, Math.PI * 2)
+      ctx.arc(centerX, centerY, outerOrbitRadius, 0, Math.PI * 2)
       ctx.stroke()
       ctx.beginPath()
-      ctx.arc(centerX, centerY, 140, 0, Math.PI * 2)
+      ctx.arc(centerX, centerY, innerOrbitRadius, 0, Math.PI * 2)
       ctx.stroke()
       ctx.setLineDash([])
 
       // Draw connection lines to center
       nodesRef.current.forEach((node) => {
-        const x = centerX + Math.cos(node.angle) * node.orbitRadius
-        const y = centerY + Math.sin(node.angle) * node.orbitRadius
+        const nodeRadius = (node.orbitRadius === 180 ? outerOrbitRadius : innerOrbitRadius)
+        const x = centerX + Math.cos(node.angle) * nodeRadius
+        const y = centerY + Math.sin(node.angle) * nodeRadius
 
         ctx.beginPath()
         ctx.strokeStyle = "rgba(0, 240, 255, 0.2)"
@@ -203,8 +213,9 @@ export function AboutSection() {
       nodesRef.current.forEach((node) => {
         node.angle += node.speed
 
-        const x = centerX + Math.cos(node.angle) * node.orbitRadius
-        const y = centerY + Math.sin(node.angle) * node.orbitRadius
+        const nodeRadius = (node.orbitRadius === 180 ? outerOrbitRadius : innerOrbitRadius)
+        const x = centerX + Math.cos(node.angle) * nodeRadius
+        const y = centerY + Math.sin(node.angle) * nodeRadius
 
         // Node background circle
         ctx.beginPath()

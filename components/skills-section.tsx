@@ -9,6 +9,7 @@ interface Skill {
   proficiency: number
   experience: string
   projects: string[]
+  orbit: string
   orbitRadius: number
   angle: number
   x: number
@@ -111,39 +112,51 @@ export function SkillsSection() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const isInView = useInView(sectionRef, { once: false, margin: "-20%" })
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
+  const [isMobile, setIsMobile] = useState(false)
   const [hoveredSkill, setHoveredSkill] = useState<(typeof SKILLS_DATA)[0] | null>(null)
   const skillsRef = useRef<Skill[]>([])
   const animationRef = useRef<number>(0)
 
   useEffect(() => {
-    const innerRadius = 120
-    const outerRadius = 200
+    const updateSkills = () => {
+      const mobile = window.innerWidth < 768
+      const scaleFactor = 1
+      const innerRadius = 120 * scaleFactor
+      const outerRadius = 200 * scaleFactor
 
-    skillsRef.current = SKILLS_DATA.map((skill, i) => {
-      const isInner = skill.orbit === "inner"
-      const radius = isInner ? innerRadius : outerRadius
-      const count = isInner ? 4 : 6
-      const baseAngle = isInner ? (i * Math.PI * 2) / count : ((i - 4) * Math.PI * 2) / count
+      skillsRef.current = SKILLS_DATA.map((skill, i) => {
+        const isInner = skill.orbit === "inner"
+        const radius = isInner ? innerRadius : outerRadius
+        const count = isInner ? 4 : 6
+        const baseAngle = isInner ? (i * Math.PI * 2) / count : ((i - 4) * Math.PI * 2) / count
 
-      return {
-        ...skill,
-        orbitRadius: radius,
-        angle: baseAngle,
-        x: 0,
-        y: 0,
-        vx: 0,
-        vy: 0,
-      }
-    })
+        return {
+          ...skill,
+          orbitRadius: radius,
+          angle: baseAngle,
+          x: 0,
+          y: 0,
+          vx: 0,
+          vy: 0,
+        }
+      })
+    }
+
+    updateSkills()
+    window.addEventListener("resize", updateSkills)
+    return () => window.removeEventListener("resize", updateSkills)
   }, [])
 
   useEffect(() => {
     const updateDimensions = () => {
       if (canvasRef.current && canvasRef.current.parentElement) {
         const rect = canvasRef.current.parentElement.getBoundingClientRect()
-        setDimensions({ width: rect.width, height: Math.min(rect.width, 600) })
+        const mobile = window.innerWidth < 768
+        setIsMobile(mobile)
+        const canvasHeight = mobile ? 800 : Math.min(rect.width, 600)
+        setDimensions({ width: rect.width, height: canvasHeight })
         canvasRef.current.width = rect.width
-        canvasRef.current.height = Math.min(rect.width, 600)
+        canvasRef.current.height = canvasHeight
       }
     }
     updateDimensions()
@@ -202,6 +215,10 @@ export function SkillsSection() {
     const centerX = dimensions.width / 2
     const centerY = dimensions.height / 2
 
+    // Get actual orbit radii from skills (they're set during initialization)
+    const innerOrbitRadius = skillsRef.current.find(s => s.orbit === "inner")?.orbitRadius || 120
+    const outerOrbitRadius = skillsRef.current.find(s => s.orbit === "outer")?.orbitRadius || 200
+
     const animate = () => {
       if (!isInView) return
 
@@ -249,10 +266,10 @@ export function SkillsSection() {
       ctx.lineWidth = 1
       ctx.setLineDash([5, 10])
       ctx.beginPath()
-      ctx.arc(centerX, centerY, 120, 0, Math.PI * 2)
+      ctx.arc(centerX, centerY, innerOrbitRadius, 0, Math.PI * 2)
       ctx.stroke()
       ctx.beginPath()
-      ctx.arc(centerX, centerY, 200, 0, Math.PI * 2)
+      ctx.arc(centerX, centerY, outerOrbitRadius, 0, Math.PI * 2)
       ctx.stroke()
       ctx.setLineDash([])
 
