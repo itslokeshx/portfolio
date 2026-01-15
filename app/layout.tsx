@@ -23,7 +23,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Lokesh | Web Developer",
+  title: "Portfolio",
   description:
     "Web developer building real-world web products with strong foundations in HTML, CSS and JavaScript and growing experience in backend systems.",
   keywords: ["MERN Stack", "Web Developer", "HTML", "CSS", "JavaScript", "React Developer", "Node.js", "MongoDB", "REST APIs", "GitHub", "Zoho Internship"],
