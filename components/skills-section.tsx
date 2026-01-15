@@ -120,7 +120,8 @@ export function SkillsSection() {
   useEffect(() => {
     const updateSkills = () => {
       const mobile = window.innerWidth < 768
-      const scaleFactor = 1
+      // Scale down orbits on mobile to fit within screen (increased from 0.5 to 0.7 for better spacing)
+      const scaleFactor = mobile ? 0.7 : 1
       const innerRadius = 120 * scaleFactor
       const outerRadius = 200 * scaleFactor
 
@@ -153,7 +154,8 @@ export function SkillsSection() {
         const rect = canvasRef.current.parentElement.getBoundingClientRect()
         const mobile = window.innerWidth < 768
         setIsMobile(mobile)
-        const canvasHeight = mobile ? 800 : Math.min(rect.width, 600)
+        // Increased canvas height on mobile to fit larger orbits (0.7 scale)
+        const canvasHeight = mobile ? 600 : Math.min(rect.width, 600)
         setDimensions({ width: rect.width, height: canvasHeight })
         canvasRef.current.width = rect.width
         canvasRef.current.height = canvasHeight
@@ -224,27 +226,32 @@ export function SkillsSection() {
 
       ctx.clearRect(0, 0, dimensions.width, dimensions.height)
 
+      // Scale factor for mobile responsiveness
+      const scaleFactor = isMobile ? 0.7 : 1
+
       // Draw sun (JavaScript)
       const sunPulse = 1 + Math.sin(Date.now() * 0.003) * 0.1
+      const sunGlowRadius = 40 * scaleFactor
+      const sunRadius = 30 * scaleFactor
 
       // Sun glow layers
       for (let i = 5; i > 0; i--) {
         ctx.beginPath()
-        const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 40 * i * sunPulse)
+        const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, sunGlowRadius * i * sunPulse)
         gradient.addColorStop(0, `rgba(255, 215, 0, ${0.3 / i})`)
         gradient.addColorStop(1, "rgba(255, 215, 0, 0)")
         ctx.fillStyle = gradient
-        ctx.arc(centerX, centerY, 40 * i * sunPulse, 0, Math.PI * 2)
+        ctx.arc(centerX, centerY, sunGlowRadius * i * sunPulse, 0, Math.PI * 2)
         ctx.fill()
       }
 
       ctx.beginPath()
       ctx.fillStyle = "#FFD700"
-      ctx.arc(centerX, centerY, 30 * sunPulse, 0, Math.PI * 2)
+      ctx.arc(centerX, centerY, sunRadius * sunPulse, 0, Math.PI * 2)
       ctx.fill()
 
       ctx.fillStyle = "#050505"
-      ctx.font = "bold 20px 'Space Grotesk', sans-serif"
+      ctx.font = `bold ${20 * scaleFactor}px 'Space Grotesk', sans-serif`
       ctx.textAlign = "center"
       ctx.textBaseline = "middle"
       ctx.fillText("JS", centerX, centerY)
@@ -252,12 +259,12 @@ export function SkillsSection() {
       const rayCount = 8
       const rayTime = Date.now() * 0.0005
       ctx.strokeStyle = "rgba(255, 215, 0, 0.3)"
-      ctx.lineWidth = 2
+      ctx.lineWidth = 2 * scaleFactor
       for (let i = 0; i < rayCount; i++) {
         const angle = rayTime + (i * Math.PI * 2) / rayCount
         ctx.beginPath()
-        ctx.moveTo(centerX + Math.cos(angle) * 40, centerY + Math.sin(angle) * 40)
-        ctx.lineTo(centerX + Math.cos(angle) * 70, centerY + Math.sin(angle) * 70)
+        ctx.moveTo(centerX + Math.cos(angle) * sunGlowRadius, centerY + Math.sin(angle) * sunGlowRadius)
+        ctx.lineTo(centerX + Math.cos(angle) * 70 * scaleFactor, centerY + Math.sin(angle) * 70 * scaleFactor)
         ctx.stroke()
       }
 
@@ -299,7 +306,8 @@ export function SkillsSection() {
         const screenY = centerY + skill.y
 
         const isHovered = hoveredSkill?.name === skill.name
-        const glowSize = isHovered ? 70 : skill.proficiency >= 90 ? 50 : skill.proficiency >= 80 ? 40 : 30
+        const scaleFactor = isMobile ? 0.7 : 1
+        const glowSize = (isHovered ? 70 : skill.proficiency >= 90 ? 50 : skill.proficiency >= 80 ? 40 : 30) * scaleFactor
         const glowOpacity = isHovered ? 0.9 : skill.proficiency >= 90 ? 0.7 : skill.proficiency >= 80 ? 0.5 : 0.3
 
         // Glow effect
@@ -315,30 +323,30 @@ export function SkillsSection() {
         ctx.beginPath()
         ctx.fillStyle = isHovered ? "rgba(0, 240, 255, 0.25)" : "#0a0a0a"
         ctx.strokeStyle = isHovered ? "#00F0FF" : "rgba(0, 240, 255, 0.6)"
-        ctx.lineWidth = isHovered ? 3.5 : 2.5
-        ctx.arc(screenX, screenY, 22, 0, Math.PI * 2)
+        ctx.lineWidth = (isHovered ? 3.5 : 2.5) * scaleFactor
+        ctx.arc(screenX, screenY, 22 * scaleFactor, 0, Math.PI * 2)
         ctx.fill()
         ctx.stroke()
 
         // Core
         ctx.beginPath()
         ctx.fillStyle = isHovered ? "#FFFFFF" : "#00F0FF"
-        ctx.arc(screenX, screenY, isHovered ? 14 : 9, 0, Math.PI * 2)
+        ctx.arc(screenX, screenY, (isHovered ? 14 : 9) * scaleFactor, 0, Math.PI * 2)
         ctx.fill()
 
         // Label
         ctx.fillStyle = isHovered ? "#FFFFFF" : "#E2E8F0"
-        ctx.font = isHovered ? "bold 14px 'Space Grotesk', sans-serif" : "12px 'Space Grotesk', sans-serif"
+        ctx.font = isHovered ? `bold ${14 * scaleFactor}px 'Space Grotesk', sans-serif` : `${12 * scaleFactor}px 'Space Grotesk', sans-serif`
         ctx.textAlign = "center"
-        ctx.fillText(skill.name, screenX, screenY + 38)
+        ctx.fillText(skill.name, screenX, screenY + 38 * scaleFactor)
 
         // Proficiency bar
-        const barWidth = 55
-        const barHeight = 5
+        const barWidth = 55 * scaleFactor
+        const barHeight = 5 * scaleFactor
         ctx.fillStyle = "#1a1a1a"
-        ctx.fillRect(screenX - barWidth / 2, screenY + 46, barWidth, barHeight)
+        ctx.fillRect(screenX - barWidth / 2, screenY + 46 * scaleFactor, barWidth, barHeight)
         ctx.fillStyle = isHovered ? "#FFFFFF" : "#00F0FF"
-        ctx.fillRect(screenX - barWidth / 2, screenY + 46, barWidth * (skill.proficiency / 100), barHeight)
+        ctx.fillRect(screenX - barWidth / 2, screenY + 46 * scaleFactor, barWidth * (skill.proficiency / 100), barHeight)
       })
 
       animationRef.current = requestAnimationFrame(animate)
