@@ -253,14 +253,8 @@ export function HeroSection() {
             <div className="flex items-center gap-1">
               <span
                 className={`font-mono text-sm md:text-base tracking-[0.15em] transition-all duration-200 ${glitch ? 'animate-pulse' : ''
-                  }`}
+                  } ${connectionStatus === 'connected' ? 'text-cyan' : 'text-cyan/80'}`}
                 style={{
-                  background: connectionStatus === 'connected'
-                    ? 'linear-gradient(90deg, #00f0ff 0%, #ffffff 100%)'
-                    : 'linear-gradient(90deg, #00f0ff 0%, #0077ff 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
                   textShadow: glitch
                     ? '0 0 20px rgba(0,240,255,1), 3px 3px 0 rgba(255,0,255,0.5), -3px -3px 0 rgba(0,255,255,0.5)'
                     : connectionStatus === 'connected'
