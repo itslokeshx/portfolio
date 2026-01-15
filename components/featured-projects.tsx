@@ -596,12 +596,12 @@ function ProjectRow({
                       </div>
                     </div>
 
-                    <div className="flex gap-4 pt-2">
+                    <div className="flex flex-col xs:flex-row gap-3 xs:gap-4 pt-2">
                       <a
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-5 py-2.5 border border-white/10 bg-white/[0.02] rounded-lg hover:bg-white/10 hover:border-cyan/50 text-slate-200 text-xs font-bold font-mono tracking-wide flex items-center gap-2 transition-all"
+                        className="px-4 sm:px-5 py-3 sm:py-2.5 border border-white/10 bg-white/[0.02] rounded-lg hover:bg-white/10 hover:border-cyan/50 text-slate-200 text-xs font-bold font-mono tracking-wide flex items-center justify-center gap-2 transition-all"
                       >
                         <Github size={16} />
                         SOURCE_CODE
@@ -611,7 +611,7 @@ function ProjectRow({
                           href={project.demo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-5 py-2.5 bg-cyan text-black rounded-lg hover:bg-white hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] text-xs font-bold font-mono tracking-wide flex items-center gap-2 transition-all"
+                          className="px-4 sm:px-5 py-3 sm:py-2.5 bg-cyan text-black rounded-lg hover:bg-white hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] text-xs font-bold font-mono tracking-wide flex items-center justify-center gap-2 transition-all"
                         >
                           LIVE_DEPLOY
                           <ExternalLink size={14} />
@@ -619,7 +619,7 @@ function ProjectRow({
                       ) : (
                         <button
                           disabled
-                          className="px-5 py-2.5 bg-cyan/20 text-slate-500 rounded-lg text-xs font-bold font-mono tracking-wide flex items-center gap-2 cursor-not-allowed opacity-50"
+                          className="px-4 sm:px-5 py-3 sm:py-2.5 bg-cyan/20 text-slate-500 rounded-lg text-xs font-bold font-mono tracking-wide flex items-center justify-center gap-2 cursor-not-allowed opacity-50"
                         >
                           NO_LIVE_DEMO
                           <ExternalLink size={14} />

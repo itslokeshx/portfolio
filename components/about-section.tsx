@@ -278,7 +278,7 @@ export function AboutSection() {
 
             {/* Main Heading */}
             <div>
-              <h2 className="text-4xl md:text-5xl font-black text-white leading-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight">
                 Architecting <span className="text-cyan">Digital</span>
                 <br />
                 <span className="bg-gradient-to-r from-cyan to-yellow-400 bg-clip-text text-transparent">
@@ -295,7 +295,7 @@ export function AboutSection() {
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               {STATS.map((stat, index) => (
                 <motion.div
                   key={stat.label}
@@ -303,13 +303,13 @@ export function AboutSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-[#111] border border-white/5 rounded-xl p-5 flex items-start justify-between hover:border-cyan/30 transition-colors"
+                  className="bg-[#111] border border-white/5 rounded-xl p-4 sm:p-5 flex items-start justify-between hover:border-cyan/30 transition-colors"
                 >
                   <div>
-                    <div className="text-2xl md:text-3xl font-black text-cyan">{stat.value}</div>
-                    <div className="text-xs font-mono text-mist/50 tracking-wider mt-1">{stat.label}</div>
+                    <div className="text-xl sm:text-2xl md:text-3xl font-black text-cyan">{stat.value}</div>
+                    <div className="text-[10px] sm:text-xs font-mono text-mist/50 tracking-wider mt-1">{stat.label}</div>
                   </div>
-                  <stat.icon className="w-5 h-5 text-mist/30" />
+                  <stat.icon className="w-4 h-4 sm:w-5 sm:h-5 text-mist/30" />
                 </motion.div>
               ))}
             </div>

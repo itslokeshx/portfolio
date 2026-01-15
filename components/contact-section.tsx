@@ -103,7 +103,7 @@ export function ContactSection() {
           className="text-center mb-12"
         >
           <p className="font-mono text-cyan/60 text-sm mb-4">// COMM_LINK</p>
-          <h2 className="text-5xl md:text-6xl font-black text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4">
             LET&apos;S <span className="text-cyan">CONNECT</span>
           </h2>
         </motion.div>
@@ -179,7 +179,7 @@ export function ContactSection() {
               <div className="flex items-center justify-center md:justify-end">
                 <a
                   href="mailto:itslokeshx@gmail.com"
-                  className="group flex items-center gap-3 px-8 py-4 bg-cyan text-void font-bold rounded-xl hover:bg-white hover:shadow-[0_0_40px_rgba(0,240,255,0.5)] transition-all"
+                  className="group flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-cyan text-void text-sm sm:text-base font-bold rounded-xl hover:bg-white hover:shadow-[0_0_40px_rgba(0,240,255,0.5)] transition-all"
                 >
                   <Send
                     size={18}
@@ -193,10 +193,10 @@ export function ContactSection() {
             {/* Divider */}
             <div className="border-t border-white/5 pt-8 mb-8">
               <div className="text-xs text-mist/40 mb-6 text-center">// SOCIAL_UPLINKS</div>
-              <div className="flex gap-6 justify-center">
+              <div className="flex flex-wrap gap-4 sm:gap-6 justify-center">
                 {SOCIAL_LINKS.map((link) => (
                   <MagneticButton key={link.name} href={link.url} label={link.handle}>
-                    <link.icon size={28} className="text-mist/60 group-hover:text-cyan transition-colors" />
+                    <link.icon size={24} className="sm:w-7 sm:h-7 text-mist/60 group-hover:text-cyan transition-colors" />
                   </MagneticButton>
                 ))}
               </div>
@@ -210,7 +210,7 @@ export function ContactSection() {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
-          className="text-center mt-12 space-y-2"
+          className="text-center mt-12 mb-8 space-y-2"
         >
           <p className="text-sm text-mist/40 font-mono">
             Designed & Developed by <span className="text-cyan">LOKESH</span>

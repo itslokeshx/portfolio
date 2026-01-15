@@ -236,7 +236,7 @@ export function HeroSection() {
 
       <canvas ref={canvasRef} className="absolute inset-0 z-10 block" />
 
-      <nav className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 py-8">
+      <nav className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-6 md:px-12 py-6 md:py-8">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 border border-cyan/50 rounded flex items-center justify-center bg-black/20 backdrop-blur-sm shadow-[0_0_15px_rgba(0,240,255,0.1)] relative overflow-hidden">
             <span className="text-cyan font-mono text-lg z-10">{"{ }"}</span>
@@ -252,7 +252,7 @@ export function HeroSection() {
             {/* Connection text with typing effect */}
             <div className="flex items-center gap-1">
               <span
-                className={`font-mono text-sm md:text-base tracking-[0.15em] transition-all duration-200 ${glitch ? 'animate-pulse' : ''
+                className={`font-mono text-xs sm:text-sm md:text-base tracking-[0.1em] sm:tracking-[0.15em] transition-all duration-200 ${glitch ? 'animate-pulse' : ''
                   } ${connectionStatus === 'connected' ? 'text-cyan' : 'text-cyan/80'}`}
                 style={{
                   textShadow: glitch
@@ -310,8 +310,8 @@ export function HeroSection() {
           <a href="#contact" className="hover:text-cyan transition-colors">CONTACT</a>
         </div>
 
-        <button className="px-6 py-3 border border-cyan/20 text-cyan rounded hover:bg-cyan/5 transition-all flex items-center gap-3 group relative overflow-hidden">
-          <span className="font-mono text-[10px] tracking-widest font-bold z-10">INITIALIZE RESUME</span>
+        <button className="px-3 sm:px-4 md:px-6 py-2 md:py-3 border border-cyan/20 text-cyan rounded hover:bg-cyan/5 transition-all flex items-center gap-2 md:gap-3 group relative overflow-hidden">
+          <span className="font-mono text-[8px] sm:text-[9px] md:text-[10px] tracking-wider md:tracking-widest font-bold z-10">INIT RESUME</span>
           <div className="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse z-10" />
           <div className="absolute inset-0 bg-cyan/5 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
         </button>
@@ -337,16 +337,16 @@ export function HeroSection() {
         transition={{ duration: 1, delay: 0 }}
         className="absolute top-[50%] pt-20 left-1/2 -translate-x-1/2 z-30 w-full max-w-2xl px-6"
       >
-        <div className="relative p-10 rounded-full border border-cyan/10 bg-black/40 backdrop-blur-sm flex flex-col items-center gap-6 overflow-hidden">
+        <div className="relative p-6 sm:p-8 md:p-10 rounded-full border border-cyan/10 bg-black/40 backdrop-blur-sm flex flex-col items-center gap-4 md:gap-6 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-cyan/5 to-transparent opacity-30" />
 
-          <h2 className="text-xl md:text-2xl font-black text-cyan tracking-[0.3em] uppercase text-center relative z-10 drop-shadow-[0_0_10px_rgba(0,240,255,0.3)]">
+          <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-black text-cyan tracking-[0.2em] md:tracking-[0.3em] uppercase text-center relative z-10 drop-shadow-[0_0_10px_rgba(0,240,255,0.3)]">
             Web Developer
           </h2>
 
-          <div className="flex flex-wrap justify-center gap-4 relative z-10">
+          <div className="flex flex-wrap justify-center gap-2 md:gap-4 relative z-10">
             {["HTML_CSS", "JAVASCRIPT", "REACT.JS", "MERN_STACK"].map((skill) => (
-              <div key={skill} className="px-4 py-2 border border-cyan/10 bg-cyan/5 rounded text-[10px] md:text-xs font-mono text-cyan tracking-widest">
+              <div key={skill} className="px-2 sm:px-3 md:px-4 py-1.5 md:py-2 border border-cyan/10 bg-cyan/5 rounded text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs font-mono text-cyan tracking-wider md:tracking-widest">
                 [ {skill} ]
               </div>
             ))}

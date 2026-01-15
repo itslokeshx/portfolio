@@ -120,8 +120,8 @@ export function SkillsSection() {
   useEffect(() => {
     const updateSkills = () => {
       const mobile = window.innerWidth < 768
-      // Scale down orbits on mobile to fit within screen (increased from 0.5 to 0.7 for better spacing)
-      const scaleFactor = mobile ? 0.7 : 1
+      // Reduced orbit scale to 0.6 on mobile to prevent label clipping at edges
+      const scaleFactor = mobile ? 0.6 : 1
       const innerRadius = 120 * scaleFactor
       const outerRadius = 200 * scaleFactor
 
