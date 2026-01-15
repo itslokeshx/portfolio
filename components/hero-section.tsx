@@ -10,6 +10,45 @@ export function HeroSection() {
   const [phase, setPhase] = useState<"hidden" | "visible">("hidden")
   const mouseRef = useRef({ x: 0, y: 0 })
 
+  // Server connection animation states
+  const [connectionText, setConnectionText] = useState("")
+  const [showCursor, setShowCursor] = useState(true)
+  const [connectionStatus, setConnectionStatus] = useState<"connecting" | "connected">("connecting")
+  const [glitch, setGlitch] = useState(false)
+
+  // Typing animation for "CONNECTED"
+  useEffect(() => {
+    const text = "CONNECTED"
+    let currentIndex = 0
+
+    const typingInterval = setInterval(() => {
+      if (currentIndex <= text.length) {
+        setConnectionText(text.substring(0, currentIndex))
+        currentIndex++
+      } else {
+        clearInterval(typingInterval)
+        // Trigger glitch effect when typing completes
+        setTimeout(() => {
+          setGlitch(true)
+          setTimeout(() => setGlitch(false), 200)
+        }, 100)
+        // Change status to connected
+        setTimeout(() => setConnectionStatus("connected"), 300)
+      }
+    }, 100)
+
+    return () => clearInterval(typingInterval)
+  }, [])
+
+  // Cursor blinking effect
+  useEffect(() => {
+    const cursorInterval = setInterval(() => {
+      setShowCursor(prev => !prev)
+    }, 530)
+
+    return () => clearInterval(cursorInterval)
+  }, [])
+
   useEffect(() => {
     setTimeout(() => setPhase("visible"), 2000)
 
@@ -199,12 +238,73 @@ export function HeroSection() {
 
       <nav className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 py-8">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 border border-cyan/50 rounded flex items-center justify-center bg-black/20 backdrop-blur-sm shadow-[0_0_15px_rgba(0,240,255,0.1)]">
-            <span className="text-cyan font-mono text-lg">{"{ }"}</span>
+          <div className="w-10 h-10 border border-cyan/50 rounded flex items-center justify-center bg-black/20 backdrop-blur-sm shadow-[0_0_15px_rgba(0,240,255,0.1)] relative overflow-hidden">
+            <span className="text-cyan font-mono text-lg z-10">{"{ }"}</span>
+            {/* Scanning line effect */}
+            <div
+              className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan/30 to-transparent h-full w-full animate-[scan_2s_ease-in-out_infinite]"
+              style={{
+                animation: 'scan 2s ease-in-out infinite'
+              }}
+            />
           </div>
-          <div>
-            <span className="text-white font-bold tracking-wide">LOKESH</span>
-            <span className="block text-cyan/60 text-[10px] font-mono tracking-widest">DEV.SYS.01</span>
+          <div className="relative">
+            {/* Connection text with typing effect */}
+            <div className="flex items-center gap-1">
+              <span
+                className={`font-mono text-sm md:text-base tracking-[0.15em] transition-all duration-200 ${glitch ? 'animate-pulse' : ''
+                  }`}
+                style={{
+                  background: connectionStatus === 'connected'
+                    ? 'linear-gradient(90deg, #00f0ff 0%, #ffffff 100%)'
+                    : 'linear-gradient(90deg, #00f0ff 0%, #0077ff 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  textShadow: glitch
+                    ? '0 0 20px rgba(0,240,255,1), 3px 3px 0 rgba(255,0,255,0.5), -3px -3px 0 rgba(0,255,255,0.5)'
+                    : connectionStatus === 'connected'
+                      ? '0 0 15px rgba(0,240,255,0.5)'
+                      : 'none',
+                  filter: glitch ? 'hue-rotate(180deg)' : 'none'
+                }}
+              >
+                {connectionText}
+              </span>
+              {/* Blinking cursor */}
+              {connectionStatus === "connecting" && (
+                <span
+                  className={`text-cyan font-mono text-xl transition-opacity duration-100 ${showCursor ? 'opacity-100' : 'opacity-0'
+                    }`}
+                >
+                  _
+                </span>
+              )}
+              {/* Connection dots animation */}
+              {connectionStatus === "connecting" && (
+                <div className="flex gap-1 ml-1">
+                  {[0, 1, 2].map((i) => (
+                    <div
+                      key={i}
+                      className="w-1 h-1 rounded-full bg-cyan animate-pulse"
+                      style={{
+                        animationDelay: `${i * 0.2}s`
+                      }}
+                    />
+                  ))}
+                </div>
+              )}
+              {/* Connected checkmark */}
+              {connectionStatus === "connected" && (
+                <div className="ml-2 flex items-center gap-1">
+                  <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse shadow-[0_0_8px_rgba(74,222,128,0.6)]" />
+                  <span className="text-green-400 text-xs font-mono">✓</span>
+                </div>
+              )}
+            </div>
+            <span className="block text-cyan/60 text-[10px] font-mono tracking-widest">
+              {connectionStatus === "connecting" ? "INITIALIZING..." : "DEV.SYS.01"}
+            </span>
           </div>
         </div>
 
