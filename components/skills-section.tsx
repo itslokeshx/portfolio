@@ -430,7 +430,7 @@ export function SkillsSection() {
         </div>
 
         {/* Container with two-column layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
           {/* Left: Canvas Container */}
           <div className="lg:col-span-2 relative">
             <canvas
