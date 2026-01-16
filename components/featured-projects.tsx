@@ -21,7 +21,7 @@ const featuredProjects: Project[] = [
     title: "Second Brain",
     category: "MERN STACK",
     description:
-      "Second Brain is a knowledge management system built with the MERN stack. It features offline-first architecture, markdown editing, and cross-device sync. Key highlights include IndexedDB integration for local storage, real-time collaboration, and a powerful tag-based organization system. Built to solve information overload, this project demonstrates advanced state management and PWA concepts at scale.",
+      "🧠 A self-hosted backend and sync system built on top of the Focus To-Do web frontend, enabling offline-first usage with MongoDB cloud sync and full data ownership.",
     stack: ["MongoDB", "Express", "React", "Node.js", "IndexedDB"],
     image: "/Project_images/second-brain.png",
     color: "#0F172A",
@@ -33,7 +33,7 @@ const featuredProjects: Project[] = [
     title: "MemeHub",
     category: "MERN STACK",
     description:
-      "MemeHub is a viral content discovery platform built with React and REST APIs. It features trending algorithms, infinite scroll, and instant social sharing. Key highlights include a custom feed algorithm, optimized image lazy-loading, and sub-50ms response times for API calls. Built to bring joy and laughter, this project demonstrates performance optimization and real-time data handling.",
+      "🖼️ MemeHub – A full-stack MERN meme-sharing platform where users can upload, browse, and search memes. Built with React, Tailwind, Node.js, Express, MongoDB, and Cloudinary. 🚀",
     stack: ["MongoDB", "Express", "React", "Node.js", "Cloudinary"],
     image: "/Project_images/memehub.png",
     color: "#111827",
@@ -45,7 +45,7 @@ const featuredProjects: Project[] = [
     title: "Automated WA Messenger",
     category: "NODE/EXPRESS",
     description:
-      "Automated WA Messenger is a backend system built with Node.js, Express, and WhatsApp Cloud API. It features scheduled message automation, cron job management, and business loyalty program integration. Key highlights include robust error handling, message queue management, and real-time delivery tracking. Built for businesses to automate customer engagement, this project demonstrates scalable backend architecture and third-party API integration.",
+      "🚀 WhatsApp Automation API — A Node.js backend to schedule and send WhatsApp Business messages via REST API. 📅🤖",
     stack: ["Node.js", "Express", "Cron", "WhatsApp Cloud API"],
     image: "/Project_images/Whatsapp_Automation.png",
     color: "#00FF94",
