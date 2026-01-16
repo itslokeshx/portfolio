@@ -21,7 +21,7 @@ const featuredProjects: Project[] = [
     title: "Second Brain",
     category: "MERN STACK",
     description:
-      "A complete knowledge management system to store, organize, and retrieve thoughts efficiently.",
+      "Second Brain is a knowledge management system built with the MERN stack. It features offline-first architecture, markdown editing, and cross-device sync. Key highlights include IndexedDB integration for local storage, real-time collaboration, and a powerful tag-based organization system. Built to solve information overload, this project demonstrates advanced state management and PWA concepts at scale.",
     stack: ["MongoDB", "Express", "React", "Node.js", "IndexedDB"],
     image: "/Project_images/second-brain.png",
     color: "#0F172A",
@@ -33,7 +33,7 @@ const featuredProjects: Project[] = [
     title: "MemeHub",
     category: "MERN STACK",
     description:
-      "A social platform for sharing and discovering memes with a community-driven feed.",
+      "MemeHub is a viral content discovery platform built with React and REST APIs. It features trending algorithms, infinite scroll, and instant social sharing. Key highlights include a custom feed algorithm, optimized image lazy-loading, and sub-50ms response times for API calls. Built to bring joy and laughter, this project demonstrates performance optimization and real-time data handling.",
     stack: ["MongoDB", "Express", "React", "Node.js", "Cloudinary"],
     image: "/Project_images/memehub.png",
     color: "#111827",
@@ -45,7 +45,7 @@ const featuredProjects: Project[] = [
     title: "Automated WA Messenger",
     category: "NODE/EXPRESS",
     description:
-      "A backend system to schedule & automate WhatsApp messages for business loyalty programs.",
+      "Automated WA Messenger is a backend system built with Node.js, Express, and WhatsApp Cloud API. It features scheduled message automation, cron job management, and business loyalty program integration. Key highlights include robust error handling, message queue management, and real-time delivery tracking. Built for businesses to automate customer engagement, this project demonstrates scalable backend architecture and third-party API integration.",
     stack: ["Node.js", "Express", "Cron", "WhatsApp Cloud API"],
     image: "/Project_images/Whatsapp_Automation.png",
     color: "#00FF94",
@@ -78,6 +78,231 @@ const featuredProjects: Project[] = [
 
 const allProjects: Project[] = [
   ...featuredProjects,
+
+  // HTML/CSS Projects (in specified order)
+  {
+    id: 30,
+    title: "Tesla Tribute Page",
+    category: "HTML/CSS",
+    description: "A tribute landing page inspired by Tesla's design.",
+    stack: ["HTML", "CSS"],
+    image: "/Project_images/Tesla.jpeg",
+    color: "#E34F26",
+    github: "https://github.com/itslokeshx/Tesla",
+    demo: "https://itslokeshx.github.io/Tesla/",
+  },
+  {
+    id: 33,
+    title: "Newsletter Subscription",
+    category: "HTML/CSS",
+    description: "Form validation and layout design for newsletters.",
+    stack: ["HTML", "CSS"],
+    image: "/Project_images/newsLetter.jpeg",
+    color: "#E34F26",
+    github: "https://github.com/itslokeshx/Newsletter-Subscription",
+    demo: "https://itslokeshx.github.io/Newsletter-Subscription/",
+  },
+  {
+    id: 31,
+    title: "News Homepage",
+    category: "HTML/CSS",
+    description: "Responsive news layout with complex CSS Grid.",
+    stack: ["HTML", "CSS"],
+    image: "/Project_images/News_page.jpeg",
+    color: "#E34F26",
+    github: "https://github.com/itslokeshx/News-Homepage",
+    demo: "https://itslokeshx.github.io/News-Homepage/",
+  },
+  {
+    id: 32,
+    title: "Result Summary",
+    category: "HTML/CSS",
+    description: "Modern card component layout challenge.",
+    stack: ["HTML", "CSS"],
+    image: "/Project_images/result.jpeg",
+    color: "#E34F26",
+    github: "https://github.com/itslokeshx/Result-summary-page",
+    demo: "https://itslokeshx.github.io/Result-summary-page/",
+  },
+  {
+    id: 34,
+    title: "Love Calce 1.0",
+    category: "HTML/CSS",
+    description: "The initial HTML/CSS version of the compatibility calculator.",
+    stack: ["HTML", "CSS"],
+    image: "/Project_images/Love_Cale_1.0.png",
+    color: "#E34F26",
+    github: "https://github.com/itslokeshx/love-calce-1.0",
+    demo: "https://itslokeshx.github.io/love-calce-1.0/",
+  },
+
+  // JavaScript Projects (in specified order)
+  {
+    id: 19,
+    title: "Study Hub sem4",
+    category: "JAVASCRIPT",
+    description: "SEM 4 Study Hub - A site to share PYQs, assignments, and study resources.",
+    stack: ["JavaScript", "HTML", "CSS"],
+    image: "/Project_images/Sem4.png",
+    color: "#F7DF1E",
+    github: "https://github.com/itslokeshx/sem4",
+    demo: "https://ucekcse.github.io/sem4/",
+  },
+  {
+    id: 25,
+    title: "EB Bill Calculator",
+    category: "JAVASCRIPT",
+    description: "A calculator for estimating electricity bills based on units consumed.",
+    stack: ["JavaScript", "HTML", "CSS"],
+    image: "/Project_images/EB_BILL.jpeg",
+    color: "#F7DF1E",
+    github: "https://github.com/itslokeshx/EB-Bill-Calculator",
+    demo: "https://itslokeshx.github.io/EB-Bill-Calculator/",
+  },
+  {
+    id: 26,
+    title: "Love Calculator 2.0",
+    category: "JAVASCRIPT",
+    description: "A fun JS-based application to calculate compatibility percentages.",
+    stack: ["JavaScript", "HTML", "CSS"],
+    image: "/Project_images/Love_Cal.jpeg",
+    color: "#F7DF1E",
+    github: "https://github.com/itslokeshx/love-calce-2.0",
+    demo: "https://itslokeshx.github.io/love-calce-2.0/",
+  },
+  {
+    id: 13,
+    title: "Cat Meme App",
+    category: "JAVASCRIPT",
+    description: "A fun application for generating and viewing cat memes.",
+    stack: ["JavaScript", "HTML", "CSS"],
+    image: "/Project_images/cat_meme.png",
+    color: "#F7DF1E",
+    github: "https://github.com/itslokeshx/Cat-Meme-App",
+    demo: "https://itslokeshx.github.io/Cat-Meme-App/",
+  },
+  {
+    id: 20,
+    title: "Password Generator",
+    category: "JAVASCRIPT",
+    description: "A utility tool to generate secure, random passwords.",
+    stack: ["JavaScript", "HTML", "CSS"],
+    image: "/Project_images/Password_gen.png",
+    color: "#F7DF1E",
+    github: "https://github.com/itslokeshx/passwordgenerator",
+    demo: "https://itslokeshx.github.io/passwordgenerator/",
+  },
+  {
+    id: 29,
+    title: "Temperature Calculator",
+    category: "JAVASCRIPT",
+    description: "A utility to convert temperatures between Celsius, Fahrenheit, and Kelvin.",
+    stack: ["JavaScript", "HTML", "CSS"],
+    image: "/Project_images/Temp_Cal.jpeg",
+    color: "#F7DF1E",
+    github: "https://github.com/itslokeshx/temperature-calculator",
+    demo: "https://itslokeshx.github.io/temperature-calculator/",
+  },
+  {
+    id: 15,
+    title: "Ordering App",
+    category: "JAVASCRIPT",
+    description: "A digital ordering system interface for food or services.",
+    stack: ["JavaScript", "HTML", "CSS"],
+    image: "/Project_images/ordering-app.png",
+    color: "#F7DF1E",
+    github: "https://github.com/itslokeshx/ordering-app",
+    demo: "https://itslokeshx.github.io/ordering-app/",
+  },
+  {
+    id: 24,
+    title: "Age Calculator",
+    category: "JAVASCRIPT",
+    description: "A utility to calculate exact age based on date of birth.",
+    stack: ["JavaScript", "HTML", "CSS"],
+    image: "/Project_images/Age_cal.jpeg",
+    color: "#F7DF1E",
+    github: "https://github.com/itslokeshx/Age-Calculator",
+    demo: "https://itslokeshx.github.io/Age-Calculator/",
+  },
+  {
+    id: 28,
+    title: "Math Calce",
+    category: "JAVASCRIPT",
+    description: "A general purpose mathematical calculator.",
+    stack: ["JavaScript", "HTML", "CSS"],
+    image: "/Project_images/Math_cal.png",
+    color: "#F7DF1E",
+    github: "https://github.com/itslokeshx/math-calce",
+    demo: "https://itslokeshx.github.io/math-calce/",
+  },
+  {
+    id: 14,
+    title: "Otakumens",
+    category: "JAVASCRIPT",
+    description: "A community-focused site for anime and manga enthusiasts.",
+    stack: ["JavaScript", "HTML", "CSS"],
+    image: "/Project_images/Otakumens.png",
+    color: "#F7DF1E",
+    github: "https://github.com/itslokeshx/otakumens",
+    demo: "https://itslokeshx.github.io/otakumens/",
+  },
+  {
+    id: 16,
+    title: "Fitness Site",
+    category: "JAVASCRIPT",
+    description: "A website dedicated to fitness routines and health tracking.",
+    stack: ["JavaScript", "HTML", "CSS"],
+    image: "/Project_images/fitness_site.png",
+    color: "#F7DF1E",
+    github: "https://github.com/itslokeshx/fitness-site",
+    demo: "https://itslokeshx.github.io/fitness-site/",
+  },
+  {
+    id: 18,
+    title: "Study Hub sem3",
+    category: "JAVASCRIPT",
+    description: "A resource sharing hub for Semester 3 class materials.",
+    stack: ["JavaScript", "HTML", "CSS"],
+    image: "/Project_images/Sem3.png",
+    color: "#F7DF1E",
+    github: "https://github.com/itslokeshx/sem3",
+    demo: "https://ucekcse.github.io/sem3/",
+  },
+  {
+    id: 21,
+    title: "To-Do List",
+    category: "JAVASCRIPT",
+    description: "A task management tool to organize daily activities.",
+    stack: ["JavaScript", "HTML", "CSS"],
+    image: "/Project_images/To_Do.png",
+    color: "#F7DF1E",
+    github: "https://github.com/itslokeshx/To-Do",
+    demo: "https://itslokeshx.github.io/To-Do/",
+  },
+  {
+    id: 22,
+    title: "Color Flipper",
+    category: "JAVASCRIPT",
+    description: "A tool to generate and switch background colors dynamically.",
+    stack: ["JavaScript", "HTML", "CSS"],
+    image: "/Project_images/Color_flipper.png",
+    color: "#F7DF1E",
+    github: "https://github.com/itslokeshx/color-flipper",
+    demo: "https://itslokeshx.github.io/color-flipper/",
+  },
+  {
+    id: 17,
+    title: "Counter",
+    category: "JAVASCRIPT",
+    description: "A simple interactive counter application.",
+    stack: ["JavaScript", "HTML", "CSS"],
+    image: "/Project_images/counter.png",
+    color: "#F7DF1E",
+    github: "https://github.com/itslokeshx/counter",
+    demo: "https://itslokeshx.github.io/counter/",
+  },
+
   // React Projects
   {
     id: 6,
@@ -101,6 +326,7 @@ const allProjects: Project[] = [
     github: "https://github.com/itslokeshx/Business-card",
     demo: "https://business-card-chi-plum.vercel.app/",
   },
+
   // TypeScript/Electron
   {
     id: 8,
@@ -124,7 +350,8 @@ const allProjects: Project[] = [
     github: "https://github.com/itslokeshx/Billzy",
     demo: "https://billzy-psi.vercel.app/",
   },
-  // Node.js APIs
+
+  // Node.js & APIs
   {
     id: 10,
     title: "QR Code Generator",
@@ -158,118 +385,6 @@ const allProjects: Project[] = [
     github: "https://github.com/itslokeshx/Advice-Generator",
     demo: "https://itslokeshx.github.io/Advice-Generator/",
   },
-  // JavaScript Apps
-  {
-    id: 13,
-    title: "Cat Meme App",
-    category: "JAVASCRIPT",
-    description: "A fun application for generating and viewing cat memes.",
-    stack: ["JavaScript", "HTML", "CSS"],
-    image: "/Project_images/cat_meme.png",
-    color: "#F7DF1E",
-    github: "https://github.com/itslokeshx/Cat-Meme-App",
-    demo: "https://itslokeshx.github.io/Cat-Meme-App/",
-  },
-  {
-    id: 14,
-    title: "Otakumens",
-    category: "JAVASCRIPT",
-    description: "A community-focused site for anime and manga enthusiasts.",
-    stack: ["JavaScript", "HTML", "CSS"],
-    image: "/Project_images/Otakumens.png",
-    color: "#F7DF1E",
-    github: "https://github.com/itslokeshx/otakumens",
-    demo: "https://itslokeshx.github.io/otakumens/",
-  },
-  {
-    id: 15,
-    title: "Ordering App",
-    category: "JAVASCRIPT",
-    description: "A digital ordering system interface for food or services.",
-    stack: ["JavaScript", "HTML", "CSS"],
-    image: "/Project_images/ordering-app.png",
-    color: "#F7DF1E",
-    github: "https://github.com/itslokeshx/ordering-app",
-    demo: "https://itslokeshx.github.io/ordering-app/",
-  },
-  {
-    id: 16,
-    title: "Fitness Site",
-    category: "JAVASCRIPT",
-    description: "A website dedicated to fitness routines and health tracking.",
-    stack: ["JavaScript", "HTML", "CSS"],
-    image: "/Project_images/fitness_site.png",
-    color: "#F7DF1E",
-    github: "https://github.com/itslokeshx/fitness-site",
-    demo: "https://itslokeshx.github.io/fitness-site/",
-  },
-  {
-    id: 17,
-    title: "Counter",
-    category: "JAVASCRIPT",
-    description: "A simple interactive counter application.",
-    stack: ["JavaScript", "HTML", "CSS"],
-    image: "/Project_images/counter.png",
-    color: "#F7DF1E",
-    github: "https://github.com/itslokeshx/counter",
-    demo: "https://itslokeshx.github.io/counter/",
-  },
-  {
-    id: 18,
-    title: "Study Hub sem3",
-    category: "JAVASCRIPT",
-    description: "A resource sharing hub for Semester 3 class materials.",
-    stack: ["JavaScript", "HTML", "CSS"],
-    image: "/Project_images/Sem3.png",
-    color: "#F7DF1E",
-    github: "https://github.com/itslokeshx/sem3",
-    demo: "https://ucekcse.github.io/sem3/",
-  },
-  {
-    id: 19,
-    title: "Study Hub sem4",
-    category: "JAVASCRIPT",
-    description: "SEM 4 Study Hub - A site to share PYQs, assignments, and study resources.",
-    stack: ["JavaScript", "HTML", "CSS"],
-    image: "/Project_images/Sem4.png",
-    color: "#F7DF1E",
-    github: "https://github.com/itslokeshx/sem4",
-    demo: "https://ucekcse.github.io/sem4/",
-  },
-  // JavaScript Tools
-  {
-    id: 20,
-    title: "Password Generator",
-    category: "JAVASCRIPT",
-    description: "A utility tool to generate secure, random passwords.",
-    stack: ["JavaScript", "HTML", "CSS"],
-    image: "/Project_images/Password_gen.png",
-    color: "#F7DF1E",
-    github: "https://github.com/itslokeshx/passwordgenerator",
-    demo: "https://itslokeshx.github.io/passwordgenerator/",
-  },
-  {
-    id: 21,
-    title: "To-Do List",
-    category: "JAVASCRIPT",
-    description: "A task management tool to organize daily activities.",
-    stack: ["JavaScript", "HTML", "CSS"],
-    image: "/Project_images/To_Do.png",
-    color: "#F7DF1E",
-    github: "https://github.com/itslokeshx/To-Do",
-    demo: "https://itslokeshx.github.io/To-Do/",
-  },
-  {
-    id: 22,
-    title: "Color Flipper",
-    category: "JAVASCRIPT",
-    description: "A tool to generate and switch background colors dynamically.",
-    stack: ["JavaScript", "HTML", "CSS"],
-    image: "/Project_images/Color_flipper.png",
-    color: "#F7DF1E",
-    github: "https://github.com/itslokeshx/color-flipper",
-    demo: "https://itslokeshx.github.io/color-flipper/",
-  },
   {
     id: 23,
     title: "Color Scheme Generator",
@@ -281,117 +396,7 @@ const allProjects: Project[] = [
     github: "https://github.com/itslokeshx/color-scheme-generator",
     demo: "https://itslokeshx.github.io/color-scheme-generator/",
   },
-  {
-    id: 24,
-    title: "Age Calculator",
-    category: "JAVASCRIPT",
-    description: "A utility to calculate exact age based on date of birth.",
-    stack: ["JavaScript", "HTML", "CSS"],
-    image: "/Project_images/Age_cal.jpeg",
-    color: "#F7DF1E",
-    github: "https://github.com/itslokeshx/Age-Calculator",
-    demo: "https://itslokeshx.github.io/Age-Calculator/",
-  },
-  {
-    id: 25,
-    title: "EB Bill Calculator",
-    category: "JAVASCRIPT",
-    description: "A calculator for estimating electricity bills based on units consumed.",
-    stack: ["JavaScript", "HTML", "CSS"],
-    image: "/Project_images/EB_BILL.jpeg",
-    color: "#F7DF1E",
-    github: "https://github.com/itslokeshx/EB-Bill-Calculator",
-    demo: "https://itslokeshx.github.io/EB-Bill-Calculator/",
-  },
-  {
-    id: 26,
-    title: "Love Calculator 2.0",
-    category: "JAVASCRIPT",
-    description: "A fun JS-based application to calculate compatibility percentages.",
-    stack: ["JavaScript", "HTML", "CSS"],
-    image: "/Project_images/Love_Cal.jpeg",
-    color: "#F7DF1E",
-    github: "https://github.com/itslokeshx/love-calce-2.0",
-    demo: "https://itslokeshx.github.io/love-calce-2.0/",
-  },
-  {
-    id: 28,
-    title: "Math Calce",
-    category: "JAVASCRIPT",
-    description: "A general purpose mathematical calculator.",
-    stack: ["JavaScript", "HTML", "CSS"],
-    image: "/Project_images/Math_cal.png",
-    color: "#F7DF1E",
-    github: "https://github.com/itslokeshx/math-calce",
-    demo: "https://itslokeshx.github.io/math-calce/",
-  },
-  {
-    id: 29,
-    title: "Temperature Calculator",
-    category: "JAVASCRIPT",
-    description: "A utility to convert temperatures between Celsius, Fahrenheit, and Kelvin.",
-    stack: ["JavaScript", "HTML", "CSS"],
-    image: "/Project_images/Temp_Cal.jpeg",
-    color: "#F7DF1E",
-    github: "https://github.com/itslokeshx/temperature-calculator",
-    demo: "https://itslokeshx.github.io/temperature-calculator/",
-  },
-  // HTML/CSS
-  {
-    id: 30,
-    title: "Tesla Tribute Page",
-    category: "HTML/CSS",
-    description: "A tribute landing page inspired by Tesla's design.",
-    stack: ["HTML", "CSS"],
-    image: "/Project_images/Tesla.jpeg",
-    color: "#E34F26",
-    github: "https://github.com/itslokeshx/Tesla",
-    demo: "https://itslokeshx.github.io/Tesla/",
-  },
-  {
-    id: 31,
-    title: "News Homepage",
-    category: "HTML/CSS",
-    description: "Responsive news layout with complex CSS Grid.",
-    stack: ["HTML", "CSS"],
-    image: "/Project_images/News_page.jpeg",
-    color: "#E34F26",
-    github: "https://github.com/itslokeshx/News-Homepage",
-    demo: "https://itslokeshx.github.io/News-Homepage/",
-  },
-  {
-    id: 32,
-    title: "Result Summary",
-    category: "HTML/CSS",
-    description: "Modern card component layout challenge.",
-    stack: ["HTML", "CSS"],
-    image: "/Project_images/result.jpeg",
-    color: "#E34F26",
-    github: "https://github.com/itslokeshx/Result-summary-page",
-    demo: "https://itslokeshx.github.io/Result-summary-page/",
-  },
-  {
-    id: 33,
-    title: "Newsletter Subscription",
-    category: "HTML/CSS",
-    description: "Form validation and layout design for newsletters.",
-    stack: ["HTML", "CSS"],
-    image: "/Project_images/newsLetter.jpeg",
-    color: "#E34F26",
-    github: "https://github.com/itslokeshx/Newsletter-Subscription",
-    demo: "https://itslokeshx.github.io/Newsletter-Subscription/",
-  },
-  {
-    id: 34,
-    title: "Love Calce 1.0",
-    category: "HTML/CSS",
-    description: "The initial HTML/CSS version of the compatibility calculator.",
-    stack: ["HTML", "CSS"],
-    image: "/Project_images/Love_Cale_1.0.png",
-    color: "#E34F26",
-    github: "https://github.com/itslokeshx/love-calce-1.0",
-    demo: "https://itslokeshx.github.io/love-calce-1.0/",
-  },
+
   // PHP & MySQL
   {
     id: 35,
@@ -404,6 +409,7 @@ const allProjects: Project[] = [
     github: "https://github.com/itslokeshx/hostelmanagement",
     demo: "https://github.com/itslokeshx/hostelmanagement",
   },
+
   // Python
   {
     id: 37,
@@ -556,12 +562,60 @@ function ProjectRow({
               <div className="grid md:grid-cols-12 gap-8 items-start">
                 {/* Left: Project Image */}
                 <div className="md:col-span-5">
-                  <div className="aspect-video w-full rounded-xl overflow-hidden border border-white/10 relative group bg-black/50">
-                    <img
+                  <div className="aspect-video w-full rounded-xl overflow-hidden border border-white/10 relative group bg-black">
+                    {/* Noise texture overlay */}
+                    <motion.div
+                      initial={{ opacity: 0.4 }}
+                      animate={{ opacity: 0 }}
+                      transition={{ duration: 1.5, delay: 0.3 }}
+                      className="absolute inset-0 z-10 pointer-events-none"
+                      style={{
+                        backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 400 400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' /%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' /%3E%3C/svg%3E")',
+                        mixBlendMode: 'overlay'
+                      }}
+                    />
+
+                    {/* Main image with smooth multi-stage blur */}
+                    <motion.img
                       src={project.image || "/placeholder.svg"}
                       alt={project.title}
-                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                      initial={{
+                        filter: 'blur(60px) brightness(0.4) contrast(1.3) saturate(0.3)',
+                        opacity: 0.3,
+                        scale: 1.15
+                      }}
+                      animate={{
+                        filter: [
+                          'blur(60px) brightness(0.4) contrast(1.3) saturate(0.3)',
+                          'blur(30px) brightness(0.7) contrast(1.15) saturate(0.7)',
+                          'blur(10px) brightness(0.9) contrast(1.05) saturate(0.95)',
+                          'blur(0px) brightness(1) contrast(1) saturate(1)'
+                        ],
+                        opacity: [0.3, 0.6, 0.9, 1],
+                        scale: [1.15, 1.1, 1.03, 1]
+                      }}
+                      transition={{
+                        duration: 1.8,
+                        times: [0, 0.35, 0.7, 1],
+                        ease: [0.22, 1, 0.36, 1]
+                      }}
+                      className="w-full h-full object-cover"
+                      style={{
+                        willChange: 'filter, opacity, transform'
+                      }}
                     />
+
+                    {/* Scanline overlay */}
+                    <motion.div
+                      initial={{ opacity: 0.3 }}
+                      animate={{ opacity: 0 }}
+                      transition={{ duration: 1.5, delay: 0.5 }}
+                      className="absolute inset-0 pointer-events-none z-20"
+                      style={{
+                        backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 240, 255, 0.03) 2px, rgba(0, 240, 255, 0.03) 4px)'
+                      }}
+                    />
+
                     {/* Hologram Scanlines */}
                     <div className="absolute inset-0 pointer-events-none">
                       <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(0,240,255,0.03)_2px,rgba(0,240,255,0.03)_4px)]" />
@@ -576,7 +630,7 @@ function ProjectRow({
                     <h4 className="text-xs text-cyan uppercase tracking-wider mb-3 font-mono border-b border-cyan/20 pb-2 inline-block">
                       // DOSSIER
                     </h4>
-                    <p className="text-sm md:text-base text-slate-300 leading-relaxed">{project.description}</p>
+                    <p className="text-sm text-slate-300 leading-relaxed mb-4">{project.description}</p>
                   </div>
 
                   <div className="space-y-6">
@@ -596,33 +650,31 @@ function ProjectRow({
                       </div>
                     </div>
 
-                    <div className="flex flex-col xs:flex-row gap-3 xs:gap-4 pt-2">
+                    <div className="flex gap-3 mt-4">
                       <a
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-4 sm:px-5 py-3 sm:py-2.5 border border-white/10 bg-white/[0.02] rounded-lg hover:bg-white/10 hover:border-cyan/50 text-slate-200 text-xs font-bold font-mono tracking-wide flex items-center justify-center gap-2 transition-all"
+                        className="px-4 py-2 border border-cyan/60 bg-transparent rounded-lg hover:bg-cyan/10 hover:border-cyan text-cyan text-sm font-semibold font-mono tracking-wide flex items-center gap-2 transition-all"
                       >
                         <Github size={16} />
-                        SOURCE_CODE
+                        Code
                       </a>
                       {project.demo !== "#" ? (
                         <a
                           href={project.demo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-4 sm:px-5 py-3 sm:py-2.5 bg-cyan text-black rounded-lg hover:bg-white hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] text-xs font-bold font-mono tracking-wide flex items-center justify-center gap-2 transition-all"
+                          className="px-4 py-2 bg-cyan text-void rounded-lg hover:shadow-[0_0_30px_rgba(0,240,255,0.7)] text-sm font-semibold font-mono tracking-wide flex items-center gap-2 transition-all shadow-[0_0_20px_rgba(0,240,255,0.4)]"
                         >
-                          LIVE_DEPLOY
-                          <ExternalLink size={14} />
+                          Live ↗
                         </a>
                       ) : (
                         <button
                           disabled
-                          className="px-4 sm:px-5 py-3 sm:py-2.5 bg-cyan/20 text-slate-500 rounded-lg text-xs font-bold font-mono tracking-wide flex items-center justify-center gap-2 cursor-not-allowed opacity-50"
+                          className="px-4 py-2 bg-cyan/20 text-slate-500 rounded-lg text-sm font-semibold font-mono tracking-wide flex items-center gap-2 cursor-not-allowed opacity-50"
                         >
-                          NO_LIVE_DEMO
-                          <ExternalLink size={14} />
+                          No Demo
                         </button>
                       )}
                     </div>
@@ -698,6 +750,28 @@ function ArchiveCard({ project }: { project: Project }) {
               +{project.stack.length - 3}
             </span>
           )}
+        </div>
+
+        {/* Mobile-only buttons */}
+        <div className="flex gap-2 mt-3 md:hidden">
+          <a
+            href={project.demo}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="flex-1 bg-cyan text-void text-xs font-semibold px-3 py-2 rounded-lg text-center hover:shadow-[0_0_20px_rgba(0,240,255,0.5)] transition-all"
+          >
+            Live ↗
+          </a>
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="flex-1 border border-cyan/60 text-cyan text-xs font-semibold px-3 py-2 rounded-lg text-center hover:bg-cyan/10 transition-all"
+          >
+            Code
+          </a>
         </div>
       </div>
     </motion.div>

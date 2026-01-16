@@ -39,9 +39,9 @@ export function AboutSection() {
   const nodesRef = useRef<OrbitNode[]>([...ORBIT_NODES])
   const [typedText, setTypedText] = useState("")
 
-  const fullText = "> Frontend Engineer // MERN Stack Learner"
+  const fullText = "I am a web developer with 2+ years of experience in HTML, CSS and JavaScript and growing experience in React, Node.js, Express and MongoDB. I have strong fundamentals in programming and problem-solving, actively build real-world projects, maintain open-source repositories, and continuously improve my engineering skills through hands-on development."
 
-  // Typing effect
+  // Typing effect with faster speed
   useEffect(() => {
     if (!isInView) return
     let index = 0
@@ -52,7 +52,7 @@ export function AboutSection() {
       } else {
         clearInterval(interval)
       }
-    }, 50)
+    }, 15) // Much faster typing (15ms instead of 50ms)
     return () => clearInterval(interval)
   }, [isInView])
 
@@ -183,17 +183,29 @@ export function AboutSection() {
         ctx.stroke()
       })
 
-      // Draw center node (LOKESH)
+      // Draw center node (</>)
       const centerPulse = 1 + Math.sin(Date.now() * 0.003) * 0.05
+      const centerRotation = (Date.now() * 0.0003) % (Math.PI * 2)
 
-      // Outer glow
-      ctx.beginPath()
-      const centerGradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 80 * centerPulse)
-      centerGradient.addColorStop(0, "rgba(0, 240, 255, 0.3)")
-      centerGradient.addColorStop(1, "rgba(0, 240, 255, 0)")
-      ctx.fillStyle = centerGradient
-      ctx.arc(centerX, centerY, 80 * centerPulse, 0, Math.PI * 2)
-      ctx.fill()
+      // Multi-layer glow circles
+      const glowLayers = [
+        { radius: 40, opacity: 0.2 },
+        { radius: 50, opacity: 0.15 },
+        { radius: 60, opacity: 0.1 },
+        { radius: 70, opacity: 0.05 },
+        { radius: 80, opacity: 0.03 }
+      ]
+
+      glowLayers.forEach((layer, index) => {
+        ctx.beginPath()
+        const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, layer.radius * centerPulse)
+        const color = index % 2 === 0 ? "0, 240, 255" : "157, 0, 255"
+        gradient.addColorStop(0, `rgba(${color}, ${layer.opacity})`)
+        gradient.addColorStop(1, `rgba(${color}, 0)`)
+        ctx.fillStyle = gradient
+        ctx.arc(centerX, centerY, layer.radius * centerPulse, 0, Math.PI * 2)
+        ctx.fill()
+      })
 
       // Inner ring
       ctx.beginPath()
@@ -202,12 +214,27 @@ export function AboutSection() {
       ctx.arc(centerX, centerY, 50 * centerPulse, 0, Math.PI * 2)
       ctx.stroke()
 
-      // Center text
-      ctx.fillStyle = "#00F0FF"
-      ctx.font = "bold 18px 'Space Grotesk', sans-serif"
+      // Code symbol </>
+      ctx.save()
+      ctx.translate(centerX, centerY)
+      ctx.rotate(centerRotation)
+      ctx.font = "bold 48px 'Space Grotesk', monospace"
       ctx.textAlign = "center"
       ctx.textBaseline = "middle"
-      ctx.fillText("LOKESH", centerX, centerY)
+
+      // Left bracket <
+      ctx.fillStyle = "#00F0FF"
+      ctx.fillText("<", -20, 0)
+
+      // Slash /
+      ctx.fillStyle = "#9D00FF"
+      ctx.fillText("/", 0, 0)
+
+      // Right bracket >
+      ctx.fillStyle = "#0077FF"
+      ctx.fillText(">", 20, 0)
+
+      ctx.restore()
 
       // Draw orbit nodes
       nodesRef.current.forEach((node) => {
@@ -245,57 +272,48 @@ export function AboutSection() {
   }, [isInView, dimensions])
 
   return (
-    <section id="about" ref={sectionRef} className="relative min-h-screen py-20 px-4 md:px-8 overflow-hidden bg-void">
+    <section id="about" ref={sectionRef} className="relative min-h-[600px] py-20 pb-16 md:py-20 md:pb-16 px-4 md:px-8 overflow-hidden bg-void">
       <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left: Orbital Constellation */}
-          <div className="relative h-[500px] md:h-[600px]">
+          <div className="relative h-[450px] md:h-[450px]">
             <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
           </div>
 
           {/* Right: Terminal + Content */}
           <div className="space-y-8">
             {/* Terminal Window */}
-            <div className="bg-[#1a1a1a] rounded-lg overflow-hidden border border-white/10">
-              <div className="flex items-center gap-2 px-4 py-3 bg-[#2a2a2a] border-b border-white/5">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-30%" }}
+              transition={{ duration: 0.6 }}
+              className="bg-[#0a0a0a] rounded-2xl overflow-hidden border-2 border-cyan/30 max-w-3xl"
+            >
+              <div className="flex items-center gap-2 px-4 py-3 bg-titanium/80 border-b border-cyan/20">
                 <div className="w-3 h-3 rounded-full bg-red-500" />
                 <div className="w-3 h-3 rounded-full bg-yellow-500" />
                 <div className="w-3 h-3 rounded-full bg-green-500" />
-                <span className="ml-4 text-xs font-mono text-mist/50">bash -- lokesh.sh</span>
+                <span className="ml-4 text-xs font-mono text-cyan/70">lokesh.bio</span>
               </div>
-              <div className="p-4 font-mono text-sm">
-                <div className="flex items-center gap-2 text-cyan">
-                  <span className="text-green-400">→</span>
-                  <span className="text-mist/60">~</span>
-                  <span className="text-cyan">About Me!</span>
-                </div>
-                <div className="mt-2 text-mist/80">
-                  {typedText}
-                  <span className="animate-pulse">_</span>
+              <div className="p-6 font-mono text-sm leading-relaxed">
+                <div className="text-cyan mb-2">$ cat about.txt</div>
+                <div
+                  className="mt-4 text-mist/80"
+                >
+                  {isInView && typedText.length > 0 ? typedText : ""}
+                  {isInView && typedText.length < fullText.length && (
+                    <span className="text-cyan animate-pulse">_</span>
+                  )}
+                  {isInView && typedText.length >= fullText.length && (
+                    <span className="text-cyan ml-1 animate-blink">█</span>
+                  )}
                 </div>
               </div>
-            </div>
-
-            {/* Main Heading */}
-            <div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight">
-                Architecting <span className="text-cyan">Digital</span>
-                <br />
-                <span className="bg-gradient-to-r from-cyan to-yellow-400 bg-clip-text text-transparent">
-                  Realities
-                </span>
-              </h2>
-            </div>
-
-            {/* Description */}
-            <div className="border-l-2 border-cyan/50 pl-4">
-              <p className="text-mist/70 leading-relaxed">
-                I am a web developer with 2+ years of experience in HTML, CSS and JavaScript and growing experience in React, Node.js, Express and MongoDB. I have strong fundamentals in programming and problem-solving, actively build real-world projects, maintain open-source repositories, and continuously improve my engineering skills through hands-on development.
-              </p>
-            </div>
+            </motion.div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-12">
               {STATS.map((stat, index) => (
                 <motion.div
                   key={stat.label}
@@ -303,7 +321,7 @@ export function AboutSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-[#111] border border-white/5 rounded-xl p-4 sm:p-5 flex items-start justify-between hover:border-cyan/30 transition-colors"
+                  className="bg-[#111] border border-white/5 rounded-xl p-4 flex items-start justify-between hover:border-cyan/30 transition-colors"
                 >
                   <div>
                     <div className="text-xl sm:text-2xl md:text-3xl font-black text-cyan">{stat.value}</div>

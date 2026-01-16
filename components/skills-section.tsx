@@ -58,22 +58,22 @@ const SKILLS_DATA = [
   },
   {
     name: "Node.js",
-    proficiency: 55,
-    experience: "Beginner",
+    proficiency: 40,
+    experience: "Learning",
     projects: ["Automated WhatsApp Messager", "QR Code Generator", "Advice Generator"],
     orbit: "inner",
   },
   {
     name: "Express.js",
-    proficiency: 55,
-    experience: "Beginner",
+    proficiency: 40,
+    experience: "Learning",
     projects: ["Automated WhatsApp Messager", "Second Brain", "MemeHub"],
     orbit: "outer",
   },
   {
     name: "MongoDB",
-    proficiency: 55,
-    experience: "Beginner",
+    proficiency: 40,
+    experience: "Learning",
     projects: ["Second Brain", "MemeHub"],
     orbit: "outer",
   },
@@ -86,15 +86,15 @@ const SKILLS_DATA = [
   },
   {
     name: "C",
-    proficiency: 50,
-    experience: "Beginner",
+    proficiency: 40,
+    experience: "Learning",
     projects: ["DSA Practice"],
     orbit: "outer",
   },
   {
     name: "Python",
-    proficiency: 50,
-    experience: "Beginner",
+    proficiency: 40,
+    experience: "Learning",
     projects: ["MindfulAI"],
     orbit: "outer",
   },
@@ -154,11 +154,26 @@ export function SkillsSection() {
         const rect = canvasRef.current.parentElement.getBoundingClientRect()
         const mobile = window.innerWidth < 768
         setIsMobile(mobile)
-        // Increased canvas height on mobile to fit larger orbits (0.7 scale)
+
+        // HD canvas with device pixel ratio
+        const dpr = window.devicePixelRatio || 1
         const canvasHeight = mobile ? 600 : Math.min(rect.width, 600)
+
         setDimensions({ width: rect.width, height: canvasHeight })
-        canvasRef.current.width = rect.width
-        canvasRef.current.height = canvasHeight
+
+        // Set actual canvas size with DPR for crisp rendering
+        canvasRef.current.width = rect.width * dpr
+        canvasRef.current.height = canvasHeight * dpr
+
+        // Scale canvas back to display size
+        canvasRef.current.style.width = rect.width + 'px'
+        canvasRef.current.style.height = canvasHeight + 'px'
+
+        // Scale context to match DPR
+        const ctx = canvasRef.current.getContext('2d')
+        if (ctx) {
+          ctx.scale(dpr, dpr)
+        }
       }
     }
     updateDimensions()
@@ -307,16 +322,35 @@ export function SkillsSection() {
 
         const isHovered = hoveredSkill?.name === skill.name
         const scaleFactor = isMobile ? 0.7 : 1
-        const glowSize = (isHovered ? 70 : skill.proficiency >= 90 ? 50 : skill.proficiency >= 80 ? 40 : 30) * scaleFactor
-        const glowOpacity = isHovered ? 0.9 : skill.proficiency >= 90 ? 0.7 : skill.proficiency >= 80 ? 0.5 : 0.3
+
+        // Differentiate glow based on proficiency
+        const is40Percent = skill.proficiency === 40
+        const glowSize = isHovered
+          ? 70
+          : is40Percent
+            ? 15  // Reduced glow for 40% skills
+            : skill.proficiency >= 90
+              ? 50
+              : skill.proficiency >= 80
+                ? 40
+                : 30
+        const glowOpacity = isHovered
+          ? 0.9
+          : is40Percent
+            ? 0.2  // Reduced opacity for 40% skills
+            : skill.proficiency >= 90
+              ? 0.7
+              : skill.proficiency >= 80
+                ? 0.5
+                : 0.3
 
         // Glow effect
         ctx.beginPath()
-        const gradient = ctx.createRadialGradient(screenX, screenY, 0, screenX, screenY, glowSize)
+        const gradient = ctx.createRadialGradient(screenX, screenY, 0, screenX, screenY, glowSize * scaleFactor)
         gradient.addColorStop(0, `rgba(0, 240, 255, ${glowOpacity})`)
         gradient.addColorStop(1, "rgba(0, 240, 255, 0)")
         ctx.fillStyle = gradient
-        ctx.arc(screenX, screenY, glowSize, 0, Math.PI * 2)
+        ctx.arc(screenX, screenY, glowSize * scaleFactor, 0, Math.PI * 2)
         ctx.fill()
 
         // Node background
@@ -324,25 +358,28 @@ export function SkillsSection() {
         ctx.fillStyle = isHovered ? "rgba(0, 240, 255, 0.25)" : "#0a0a0a"
         ctx.strokeStyle = isHovered ? "#00F0FF" : "rgba(0, 240, 255, 0.6)"
         ctx.lineWidth = (isHovered ? 3.5 : 2.5) * scaleFactor
-        ctx.arc(screenX, screenY, 22 * scaleFactor, 0, Math.PI * 2)
+        const nodeSize = is40Percent ? 20 : 22  // Smaller nodes for 40% skills
+        ctx.arc(screenX, screenY, nodeSize * scaleFactor, 0, Math.PI * 2)
         ctx.fill()
         ctx.stroke()
 
         // Core
         ctx.beginPath()
         ctx.fillStyle = isHovered ? "#FFFFFF" : "#00F0FF"
-        ctx.arc(screenX, screenY, (isHovered ? 14 : 9) * scaleFactor, 0, Math.PI * 2)
+        const coreSize = is40Percent ? 7 : 9  // Smaller core for 40% skills
+        ctx.arc(screenX, screenY, (isHovered ? 14 : coreSize) * scaleFactor, 0, Math.PI * 2)
         ctx.fill()
 
-        // Label
+        // Label with improved rendering
         ctx.fillStyle = isHovered ? "#FFFFFF" : "#E2E8F0"
-        ctx.font = isHovered ? `bold ${14 * scaleFactor}px 'Space Grotesk', sans-serif` : `${12 * scaleFactor}px 'Space Grotesk', sans-serif`
+        const fontSize = isHovered ? 14 : 12
+        ctx.font = `600 ${fontSize * scaleFactor}px 'Space Grotesk', sans-serif`  // Increased font weight
         ctx.textAlign = "center"
         ctx.fillText(skill.name, screenX, screenY + 38 * scaleFactor)
 
-        // Proficiency bar
-        const barWidth = 55 * scaleFactor
-        const barHeight = 5 * scaleFactor
+        // Proficiency bar (increased width for clarity)
+        const barWidth = 50 * scaleFactor  // Increased from 55
+        const barHeight = 4 * scaleFactor  // Increased from 5
         ctx.fillStyle = "#1a1a1a"
         ctx.fillRect(screenX - barWidth / 2, screenY + 46 * scaleFactor, barWidth, barHeight)
         ctx.fillStyle = isHovered ? "#FFFFFF" : "#00F0FF"
@@ -406,59 +443,70 @@ export function SkillsSection() {
 
           {/* Right: Sticky Skills Data Panel */}
           <motion.div
-            className="lg:sticky lg:top-20 rounded-2xl border border-cyan/30 bg-[#0a0a0a] p-6"
-            style={{ boxShadow: "0 0 60px rgba(0, 240, 255, 0.15)" }}
+            className="lg:sticky lg:top-20 rounded-2xl border-2 border-cyan/30 bg-[#0a0a0a] p-8 shadow-[0_0_60px_rgba(0,240,255,0.15)]"
           >
             {hoveredSkill ? (
               <motion.div
                 key={hoveredSkill.name}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
               >
-                <div className="text-center mb-6">
-                  <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-cyan/10 border-2 border-cyan flex items-center justify-center">
-                    <span className="text-3xl font-black text-cyan">{hoveredSkill.name.slice(0, 2).toUpperCase()}</span>
+                {/* Header Section */}
+                <div className="text-center mb-8">
+                  <div className="w-24 h-24 mx-auto mb-5 rounded-full bg-gradient-to-br from-cyan/20 to-cyan/5 border-2 border-cyan flex items-center justify-center shadow-[0_0_30px_rgba(0,240,255,0.3)]">
+                    <span className="text-4xl font-black text-cyan">{hoveredSkill.name.slice(0, 2).toUpperCase()}</span>
                   </div>
-                  <h3 className="text-2xl font-black text-white">{hoveredSkill.name}</h3>
-                  <p className="text-cyan/60 font-mono text-sm">{hoveredSkill.experience}</p>
+                  <h3 className="text-3xl font-black text-white mb-2">{hoveredSkill.name}</h3>
+                  <p className="text-cyan/70 font-mono text-sm uppercase tracking-wider">{hoveredSkill.experience}</p>
                 </div>
 
                 {/* Proficiency Gauge */}
-                <div className="mb-6">
-                  <div className="flex justify-between text-sm mb-2">
-                    <span className="font-mono text-mist/50">PROFICIENCY</span>
-                    <span className="font-mono text-cyan">{hoveredSkill.proficiency}%</span>
+                <div className="mb-8">
+                  <div className="flex justify-between items-center mb-3">
+                    <span className="font-mono text-xs text-mist/50 uppercase tracking-wider">Proficiency</span>
+                    <span className="font-mono text-lg font-bold text-cyan">{hoveredSkill.proficiency}%</span>
                   </div>
-                  <div className="h-3 bg-[#1a1a1a] rounded-full overflow-hidden">
+                  <div className="h-4 bg-[#1a1a1a] rounded-full overflow-hidden border border-cyan/20">
                     <motion.div
                       initial={{ width: 0 }}
                       animate={{ width: `${hoveredSkill.proficiency}%` }}
-                      transition={{ duration: 0.6, ease: "easeOut" }}
-                      className="h-full bg-gradient-to-r from-cyan to-cyan/60 rounded-full"
-                      style={{ boxShadow: "0 0 20px rgba(0, 240, 255, 0.5)" }}
-                    />
+                      transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
+                      className="h-full bg-gradient-to-r from-cyan via-cyan to-cyan/60 rounded-full relative"
+                      style={{ boxShadow: "0 0 20px rgba(0, 240, 255, 0.6)" }}
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse" />
+                    </motion.div>
                   </div>
                 </div>
 
                 {/* Related Projects */}
                 <div>
-                  <h4 className="font-mono text-xs text-mist/50 mb-3 tracking-wider">// RELATED_PROJECTS</h4>
+                  <h4 className="font-mono text-xs text-mist/50 mb-4 tracking-wider uppercase">// Related Projects</h4>
                   <div className="flex flex-wrap gap-2">
-                    {hoveredSkill.projects.map((project) => (
-                      <span
+                    {hoveredSkill.projects.map((project, index) => (
+                      <motion.span
                         key={project}
-                        className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-sm font-mono text-mist/80 hover:border-cyan/50 hover:text-cyan transition-colors"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: index * 0.05 }}
+                        className="px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm font-mono text-mist/80 hover:border-cyan/50 hover:text-cyan hover:bg-cyan/5 transition-all duration-200 cursor-default"
                       >
                         {project}
-                      </span>
+                      </motion.span>
                     ))}
                   </div>
                 </div>
               </motion.div>
             ) : (
-              <div className="text-center py-8">
-                <p className="text-mist/50 font-mono text-sm">HOVER OVER A SKILL</p>
+              <div className="text-center py-16">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full border-2 border-dashed border-mist/20 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-mist/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                  </svg>
+                </div>
+                <p className="text-mist/50 font-mono text-sm uppercase tracking-wider">Hover Over a Skill</p>
                 <p className="text-mist/30 text-xs mt-2">to view proficiency & projects</p>
               </div>
             )}

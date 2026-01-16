@@ -344,11 +344,25 @@ export function HeroSection() {
             Web Developer
           </h2>
 
-          <div className="flex flex-wrap justify-center gap-2 md:gap-4 relative z-10">
-            {["HTML_CSS", "JAVASCRIPT", "REACT.JS", "MERN_STACK"].map((skill) => (
-              <div key={skill} className="px-2 sm:px-3 md:px-4 py-1.5 md:py-2 border border-cyan/10 bg-cyan/5 rounded text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs font-mono text-cyan tracking-wider md:tracking-widest">
-                [ {skill} ]
-              </div>
+          <div className="flex flex-wrap justify-center gap-3 mt-6 relative z-10">
+            {["Frontend Development", "JavaScript", "React", "MERN Stack"].map((badge, index) => (
+              <motion.div
+                key={badge}
+                initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{
+                  duration: 0.4,
+                  delay: index * 0.1,
+                  ease: [0.34, 1.56, 0.64, 1]
+                }}
+                whileHover={{
+                  scale: 1.05,
+                  transition: { duration: 0.2 }
+                }}
+                className="px-4 py-1.5 border border-cyan/40 bg-cyan/5 rounded-full text-xs uppercase tracking-wider font-medium text-cyan/90 hover:border-cyan hover:bg-cyan/10 hover:shadow-[0_0_15px_rgba(0,240,255,0.4)] transition-all duration-200"
+              >
+                {badge}
+              </motion.div>
             ))}
           </div>
         </div>
