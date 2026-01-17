@@ -3,19 +3,19 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 
-const ASCII_LOGO = `╔══════════════════╗
-║  █████  █████   ║
-║  ███    ███     ║
-║  █████  █████   ║
-║  ███    ███     ║
-║  █████  █████   ║
-╚══════════════════╝
-       LK`
+const ASCII_LOGO = `
+██╗      ██████╗ ██╗  ██╗███████╗███████╗██╗  ██╗
+██║     ██╔═══██╗██║ ██╔╝██╔════╝██╔════╝██║  ██║
+██║     ██║   ██║█████╔╝ █████╗  ███████╗███████║
+██║     ██║   ██║██╔═██╗ ██╔══╝  ╚════██║██╔══██║
+███████╗╚██████╔╝██║  ██╗███████╗███████║██║  ██║
+╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝`
 
 const TERMINAL_STATS = [
-    "> experiments loaded: 12",
-    "> status: forging",
-    "> last spark: today"
+    "> workspace: active",
+    "> modules loaded: projects, skills, archive",
+    "> system state: learning",
+    "> last update: today"
 ]
 
 export function TerminalWindow() {
@@ -86,7 +86,7 @@ export function TerminalWindow() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1, delay: 1 }}
-                    className="text-violet font-mono text-base leading-tight text-center mb-6"
+                    className="bg-gradient-to-r from-cyan to-blue-600 bg-clip-text text-transparent font-bold font-mono text-[10px] sm:text-xs leading-[1.1] text-center mb-6 whitespace-pre"
                     style={{ fontFamily: "'Fira Code', monospace" }}
                 >
                     {ASCII_LOGO}

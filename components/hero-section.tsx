@@ -5,40 +5,47 @@ import { motion } from "framer-motion"
 import { ChevronDown, Github, Twitter, Linkedin } from "lucide-react"
 import { TerminalWindow } from "./terminal-window"
 
-// Glitch Text Component
-const GlitchText = ({ text, delay = 0 }: { text: string, delay?: number }) => {
+// Smooth Typewriter Component
+const SmoothText = ({ text, delay = 0, className = "" }: { text: string, delay?: number, className?: string }) => {
   const [displayText, setDisplayText] = useState("")
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*"
+  const [showCursor, setShowCursor] = useState(false)
+  const [isComplete, setIsComplete] = useState(false)
 
   useEffect(() => {
     let timeout: NodeJS.Timeout
-    const startDelay = setTimeout(() => {
-      let iteration = 0
-      const interval = setInterval(() => {
-        setDisplayText(
-          text
-            .split("")
-            .map((letter, index) => {
-              if (index < iteration) return text[index]
-              return chars[Math.floor(Math.random() * chars.length)]
-            })
-            .join("")
-        )
+    let interval: NodeJS.Timeout
 
-        if (iteration >= text.length) {
+    const startDelay = setTimeout(() => {
+      setShowCursor(true)
+      let currentIndex = 0
+
+      interval = setInterval(() => {
+        if (currentIndex <= text.length) {
+          setDisplayText(text.slice(0, currentIndex))
+          currentIndex++
+        } else {
           clearInterval(interval)
+          setIsComplete(true)
+          setShowCursor(false) // Remove cursor after finished
         }
-        iteration += 1 / 3
-      }, 30)
-      return () => clearInterval(interval)
+      }, 50) // Smooth typing speed
+
     }, delay)
 
     return () => {
       clearTimeout(startDelay)
+      clearInterval(interval)
     }
   }, [text, delay])
 
-  return <span>{displayText}</span>
+  return (
+    <span className={className}>
+      {displayText}
+      {showCursor && (
+        <span className="inline-block w-[3px] h-[1em] bg-cyan ml-1 align-middle animate-pulse" />
+      )}
+    </span>
+  )
 }
 
 
@@ -46,7 +53,7 @@ export function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   return (
-    <section ref={containerRef} className="relative min-h-screen w-full overflow-hidden bg-[#050505]">
+    <section ref={containerRef} className="relative min-h-screen w-full overflow-hidden bg-[#050505] flex flex-col justify-center">
       {/* Background Grid - Seamless continuation */}
       <div
         className="absolute inset-0 z-0 opacity-[0.05] pointer-events-none"
@@ -126,80 +133,74 @@ export function HeroSection() {
       </motion.nav>
 
       {/* Hero Content */}
-      <div className="relative z-10 min-h-screen flex items-center justify-center pt-16">
-        <div className="max-w-[1400px] w-full mx-auto px-8 lg:px-20">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-8 lg:px-20 pt-16">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
 
-            {/* Left Column */}
-            <div className="space-y-8">
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1 }}
-                className="text-carbon text-[11px] font-mono uppercase tracking-[0.2em]"
+          {/* Left Column */}
+          <div className="space-y-8">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+              className="text-carbon text-[11px] font-mono uppercase tracking-[0.2em]"
+            >
+              <SmoothText text="LOKESH — A DEVELOPER IN PROGRESS" delay={1500} />
+            </motion.div>
+
+            <div className="space-y-2 min-h-[160px]"> {/* Min height to prevent shift */}
+              {/* Smooth Reveal Titles */}
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-mist leading-[1.1] tracking-tight">
+                <SmoothText text="I learn software" delay={2500} />
+              </h1>
+              <h1
+                className="text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-cyan via-plasma to-cyan bg-clip-text text-transparent leading-[1.1] tracking-tight"
+                style={{ textShadow: "0 0 30px rgba(0, 240, 255, 0.4)" }}
               >
-                LOKESH - WHERE CODE MEETS CURIOSITY
-              </motion.div>
-
-              <div className="space-y-2 min-h-[160px]"> {/* Min height to prevent shift */}
-                {/* Glitch Reveal Titles */}
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-mist leading-[1.1] tracking-tight">
-                  <GlitchText text="Forging digital" delay={1200} />
-                </h1>
-                <h1
-                  className="text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-cyan via-plasma to-cyan bg-clip-text text-transparent leading-[1.1] tracking-tight"
-                  style={{ textShadow: "0 0 30px rgba(0, 240, 255, 0.4)" }}
-                >
-                  <GlitchText text="breaking barriers" delay={2000} />
-                </h1>
-              </div>
-
-              <motion.p
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 2.5 }}
-                className="text-carbon text-lg leading-relaxed max-w-[500px]"
-              >
-                Welcome to my digital workshop — a space for experiments,
-                prototypes, and open-source artifacts. Currently building at the intersection of design and code.
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 2.8 }}
-                className="flex flex-wrap gap-4"
-              >
-                <button className="group px-8 py-3.5 border-2 border-cyan bg-transparent text-cyan rounded-md font-medium text-[15px] hover:bg-cyan hover:text-void transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,240,255,0.4)]">
-                  explore artifacts →
-                </button>
-                <button className="px-8 py-3.5 border border-cyan/30 bg-transparent text-mist rounded-md font-medium text-[15px] hover:border-cyan hover:shadow-[0_0_15px_rgba(0,240,255,0.2)] transition-all duration-300">
-                  introduction
-                </button>
-              </motion.div>
+                <SmoothText text="by building real things." delay={3500} />
+              </h1>
             </div>
 
-            {/* Right Column - Terminal Appearance */}
-            <div className="flex justify-center lg:justify-end">
-              <motion.div
-                initial={{ scaleY: 0, opacity: 0 }}
-                animate={{ scaleY: 1, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 1.5, ease: "circOut" }}
-                className="origin-center"
-              >
-                <TerminalWindow />
-              </motion.div>
-            </div>
+            <motion.p
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 2.5 }}
+              className="text-carbon text-lg leading-relaxed max-w-[500px]"
+            >
+              This site is a living workspace where ideas move from rough experiments to usable systems. Some work, some don't—but everything teaches me something. Explore my evolution from code to product.
+            </motion.p>
 
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 2.8 }}
+              className="flex flex-wrap gap-4"
+            >
+              <button className="group px-8 py-3.5 border-2 border-cyan bg-transparent text-cyan rounded-md font-medium text-[15px] hover:bg-cyan hover:text-void transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,240,255,0.4)]">
+                see my work →
+              </button>
+              <button className="px-8 py-3.5 border border-cyan/30 bg-transparent text-mist rounded-md font-medium text-[15px] hover:border-cyan hover:shadow-[0_0_15px_rgba(0,240,255,0.2)] transition-all duration-300">
+                how this site works
+              </button>
+            </motion.div>
           </div>
+
+          {/* Right Column - Terminal Appearance */}
+          <div className="flex justify-center lg:justify-end">
+            <motion.div
+              initial={{ scaleY: 0, opacity: 0 }}
+              animate={{ scaleY: 1, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1.5, ease: "circOut" }}
+              className="origin-center"
+            >
+              <TerminalWindow />
+            </motion.div>
+          </div>
+
         </div>
       </div>
-      {/* Bottom Info Bar */}
-
-
       {/* Scroll Indicator */}
       <motion.div
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none z-20"
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none z-20"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 4, duration: 1 }}
@@ -213,6 +214,6 @@ export function HeroSection() {
         </motion.div>
       </motion.div>
 
-    </section>
+    </section >
   )
 }
