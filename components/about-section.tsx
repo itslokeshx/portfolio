@@ -287,6 +287,23 @@ export function AboutSection() {
   return (
     <section id="about" ref={sectionRef} className="relative min-h-[600px] py-20 pb-16 md:py-20 md:pb-16 px-4 md:px-8 overflow-hidden bg-void">
       <div className="max-w-7xl mx-auto">
+        {/* Section Title */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <p className="font-mono text-cyan/60 text-sm mb-4">// SYSTEM_PROFILE</p>
+          <h2 className="text-5xl md:text-6xl font-black text-white mb-4">
+            ABOUT <span className="text-cyan">ME</span>
+          </h2>
+          <p className="text-mist/60 max-w-2xl mx-auto">
+            Exploring the digital frontier through code, creativity, and constant learning.
+          </p>
+        </motion.div>
+
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left: Orbital Constellation */}
           <div className="relative h-[450px] md:h-[450px]">
