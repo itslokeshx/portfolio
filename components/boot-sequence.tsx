@@ -8,21 +8,21 @@ interface BootSequenceProps {
 }
 
 export function BootSequence({ onComplete }: BootSequenceProps) {
-  const [phase, setPhase] = useState<"INIT" | "SYNC" | "LOCKED" | "CONSTRUCT" | "COMPLETE">("INIT")
+  const [phase, setPhase] = useState<"LOADING" | "RESOLVED" | "COMPLETE">("LOADING")
+  const [text, setText] = useState("ESTABLISHING SECURE HANDSHAKE")
 
-  // Sequence Timing (4.5s Total)
+  // Sequence Timing (4.0s Total Strict)
   useEffect(() => {
-    // 0s - 1.5s: INIT (Core spins, Initializing System)
-    const timer1 = setTimeout(() => setPhase("SYNC"), 1500)
+    // 0s: Start Loading (handled by CSS animation)
 
-    // 1.5s - 3.0s: SYNC (Intensify, Syncing Neural Network)
-    const timer2 = setTimeout(() => setPhase("LOCKED"), 3000)
+    // 2.0s: Change Text
+    const timer1 = setTimeout(() => setText("AUTHENTICATING IDENTITY"), 2000)
 
-    // 3.0s - 3.5s: LOCKED (Stabilize on CONNECTED)
-    const timer3 = setTimeout(() => setPhase("CONSTRUCT"), 3500)
+    // 4.0s: Finish Loading -> Show RESOLVED
+    const timer2 = setTimeout(() => setPhase("RESOLVED"), 4000)
 
-    // 3.5s - 4.5s: CONSTRUCT (Move to Navbar)
-    const timer4 = setTimeout(() => {
+    // 4.5s: Handoff
+    const timer3 = setTimeout(() => {
       setPhase("COMPLETE")
       onComplete()
     }, 4500)
@@ -31,7 +31,6 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
       clearTimeout(timer1)
       clearTimeout(timer2)
       clearTimeout(timer3)
-      clearTimeout(timer4)
     }
   }, [onComplete])
 
@@ -41,122 +40,87 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
         className="fixed inset-0 z-[10000] bg-[#050505] overflow-hidden flex flex-col items-center justify-center font-mono"
         initial={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.8 }}
       >
-        {/* Background Grid - Seamless Handoff */}
+        {/* Background Grid - Hidden during loader for pure minimal look, or very subtle */}
         <div
-          className="absolute inset-0 z-0 opacity-[0.05] pointer-events-none"
+          className="absolute inset-0 z-0 opacity-[0.02] pointer-events-none"
           style={{
-            backgroundImage: `linear-gradient(rgba(0, 240, 255, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 240, 255, 0.3) 1px, transparent 1px)`,
-            backgroundSize: '50px 50px'
+            backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)`,
+            backgroundSize: '100px 100px'
           }}
         />
 
-        {/* Central Core Container */}
-        <div className="relative flex flex-col items-center justify-center">
+        {/* CONTAINER */}
+        <div className="relative w-full max-w-[600px] flex flex-col items-center justify-center gap-6">
 
-          {/* Spinning Core Visuals (Visible before Construction Phase) */}
-          {(phase === "INIT" || phase === "SYNC") && (
-            <div className="relative w-32 h-32 mb-8">
-              {/* Outer Ring */}
-              <motion.div
-                className="absolute inset-0 border border-cyan/20 rounded-full"
-                animate={{ rotate: 360, scale: phase === "SYNC" ? [1, 1.1, 1] : 1 }}
-                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-              />
+          {/* TEXT & LOADER LINE */}
+          {(phase === "LOADING") && (
+            <div className="w-full flex flex-col items-start px-12 md:px-0">
+              <div className="flex items-center gap-3 text-sm md:text-base font-medium tracking-wider mb-4 h-6">
+                <span className="text-cyan/70">{">"}</span>
+                <span className="text-white/90">
+                  {text}
+                </span>
+                <motion.span
+                  animate={{ opacity: [0, 1, 0] }}
+                  transition={{ duration: 0.5, repeat: Infinity }}
+                  className="w-2 h-4 bg-cyan"
+                />
+              </div>
 
-              {/* Inner Ring (Counter-rotate) */}
-              <motion.div
-                className="absolute inset-4 border-2 border-t-cyan/60 border-r-transparent border-b-cyan/60 border-l-transparent rounded-full"
-                animate={{ rotate: -360 }}
-                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-              />
+              {/* Minimal Progress Line - Constant 4s Progress */}
+              <div className="w-full h-[2px] bg-white/10 relative overflow-hidden">
+                <motion.div
+                  className="absolute inset-y-0 left-0 bg-cyan shadow-[0_0_15px_rgba(0,240,255,0.6)]"
+                  initial={{ width: "0%" }}
+                  animate={{ width: "100%" }}
+                  transition={{
+                    duration: 4,
+                    ease: "linear"
+                  }}
+                />
+              </div>
 
-              {/* Core Particles */}
-              <motion.div
-                className="absolute inset-0 flex items-center justify-center"
-                animate={{ opacity: phase === "SYNC" ? [0.5, 1, 0.5] : 0.5 }}
-                transition={{ duration: 0.5, repeat: Infinity }}
-              >
-                <div className="w-2 h-2 bg-cyan rounded-full blur-[2px]" />
-              </motion.div>
-
-              {/* Scanning Line */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan/10 to-transparent"
-                animate={{ top: ["-100%", "100%"] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-              />
+              <div className="flex justify-between w-full mt-2 text-[10px] text-white/30 font-mono">
+                <span>SYS.KEY: 0x8F4A</span>
+                <span>PROCESSING...</span>
+              </div>
             </div>
           )}
 
-          {/* Text Status */}
-          <div className="h-8 flex items-center justify-center overflow-hidden">
-            <AnimatePresence mode="wait">
-              {phase === "INIT" && (
-                <motion.div
-                  key="init"
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: -20, opacity: 0 }}
-                  className="text-cyan/60 tracking-[0.3em] text-xs font-bold"
-                >
-                  INITIALIZING SYSTEM
-                </motion.div>
-              )}
-              {phase === "SYNC" && (
-                <motion.div
-                  key="sync"
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: -20, opacity: 0 }}
-                  className="text-cyan tracking-[0.3em] text-xs font-bold animate-pulse"
-                >
-                  SYNCING NEURAL NETWORK...
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-
-          {/* FINAL TRANSITION ELEMENT */}
-          {/* This is the element that physically travels to the navbar */}
-          {(phase === "LOCKED" || phase === "CONSTRUCT" || phase === "COMPLETE") && (
+          {/* RESOLVED STATE ([ CONNECTED ]) */}
+          {(phase === "RESOLVED" || phase === "COMPLETE") && (
             <motion.div
               layoutId="connected-status"
-              initial={{ scale: 2, opacity: 0 }}
+              initial={{ scale: 0.9, opacity: 0, letterSpacing: "1em" }}
               animate={
-                phase === "LOCKED"
-                  ? { scale: 1.5, opacity: 1, x: 0, y: 0 }
-                  : { top: "28px", left: "64px", x: 0, y: 0, scale: 1, position: "fixed", transformOrigin: "top left" }
+                phase === "RESOLVED"
+                  ? { scale: 1, opacity: 1, letterSpacing: "0.2em", x: 0, y: 0 } // Centered
+                  : { top: "28px", left: "64px", x: 0, y: 0, scale: 0.8, letterSpacing: "0.1em", position: "fixed", transformOrigin: "top left" } // Moves to nav
               }
               transition={{
-                duration: phase === "LOCKED" ? 0.3 : 1.0,
+                duration: phase === "RESOLVED" ? 0.3 : 0.8,
                 ease: [0.16, 1, 0.3, 1]
               }}
               className="flex items-center gap-3 z-50 absolute"
-              style={phase === "LOCKED" ? {} : { x: "-50%", y: "-50%", left: "50%", top: "50%" }} // Centered initially
+              style={phase === "RESOLVED" ? {} : { x: "-50%", y: "-50%", left: "50%", top: "50%" }}
             >
-              <motion.span
-                className="text-cyan font-bold tracking-[0.2em] text-sm md:text-base drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]"
-              >
-                CONNECTED
-              </motion.span>
-              <motion.div
-                className="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_5px_#22c55e]"
-                animate={{ opacity: [1, 0.5, 1] }}
-                transition={{ duration: 1, repeat: Infinity }}
-              />
+              <span className="text-cyan font-bold text-lg md:text-xl font-mono">
+                [ <span className="shadow-cyan drop-shadow-[0_0_10px_rgba(0,240,255,0.5)]">CONNECTED</span> ]
+              </span>
             </motion.div>
           )}
+
         </div>
 
-        {/* Wireframe Scanning Effect (Construction Phase) */}
-        {(phase === "CONSTRUCT" || phase === "COMPLETE") && (
+        {/* Construction Line */}
+        {(phase === "COMPLETE") && (
           <motion.div
             initial={{ height: "0%" }}
             animate={{ height: "100%" }}
             transition={{ duration: 1.0, ease: "easeInOut" }}
-            className="absolute inset-x-0 top-0 border-b border-cyan/20 bg-cyan/5 z-0 pointer-events-none"
+            className="absolute inset-x-0 top-0 border-b border-cyan/10 bg-cyan/5 z-0 pointer-events-none"
           />
         )}
 
