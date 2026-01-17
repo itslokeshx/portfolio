@@ -86,7 +86,7 @@ export function HeroSection() {
 
               <div className="flex flex-col leading-none">
                 <div className="flex items-center gap-2">
-                  <span className="text-cyan font-bold tracking-[0.2em] text-sm drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]">CONNECTED</span>
+                  <motion.span layoutId="connected-text" className="text-cyan font-bold tracking-[0.2em] text-sm drop-shadow-[0_0_8px_rgba(0,240,255,0.4)] inline-block">CONNECTED</motion.span>
                   <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse shadow-[0_0_5px_#22c55e]" />
                 </div>
                 <span className="text-carbon text-[10px] font-mono tracking-wider mt-1">DEV.SYS.01</span>

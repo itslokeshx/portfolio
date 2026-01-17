@@ -47,6 +47,23 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
   const [lines, setLines] = useState<LogLine[]>([])
   const [phase, setPhase] = useState<"LOADING" | "COMPLETE">("LOADING")
 
+  // CRT Scanline Effect Component
+  const ScanlineOverlay = () => (
+    <div className="absolute inset-0 pointer-events-none z-[20] overflow-hidden">
+      {/* Scan moving line */}
+      <motion.div
+        initial={{ top: "-10%" }}
+        animate={{ top: "110%" }}
+        transition={{ duration: 4, ease: "linear", repeat: Infinity }}
+        className="absolute left-0 right-0 h-[100px] bg-gradient-to-b from-transparent via-cyan/5 to-transparent opacity-30"
+      />
+      {/* Static noise grain (simulated with bg image or subtle varying opacity grid) */}
+      <div className="absolute inset-0 opacity-[0.03]"
+        style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
+      />
+    </div>
+  )
+
   useEffect(() => {
     let lineCounter = 0;
     const addLine = (text: string) => {
@@ -99,19 +116,9 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
         className="fixed inset-0 z-[10000] bg-[#050505] overflow-hidden flex flex-col items-center justify-center font-mono"
         initial={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }} // Fade out background slower/later to allow text to move?
-      // Actually, opacity: 0 on ROOT kills the layoutId child instantly unless layoutId is promoted.
-      // Better strategy: Don't let the layoutId element be a child of an exiting AnimatePresence if possible, 
-      // OR ensure the exit prop doesn't hide everything.
-      // For now, removing exit prop on root might keep it around, but we need it gone.
-      // The fix is actually in the PARENT (App) not unmounting this component abruptly?
-      // If parent unmounts, this exit fires.
+        transition={{ duration: 0.5 }}
       >
-        {/* Helper: To allow layoutId to persist, we rely on Framer Motion's shared element presence. 
-            If the destination (Hero) is mounted when this unmounts, it works. 
-            Trouble is if `opacity: 0` here applies to children. It does.
-            We must override exit on the child.
-        */}
+        <ScanlineOverlay />
 
         {/* Background Grid */}
         <div
@@ -123,7 +130,7 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
         />
 
         {/* CONTAINER */}
-        <div className="relative w-full max-w-[600px] flex flex-col items-center justify-center gap-6">
+        <div className="relative w-full max-w-[600px] flex flex-col items-center justify-center gap-6 z-30">
 
           {/* TERMINAL OUTPUT AREA */}
           <div className="w-full flex flex-col items-start px-12 md:px-0 min-h-[120px] justify-end">
@@ -138,7 +145,7 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
                     layout
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: isConnectedLine ? 1 : 1 - (lines.length - 1 - i) * 0.3, y: 0 }}
-                    exit={{ opacity: 0, y: -20, transition: { duration: 0.2 } }} // This exit is for scrolling lines only
+                    exit={{ opacity: 0, y: -20, transition: { duration: 0.2 } }}
                     transition={{ duration: 0.3 }}
                     className={`flex items-center gap-3 text-sm md:text-base font-medium tracking-wider h-8 w-full ${isConnectedLine ? 'justify-center mt-4' : ''}`}
                     style={{ position: isConnectedLine ? 'relative' : 'static', zIndex: isConnectedLine ? 50 : 1 }}
@@ -158,18 +165,34 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
                     )}
 
                     {isConnectedLine && (
-                      <motion.div
-                        layoutId="connected-status"
-                        // CRITICAL: We override exit here so it doesn't fade out with the parent, 
-                        // but rather lets the layoutId take over to the new destination.
-                        // Setting exit to empty object or opacity 1 can help.
-                        exit={{ opacity: 1, transition: { duration: 0.01 } }}
-                        className="flex items-center gap-3"
-                      >
-                        <span className="text-cyan font-bold text-sm md:text-base font-mono tracking-widest">
-                          [ <span className="shadow-cyan drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]">CONNECTED</span> ]
+                      // SPLIT LAYOUT: Brackets fade out, Text moves
+                      <div className="flex items-center gap-3">
+                        <span className="text-cyan font-bold text-sm md:text-base font-mono tracking-widest flex items-center gap-3">
+                          <motion.span
+                            animate={phase === "COMPLETE" ? { opacity: 0, scale: 0.8 } : { opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            [
+                          </motion.span>
+
+                          {/* THE HERO: CONNECTED TEXT */}
+                          <motion.span
+                            layoutId="connected-text"
+                            className="shadow-cyan drop-shadow-[0_0_8px_rgba(0,240,255,0.4)] inline-block"
+                            // Override exit so it persists for the move
+                            exit={{ opacity: 1, transition: { duration: 0.01 } }}
+                          >
+                            CONNECTED
+                          </motion.span>
+
+                          <motion.span
+                            animate={phase === "COMPLETE" ? { opacity: 0, scale: 0.8 } : { opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            ]
+                          </motion.span>
                         </span>
-                      </motion.div>
+                      </div>
                     )}
                   </motion.div>
                 )
@@ -177,35 +200,40 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
             </AnimatePresence>
           </div>
 
-          {/* PROGRESS LINE */}
-          {/* This should fade out separately */}
-          <motion.div
-            className="w-full px-12 md:px-0"
-            exit={{ opacity: 0 }}
-          >
-            <div className="w-full h-[4px] bg-white/10 relative overflow-hidden rounded-full">
+          {/* PROGRESS LINE - Fades out on complete */}
+          <AnimatePresence>
+            {phase !== "COMPLETE" && (
               <motion.div
-                className="absolute inset-y-0 left-0 bg-cyan shadow-[0_0_20px_rgba(0,240,255,0.6)]"
-                initial={{ width: "0%" }}
-                animate={{ width: "100%" }}
-                transition={{
-                  duration: 5,
-                  ease: "linear"
-                }}
+                className="w-full px-12 md:px-0"
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.5 }}
               >
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[100px] h-[6px] bg-gradient-to-r from-transparent to-white blur-[2px]" />
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[20px] h-[8px] bg-white blur-[4px] rounded-full" />
-              </motion.div>
-            </div>
+                <div className="w-full h-[4px] bg-white/10 relative overflow-hidden rounded-full">
+                  <motion.div
+                    className="absolute inset-y-0 left-0 bg-cyan shadow-[0_0_20px_rgba(0,240,255,0.6)]"
+                    initial={{ width: "0%" }}
+                    animate={{ width: "100%" }}
+                    transition={{
+                      duration: 5,
+                      ease: "linear"
+                    }}
+                  >
+                    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[100px] h-[6px] bg-gradient-to-r from-transparent to-white blur-[2px]" />
+                    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[20px] h-[8px] bg-white blur-[4px] rounded-full" />
+                  </motion.div>
+                </div>
 
-            <div className="flex justify-between w-full mt-2 text-[10px] text-white/30 font-mono">
-              <span>SYS.KEY: 0x8F4A</span>
-              <span>PROCESSING...</span>
-            </div>
-          </motion.div>
+                <div className="flex justify-between w-full mt-2 text-[10px] text-white/30 font-mono">
+                  <span>SYS.KEY: 0x8F4A</span>
+                  <span>PROCESSING...</span>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
         </div>
 
+        {/* Construction Line */}
         {(phase === "COMPLETE") && (
           <motion.div
             initial={{ height: "0%" }}
