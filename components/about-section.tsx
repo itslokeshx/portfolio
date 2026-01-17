@@ -62,9 +62,22 @@ export function AboutSection() {
         const rect = canvasRef.current.parentElement.getBoundingClientRect()
         const mobile = window.innerWidth < 768
         setIsMobile(mobile)
+
+        // Get device pixel ratio for high-DPI displays (Retina, etc.)
+        const dpr = window.devicePixelRatio || 1
+
+        // Set display size (CSS pixels)
         setDimensions({ width: rect.width, height: rect.height })
-        canvasRef.current.width = rect.width
-        canvasRef.current.height = rect.height
+
+        // Set actual canvas size (device pixels) for full HD quality
+        canvasRef.current.width = rect.width * dpr
+        canvasRef.current.height = rect.height * dpr
+
+        // Scale context to match device pixel ratio
+        const ctx = canvasRef.current.getContext("2d")
+        if (ctx) {
+          ctx.scale(dpr, dpr)
+        }
       }
     }
     updateDimensions()

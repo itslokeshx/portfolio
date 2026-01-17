@@ -593,8 +593,8 @@ function ProjectRow({
                         opacity: [0.3, 0.6, 0.9, 1]
                       }}
                       transition={{
-                        duration: 1.8,
-                        times: [0, 0.35, 0.7, 1],
+                        duration: 0.8,
+                        times: [0, 0.3, 0.65, 1],
                         ease: [0.22, 1, 0.36, 1]
                       }}
                       className="w-full h-full object-cover"

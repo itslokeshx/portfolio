@@ -430,7 +430,7 @@ export function SkillsSection() {
         </div>
 
         {/* Container with two-column layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8 items-start">
           {/* Left: Canvas Container */}
           <div className="lg:col-span-2 relative">
             <canvas
@@ -441,9 +441,9 @@ export function SkillsSection() {
             />
           </div>
 
-          {/* Right: Sticky Skills Data Panel */}
+          {/* Right: Sticky Skills Data Panel - Centered */}
           <motion.div
-            className="lg:sticky lg:top-20 rounded-2xl border-2 border-cyan/30 bg-[#0a0a0a] p-8 shadow-[0_0_60px_rgba(0,240,255,0.15)]"
+            className="lg:sticky lg:top-32 mt-[20%] rounded-2xl border-2 border-cyan/30 bg-[#0a0a0a] p-5 md:p-6 shadow-[0_0_60px_rgba(0,240,255,0.15)] h-[400px] flex flex-col overflow-hidden"
           >
             {hoveredSkill ? (
               <motion.div
@@ -452,23 +452,24 @@ export function SkillsSection() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
+                className="flex flex-col h-full"
               >
-                {/* Header Section */}
-                <div className="text-center mb-8">
-                  <div className="w-24 h-24 mx-auto mb-5 rounded-full bg-gradient-to-br from-cyan/20 to-cyan/5 border-2 border-cyan flex items-center justify-center shadow-[0_0_30px_rgba(0,240,255,0.3)]">
-                    <span className="text-4xl font-black text-cyan">{hoveredSkill.name.slice(0, 2).toUpperCase()}</span>
+                {/* Header Section - Compact */}
+                <div className="text-center mb-4">
+                  <div className="w-18 h-18 mx-auto mb-3 rounded-full bg-gradient-to-br from-cyan/20 to-cyan/5 border-2 border-cyan flex items-center justify-center shadow-[0_0_30px_rgba(0,240,255,0.3)]">
+                    <span className="text-2xl font-black text-cyan">{hoveredSkill.name.slice(0, 2).toUpperCase()}</span>
                   </div>
-                  <h3 className="text-3xl font-black text-white mb-2">{hoveredSkill.name}</h3>
-                  <p className="text-cyan/70 font-mono text-sm uppercase tracking-wider">{hoveredSkill.experience}</p>
+                  <h3 className="text-2xl md:text-2xl font-black text-white mb-1">{hoveredSkill.name}</h3>
+                  <p className="text-cyan/70 font-mono text-xs uppercase tracking-wider">{hoveredSkill.experience}</p>
                 </div>
 
-                {/* Proficiency Gauge */}
-                <div className="mb-8">
-                  <div className="flex justify-between items-center mb-3">
+                {/* Proficiency Gauge - Compact */}
+                <div className="mb-4">
+                  <div className="flex justify-between items-center mb-2">
                     <span className="font-mono text-xs text-mist/50 uppercase tracking-wider">Proficiency</span>
-                    <span className="font-mono text-lg font-bold text-cyan">{hoveredSkill.proficiency}%</span>
+                    <span className="font-mono text-base font-bold text-cyan">{hoveredSkill.proficiency}%</span>
                   </div>
-                  <div className="h-4 bg-[#1a1a1a] rounded-full overflow-hidden border border-cyan/20">
+                  <div className="h-3 bg-[#1a1a1a] rounded-full overflow-hidden border border-cyan/20">
                     <motion.div
                       initial={{ width: 0 }}
                       animate={{ width: `${hoveredSkill.proficiency}%` }}
@@ -481,33 +482,40 @@ export function SkillsSection() {
                   </div>
                 </div>
 
-                {/* Related Projects */}
-                <div>
-                  <h4 className="font-mono text-xs text-mist/50 mb-4 tracking-wider uppercase">// Related Projects</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {hoveredSkill.projects.map((project, index) => (
-                      <motion.span
-                        key={project}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: index * 0.05 }}
-                        className="px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm font-mono text-mist/80 hover:border-cyan/50 hover:text-cyan hover:bg-cyan/5 transition-all duration-200 cursor-default"
-                      >
-                        {project}
-                      </motion.span>
-                    ))}
+                {/* Related Projects - Max 4 */}
+                <div className="flex-1 overflow-hidden flex flex-col">
+                  <h4 className="font-mono text-[10px] text-mist/50 mb-2 tracking-wider uppercase">// Related Projects</h4>
+                  <div className="flex-1 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-cyan/20 scrollbar-track-transparent">
+                    <div className="flex flex-wrap gap-2">
+                      {hoveredSkill.projects.slice(0, 4).map((project, index) => (
+                        <motion.span
+                          key={project}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: index * 0.05 }}
+                          className="px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-xs md:text-sm font-mono text-mist/80 hover:border-cyan/50 hover:text-cyan hover:bg-cyan/5 transition-all duration-200 cursor-default"
+                        >
+                          {project}
+                        </motion.span>
+                      ))}
+                      {hoveredSkill.projects.length > 4 && (
+                        <span className="px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-xs md:text-sm font-mono text-mist/50 cursor-default">
+                          +{hoveredSkill.projects.length - 4} more
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
               </motion.div>
             ) : (
-              <div className="text-center py-16">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full border-2 border-dashed border-mist/20 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-mist/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="text-center flex flex-col items-center justify-center h-full">
+                <div className="w-14 h-14 mx-auto mb-3 rounded-full border-2 border-dashed border-mist/20 flex items-center justify-center">
+                  <svg className="w-7 h-7 text-mist/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
                   </svg>
                 </div>
                 <p className="text-mist/50 font-mono text-sm uppercase tracking-wider">Hover Over a Skill</p>
-                <p className="text-mist/30 text-xs mt-2">to view proficiency & projects</p>
+                <p className="text-mist/30 text-xs mt-1">to view proficiency & projects</p>
               </div>
             )}
           </motion.div>
