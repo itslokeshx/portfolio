@@ -195,17 +195,7 @@ export function HeroSection() {
         </div>
       </div>
       {/* Bottom Info Bar */}
-      <motion.div
-        initial={{ y: 100 }}
-        animate={{ y: 0 }}
-        transition={{ delay: 3, duration: 0.8 }}
-        className="fixed bottom-0 left-0 right-0 z-40 h-8 bg-[#050505]/95 backdrop-blur-lg border-t border-white/5"
-      >
-        <div className="max-w-[1400px] mx-auto px-8 h-full flex items-center justify-end text-[10px] font-mono uppercase tracking-wider">
-          <span className="text-cyan/50 mr-2">NET.STATUS:</span>
-          <span className="text-cyan">[CONNECTED]</span>
-        </div>
-      </motion.div>
+
 
       {/* Scroll Indicator */}
       <motion.div
