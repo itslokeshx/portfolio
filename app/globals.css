@@ -140,6 +140,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-void text-mist;
   }
@@ -231,13 +232,11 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 240, 255, 0.03) 2px,
-    rgba(0, 240, 255, 0.03) 4px
-  );
+  background: repeating-linear-gradient(0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 240, 255, 0.03) 2px,
+      rgba(0, 240, 255, 0.03) 4px);
   pointer-events: none;
   animation: scanline-scroll 3s linear infinite;
 }
@@ -246,6 +245,7 @@
   0% {
     transform: translateY(0);
   }
+
   100% {
     transform: translateY(4px);
   }
@@ -256,6 +256,7 @@
   0% {
     transform: translateY(-100%);
   }
+
   100% {
     transform: translateY(100%);
   }
@@ -267,10 +268,12 @@
 
 /* Pulse Animation */
 @keyframes pulse-glow {
+
   0%,
   100% {
     box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
   }
+
   50% {
     box-shadow: 0 0 40px rgba(0, 240, 255, 0.8);
   }
@@ -282,10 +285,12 @@
 
 /* Typing Cursor */
 @keyframes blink {
+
   0%,
   50% {
     opacity: 1;
   }
+
   51%,
   100% {
     opacity: 0;
@@ -313,22 +318,27 @@
     transform: translate(0);
     text-shadow: -2px 0 #ff0000, 2px 0 #00ff00;
   }
+
   20% {
     transform: translate(-2px, 2px);
     text-shadow: 2px 0 #ff0000, -2px 0 #00ff00;
   }
+
   40% {
     transform: translate(-2px, -2px);
     text-shadow: -2px 0 #ff0000, 2px 0 #00ff00;
   }
+
   60% {
     transform: translate(2px, 2px);
     text-shadow: 2px 0 #ff0000, -2px 0 #00ff00;
   }
+
   80% {
     transform: translate(2px, -2px);
     text-shadow: -2px 0 #ff0000, 2px 0 #00ff00;
   }
+
   100% {
     transform: translate(0);
     text-shadow: none;
@@ -339,8 +349,68 @@
   animation: glitch 0.3s ease-in-out;
 }
 
+/* Radial Gradient Background */
+.bg-gradient-radial {
+  background: radial-gradient(circle at center, var(--titanium) 0%, transparent 70%);
+}
+
+/* Terminal Cursor Blink */
+@keyframes cursor-blink {
+
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.terminal-cursor {
+  animation: cursor-blink 1s step-end infinite;
+}
+
+/* Status Dot Pulse */
+@keyframes status-pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+}
+
+.status-pulse {
+  animation: status-pulse 1.5s ease-in-out infinite;
+}
+
+/* Slow Bounce for Scroll Indicator */
+@keyframes bounce-slow {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.bounce-slow {
+  animation: bounce-slow 2s ease-in-out infinite;
+}
+
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {

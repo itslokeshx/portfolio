@@ -2,399 +2,224 @@
 
 import { useRef, useEffect, useState } from "react"
 import { motion } from "framer-motion"
-import { ChevronDown } from "lucide-react"
+import { ChevronDown, Github, Twitter, Linkedin } from "lucide-react"
+import { TerminalWindow } from "./terminal-window"
 
-export function HeroSection() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [phase, setPhase] = useState<"hidden" | "visible">("hidden")
-  const mouseRef = useRef({ x: 0, y: 0 })
-
-  // Server connection animation states
-  const [connectionText, setConnectionText] = useState("")
-  const [showCursor, setShowCursor] = useState(true)
-  const [connectionStatus, setConnectionStatus] = useState<"connecting" | "connected">("connecting")
-  const [glitch, setGlitch] = useState(false)
-
-  // Typing animation for "CONNECTED"
-  useEffect(() => {
-    const text = "CONNECTED"
-    let currentIndex = 0
-
-    const typingInterval = setInterval(() => {
-      if (currentIndex <= text.length) {
-        setConnectionText(text.substring(0, currentIndex))
-        currentIndex++
-      } else {
-        clearInterval(typingInterval)
-        // Trigger glitch effect when typing completes
-        setTimeout(() => {
-          setGlitch(true)
-          setTimeout(() => setGlitch(false), 200)
-        }, 100)
-        // Change status to connected
-        setTimeout(() => setConnectionStatus("connected"), 300)
-      }
-    }, 100)
-
-    return () => clearInterval(typingInterval)
-  }, [])
-
-  // Cursor blinking effect
-  useEffect(() => {
-    const cursorInterval = setInterval(() => {
-      setShowCursor(prev => !prev)
-    }, 530)
-
-    return () => clearInterval(cursorInterval)
-  }, [])
+// Glitch Text Component
+const GlitchText = ({ text, delay = 0 }: { text: string, delay?: number }) => {
+  const [displayText, setDisplayText] = useState("")
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*"
 
   useEffect(() => {
-    setTimeout(() => setPhase("visible"), 2000)
+    let timeout: NodeJS.Timeout
+    const startDelay = setTimeout(() => {
+      let iteration = 0
+      const interval = setInterval(() => {
+        setDisplayText(
+          text
+            .split("")
+            .map((letter, index) => {
+              if (index < iteration) return text[index]
+              return chars[Math.floor(Math.random() * chars.length)]
+            })
+            .join("")
+        )
 
-    const canvas = canvasRef.current
-    const container = containerRef.current
-    if (!canvas || !container) return
-
-    const ctx = canvas.getContext("2d")
-    if (!ctx) return
-
-    let animationFrameId: number
-    let particles: Particle[] = []
-    let width = 0
-    let height = 0
-    let isLocked = false
-    let textOpacity = 0
-
-    const PARTICLE_SIZE = 2
-    const PARTICLE_GAP = 5
-    const COLOR = "0, 240, 255"
-
-    class Particle {
-      x: number
-      y: number
-      targetX: number
-      targetY: number
-      vx: number
-      vy: number
-      size: number
-
-      constructor(x: number, y: number, tx: number, ty: number) {
-        this.x = Math.random() * width
-        this.y = Math.random() * height
-        this.targetX = tx
-        this.targetY = ty
-        this.vx = (Math.random() - 0.5) * 2
-        this.vy = (Math.random() - 0.5) * 2
-        this.size = PARTICLE_SIZE
-      }
-
-      update(mouse: { x: number, y: number }): boolean {
-        const dx = this.targetX - this.x
-        const dy = this.targetY - this.y
-        this.vx += dx * 0.05
-        this.vy += dy * 0.05
-
-        const mdx = mouse.x - this.x
-        const mdy = mouse.y - this.y
-        const dist = Math.sqrt(mdx * mdx + mdy * mdy)
-        if (dist < 100) {
-          const force = (100 - dist) / 100
-          this.vx -= (mdx / dist) * force * 5
-          this.vy -= (mdy / dist) * force * 5
+        if (iteration >= text.length) {
+          clearInterval(interval)
         }
-
-        this.vx *= 0.85
-        this.vy *= 0.85
-
-        this.x += this.vx
-        this.y += this.vy
-
-        return Math.abs(dx) < 0.5 && Math.abs(dy) < 0.5
-      }
-
-      // No longer used directly in new loop logic, but kept for reference or fallback
-      draw(context: CanvasRenderingContext2D, locked: boolean) {
-        // ... (Replaced by direct loop drawing)
-      }
-    }
-
-    const init = () => {
-      width = container.clientWidth
-      height = container.clientHeight
-      canvas.width = width
-      canvas.height = height
-
-      const tempCanvas = document.createElement("canvas")
-      const tCtx = tempCanvas.getContext("2d")
-      if (!tCtx) return
-
-      tempCanvas.width = width
-      tempCanvas.height = height
-
-      tCtx.fillStyle = "white"
-      const fontSize = width < 768 ? 60 : 120
-      tCtx.font = `900 ${fontSize}px "Space Grotesk", sans-serif`
-      tCtx.textAlign = "center"
-      tCtx.textBaseline = "middle"
-      tCtx.fillText("LOKESH", width / 2, height / 2 - 50)
-
-      const imageData = tCtx.getImageData(0, 0, width, height).data
-      particles = []
-
-      for (let y = 0; y < height; y += PARTICLE_GAP) {
-        for (let x = 0; x < width; x += PARTICLE_GAP) {
-          const index = (y * width + x) * 4
-          if (imageData[index + 3] > 128) {
-            particles.push(new Particle(x, y, x, y))
-          }
-        }
-      }
-    }
-
-    const animate = () => {
-      ctx.clearRect(0, 0, width, height)
-
-      let lockedCount = 0
-
-      // 1. Draw Particles (Fade out if locked)
-      if (textOpacity < 1) {
-        particles.forEach(p => {
-          const settled = p.update(mouseRef.current)
-          if (settled) lockedCount++
-
-          const particleOpacity = isLocked ? 1 - textOpacity : 0.8
-          ctx.fillStyle = `rgba(${COLOR}, ${particleOpacity})`
-          ctx.fillRect(p.x, p.y, p.size, p.size)
-        })
-      }
-
-      // 2. Check Lock State
-      if (lockedCount > particles.length * 0.95) {
-        isLocked = true
-      }
-
-      // 3. Draw Solid Text (Fade in if locked)
-      if (isLocked) {
-        if (textOpacity < 1) textOpacity += 0.02
-
-        ctx.save()
-        ctx.globalAlpha = textOpacity
-        // Use the Cyan color instead of white to match particles
-        ctx.fillStyle = `rgb(${COLOR})`
-        const fontSize = width < 768 ? 60 : 120
-        ctx.font = `900 ${fontSize}px "Space Grotesk", sans-serif`
-        ctx.textAlign = "center"
-        ctx.textBaseline = "middle"
-
-        // Softer Glow Effect (Reduced from 0.8 / 20)
-        ctx.shadowColor = `rgba(${COLOR}, 0.5)`
-        ctx.shadowBlur = 10
-
-        ctx.fillText("LOKESH", width / 2, height / 2 - 50)
-        ctx.restore()
-      }
-
-      animationFrameId = requestAnimationFrame(animate)
-    }
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect()
-      mouseRef.current = {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top
-      }
-    }
-
-    const handleResize = () => {
-      init()
-    }
-
-    window.addEventListener("resize", handleResize)
-    window.addEventListener("mousemove", handleMouseMove)
-
-    init()
-    animate()
+        iteration += 1 / 3
+      }, 30)
+      return () => clearInterval(interval)
+    }, delay)
 
     return () => {
-      window.removeEventListener("resize", handleResize)
-      window.removeEventListener("mousemove", handleMouseMove)
-      cancelAnimationFrame(animationFrameId)
+      clearTimeout(startDelay)
     }
-  }, [])
+  }, [text, delay])
+
+  return <span>{displayText}</span>
+}
+
+
+export function HeroSection() {
+  const containerRef = useRef<HTMLDivElement>(null)
 
   return (
-    <section ref={containerRef} className="relative h-screen w-full overflow-hidden bg-[#050505]">
+    <section ref={containerRef} className="relative min-h-screen w-full overflow-hidden bg-[#050505]">
+      {/* Background Grid - Seamless continuation */}
       <div
-        className="absolute inset-0 z-0 opacity-20 pointer-events-none"
+        className="absolute inset-0 z-0 opacity-[0.05] pointer-events-none"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 240, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 240, 255, 0.1) 1px, transparent 1px)`,
-          backgroundSize: '40px 40px'
+          backgroundImage: `linear-gradient(rgba(0, 240, 255, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 240, 255, 0.3) 1px, transparent 1px)`,
+          backgroundSize: '50px 50px'
         }}
       />
-      <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent" />
 
-      <canvas ref={canvasRef} className="absolute inset-0 z-10 block" />
+      {/* Radial gradient */}
+      <div className="absolute inset-0 z-0 bg-gradient-radial from-titanium/50 via-transparent to-transparent pointer-events-none" />
 
-      <nav className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-6 md:px-12 py-6 md:py-8">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 border border-cyan/50 rounded flex items-center justify-center bg-black/20 backdrop-blur-sm shadow-[0_0_15px_rgba(0,240,255,0.1)] relative overflow-hidden">
-            <span className="text-cyan font-mono text-lg z-10">{"{ }"}</span>
-            {/* Scanning line effect */}
-            <div
-              className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan/30 to-transparent h-full w-full animate-[scan_2s_ease-in-out_infinite]"
-              style={{
-                animation: 'scan 2s ease-in-out infinite'
-              }}
-            />
-          </div>
-          <div className="relative">
-            {/* Connection text with typing effect */}
-            <div className="flex items-center gap-1">
-              <span
-                className={`font-mono text-xs sm:text-sm md:text-base tracking-[0.1em] sm:tracking-[0.15em] transition-all duration-200 ${glitch ? 'animate-pulse' : ''
-                  } ${connectionStatus === 'connected' ? 'text-cyan' : 'text-cyan/80'}`}
-                style={{
-                  textShadow: glitch
-                    ? '0 0 20px rgba(0,240,255,1), 3px 3px 0 rgba(255,0,255,0.5), -3px -3px 0 rgba(0,255,255,0.5)'
-                    : connectionStatus === 'connected'
-                      ? '0 0 15px rgba(0,240,255,0.5)'
-                      : 'none',
-                  filter: glitch ? 'hue-rotate(180deg)' : 'none'
-                }}
-              >
-                {connectionText}
-              </span>
-              {/* Blinking cursor */}
-              {connectionStatus === "connecting" && (
-                <span
-                  className={`text-cyan font-mono text-xl transition-opacity duration-100 ${showCursor ? 'opacity-100' : 'opacity-0'
-                    }`}
-                >
-                  _
-                </span>
-              )}
-              {/* Connection dots animation */}
-              {connectionStatus === "connecting" && (
-                <div className="flex gap-1 ml-1">
-                  {[0, 1, 2].map((i) => (
-                    <div
-                      key={i}
-                      className="w-1 h-1 rounded-full bg-cyan animate-pulse"
-                      style={{
-                        animationDelay: `${i * 0.2}s`
-                      }}
-                    />
-                  ))}
-                </div>
-              )}
-              {/* Connected checkmark */}
-              {connectionStatus === "connected" && (
-                <div className="ml-2 flex items-center gap-1">
-                  <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse shadow-[0_0_8px_rgba(74,222,128,0.6)]" />
-                  <span className="text-green-400 text-xs font-mono">✓</span>
-                </div>
-              )}
-            </div>
-            <span className="block text-cyan/60 text-[10px] font-mono tracking-widest">
-              {connectionStatus === "connecting" ? "INITIALIZING..." : "DEV.SYS.01"}
-            </span>
-          </div>
-        </div>
-
-        <div className="hidden md:flex items-center gap-12 font-mono text-[10px] tracking-[0.2em] font-bold text-slate-400">
-          <a href="#" className="hover:text-cyan transition-colors">HOME</a>
-          <a href="#about" className="hover:text-cyan transition-colors">ABOUT</a>
-          <a href="#skills" className="hover:text-cyan transition-colors">SKILLS</a>
-          <a href="#projects" className="hover:text-cyan transition-colors">PROJECTS</a>
-          <a href="#contact" className="hover:text-cyan transition-colors">CONTACT</a>
-        </div>
-
-        <button className="px-3 sm:px-4 md:px-6 py-2 md:py-3 border border-cyan/20 text-cyan rounded hover:bg-cyan/5 transition-all flex items-center gap-2 md:gap-3 group relative overflow-hidden">
-          <span className="font-mono text-[8px] sm:text-[9px] md:text-[10px] tracking-wider md:tracking-widest font-bold z-10">INIT RESUME</span>
-          <div className="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse z-10" />
-          <div className="absolute inset-0 bg-cyan/5 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-        </button>
-      </nav>
-
-      <div className="absolute left-8 top-1/2 -translate-y-1/2 hidden md:block mix-blend-screen pointer-events-none z-20">
-        <div
-          className="text-[10px] font-mono text-cyan/20 tracking-widest"
-          style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
-        >
-          SYS.ID: LK-047 // CORE
-        </div>
-      </div>
-
-      <div className="absolute right-8 top-32 hidden md:block text-right mix-blend-screen pointer-events-none z-20">
-        <div className="w-20 h-px bg-cyan/20 mb-2 ml-auto" />
-        <span className="text-[10px] font-mono text-cyan/40 tracking-wider">NET.STATUS: [CONNECTED]</span>
-      </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: phase === "visible" ? 1 : 0, y: phase === "visible" ? 0 : 30 }}
-        transition={{ duration: 1, delay: 0 }}
-        className="absolute top-[50%] pt-20 left-1/2 -translate-x-1/2 z-30 w-full max-w-2xl px-6"
+      {/* Navigation Bar */}
+      <motion.nav
+        initial={{ borderBottomColor: "rgba(255,255,255,0)" }}
+        animate={{ borderBottomColor: "rgba(255,255,255,0.05)" }}
+        transition={{ duration: 1, delay: 1 }}
+        className="fixed top-0 left-0 right-0 z-50 h-16 bg-[#050505]/80 backdrop-blur-md"
       >
-        <div className="relative p-6 sm:p-8 md:p-10 rounded-full border border-cyan/10 bg-black/40 backdrop-blur-sm flex flex-col items-center gap-4 md:gap-6 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-cyan/5 to-transparent opacity-30" />
+        <div className="max-w-[1400px] mx-auto px-6 h-full flex items-center justify-between">
 
-          <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-black text-cyan tracking-[0.2em] md:tracking-[0.3em] uppercase text-center relative z-10 drop-shadow-[0_0_10px_rgba(0,240,255,0.3)]">
-            Web Developer
-          </h2>
+          {/* Left: Connected Status (Target for Loader Transition) */}
+          <div className="flex items-center gap-4 pl-4 pt-1">
+            {/* Note: The loader "CONNECTED" text flies to roughly this position (top: 28px, left: 64px) */}
+            {/* We fade this in slightly later to ensure smooth handoff if using layoutId across components isn't perfect, 
+                 OR we use the same visual style so it matches perfectly. */}
 
-          <div className="flex flex-wrap justify-center gap-3 mt-6 relative z-10">
-            {["Frontend Development", "JavaScript", "React", "MERN Stack"].map((badge, index) => (
-              <motion.div
-                key={badge}
-                initial={{ opacity: 0, scale: 0.8, y: 10 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{
-                  duration: 0.4,
-                  delay: index * 0.1,
-                  ease: [0.34, 1.56, 0.64, 1]
-                }}
-                whileHover={{
-                  scale: 1.05,
-                  transition: { duration: 0.2 }
-                }}
-                className="px-4 py-1.5 border border-cyan/40 bg-cyan/5 rounded-full text-xs uppercase tracking-wider font-medium text-cyan/90 hover:border-cyan hover:bg-cyan/10 hover:shadow-[0_0_15px_rgba(0,240,255,0.4)] transition-all duration-200"
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.5 }} // Wait for loader element to arrive/fade
+              className="flex items-center gap-4"
+            >
+              <div className="w-8 h-8 rounded border border-cyan/50 bg-cyan/5 flex items-center justify-center shadow-[0_0_10px_rgba(0,240,255,0.2)]">
+                <span className="text-cyan font-mono font-bold text-sm">{"{ }"}</span>
+              </div>
+
+              <div className="flex flex-col leading-none">
+                <div className="flex items-center gap-2">
+                  <span className="text-cyan font-bold tracking-[0.2em] text-sm drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]">CONNECTED</span>
+                  <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse shadow-[0_0_5px_#22c55e]" />
+                </div>
+                <span className="text-carbon text-[10px] font-mono tracking-wider mt-1">DEV.SYS.01</span>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Center Links - "Constructing" in */}
+          <div className="hidden lg:flex items-center gap-8 xl:gap-12">
+            {["HOME", "ABOUT", "SKILLS", "PROJECTS", "CONTACT"].map((item, i) => (
+              <motion.a
+                key={item}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.8 + (i * 0.1) }}
+                href={`#${item.toLowerCase()}`}
+                className="text-[11px] font-medium text-gray-400 hover:text-cyan tracking-[0.2em] transition-colors duration-300"
               >
-                {badge}
-              </motion.div>
+                {item}
+              </motion.a>
             ))}
           </div>
+
+          {/* Right Button */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 1.2 }}
+          >
+            <button className="flex items-center gap-2 px-5 py-2 border border-cyan/30 rounded text-cyan text-[11px] tracking-widest font-medium hover:bg-cyan/10 transition-all shadow-[0_0_10px_rgba(0,240,255,0.1)] hover:shadow-[0_0_15px_rgba(0,240,255,0.3)]">
+              INIT RESUME
+              <div className="w-1.5 h-1.5 rounded-full bg-cyan/50" />
+            </button>
+          </motion.div>
+
+        </div>
+      </motion.nav>
+
+      {/* Hero Content */}
+      <div className="relative z-10 min-h-screen flex items-center justify-center pt-16">
+        <div className="max-w-[1400px] w-full mx-auto px-8 lg:px-20">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+            {/* Left Column */}
+            <div className="space-y-8">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1 }}
+                className="text-carbon text-[11px] font-mono uppercase tracking-[0.2em]"
+              >
+                LOKESH - WHERE CODE MEETS CURIOSITY
+              </motion.div>
+
+              <div className="space-y-2 min-h-[160px]"> {/* Min height to prevent shift */}
+                {/* Glitch Reveal Titles */}
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-mist leading-[1.1] tracking-tight">
+                  <GlitchText text="Forging digital" delay={1200} />
+                </h1>
+                <h1
+                  className="text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-cyan via-plasma to-cyan bg-clip-text text-transparent leading-[1.1] tracking-tight"
+                  style={{ textShadow: "0 0 30px rgba(0, 240, 255, 0.4)" }}
+                >
+                  <GlitchText text="breaking barriers" delay={2000} />
+                </h1>
+              </div>
+
+              <motion.p
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 2.5 }}
+                className="text-carbon text-lg leading-relaxed max-w-[500px]"
+              >
+                Welcome to my digital workshop — a space for experiments,
+                prototypes, and open-source artifacts. Currently building at the intersection of design and code.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 2.8 }}
+                className="flex flex-wrap gap-4"
+              >
+                <button className="group px-8 py-3.5 border-2 border-cyan bg-transparent text-cyan rounded-md font-medium text-[15px] hover:bg-cyan hover:text-void transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,240,255,0.4)]">
+                  explore artifacts →
+                </button>
+                <button className="px-8 py-3.5 border border-cyan/30 bg-transparent text-mist rounded-md font-medium text-[15px] hover:border-cyan hover:shadow-[0_0_15px_rgba(0,240,255,0.2)] transition-all duration-300">
+                  introduction
+                </button>
+              </motion.div>
+            </div>
+
+            {/* Right Column - Terminal Appearance */}
+            <div className="flex justify-center lg:justify-end">
+              <motion.div
+                initial={{ scaleY: 0, opacity: 0 }}
+                animate={{ scaleY: 1, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 1.5, ease: "circOut" }}
+                className="origin-center"
+              >
+                <TerminalWindow />
+              </motion.div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      {/* Bottom Info Bar */}
+      <motion.div
+        initial={{ y: 100 }}
+        animate={{ y: 0 }}
+        transition={{ delay: 3, duration: 0.8 }}
+        className="fixed bottom-0 left-0 right-0 z-40 h-8 bg-[#050505]/95 backdrop-blur-lg border-t border-white/5"
+      >
+        <div className="max-w-[1400px] mx-auto px-8 h-full flex items-center justify-end text-[10px] font-mono uppercase tracking-wider">
+          <span className="text-cyan/50 mr-2">NET.STATUS:</span>
+          <span className="text-cyan">[CONNECTED]</span>
         </div>
       </motion.div>
 
-      <div className="absolute bottom-8 left-8 hidden md:flex items-center gap-4 z-20">
-        <div className="w-8 h-8 rounded-full border border-cyan/20 flex items-center justify-center">
-          <div className="w-4 h-4 text-cyan/50 animate-spin" style={{ borderTop: '1px solid currentColor', borderRadius: '50%' }} />
-        </div>
-        <div className="text-[10px] font-mono text-cyan/30 flex flex-col gap-1">
-          <span>COORD: 12.7890° N, 79.0030° E</span>
-          <span className="text-cyan/50">SECTOR: 7G // [LIVE]</span>
-        </div>
-      </div>
-
-      <div className="absolute bottom-8 right-8 hidden md:block text-right z-20">
-        <div className="text-[10px] font-mono text-cyan/30 mb-1">SYS.VER.2.0.4</div>
-        <div className="text-[10px] font-mono text-cyan/20">MEMORY: 64TB // OK</div>
-      </div>
-
+      {/* Scroll Indicator */}
       <motion.div
         className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none z-20"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 3, duration: 1 }}
+        transition={{ delay: 4, duration: 1 }}
       >
-        <span className="text-[9px] font-mono text-cyan/40 tracking-[0.3em] uppercase">Scroll to Initialize</span>
+        <span className="text-[10px] font-mono text-cyan/40 tracking-[0.3em] uppercase">Scroll to Initialize</span>
         <motion.div
-          animate={{ y: [0, 5, 0] }}
-          transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ChevronDown className="text-cyan/40 w-3 h-3" />
+          <ChevronDown className="text-cyan/40 w-4 h-4" />
         </motion.div>
       </motion.div>
 
