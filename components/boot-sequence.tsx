@@ -7,14 +7,24 @@ interface BootSequenceProps {
   onComplete: () => void
 }
 
-// Typewriter Component for smooth text reveal
-const TypewriterText = ({ text }: { text: string }) => {
+// Typewriter Component for smooth text reveal. 
+// It will typed ONCE when mounted.
+const TypewriterText = ({ text, isNew }: { text: string; isNew: boolean }) => {
   const [displayedText, setDisplayedText] = useState("")
 
   useEffect(() => {
+    // Only type if it's considered "new" or if we want to ensure it types on mount.
+    // Actually, simply resetting on mount is enough if the component instance is stable.
+    // But to be safe against re-renders, we can perform typing logic here.
+
+    // If it's not new (scrolled up), just show full text to prevent re-typing.
+    if (!isNew) {
+      setDisplayedText(text)
+      return
+    }
+
     setDisplayedText("")
     let i = 0
-    // Slightly faster typing for multi-line to ensure completion before next line
     const interval = setInterval(() => {
       if (i < text.length) {
         setDisplayedText((prev) => prev + text.charAt(i))
@@ -25,7 +35,7 @@ const TypewriterText = ({ text }: { text: string }) => {
     }, 20)
 
     return () => clearInterval(interval)
-  }, [text])
+  }, [text, isNew])
 
   return (
     <span className="text-white/90">
@@ -34,18 +44,29 @@ const TypewriterText = ({ text }: { text: string }) => {
   )
 }
 
+interface LogLine {
+  id: number;
+  text: string;
+  isNew: boolean;
+}
+
 export function BootSequence({ onComplete }: BootSequenceProps) {
-  const [lines, setLines] = useState<string[]>([])
+  const [lines, setLines] = useState<LogLine[]>([])
   const [phase, setPhase] = useState<"LOADING" | "COMPLETE">("LOADING")
 
   // Sequence Timing (5.0s Strict)
   useEffect(() => {
-    // Helper to add line safely
-    const addLine = (newLine: string) => {
+    // Helper to add line safely with unique ID
+    let lineCounter = 0;
+    const addLine = (text: string) => {
+      lineCounter++;
+      const newLine: LogLine = { id: lineCounter, text, isNew: true }
+
       setLines(prev => {
-        // Keep max 3 lines (simulating scroll)
-        // If we have 3, remove top one to make room
-        const newLines = [...prev, newLine]
+        // Mark old lines as not new (prevents re-typing if they re-render)
+        const oldLines = prev.map(l => ({ ...l, isNew: false }))
+
+        const newLines = [...oldLines, newLine]
         if (newLines.length > 3) {
           return newLines.slice(newLines.length - 3)
         }
@@ -65,20 +86,10 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
     // 3s: Line 4 (Scrolls out Line 1)
     const timer3 = setTimeout(() => addLine("AUTHENTICATING IDENTITY"), 3000)
 
-    // 4s: Line 5 (The Connection) - This will be handled specially in visually
+    // 4s: Line 5 (The Connection)
     const timer4 = setTimeout(() => {
-      setLines(prev => {
-        // We want ONLY the final connection line or clear the rest for cleaner look?
-        // User said "3 goes for 2nd place then that connected...". 
-        // Let's just push it normally so it sits at the bottom of the stack or replace?
-        // "3rd then when 4rd comes 1 disapper then 5 th is connected so 3 goes for 2nd place"
-        // Implies scrolling behavior continues.
-        const newLines = [...prev, "[ CONNECTED ]"]
-        if (newLines.length > 3) {
-          return newLines.slice(newLines.length - 3)
-        }
-        return newLines
-      })
+      // Just add it as a normal line, special rendering logic handles the style
+      addLine("[ CONNECTED ]")
     }, 4000)
 
     // 5s: Handoff
@@ -95,9 +106,6 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
       clearTimeout(timer5)
     }
   }, [onComplete])
-
-  // Current active line index (approximate for visuals)
-  const isConnected = lines.includes("[ CONNECTED ]")
 
   return (
     <AnimatePresence>
@@ -120,19 +128,24 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
         <div className="relative w-full max-w-[600px] flex flex-col items-center justify-center gap-6">
 
           {/* TERMINAL OUTPUT AREA */}
-          <div className="w-full flex flex-col items-start px-12 md:px-0 min-h-[100px] justify-end">
-            <AnimatePresence mode="popLayout">
-              {lines.map((text, i) => {
+          <div className="w-full flex flex-col items-start px-12 md:px-0 min-h-[120px] justify-end">
+            <AnimatePresence mode="popLayout" initial={false}>
+              {lines.map((line, i) => {
                 const isLast = i === lines.length - 1
-                const isConnectedLine = text === "[ CONNECTED ]"
+                const isConnectedLine = line.text === "[ CONNECTED ]"
+
+                // "3 goes for 2nd place" logic is handled naturally by flex-col and remove-from-top scrolling.
+                // When line 4 is added, line 1 is removed. [1, 2, 3] -> [2, 3, 4]
+                // When line 5 (connected) is added, line 2 is removed. [2, 3, 4] -> [3, 4, 5]
+                // So [CONNECTED] will be at the bottom (3rd visible slot).
 
                 return (
                   <motion.div
-                    key={`${text}-${i}`} // Unique key for scroll animation
-                    layout // Animate layout changes (scrolling up)
+                    key={line.id} // STABLE KEY: Prevents re-mounts and re-typing of existing lines!
+                    layout // Animate layout changes (smooth move up)
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: isConnectedLine ? 1 : 1 - (lines.length - 1 - i) * 0.3, y: 0 }} // Fade older lines slightly
-                    exit={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: isConnectedLine ? 1 : 1 - (lines.length - 1 - i) * 0.3, y: 0 }}
+                    exit={{ opacity: 0, y: -20, transition: { duration: 0.2 } }}
                     transition={{ duration: 0.3 }}
                     className={`flex items-center gap-3 text-sm md:text-base font-medium tracking-wider h-8 w-full ${isConnectedLine ? 'justify-center mt-4' : ''}`}
                   >
@@ -140,7 +153,7 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
                     {!isConnectedLine && (
                       <>
                         <span className="text-cyan/70">{">"}</span>
-                        <TypewriterText text={text} />
+                        <TypewriterText text={line.text} isNew={line.isNew} />
                         {/* Cursor only on latest line */}
                         {isLast && (
                           <motion.span
@@ -152,7 +165,7 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
                       </>
                     )}
 
-                    {/* Special Connected Line (Wait for Handshake Phase) */}
+                    {/* Special Connected Line */}
                     {isConnectedLine && phase !== "COMPLETE" && (
                       <motion.div
                         layoutId="connected-status"
