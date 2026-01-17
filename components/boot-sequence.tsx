@@ -7,17 +7,10 @@ interface BootSequenceProps {
   onComplete: () => void
 }
 
-// Typewriter Component for smooth text reveal. 
-// It will typed ONCE when mounted.
 const TypewriterText = ({ text, isNew }: { text: string; isNew: boolean }) => {
   const [displayedText, setDisplayedText] = useState("")
 
   useEffect(() => {
-    // Only type if it's considered "new" or if we want to ensure it types on mount.
-    // Actually, simply resetting on mount is enough if the component instance is stable.
-    // But to be safe against re-renders, we can perform typing logic here.
-
-    // If it's not new (scrolled up), just show full text to prevent re-typing.
     if (!isNew) {
       setDisplayedText(text)
       return
@@ -54,18 +47,14 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
   const [lines, setLines] = useState<LogLine[]>([])
   const [phase, setPhase] = useState<"LOADING" | "COMPLETE">("LOADING")
 
-  // Sequence Timing (5.0s Strict)
   useEffect(() => {
-    // Helper to add line safely with unique ID
     let lineCounter = 0;
     const addLine = (text: string) => {
       lineCounter++;
       const newLine: LogLine = { id: lineCounter, text, isNew: true }
 
       setLines(prev => {
-        // Mark old lines as not new (prevents re-typing if they re-render)
         const oldLines = prev.map(l => ({ ...l, isNew: false }))
-
         const newLines = [...oldLines, newLine]
         if (newLines.length > 3) {
           return newLines.slice(newLines.length - 3)
@@ -83,14 +72,11 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
     // 2s: Line 3
     const timer2 = setTimeout(() => addLine("ACQUIRING NEURAL TARGET"), 2000)
 
-    // 3s: Line 4 (Scrolls out Line 1)
+    // 3s: Line 4
     const timer3 = setTimeout(() => addLine("AUTHENTICATING IDENTITY"), 3000)
 
-    // 4s: Line 5 (The Connection)
-    const timer4 = setTimeout(() => {
-      // Just add it as a normal line, special rendering logic handles the style
-      addLine("[ CONNECTED ]")
-    }, 4000)
+    // 4s: Line 5 (Connected)
+    const timer4 = setTimeout(() => addLine("[ CONNECTED ]"), 4000)
 
     // 5s: Handoff
     const timer5 = setTimeout(() => {
@@ -113,8 +99,20 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
         className="fixed inset-0 z-[10000] bg-[#050505] overflow-hidden flex flex-col items-center justify-center font-mono"
         initial={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.5, delay: 0.2 }} // Fade out background slower/later to allow text to move?
+      // Actually, opacity: 0 on ROOT kills the layoutId child instantly unless layoutId is promoted.
+      // Better strategy: Don't let the layoutId element be a child of an exiting AnimatePresence if possible, 
+      // OR ensure the exit prop doesn't hide everything.
+      // For now, removing exit prop on root might keep it around, but we need it gone.
+      // The fix is actually in the PARENT (App) not unmounting this component abruptly?
+      // If parent unmounts, this exit fires.
       >
+        {/* Helper: To allow layoutId to persist, we rely on Framer Motion's shared element presence. 
+            If the destination (Hero) is mounted when this unmounts, it works. 
+            Trouble is if `opacity: 0` here applies to children. It does.
+            We must override exit on the child.
+        */}
+
         {/* Background Grid */}
         <div
           className="absolute inset-0 z-0 opacity-[0.02] pointer-events-none"
@@ -134,27 +132,21 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
                 const isLast = i === lines.length - 1
                 const isConnectedLine = line.text === "[ CONNECTED ]"
 
-                // "3 goes for 2nd place" logic is handled naturally by flex-col and remove-from-top scrolling.
-                // When line 4 is added, line 1 is removed. [1, 2, 3] -> [2, 3, 4]
-                // When line 5 (connected) is added, line 2 is removed. [2, 3, 4] -> [3, 4, 5]
-                // So [CONNECTED] will be at the bottom (3rd visible slot).
-
                 return (
                   <motion.div
-                    key={line.id} // STABLE KEY: Prevents re-mounts and re-typing of existing lines!
-                    layout // Animate layout changes (smooth move up)
+                    key={line.id}
+                    layout
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: isConnectedLine ? 1 : 1 - (lines.length - 1 - i) * 0.3, y: 0 }}
-                    exit={{ opacity: 0, y: -20, transition: { duration: 0.2 } }}
+                    exit={{ opacity: 0, y: -20, transition: { duration: 0.2 } }} // This exit is for scrolling lines only
                     transition={{ duration: 0.3 }}
                     className={`flex items-center gap-3 text-sm md:text-base font-medium tracking-wider h-8 w-full ${isConnectedLine ? 'justify-center mt-4' : ''}`}
+                    style={{ position: isConnectedLine ? 'relative' : 'static', zIndex: isConnectedLine ? 50 : 1 }}
                   >
-                    {/* Standard Line */}
                     {!isConnectedLine && (
                       <>
                         <span className="text-cyan/70">{">"}</span>
                         <TypewriterText text={line.text} isNew={line.isNew} />
-                        {/* Cursor only on latest line */}
                         {isLast && (
                           <motion.span
                             animate={{ opacity: [0, 1, 0] }}
@@ -165,10 +157,13 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
                       </>
                     )}
 
-                    {/* Special Connected Line */}
-                    {isConnectedLine && phase !== "COMPLETE" && (
+                    {isConnectedLine && (
                       <motion.div
                         layoutId="connected-status"
+                        // CRITICAL: We override exit here so it doesn't fade out with the parent, 
+                        // but rather lets the layoutId take over to the new destination.
+                        // Setting exit to empty object or opacity 1 can help.
+                        exit={{ opacity: 1, transition: { duration: 0.01 } }}
                         className="flex items-center gap-3"
                       >
                         <span className="text-cyan font-bold text-sm md:text-base font-mono tracking-widest">
@@ -183,18 +178,21 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
           </div>
 
           {/* PROGRESS LINE */}
-          <div className="w-full px-12 md:px-0">
+          {/* This should fade out separately */}
+          <motion.div
+            className="w-full px-12 md:px-0"
+            exit={{ opacity: 0 }}
+          >
             <div className="w-full h-[4px] bg-white/10 relative overflow-hidden rounded-full">
               <motion.div
                 className="absolute inset-y-0 left-0 bg-cyan shadow-[0_0_20px_rgba(0,240,255,0.6)]"
                 initial={{ width: "0%" }}
                 animate={{ width: "100%" }}
                 transition={{
-                  duration: 5, // 5 Seconds Strict
+                  duration: 5,
                   ease: "linear"
                 }}
               >
-                {/* Glowing Leading Edge (Tip) */}
                 <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[100px] h-[6px] bg-gradient-to-r from-transparent to-white blur-[2px]" />
                 <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[20px] h-[8px] bg-white blur-[4px] rounded-full" />
               </motion.div>
@@ -204,11 +202,10 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
               <span>SYS.KEY: 0x8F4A</span>
               <span>PROCESSING...</span>
             </div>
-          </div>
+          </motion.div>
 
         </div>
 
-        {/* Construction Line */}
         {(phase === "COMPLETE") && (
           <motion.div
             initial={{ height: "0%" }}
