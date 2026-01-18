@@ -185,13 +185,17 @@ export function ContactSection() {
               <div className="flex items-center justify-center md:justify-end">
                 <a
                   href="mailto:itslokeshx@gmail.com"
-                  className="group flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-cyan text-void text-sm sm:text-base font-bold rounded-xl hover:bg-white hover:shadow-[0_0_40px_rgba(0,240,255,0.5)] transition-all"
+                  className="group relative px-8 py-4 bg-cyan/5 border border-cyan/20 text-cyan font-mono text-sm tracking-widest rounded-xl overflow-hidden hover:bg-cyan hover:text-black hover:border-cyan hover:shadow-[0_0_30px_rgba(0,240,255,0.4)] transition-all duration-300 active:scale-95"
                 >
-                  <Send
-                    size={18}
-                    className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
-                  />
-                  SEND_MESSAGE
+                  <div className="flex items-center gap-3 relative z-10">
+                    <span>SEND_MESSAGE</span>
+                    <Send
+                      size={16}
+                      className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
+                    />
+                  </div>
+                  {/* Scanline effect on hover */}
+                  <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
                 </a>
               </div>
             </div>

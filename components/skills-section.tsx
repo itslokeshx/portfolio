@@ -123,7 +123,7 @@ export function SkillsSection() {
       // Aggressively scaled for 320px height to ensure single-screen fit
       const scaleFactor = mobile ? 0.75 : 1
       const innerRadius = 135 * scaleFactor
-      const outerRadius = 220 * scaleFactor
+      const outerRadius = 215 * scaleFactor
 
       skillsRef.current = SKILLS_DATA.map((skill, i) => {
         const isInner = skill.orbit === "inner"
@@ -235,7 +235,7 @@ export function SkillsSection() {
 
     // Get actual orbit radii from skills (they're set during initialization)
     const innerOrbitRadius = skillsRef.current.find(s => s.orbit === "inner")?.orbitRadius || 135
-    const outerOrbitRadius = skillsRef.current.find(s => s.orbit === "outer")?.orbitRadius || 220
+    const outerOrbitRadius = skillsRef.current.find(s => s.orbit === "outer")?.orbitRadius || 215
 
     const animate = () => {
       if (!isInView) return
