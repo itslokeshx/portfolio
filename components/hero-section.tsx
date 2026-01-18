@@ -6,44 +6,46 @@ import { ChevronDown, Github, Twitter, Linkedin } from "lucide-react"
 import { TerminalWindow } from "./terminal-window"
 
 // Smooth Typewriter Component
-const SmoothText = ({ text, delay = 0, className = "" }: { text: string, delay?: number, className?: string }) => {
+// Rotating Typewriter Component
+const RotatingText = ({ texts, className = "" }: { texts: string[], className?: string }) => {
+  const [currentTextIndex, setCurrentTextIndex] = useState(0)
   const [displayText, setDisplayText] = useState("")
-  const [showCursor, setShowCursor] = useState(false)
-  const [isComplete, setIsComplete] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [typingSpeed, setTypingSpeed] = useState(50)
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout
-    let interval: NodeJS.Timeout
+    const handleTyping = () => {
+      const fullText = texts[currentTextIndex]
 
-    const startDelay = setTimeout(() => {
-      setShowCursor(true)
-      let currentIndex = 0
-
-      interval = setInterval(() => {
-        if (currentIndex <= text.length) {
-          setDisplayText(text.slice(0, currentIndex))
-          currentIndex++
+      setDisplayText(current => {
+        if (isDeleting) {
+          return fullText.substring(0, current.length - 1)
         } else {
-          clearInterval(interval)
-          setIsComplete(true)
-          setShowCursor(false) // Remove cursor after finished
+          return fullText.substring(0, current.length + 1)
         }
-      }, 50) // Smooth typing speed
+      })
 
-    }, delay)
+      // Speed Logic
+      if (!isDeleting && displayText === fullText) {
+        // Finished typing, pause before deleting
+        setTimeout(() => setIsDeleting(true), 2000)
+      } else if (isDeleting && displayText === "") {
+        // Finished deleting, move to next text
+        setIsDeleting(false)
+        setCurrentTextIndex((prev) => (prev + 1) % texts.length)
+      }
 
-    return () => {
-      clearTimeout(startDelay)
-      clearInterval(interval)
+      setTypingSpeed(isDeleting ? 30 : 50)
     }
-  }, [text, delay])
+
+    const timer = setTimeout(handleTyping, typingSpeed)
+    return () => clearTimeout(timer)
+  }, [displayText, isDeleting, currentTextIndex, texts, typingSpeed])
 
   return (
     <span className={className}>
       {displayText}
-      {showCursor && (
-        <span className="inline-block w-[3px] h-[1em] bg-cyan ml-1 align-middle animate-pulse" />
-      )}
+      <span className="inline-block w-[2px] h-[1em] bg-cyan/80 ml-1 align-middle animate-pulse" />
     </span>
   )
 }
@@ -146,23 +148,31 @@ export function HeroSection() {
               <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-cyan/10 border border-cyan/20 backdrop-blur-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse" />
                 <span className="text-cyan text-[9px] sm:text-[10px] font-mono tracking-[0.2em] uppercase">
-                  <SmoothText text="System Online" delay={1500} />
+                  System Online
                 </span>
               </div>
             </motion.div>
 
             <div className="space-y-1 min-h-[90px] sm:min-h-[110px]"> {/* Compact min-height */}
-              {/* Smooth Reveal Titles */}
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-mist leading-[1.1] tracking-tight">
-                <SmoothText text="I learn software" delay={2500} />
+              {/* Refined "Man Made" Colors - Electric Blue & Clean White */}
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white/90 leading-[1.1] tracking-tight">
+                I learn software
               </h1>
               <div className="relative inline-block">
-                <div className="absolute -inset-1 bg-gradient-to-r from-cyan/20 via-blue-500/20 to-purple-500/20 blur-xl opacity-50" />
+                {/* Subtle Electric Blue Glow only */}
+                <div className="absolute -inset-1 bg-blue-500/20 blur-xl opacity-40" />
                 <h1
-                  className="relative text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-cyan via-blue-400 to-purple-400 bg-clip-text text-transparent leading-[1.1] tracking-tight pb-1"
-                  style={{ textShadow: "0 0 30px rgba(0, 240, 255, 0.3)" }}
+                  className="relative text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-cyan-300 via-blue-400 to-cyan-300 bg-clip-text text-transparent leading-[1.1] tracking-tight pb-1 whitespace-nowrap"
+                  style={{ textShadow: "0 0 30px rgba(0, 200, 255, 0.2)" }}
                 >
-                  <SmoothText text="by building real things." delay={3500} />
+                  <RotatingText
+                    texts={[
+                      "by building real things.",
+                      "by solving complex problems.",
+                      "by obsessing over details.",
+                      "by designing the future."
+                    ]}
+                  />
                 </h1>
               </div>
             </div>
