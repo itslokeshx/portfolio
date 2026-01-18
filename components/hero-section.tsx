@@ -233,7 +233,7 @@ export function HeroSection() {
 
 
       {/* Smooth Transition Fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-48 md:h-64 bg-gradient-to-t from-void via-void/40 to-transparent pointer-events-none z-20" />
+      <div className="absolute bottom-0 left-0 right-0 h-48 md:h-64 bg-gradient-to-t from-void via-void/40 to-transparent pointer-events-none z-5" />
 
     </section >
   )
