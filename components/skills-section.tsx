@@ -120,10 +120,10 @@ export function SkillsSection() {
   useEffect(() => {
     const updateSkills = () => {
       const mobile = window.innerWidth < 768
-      // Reduced orbit scale to 0.6 on mobile to prevent label clipping at edges
-      const scaleFactor = mobile ? 0.6 : 1
-      const innerRadius = 120 * scaleFactor
-      const outerRadius = 200 * scaleFactor
+      // Adjusted orbit scale for better fit and "best" look
+      const scaleFactor = mobile ? 0.75 : 1
+      const innerRadius = 135 * scaleFactor
+      const outerRadius = 220 * scaleFactor
 
       skillsRef.current = SKILLS_DATA.map((skill, i) => {
         const isInner = skill.orbit === "inner"
@@ -233,16 +233,16 @@ export function SkillsSection() {
     const centerY = dimensions.height / 2
 
     // Get actual orbit radii from skills (they're set during initialization)
-    const innerOrbitRadius = skillsRef.current.find(s => s.orbit === "inner")?.orbitRadius || 120
-    const outerOrbitRadius = skillsRef.current.find(s => s.orbit === "outer")?.orbitRadius || 200
+    const innerOrbitRadius = skillsRef.current.find(s => s.orbit === "inner")?.orbitRadius || 135
+    const outerOrbitRadius = skillsRef.current.find(s => s.orbit === "outer")?.orbitRadius || 220
 
     const animate = () => {
       if (!isInView) return
 
       ctx.clearRect(0, 0, dimensions.width, dimensions.height)
 
-      // Scale factor for mobile responsiveness
-      const scaleFactor = isMobile ? 0.7 : 1
+      // Scale factor for mobile responsiveness - increased for better visibility
+      const scaleFactor = isMobile ? 0.8 : 1
 
       // Draw sun (JavaScript)
       const sunPulse = 1 + Math.sin(Date.now() * 0.003) * 0.1
