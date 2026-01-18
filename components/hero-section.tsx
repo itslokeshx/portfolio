@@ -59,9 +59,9 @@ export function HeroSection() {
 
   // Desktop: Text (1.8s) -> Terminal (2.4s)
   // Mobile: Terminal (1.8s) -> Text (2.2s)
-  const startDelay = 1.8
-  const textDelay = isMobile ? startDelay + 0.4 : startDelay
-  const terminalDelay = isMobile ? startDelay : startDelay + 0.6
+  const startDelay = 0.8
+  const textDelay = isMobile ? startDelay + 0.3 : startDelay
+  const terminalDelay = isMobile ? startDelay : startDelay + 0.4
 
   const handleResumeClick = () => {
     terminalRef.current?.addLog("resume in progress —  building projects", "WARN")
@@ -123,7 +123,7 @@ export function HeroSection() {
                 key={item}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.5 + (i * 0.05) }}
+                transition={{ duration: 0.3, delay: 0.5 + (i * 0.05) }}
                 href={`#${item.toLowerCase()}`}
                 className="text-[11px] font-medium text-gray-400 hover:text-cyan tracking-[0.2em] transition-colors duration-300"
               >
@@ -136,7 +136,7 @@ export function HeroSection() {
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 2.2 }} // Button appears last
+            transition={{ duration: 0.5, delay: 1.8 }} // Button appears last
           >
             <button
               onClick={handleResumeClick}

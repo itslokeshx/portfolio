@@ -77,9 +77,9 @@ export const TerminalWindow = forwardRef<TerminalHandles>((props, ref) => {
 
         const bootLogs: LogEntry[] = [
             { id: 1, timestamp: getLocalTime(now), level: 'SYSTEM', message: "initializing workspace", color: "text-cyan-400" },
-            { id: 2, timestamp: getLocalTime(new Date(now.getTime() + 800)), level: 'INFO', message: "loading projects & skills", color: "text-gray-400" },
-            { id: 3, timestamp: getLocalTime(new Date(now.getTime() + 1600)), level: 'WARN', message: "preparing interactive modules", color: "text-cyan-400/80" },
-            { id: 4, timestamp: getLocalTime(new Date(now.getTime() + 2400)), level: 'SUCCESS', message: "system_ready.Explore!", color: "text-green-400" }
+            { id: 2, timestamp: getLocalTime(new Date(now.getTime() + 400)), level: 'INFO', message: "loading projects & skills", color: "text-gray-400" },
+            { id: 3, timestamp: getLocalTime(new Date(now.getTime() + 800)), level: 'WARN', message: "preparing interactive modules", color: "text-cyan-400/80" },
+            { id: 4, timestamp: getLocalTime(new Date(now.getTime() + 1200)), level: 'SUCCESS', message: "system_ready.Explore!", color: "text-green-400" }
         ]
 
         let timeouts: NodeJS.Timeout[] = []
@@ -90,7 +90,7 @@ export const TerminalWindow = forwardRef<TerminalHandles>((props, ref) => {
                 if (index === bootLogs.length - 1) {
                     setIsBooting(false)
                 }
-            }, 800 * (index + 1))
+            }, 400 * (index + 1))
             timeouts.push(timeout)
         })
 
