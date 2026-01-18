@@ -210,7 +210,7 @@ export function HeroSection() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: textDelay + 0.4 }} // Description follows title
-              className="text-gray-400 text-[15px] sm:text-[17px] leading-relaxed max-w-[480px] font-light space-y-5"
+              className="text-gray-200 text-[15px] sm:text-[17px] leading-relaxed max-w-[480px] font-light space-y-5"
             >
               <div>
                 <p>This site is a living workspace.</p>
