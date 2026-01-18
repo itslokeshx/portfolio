@@ -113,21 +113,27 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-[10000] bg-[#050505] overflow-hidden flex flex-col items-center justify-center font-mono"
+        className="fixed inset-0 z-[10000] overflow-hidden flex flex-col items-center justify-center font-mono pointer-events-none"
         initial={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <ScanlineOverlay />
+        {/* Fading Background Layer */}
+        <motion.div
+          className="absolute inset-0 bg-[#050505] z-0"
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+        >
+          <ScanlineOverlay />
 
-        {/* Background Grid */}
-        <div
-          className="absolute inset-0 z-0 opacity-[0.02] pointer-events-none"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)`,
-            backgroundSize: '100px 100px'
-          }}
-        />
+          {/* Background Grid */}
+          <div
+            className="absolute inset-0 z-0 opacity-[0.02]"
+            style={{
+              backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)`,
+              backgroundSize: '100px 100px'
+            }}
+          />
+        </motion.div>
 
         {/* CONTAINER */}
         <div className="relative w-full max-w-[600px] flex flex-col items-center justify-center gap-6 z-30">

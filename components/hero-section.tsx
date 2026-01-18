@@ -115,7 +115,7 @@ export function HeroSection() {
                 key={item}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.2 + (i * 0.05) }}
+                transition={{ duration: 0.3, delay: 0.8 + (i * 0.05) }} // Increased delay
                 href={`#${item.toLowerCase()}`}
                 className="text-[11px] font-medium text-gray-400 hover:text-cyan tracking-[0.2em] transition-colors duration-300"
               >
@@ -154,7 +154,7 @@ export function HeroSection() {
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
+                transition={{ delay: 1.0 }} // Increased delay
               >
                 <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-cyan/10 border border-cyan/20 backdrop-blur-sm">
                   <span className="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse" />
@@ -167,7 +167,7 @@ export function HeroSection() {
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
+                transition={{ delay: 1.2, duration: 0.5 }} // Increased delay
                 className="space-y-2 min-h-[50px] leading-none"
               >
                 {/* Refined "Man Made" Colors - Electric Blue & Clean White */}
@@ -198,7 +198,7 @@ export function HeroSection() {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
+              transition={{ duration: 0.5, delay: 1.4 }} // Increased delay
               className="text-gray-400 text-[15px] sm:text-[17px] leading-relaxed max-w-[480px] font-light space-y-5"
             >
               <div>
@@ -220,7 +220,7 @@ export function HeroSection() {
             <motion.div
               initial={{ scaleY: 0, opacity: 0 }}
               animate={{ scaleY: 1, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.5, ease: "circOut" }}
+              transition={{ duration: 0.5, delay: 1.6, ease: "circOut" }} // Increased delay
               className="origin-center w-full max-w-xl"
             >
               <TerminalWindow ref={terminalRef} />
