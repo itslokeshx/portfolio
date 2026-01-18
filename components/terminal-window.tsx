@@ -46,6 +46,19 @@ export const TerminalWindow = forwardRef<TerminalHandles>((props, ref) => {
     const [input, setInput] = useState("")
     const [isBooting, setIsBooting] = useState(true)
 
+    // Placeholder Typing Logic
+    const [placeholderText, setPlaceholderText] = useState("")
+    const [placeholderIndex, setPlaceholderIndex] = useState(0)
+    const [isDeleting, setIsDeleting] = useState(false)
+    const [charIndex, setCharIndex] = useState(0)
+
+    const placeholderPrompts = [
+        "type 'help' to get started",
+        "try 'projects' to see my work",
+        "run 'skills' to view tech stack",
+        "type 'contact' to say hello"
+    ]
+
     const inputRef = useRef<HTMLInputElement>(null)
     const containerRef = useRef<HTMLDivElement>(null)
     const scrollRef = useRef<HTMLDivElement>(null)
@@ -83,6 +96,40 @@ export const TerminalWindow = forwardRef<TerminalHandles>((props, ref) => {
 
         return () => timeouts.forEach(clearTimeout)
     }, [])
+
+    // Placeholder Animation Effect
+    useEffect(() => {
+        if (isBooting) return
+
+        const currentPrompt = placeholderPrompts[placeholderIndex]
+
+        let timeout: NodeJS.Timeout
+
+        if (isDeleting) {
+            timeout = setTimeout(() => {
+                setPlaceholderText(currentPrompt.substring(0, charIndex - 1))
+                setCharIndex(prev => prev - 1)
+            }, 50) // Deleting speed
+        } else {
+            timeout = setTimeout(() => {
+                setPlaceholderText(currentPrompt.substring(0, charIndex + 1))
+                setCharIndex(prev => prev + 1)
+            }, 100) // Typing speed
+        }
+
+        if (!isDeleting && charIndex === currentPrompt.length) {
+            // Finished typing, wait before deleting
+            timeout = setTimeout(() => {
+                setIsDeleting(true)
+            }, 2000)
+        } else if (isDeleting && charIndex === 0) {
+            // Finished deleting, move to next prompt
+            setIsDeleting(false)
+            setPlaceholderIndex(prev => (prev + 1) % placeholderPrompts.length)
+        }
+
+        return () => clearTimeout(timeout)
+    }, [charIndex, isDeleting, placeholderIndex, isBooting])
 
     // Scroll to bottom on history update - STRICTLY INTERNAL SCROLL
     useEffect(() => {
@@ -318,11 +365,11 @@ export const TerminalWindow = forwardRef<TerminalHandles>((props, ref) => {
                                         value={input}
                                         onChange={(e) => setInput(e.target.value)}
                                         onKeyDown={handleKeyDown}
-                                        className="w-full bg-transparent border-none outline-none text-gray-200 placeholder:text-gray-700 font-mono caret-cyan-400"
+                                        className="w-full bg-transparent border-none outline-none text-gray-200 placeholder:text-gray-500/50 font-mono caret-cyan-400"
                                         autoFocus
                                         autoComplete="off"
                                         spellCheck="false"
-                                        placeholder="type `help` to get started"
+                                        placeholder={placeholderText}
                                     />
                                 </div>
                             </div>
