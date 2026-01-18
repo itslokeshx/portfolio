@@ -120,10 +120,10 @@ export function SkillsSection() {
   useEffect(() => {
     const updateSkills = () => {
       const mobile = window.innerWidth < 768
-      // Adjusted orbit scale for better fit and "best" look
-      const scaleFactor = mobile ? 0.75 : 1
-      const innerRadius = 135 * scaleFactor
-      const outerRadius = 220 * scaleFactor
+      // Aggressively scaled for 320px height to ensure single-screen fit
+      const scaleFactor = mobile ? 0.6 : 1
+      const innerRadius = 120 * scaleFactor
+      const outerRadius = 200 * scaleFactor
 
       skillsRef.current = SKILLS_DATA.map((skill, i) => {
         const isInner = skill.orbit === "inner"
@@ -157,7 +157,8 @@ export function SkillsSection() {
 
         // HD canvas with device pixel ratio
         const dpr = window.devicePixelRatio || 1
-        const canvasHeight = mobile ? 600 : Math.min(rect.width, 600)
+        // Drastically reduced height for true single-screen experience
+        const canvasHeight = mobile ? 320 : Math.min(rect.width, 600)
 
         setDimensions({ width: rect.width, height: canvasHeight })
 
@@ -233,16 +234,16 @@ export function SkillsSection() {
     const centerY = dimensions.height / 2
 
     // Get actual orbit radii from skills (they're set during initialization)
-    const innerOrbitRadius = skillsRef.current.find(s => s.orbit === "inner")?.orbitRadius || 135
-    const outerOrbitRadius = skillsRef.current.find(s => s.orbit === "outer")?.orbitRadius || 220
+    const innerOrbitRadius = skillsRef.current.find(s => s.orbit === "inner")?.orbitRadius || 120
+    const outerOrbitRadius = skillsRef.current.find(s => s.orbit === "outer")?.orbitRadius || 200
 
     const animate = () => {
       if (!isInView) return
 
       ctx.clearRect(0, 0, dimensions.width, dimensions.height)
 
-      // Scale factor for mobile responsiveness - increased for better visibility
-      const scaleFactor = isMobile ? 0.8 : 1
+      // Scale factor for mobile responsiveness - reduced to fit 320px
+      const scaleFactor = isMobile ? 0.65 : 1
 
       // Draw sun (JavaScript)
       const sunPulse = 1 + Math.sin(Date.now() * 0.003) * 0.1
@@ -436,7 +437,7 @@ export function SkillsSection() {
         </div>
 
         {/* Container with two-column layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 lg:gap-8 items-start">
           {/* Left: Canvas Container */}
           <div className="lg:col-span-2 relative">
             <canvas
@@ -449,7 +450,7 @@ export function SkillsSection() {
 
           {/* Right: Sticky Skills Data Panel - Centered */}
           <motion.div
-            className="lg:sticky lg:top-32 mt-[20%] rounded-2xl border-2 border-cyan/30 bg-[#0a0a0a] p-5 md:p-6 shadow-[0_0_60px_rgba(0,240,255,0.15)] h-[400px] flex flex-col overflow-hidden"
+            className="lg:sticky lg:top-32 mt-2 lg:mt-[20%] rounded-2xl border-2 border-cyan/30 bg-[#0a0a0a] p-4 md:p-6 shadow-[0_0_60px_rgba(0,240,255,0.15)] min-h-[280px] lg:h-[400px] flex flex-col overflow-hidden"
           >
             {hoveredSkill ? (
               <motion.div
