@@ -313,7 +313,7 @@ export const TerminalWindow = forwardRef<TerminalHandles>((props, ref) => {
                 {/* Content */}
                 <div
                     ref={scrollRef}
-                    className="p-6 flex-1 overflow-y-auto overflow-x-hidden relative custom-scrollbar scroll-smooth"
+                    className="p-6 flex-1 overflow-auto relative custom-scrollbar scroll-smooth"
                 >
                     {/* Background Noise */}
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.02] pointer-events-none fixed" />
@@ -332,7 +332,7 @@ export const TerminalWindow = forwardRef<TerminalHandles>((props, ref) => {
                                     initial={{ opacity: 0, x: -10 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     layout
-                                    className="flex flex-row items-baseline gap-2 text-gray-400 font-medium w-full break-words leading-tight"
+                                    className="flex flex-row items-baseline gap-2 text-gray-400 font-medium w-full whitespace-nowrap leading-tight"
                                 >
                                     {!log.isCommand && (
                                         <>

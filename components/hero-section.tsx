@@ -64,7 +64,7 @@ export function HeroSection() {
   const terminalDelay = isMobile ? startDelay : startDelay + 0.6
 
   const handleResumeClick = () => {
-    terminalRef.current?.addLog("resume not ready — building projects", "WARN")
+    terminalRef.current?.addLog("resume in progress —  building projects", "WARN")
   }
 
   return (
@@ -140,9 +140,9 @@ export function HeroSection() {
           >
             <button
               onClick={handleResumeClick}
-              className="flex items-center gap-2 px-5 py-2 border border-cyan/30 rounded text-cyan text-[11px] tracking-widest font-medium hover:bg-cyan/10 transition-all shadow-[0_0_10px_rgba(0,240,255,0.1)] hover:shadow-[0_0_15px_rgba(0,240,255,0.3)]"
+              className="flex items-center gap-2 px-3 py-1.5 sm:px-5 sm:py-2 border border-cyan/30 rounded text-cyan text-[10px] sm:text-[11px] tracking-widest font-medium hover:bg-cyan/10 transition-all shadow-[0_0_10px_rgba(0,240,255,0.1)] hover:shadow-[0_0_15px_rgba(0,240,255,0.3)]"
             >
-              INIT RESUME
+              EXECUTE RESUME
               <div className="w-1.5 h-1.5 rounded-full bg-cyan/50" />
             </button>
           </motion.div>
