@@ -60,7 +60,7 @@ export function HeroSection() {
   }
 
   return (
-    <section ref={containerRef} className="relative min-h-screen w-full overflow-hidden bg-[#050505] flex flex-col justify-center">
+    <section id="home" ref={containerRef} className="relative min-h-screen w-full overflow-hidden bg-[#050505] flex flex-col justify-center">
       {/* Background Grid - Seamless continuation */}
       <div
         className="absolute inset-0 z-0 opacity-[0.05] pointer-events-none"
@@ -204,13 +204,13 @@ export function HeroSection() {
               <div>
                 <p>This site is a living workspace.</p>
                 <p className="mt-1">
-                  Here, ideas move from rough experiments to usable systems.
+                  Ideas start as experiments and evolve into usable systems.
                 </p>
                 <p className="mt-1">
-                  Some work. Some don&apos;t.
+                  Some succeed. Some fail.
                 </p>
               </div>
-              <p className="text-cyan/80 font-mono text-xs tracking-wide">Everything teaches me something.</p>
+              <p className="text-cyan/80 font-mono text-xs tracking-wide">Every build leaves me better than before.</p>
             </motion.div>
 
           </div>

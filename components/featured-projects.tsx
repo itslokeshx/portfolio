@@ -788,7 +788,13 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
 
   return (
     <section id="projects" className="relative py-32 bg-[#050505] overflow-hidden">
-      <div className="container mx-auto px-6">
+      <motion.div
+        className="container mx-auto px-6"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
         {/* Header */}
         <div className="mb-12">
           <p className="font-mono text-cyan/60 text-sm mb-4">// FEATURED_PROJECTS</p>
@@ -902,7 +908,7 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
+      </motion.div>
     </section>
   )
 }

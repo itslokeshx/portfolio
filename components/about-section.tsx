@@ -286,7 +286,13 @@ export function AboutSection() {
 
   return (
     <section id="about" ref={sectionRef} className="relative min-h-[600px] py-20 pb-16 md:py-20 md:pb-16 px-4 md:px-8 overflow-hidden bg-void">
-      <div className="max-w-7xl mx-auto">
+      <motion.div
+        className="max-w-7xl mx-auto"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
         {/* Section Title */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -363,7 +369,7 @@ export function AboutSection() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }

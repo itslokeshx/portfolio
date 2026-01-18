@@ -94,7 +94,13 @@ export function ContactSection() {
       ref={sectionRef}
       className="relative min-h-screen py-20 px-4 md:px-8 flex items-center justify-center bg-void"
     >
-      <div className="max-w-4xl mx-auto w-full">
+      <motion.div
+        className="max-w-4xl mx-auto w-full"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -217,7 +223,7 @@ export function ContactSection() {
           </p>
           <p className="text-xs text-mist/20 font-mono">SYS.VER.2.0 // 2026 // ALL_SYSTEMS_NOMINAL</p>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   )
 }
