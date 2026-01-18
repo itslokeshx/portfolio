@@ -91,7 +91,7 @@ export function TerminalWindow() {
             <div className="absolute -inset-1 bg-gradient-to-b from-[#56b6c2]/20 to-[#c678dd]/20 rounded-xl blur-xl opacity-20" />
 
             {/* Main Window Container - High fidelity dark theme */}
-            <div className="relative bg-[#0d0d0d]/95 backdrop-blur-xl border border-white/5 rounded-lg overflow-hidden shadow-2xl flex flex-col min-h-[360px]">
+            <div className="relative bg-[#0d0d0d]/95 backdrop-blur-xl border border-white/5 rounded-lg overflow-hidden shadow-2xl flex flex-col min-h-[280px] sm:min-h-[360px]">
 
                 {/* Header - Minimalist */}
                 <div className="h-8 bg-[#151515] border-b border-white/5 flex items-center justify-between px-4 select-none">

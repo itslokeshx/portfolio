@@ -135,58 +135,63 @@ export function HeroSection() {
       </motion.nav>
 
       {/* Hero Content */}
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-8 lg:px-20 pt-16">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-20 pt-28 sm:pt-32 lg:pt-20">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
 
           {/* Left Column */}
-          <div className="space-y-3 lg:space-y-4 relative z-20">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1 }}
-            >
-              <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-cyan/10 border border-cyan/20 backdrop-blur-sm mb-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse" />
-                <span className="text-cyan text-[9px] sm:text-[10px] font-mono tracking-[0.2em] uppercase">
-                  System Online
-                </span>
-              </div>
-            </motion.div>
+          <div className="flex flex-col justify-center space-y-6 relative z-20">
 
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.5, duration: 0.8 }}
-              className="space-y-0 min-h-[50px]"
-            >
-              {/* Refined "Man Made" Colors - Electric Blue & Clean White */}
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white/90 leading-[1.1] tracking-tight">
-                I learn code
-              </h1>
-              <div className="relative inline-block">
-                {/* Subtle Electric Blue Glow only */}
-                <div className="absolute -inset-1 bg-blue-500/20 blur-xl opacity-40" />
-                <h1
-                  className="relative text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-cyan-300 via-blue-400 to-cyan-300 bg-clip-text text-transparent leading-[1.1] tracking-tight pb-1 whitespace-nowrap"
-                  style={{ textShadow: "0 0 30px rgba(0, 200, 255, 0.2)" }}
-                >
-                  <RotatingText
-                    texts={[
-                      "by building real things.",
-                      "by solving real problems.",
-                      "by learning through failure.",
-                      "by refining what works."
-                    ]}
-                  />
+            {/* Header Group */}
+            <div className="space-y-6">
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1 }}
+              >
+                <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-cyan/10 border border-cyan/20 backdrop-blur-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse" />
+                  <span className="text-cyan text-[9px] sm:text-[10px] font-mono tracking-[0.2em] uppercase">
+                    System Online
+                  </span>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.5, duration: 0.8 }}
+                className="space-y-0 min-h-[50px] leading-none"
+              >
+                {/* Refined "Man Made" Colors - Electric Blue & Clean White */}
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white/90 tracking-tight">
+                  I learn code
                 </h1>
-              </div>
-            </motion.div>
+                <div className="relative inline-block">
+                  {/* Subtle Electric Blue Glow only */}
+                  <div className="absolute -inset-1 bg-blue-500/20 blur-xl opacity-40" />
+                  <h1
+                    className="relative text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-300 via-blue-400 to-cyan-300 bg-clip-text text-transparent tracking-tight whitespace-nowrap"
+                    style={{ textShadow: "0 0 30px rgba(0, 200, 255, 0.2)" }}
+                  >
+                    <RotatingText
+                      texts={[
+                        "by building real things.",
+                        "by solving real problems.",
+                        "by learning through failure.",
+                        "by refining what works."
+                      ]}
+                    />
+                  </h1>
+                </div>
+              </motion.div>
+            </div>
 
+            {/* Description - Consistent constrained width for readability */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 2.5 }}
-              className="text-gray-300 text-sm sm:text-base leading-6 max-w-[500px] font-light space-y-2 my-4"
+              className="text-gray-300 text-sm sm:text-base leading-6 max-w-[500px] font-light space-y-3"
             >
               <p>This site is a living workspace.</p>
               <p>
@@ -196,11 +201,12 @@ export function HeroSection() {
               <p>Everything teaches me something.</p>
             </motion.div>
 
+            {/* Actions */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 2.8 }}
-              className="flex flex-wrap gap-3 pt-0"
+              className="flex flex-wrap gap-4"
             >
               <button className="group relative px-5 py-2.5 bg-cyan/10 hover:bg-cyan/20 text-cyan rounded-lg font-medium text-xs sm:text-sm transition-all duration-300 overflow-hidden border border-cyan/30 hover:border-cyan/60 hover:shadow-[0_0_20px_rgba(0,240,255,0.3)]">
                 <div className="absolute inset-0 translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-300 bg-gradient-to-t from-cyan/20 to-transparent" />
