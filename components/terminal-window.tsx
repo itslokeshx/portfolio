@@ -319,7 +319,7 @@ export const TerminalWindow = forwardRef<TerminalHandles>((props, ref) => {
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.02] pointer-events-none fixed" />
 
                     {/* Boot ASCII Art - ALWAYS VISIBLE - PRESERVE WHITESPACE */}
-                    <pre className="font-bold text-[8px] sm:text-[10px] leading-[1.1] text-transparent bg-clip-text bg-gradient-to-b from-[#56b6c2] to-[#61afef] self-start select-none mb-6 whitespace-pre font-mono">
+                    <pre className="font-bold text-[5px] xs:text-[6px] sm:text-[10px] leading-[1.1] text-transparent bg-clip-text bg-gradient-to-b from-[#56b6c2] to-[#61afef] self-start select-none mb-6 whitespace-pre font-mono">
                         {ASCII_ART}
                     </pre>
 
@@ -370,10 +370,12 @@ export const TerminalWindow = forwardRef<TerminalHandles>((props, ref) => {
                                 >
                                     ➜
                                 </motion.span>
-                                <span className="text-[#56b6c2]">root@loki</span>
-                                <span className="text-gray-500">:</span>
-                                <span className="text-[#61afef]">~</span>
-                                <span className="text-gray-400">$</span>
+                                <div className="flex items-center gap-2 whitespace-nowrap overflow-hidden">
+                                    <span className="text-[#56b6c2] hidden sm:inline">root@loki</span>
+                                    <span className="text-gray-500 hidden sm:inline">:</span>
+                                    <span className="text-[#61afef] hidden sm:inline">~</span>
+                                    <span className="text-gray-400">$</span>
+                                </div>
 
                                 <div className="relative flex-1">
                                     <input
