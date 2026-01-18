@@ -161,7 +161,7 @@ export function HeroSection() {
             >
               {/* Refined "Man Made" Colors - Electric Blue & Clean White */}
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white/90 leading-[1.1] tracking-tight">
-                I learn software
+                I learn code
               </h1>
               <div className="relative inline-block">
                 {/* Subtle Electric Blue Glow only */}
