@@ -157,8 +157,8 @@ export function SkillsSection() {
 
         // HD canvas with device pixel ratio
         const dpr = window.devicePixelRatio || 1
-        // Final tweak: 300px to strictly meet the "fit for 20px" requirement
-        const canvasHeight = mobile ? 300 : Math.min(rect.width, 600)
+        // Final tweak: 420px to fully fit the 0.75 scale constellation without clipping
+        const canvasHeight = mobile ? 420 : Math.min(rect.width, 600)
 
         setDimensions({ width: rect.width, height: canvasHeight })
 
@@ -234,8 +234,8 @@ export function SkillsSection() {
     const centerY = dimensions.height / 2
 
     // Get actual orbit radii from skills (they're set during initialization)
-    const innerOrbitRadius = skillsRef.current.find(s => s.orbit === "inner")?.orbitRadius || 120
-    const outerOrbitRadius = skillsRef.current.find(s => s.orbit === "outer")?.orbitRadius || 200
+    const innerOrbitRadius = skillsRef.current.find(s => s.orbit === "inner")?.orbitRadius || 135
+    const outerOrbitRadius = skillsRef.current.find(s => s.orbit === "outer")?.orbitRadius || 220
 
     const animate = () => {
       if (!isInView) return
@@ -451,7 +451,7 @@ export function SkillsSection() {
 
           {/* Right: Sticky Skills Data Panel - Centered */}
           <motion.div
-            className="lg:sticky lg:top-32 mt-2 lg:mt-[20%] rounded-2xl border-2 border-cyan/30 bg-[#0a0a0a] p-4 md:p-6 shadow-[0_0_60px_rgba(0,240,255,0.15)] min-h-[260px] lg:h-[400px] flex flex-col overflow-hidden"
+            className="lg:sticky lg:top-32 mt-12 lg:mt-[20%] rounded-2xl border-2 border-cyan/30 bg-[#0a0a0a] p-4 md:p-6 shadow-[0_0_60px_rgba(0,240,255,0.15)] min-h-[260px] lg:h-[400px] flex flex-col overflow-hidden"
           >
             {hoveredSkill ? (
               <motion.div
@@ -522,7 +522,9 @@ export function SkillsSection() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
                   </svg>
                 </div>
-                <p className="text-mist/50 font-mono text-sm uppercase tracking-wider">Hover Over a Skill</p>
+                <p className="text-mist/50 font-mono text-sm uppercase tracking-wider">
+                  {isMobile ? "Tap a Skill" : "Hover Over a Skill"}
+                </p>
                 <p className="text-mist/30 text-xs mt-1">to view proficiency & projects</p>
               </div>
             )}
