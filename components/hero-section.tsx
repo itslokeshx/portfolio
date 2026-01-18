@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { ChevronDown, Github, Twitter, Linkedin, ArrowRight } from "lucide-react"
 import { TerminalWindow, TerminalHandles } from "./terminal-window"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 // Smooth Typewriter Component
 // Rotating Typewriter Component
@@ -54,6 +55,13 @@ const RotatingText = ({ texts, className = "" }: { texts: string[], className?: 
 export function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null)
   const terminalRef = useRef<TerminalHandles>(null)
+  const isMobile = useIsMobile()
+
+  // Desktop: Text (1.8s) -> Terminal (2.4s)
+  // Mobile: Terminal (1.8s) -> Text (2.2s)
+  const startDelay = 1.8
+  const textDelay = isMobile ? startDelay + 0.4 : startDelay
+  const terminalDelay = isMobile ? startDelay : startDelay + 0.6
 
   const handleResumeClick = () => {
     terminalRef.current?.addLog("resume not ready — building projects", "WARN")
@@ -152,9 +160,10 @@ export function HeroSection() {
             {/* Header Group */}
             <div className="space-y-6">
               <motion.div
+                key={isMobile ? "mobile-text-1" : "desktop-text-1"}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.8, duration: 0.8 }} // Slow, smooth fade after hold
+                transition={{ delay: textDelay, duration: 0.8 }} // Slow, smooth fade after hold
               >
                 <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-cyan/10 border border-cyan/20 backdrop-blur-sm">
                   <span className="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse" />
@@ -165,9 +174,10 @@ export function HeroSection() {
               </motion.div>
 
               <motion.div
+                key={isMobile ? "mobile-text-2" : "desktop-text-2"}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 2.0, duration: 0.8 }} // Following badge
+                transition={{ delay: textDelay + 0.2, duration: 0.8 }} // Following badge
                 className="space-y-2 min-h-[50px] leading-none"
               >
                 {/* Refined "Man Made" Colors - Electric Blue & Clean White */}
@@ -196,9 +206,10 @@ export function HeroSection() {
 
             {/* Description - Consistent constrained width for readability */}
             <motion.div
+              key={isMobile ? "mobile-text-3" : "desktop-text-3"}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 2.2 }} // Description follows title
+              transition={{ duration: 0.8, delay: textDelay + 0.4 }} // Description follows title
               className="text-gray-400 text-[15px] sm:text-[17px] leading-relaxed max-w-[480px] font-light space-y-5"
             >
               <div>
@@ -218,9 +229,10 @@ export function HeroSection() {
           {/* Right Column - Terminal Appearance */}
           <div className="flex justify-center lg:justify-end items-center h-full order-1 lg:order-2">
             <motion.div
+              key={isMobile ? "mobile-term" : "desktop-term"}
               initial={{ scaleY: 0, opacity: 0 }}
               animate={{ scaleY: 1, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 2.4, ease: "circOut" }} // Terminal follows description
+              transition={{ duration: 0.8, delay: terminalDelay, ease: "circOut" }} // Terminal follows description
               className="origin-center w-full max-w-xl"
             >
               <TerminalWindow ref={terminalRef} />
