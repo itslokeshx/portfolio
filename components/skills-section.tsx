@@ -157,8 +157,8 @@ export function SkillsSection() {
 
         // HD canvas with device pixel ratio
         const dpr = window.devicePixelRatio || 1
-        // Drastically reduced height for true single-screen experience
-        const canvasHeight = mobile ? 320 : Math.min(rect.width, 600)
+        // Final tweak: 300px to strictly meet the "fit for 20px" requirement
+        const canvasHeight = mobile ? 300 : Math.min(rect.width, 600)
 
         setDimensions({ width: rect.width, height: canvasHeight })
 
@@ -443,14 +443,15 @@ export function SkillsSection() {
             <canvas
               ref={canvasRef}
               className="w-full cursor-default"
-              onMouseLeave={handleCanvasLeave}
-              onMouseMove={handleCanvasHover}
+              onMouseLeave={!isMobile ? handleCanvasLeave : undefined}
+              onMouseMove={!isMobile ? handleCanvasHover : undefined}
+              onClick={isMobile ? handleCanvasHover : undefined}
             />
           </div>
 
           {/* Right: Sticky Skills Data Panel - Centered */}
           <motion.div
-            className="lg:sticky lg:top-32 mt-2 lg:mt-[20%] rounded-2xl border-2 border-cyan/30 bg-[#0a0a0a] p-4 md:p-6 shadow-[0_0_60px_rgba(0,240,255,0.15)] min-h-[280px] lg:h-[400px] flex flex-col overflow-hidden"
+            className="lg:sticky lg:top-32 mt-2 lg:mt-[20%] rounded-2xl border-2 border-cyan/30 bg-[#0a0a0a] p-4 md:p-6 shadow-[0_0_60px_rgba(0,240,255,0.15)] min-h-[260px] lg:h-[400px] flex flex-col overflow-hidden"
           >
             {hoveredSkill ? (
               <motion.div
