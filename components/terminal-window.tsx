@@ -190,8 +190,8 @@ export const TerminalWindow = forwardRef<TerminalHandles>((props, ref) => {
             case "contact":
                 addResponse([
                     <span key="gh" className="flex gap-2">GitHub   → <a href="https://github.com/itslokeshx" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline hover:text-cyan-300 transition-colors">https://github.com/itslokeshx</a></span>,
-                    <span key="li" className="flex gap-2">LinkedIn → <a href="https://linkedin.com/in/lokeshx" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline hover:text-cyan-300 transition-colors">https://linkedin.com/in/lokeshx</a></span>,
-                    <span key="em" className="flex gap-2">Email    → <a href="mailto:hello@lokesh.dev" className="text-cyan-400 hover:underline hover:text-cyan-300 transition-colors">hello@lokesh.dev</a></span>
+                    <span key="li" className="flex gap-2">LinkedIn → <a href="https://www.linkedin.com/in/itslokeshx/" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline hover:text-cyan-300 transition-colors">https://www.linkedin.com/in/itslokeshx/</a></span>,
+                    <span key="em" className="flex gap-2">Email    → <a href="mailto:itslokeshx@gmail.com" className="text-cyan-400 hover:underline hover:text-cyan-300 transition-colors">itslokeshx@gmail.com</a></span>
                 ])
                 break
             default:

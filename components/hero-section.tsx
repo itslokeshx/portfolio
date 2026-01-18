@@ -143,7 +143,7 @@ export function HeroSection() {
       </motion.nav>
 
       {/* Hero Content */}
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-20 pt-20">
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-20 pt-20 pb-10">
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-20 items-center min-h-[calc(100vh-80px)]">
 
           {/* Left Column */}
@@ -210,7 +210,7 @@ export function HeroSection() {
                   Some succeed. Some fail.
                 </p>
               </div>
-              <p className="text-cyan/80 font-mono text-xs tracking-wide">Every build leaves me better than before.</p>
+              <p className="text-cyan font-mono text-[15px] tracking-wide drop-shadow-[0_0_5px_rgba(0,240,255,0.5)]">Every build leaves me better than before.</p>
             </motion.div>
 
           </div>
@@ -233,7 +233,7 @@ export function HeroSection() {
 
 
       {/* Smooth Transition Fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#050505] via-[#050505]/50 to-transparent pointer-events-none z-20" />
+      <div className="absolute bottom-0 left-0 right-0 h-48 md:h-64 bg-gradient-to-t from-void via-void/40 to-transparent pointer-events-none z-20" />
 
     </section >
   )
