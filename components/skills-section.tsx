@@ -121,9 +121,9 @@ export function SkillsSection() {
     const updateSkills = () => {
       const mobile = window.innerWidth < 768
       // Aggressively scaled for 320px height to ensure single-screen fit
-      const scaleFactor = mobile ? 0.6 : 1
-      const innerRadius = 120 * scaleFactor
-      const outerRadius = 200 * scaleFactor
+      const scaleFactor = mobile ? 0.75 : 1
+      const innerRadius = 135 * scaleFactor
+      const outerRadius = 220 * scaleFactor
 
       skillsRef.current = SKILLS_DATA.map((skill, i) => {
         const isInner = skill.orbit === "inner"

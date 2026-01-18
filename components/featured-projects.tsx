@@ -474,6 +474,27 @@ function ProjectRow({
   const [isHovered, setIsHovered] = useState(false)
   const rowRef = useRef<HTMLDivElement>(null)
 
+  useEffect(() => {
+    if (isExpanded && rowRef.current) {
+      // Wait for the accordion animation to complete (300ms) before scrolling
+      // This ensures we scroll to the final position after other items might have collapsed
+      const timer = setTimeout(() => {
+        if (!rowRef.current) return
+
+        const yOffset = -100 // Buffer for fixed header
+        const element = rowRef.current
+        const y = element.getBoundingClientRect().top + window.scrollY + yOffset
+
+        window.scrollTo({
+          top: y,
+          behavior: 'smooth'
+        })
+      }, 260) // Reduced to match faster animation
+
+      return () => clearTimeout(timer)
+    }
+  }, [isExpanded])
+
   return (
     <div className="border-b border-white/5" ref={rowRef}>
       {/* Row Header */}
@@ -555,7 +576,7 @@ function ProjectRow({
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
             className="overflow-hidden"
           >
             <div className="px-4 pb-8 pt-4 bg-white/[0.01]">
