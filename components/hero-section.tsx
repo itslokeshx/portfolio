@@ -137,30 +137,30 @@ export function HeroSection() {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
 
           {/* Left Column */}
-          <div className="space-y-6 lg:space-y-8 relative z-20">
+          <div className="space-y-4 lg:space-y-5 relative z-20">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1 }}
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan/10 border border-cyan/20 backdrop-blur-sm">
+              <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-cyan/10 border border-cyan/20 backdrop-blur-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse" />
-                <span className="text-cyan text-[10px] sm:text-[11px] font-mono tracking-[0.2em] uppercase">
+                <span className="text-cyan text-[9px] sm:text-[10px] font-mono tracking-[0.2em] uppercase">
                   <SmoothText text="System Online" delay={1500} />
                 </span>
               </div>
             </motion.div>
 
-            <div className="space-y-1 sm:space-y-2 min-h-[120px] sm:min-h-[140px]"> {/* Min height to prevent shift */}
+            <div className="space-y-1 min-h-[90px] sm:min-h-[110px]"> {/* Compact min-height */}
               {/* Smooth Reveal Titles */}
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-mist leading-[1.1] tracking-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-mist leading-[1.1] tracking-tight">
                 <SmoothText text="I learn software" delay={2500} />
               </h1>
               <div className="relative inline-block">
                 <div className="absolute -inset-1 bg-gradient-to-r from-cyan/20 via-blue-500/20 to-purple-500/20 blur-xl opacity-50" />
                 <h1
-                  className="relative text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-cyan via-blue-400 to-purple-400 bg-clip-text text-transparent leading-[1.1] tracking-tight pb-2"
-                  style={{ textShadow: "0 0 40px rgba(0, 240, 255, 0.3)" }}
+                  className="relative text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-cyan via-blue-400 to-purple-400 bg-clip-text text-transparent leading-[1.1] tracking-tight pb-1"
+                  style={{ textShadow: "0 0 30px rgba(0, 240, 255, 0.3)" }}
                 >
                   <SmoothText text="by building real things." delay={3500} />
                 </h1>
@@ -171,7 +171,7 @@ export function HeroSection() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 2.5 }}
-              className="text-gray-400 text-sm sm:text-base leading-relaxed max-w-[480px] font-light"
+              className="text-gray-400 text-xs sm:text-sm leading-relaxed max-w-[420px] font-light"
             >
               This site is a living workspace where ideas move from rough experiments to usable systems. Some work, some don't—but everything teaches me something. Explore my evolution from code to product.
             </motion.p>
@@ -180,14 +180,14 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 2.8 }}
-              className="flex flex-wrap gap-4 pt-2"
+              className="flex flex-wrap gap-3 pt-1"
             >
-              <button className="group relative px-6 py-3 bg-cyan/10 hover:bg-cyan/20 text-cyan rounded-lg font-medium text-sm transition-all duration-300 overflow-hidden border border-cyan/30 hover:border-cyan/60 hover:shadow-[0_0_20px_rgba(0,240,255,0.3)]">
+              <button className="group relative px-5 py-2.5 bg-cyan/10 hover:bg-cyan/20 text-cyan rounded-lg font-medium text-xs sm:text-sm transition-all duration-300 overflow-hidden border border-cyan/30 hover:border-cyan/60 hover:shadow-[0_0_20px_rgba(0,240,255,0.3)]">
                 <div className="absolute inset-0 translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-300 bg-gradient-to-t from-cyan/20 to-transparent" />
                 <span className="relative z-10">Explore Work</span>
               </button>
 
-              <button className="px-6 py-3 border border-gray-800 hover:border-gray-600 text-gray-400 hover:text-white rounded-lg font-medium text-sm transition-all duration-300 bg-black/40 backdrop-blur-sm">
+              <button className="px-5 py-2.5 border border-gray-800 hover:border-gray-600 text-gray-400 hover:text-white rounded-lg font-medium text-xs sm:text-sm transition-all duration-300 bg-black/40 backdrop-blur-sm">
                 System Status
               </button>
             </motion.div>
