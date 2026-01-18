@@ -140,7 +140,7 @@ export function HeroSection() {
           >
             <button
               onClick={handleResumeClick}
-              className="flex items-center gap-2 px-3 py-1.5 sm:px-5 sm:py-2 border border-cyan/30 rounded text-cyan text-[10px] sm:text-[11px] tracking-widest font-medium hover:bg-cyan/10 transition-all shadow-[0_0_10px_rgba(0,240,255,0.1)] hover:shadow-[0_0_15px_rgba(0,240,255,0.3)]"
+              className="flex items-center gap-2 px-3 py-1.5 sm:px-5 sm:py-2 border border-cyan/30 rounded text-cyan text-[10px] sm:text-[11px] tracking-widest font-medium hover:bg-cyan/10 transition-all shadow-[0_0_10px_rgba(0,240,255,0.1)] hover:shadow-[0_0_15px_rgba(0,240,255,0.3)] backdrop-blur-md bg-void/30"
             >
               EXECUTE RESUME
               <div className="w-1.5 h-1.5 rounded-full bg-cyan/50" />
@@ -151,7 +151,7 @@ export function HeroSection() {
       </motion.nav>
 
       {/* Hero Content */}
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-20 pt-20 pb-10">
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-20 pt-20 pb-10">
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-20 items-center min-h-[calc(100vh-80px)]">
 
           {/* Left Column */}
@@ -165,7 +165,7 @@ export function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: textDelay, duration: 0.8 }} // Slow, smooth fade after hold
               >
-                <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-cyan/10 border border-cyan/20 backdrop-blur-sm">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan/10 border border-cyan/20 backdrop-blur-sm">
                   <span className="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse" />
                   <span className="text-cyan text-[9px] sm:text-[10px] font-mono tracking-[0.2em] uppercase">
                     System Online
@@ -184,11 +184,11 @@ export function HeroSection() {
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white/90 tracking-tight">
                   I learn code
                 </h1>
-                <div className="relative inline-block">
+                <div className="relative inline-block mt-1 sm:mt-0">
                   {/* Subtle Electric Blue Glow only */}
                   <div className="absolute -inset-1 bg-blue-500/20 blur-xl opacity-40" />
                   <h1
-                    className="relative text-[26px] sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-300 via-blue-400 to-cyan-300 bg-clip-text text-transparent tracking-tight whitespace-normal sm:whitespace-nowrap"
+                    className="relative text-[28px] sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-300 via-blue-400 to-cyan-300 bg-clip-text text-transparent tracking-tight whitespace-normal sm:whitespace-nowrap min-h-[40px] sm:min-h-auto"
                     style={{ textShadow: "0 0 30px rgba(0, 200, 255, 0.2)" }}
                   >
                     <RotatingText
@@ -221,7 +221,7 @@ export function HeroSection() {
                   Some succeed. Some fail.
                 </p>
               </div>
-              <p className="text-cyan font-mono text-[15px] tracking-wide drop-shadow-[0_0_5px_rgba(0,240,255,0.5)]">Every build leaves me better than before.</p>
+              <p className="text-cyan font-mono text-sm sm:text-[15px] tracking-wide drop-shadow-[0_0_5px_rgba(0,240,255,0.5)]">Every build leaves me better than before.</p>
             </motion.div>
 
           </div>
@@ -245,7 +245,7 @@ export function HeroSection() {
 
 
       {/* Smooth Transition Fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-48 md:h-64 bg-gradient-to-t from-void via-void/40 to-transparent pointer-events-none z-5" />
+      < div className="absolute bottom-0 left-0 right-0 h-48 md:h-64 bg-gradient-to-t from-void via-void/40 to-transparent pointer-events-none z-5" />
 
     </section >
   )

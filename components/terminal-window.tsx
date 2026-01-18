@@ -294,7 +294,7 @@ export const TerminalWindow = forwardRef<TerminalHandles>((props, ref) => {
             <div
                 ref={containerRef}
                 onClick={handleContainerClick}
-                className="relative bg-[#0d0d0d]/95 backdrop-blur-xl border border-white/5 rounded-lg overflow-hidden shadow-2xl flex flex-col h-[360px]"
+                className="relative bg-[#0d0d0d]/95 backdrop-blur-xl border border-white/5 rounded-lg overflow-hidden shadow-2xl flex flex-col h-[280px] sm:h-[360px]"
             >
                 {/* Header */}
                 <div className="h-8 bg-[#151515] border-b border-white/5 flex items-center justify-between px-4 select-none shrink-0">
@@ -313,13 +313,13 @@ export const TerminalWindow = forwardRef<TerminalHandles>((props, ref) => {
                 {/* Content */}
                 <div
                     ref={scrollRef}
-                    className="p-6 flex-1 overflow-auto relative custom-scrollbar scroll-smooth"
+                    className="p-3 sm:p-6 flex-1 overflow-auto relative custom-scrollbar scroll-smooth"
                 >
                     {/* Background Noise */}
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.02] pointer-events-none fixed" />
 
                     {/* Boot ASCII Art - ALWAYS VISIBLE - PRESERVE WHITESPACE */}
-                    <pre className="font-bold text-[5px] xs:text-[6px] sm:text-[10px] leading-[1.1] text-transparent bg-clip-text bg-gradient-to-b from-[#56b6c2] to-[#61afef] self-start select-none mb-6 whitespace-pre font-mono">
+                    <pre className="font-bold text-[5px] sm:text-[10px] leading-[1.1] text-transparent bg-clip-text bg-gradient-to-b from-[#56b6c2] to-[#61afef] self-start select-none mb-4 sm:mb-6 whitespace-pre font-mono">
                         {ASCII_ART}
                     </pre>
 
@@ -332,7 +332,7 @@ export const TerminalWindow = forwardRef<TerminalHandles>((props, ref) => {
                                     initial={{ opacity: 0, x: -10 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     layout
-                                    className="flex flex-row items-baseline gap-2 text-gray-400 font-medium w-full whitespace-nowrap leading-tight"
+                                    className="flex flex-row items-baseline gap-2 text-gray-400 font-medium w-full whitespace-pre-wrap break-words leading-tight"
                                 >
                                     {!log.isCommand && (
                                         <>
