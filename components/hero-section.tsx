@@ -139,13 +139,13 @@ export function HeroSection() {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
 
           {/* Left Column */}
-          <div className="space-y-4 lg:space-y-5 relative z-20">
+          <div className="space-y-3 lg:space-y-4 relative z-20">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1 }}
             >
-              <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-cyan/10 border border-cyan/20 backdrop-blur-sm">
+              <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-cyan/10 border border-cyan/20 backdrop-blur-sm mb-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse" />
                 <span className="text-cyan text-[9px] sm:text-[10px] font-mono tracking-[0.2em] uppercase">
                   System Online
@@ -153,7 +153,12 @@ export function HeroSection() {
               </div>
             </motion.div>
 
-            <div className="space-y-1 min-h-[90px] sm:min-h-[110px]"> {/* Compact min-height */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.5, duration: 0.8 }}
+              className="space-y-0 min-h-[50px]"
+            >
               {/* Refined "Man Made" Colors - Electric Blue & Clean White */}
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white/90 leading-[1.1] tracking-tight">
                 I learn software
@@ -168,33 +173,38 @@ export function HeroSection() {
                   <RotatingText
                     texts={[
                       "by building real things.",
-                      "by solving complex problems.",
-                      "by obsessing over details.",
-                      "by designing the future."
+                      "by solving real problems.",
+                      "by learning through failure.",
+                      "by refining what works."
                     ]}
                   />
                 </h1>
               </div>
-            </div>
+            </motion.div>
 
-            <motion.p
+            <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 2.5 }}
-              className="text-gray-400 text-xs sm:text-sm leading-relaxed max-w-[420px] font-light"
+              className="text-gray-300 text-sm sm:text-base leading-6 max-w-[500px] font-light space-y-2 my-4"
             >
-              This site is a living workspace where ideas move from rough experiments to usable systems. Some work, some don't—but everything teaches me something. Explore my evolution from code to product.
-            </motion.p>
+              <p>This site is a living workspace.</p>
+              <p>
+                Here, ideas move from rough experiments to usable systems.<br />
+                Some work. Some don&apos;t.
+              </p>
+              <p>Everything teaches me something.</p>
+            </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 2.8 }}
-              className="flex flex-wrap gap-3 pt-1"
+              className="flex flex-wrap gap-3 pt-0"
             >
               <button className="group relative px-5 py-2.5 bg-cyan/10 hover:bg-cyan/20 text-cyan rounded-lg font-medium text-xs sm:text-sm transition-all duration-300 overflow-hidden border border-cyan/30 hover:border-cyan/60 hover:shadow-[0_0_20px_rgba(0,240,255,0.3)]">
                 <div className="absolute inset-0 translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-300 bg-gradient-to-t from-cyan/20 to-transparent" />
-                <span className="relative z-10">Explore Work</span>
+                <span className="relative z-10">View Projects →</span>
               </button>
 
               <button className="px-5 py-2.5 border border-gray-800 hover:border-gray-600 text-gray-400 hover:text-white rounded-lg font-medium text-xs sm:text-sm transition-all duration-300 bg-black/40 backdrop-blur-sm">
@@ -217,21 +227,6 @@ export function HeroSection() {
 
         </div>
       </div>
-      {/* Scroll Indicator */}
-      <motion.div
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none z-20"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 4, duration: 1 }}
-      >
-        <span className="text-[10px] font-mono text-cyan/40 tracking-[0.3em] uppercase">Scroll to Initialize</span>
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <ChevronDown className="text-cyan/40 w-4 h-4" />
-        </motion.div>
-      </motion.div>
 
     </section >
   )

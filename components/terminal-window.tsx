@@ -25,8 +25,8 @@ interface LogEntry {
 const BOOT_LOGS: LogEntry[] = [
     { id: 1, timestamp: "10:24:01", level: 'SYSTEM', message: "initializing workspace", color: "text-cyan-400" },
     { id: 2, timestamp: "10:24:02", level: 'INFO', message: "loading projects & skills", color: "text-gray-400" },
-    { id: 3, timestamp: "10:24:03", level: 'WARN', message: "preparing interactive modules", color: "text-cyan-400/80" }, // Subtler cyan
-    { id: 4, timestamp: "10:24:05", level: 'SUCCESS', message: "system_ready. waiting for user input.", color: "text-green-400" } // Keep green for success only
+    { id: 3, timestamp: "10:24:03", level: 'WARN', message: "preparing interactive modules", color: "text-cyan-400/80" },
+    { id: 4, timestamp: "10:24:05", level: 'SUCCESS', message: "system_ready.Explore!", color: "text-green-400" }
 ]
 
 // --- Hooks ---
@@ -50,8 +50,8 @@ const useSmoothTypewriter = (text: string, speed = 10) => {
                 index.current++
                 setDisplayedText(text.slice(0, index.current))
 
-                const variableSpeed = speed + (Math.random() * 15 - 5)
-                timeoutId = setTimeout(type, variableSpeed)
+                // Consistent speed for smoothness
+                timeoutId = setTimeout(type, speed)
             } else {
                 setIsComplete(true)
             }
