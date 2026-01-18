@@ -23,9 +23,9 @@ interface LogEntry {
 }
 
 const BOOT_LOGS: LogEntry[] = [
-    { id: 1, timestamp: "10:24:01", level: 'SYSTEM', message: "initializing neural_core v2.5.0", color: "text-cyan-400" },
-    { id: 2, timestamp: "10:24:02", level: 'INFO', message: "loading modules: react, next, three, framer", color: "text-gray-400" },
-    { id: 3, timestamp: "10:24:03", level: 'WARN', message: "optimizing aesthetic parameters...", color: "text-cyan-400/80" }, // Subtler cyan
+    { id: 1, timestamp: "10:24:01", level: 'SYSTEM', message: "initializing workspace", color: "text-cyan-400" },
+    { id: 2, timestamp: "10:24:02", level: 'INFO', message: "loading projects & skills", color: "text-gray-400" },
+    { id: 3, timestamp: "10:24:03", level: 'WARN', message: "preparing interactive modules", color: "text-cyan-400/80" }, // Subtler cyan
     { id: 4, timestamp: "10:24:05", level: 'SUCCESS', message: "system_ready. waiting for user input.", color: "text-green-400" } // Keep green for success only
 ]
 
@@ -103,7 +103,7 @@ export function TerminalWindow() {
 
                     <div className="flex items-center gap-2 text-[10px] text-gray-500 font-medium tracking-wider opacity-60">
                         <Terminal className="w-3 h-3" />
-                        <span>lokesh@dev: ~/portfolio</span>
+                        <span>root@loki:~/welcome home</span>
                     </div>
 
                     <div className="w-10" />
@@ -141,7 +141,7 @@ export function TerminalWindow() {
                             className="flex items-center gap-2 pt-4 text-xs sm:text-sm"
                         >
                             <span className="text-[#98c379]">➜</span>
-                            <span className="text-[#56b6c2]">visitor@lokesh.dev</span>
+                            <span className="text-[#56b6c2]">root@loki</span>
                             <span className="text-gray-500">:</span>
                             <span className="text-[#61afef]">~</span>
                             <span className="text-gray-400">$</span>
