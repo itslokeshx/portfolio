@@ -77,7 +77,7 @@ export function HeroSection() {
       <motion.nav
         initial={{ borderBottomColor: "rgba(255,255,255,0)" }}
         animate={{ borderBottomColor: "rgba(255,255,255,0.05)" }}
-        transition={{ duration: 1, delay: 1 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
         className="fixed top-0 left-0 right-0 z-50 h-16 bg-[#050505]/80 backdrop-blur-md"
       >
         <div className="max-w-[1400px] mx-auto px-6 h-full flex items-center justify-between">
@@ -91,7 +91,7 @@ export function HeroSection() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.5 }} // Wait for loader element to arrive/fade
+              transition={{ delay: 0.1, duration: 0.3 }} // Fast load
               className="flex items-center gap-4"
             >
               <div className="w-8 h-8 rounded border border-cyan/50 bg-cyan/5 flex items-center justify-center shadow-[0_0_10px_rgba(0,240,255,0.2)]">
@@ -115,7 +115,7 @@ export function HeroSection() {
                 key={item}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.8 + (i * 0.1) }}
+                transition={{ duration: 0.3, delay: 0.2 + (i * 0.05) }}
                 href={`#${item.toLowerCase()}`}
                 className="text-[11px] font-medium text-gray-400 hover:text-cyan tracking-[0.2em] transition-colors duration-300"
               >
@@ -128,7 +128,7 @@ export function HeroSection() {
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 1.2 }}
+            transition={{ duration: 0.3, delay: 0.3 }}
           >
             <button
               onClick={handleResumeClick}
@@ -144,17 +144,17 @@ export function HeroSection() {
 
       {/* Hero Content */}
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-20 pt-20">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center min-h-[calc(100vh-80px)]">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-20 items-center min-h-[calc(100vh-80px)]">
 
           {/* Left Column */}
-          <div className="flex flex-col justify-center space-y-8 relative z-20 pl-4 lg:pl-0">
+          <div className="flex flex-col justify-center space-y-8 relative z-20 pl-4 lg:pl-0 order-2 lg:order-1">
 
             {/* Header Group */}
             <div className="space-y-6">
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1 }}
+                transition={{ delay: 0.3 }}
               >
                 <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-cyan/10 border border-cyan/20 backdrop-blur-sm">
                   <span className="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse" />
@@ -167,7 +167,7 @@ export function HeroSection() {
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.5, duration: 0.8 }}
+                transition={{ delay: 0.4, duration: 0.5 }}
                 className="space-y-2 min-h-[50px] leading-none"
               >
                 {/* Refined "Man Made" Colors - Electric Blue & Clean White */}
@@ -178,7 +178,7 @@ export function HeroSection() {
                   {/* Subtle Electric Blue Glow only */}
                   <div className="absolute -inset-1 bg-blue-500/20 blur-xl opacity-40" />
                   <h1
-                    className="relative text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-300 via-blue-400 to-cyan-300 bg-clip-text text-transparent tracking-tight whitespace-nowrap"
+                    className="relative text-[26px] sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-300 via-blue-400 to-cyan-300 bg-clip-text text-transparent tracking-tight whitespace-normal sm:whitespace-nowrap"
                     style={{ textShadow: "0 0 30px rgba(0, 200, 255, 0.2)" }}
                   >
                     <RotatingText
@@ -198,7 +198,7 @@ export function HeroSection() {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 2.5 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
               className="text-gray-400 text-[15px] sm:text-[17px] leading-relaxed max-w-[480px] font-light space-y-5"
             >
               <div>
@@ -216,11 +216,11 @@ export function HeroSection() {
           </div>
 
           {/* Right Column - Terminal Appearance */}
-          <div className="flex justify-center lg:justify-end items-center h-full">
+          <div className="flex justify-center lg:justify-end items-center h-full order-1 lg:order-2">
             <motion.div
               initial={{ scaleY: 0, opacity: 0 }}
               animate={{ scaleY: 1, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 1.5, ease: "circOut" }}
+              transition={{ duration: 0.5, delay: 0.5, ease: "circOut" }}
               className="origin-center w-full max-w-xl"
             >
               <TerminalWindow ref={terminalRef} />
