@@ -351,8 +351,25 @@ export const TerminalWindow = forwardRef<TerminalHandles>((props, ref) => {
 
                         {/* Input Line */}
                         {!isBooting && (
-                            <div className="flex items-center gap-2 pt-2 group">
-                                <span className="text-[#98c379]">➜</span>
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                className="flex items-center gap-2 pt-2 pb-1 group relative"
+                            >
+                                {/* Active Line Highlight - Pulsing */}
+                                <motion.div
+                                    animate={{ opacity: [0.3, 0.6, 0.3] }}
+                                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                                    className="absolute -inset-x-2 inset-y-0 bg-cyan-500/5 -z-10 rounded"
+                                />
+
+                                <motion.span
+                                    animate={{ x: [0, 3, 0] }}
+                                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                                    className="text-[#98c379]"
+                                >
+                                    ➜
+                                </motion.span>
                                 <span className="text-[#56b6c2]">root@loki</span>
                                 <span className="text-gray-500">:</span>
                                 <span className="text-[#61afef]">~</span>
@@ -365,14 +382,14 @@ export const TerminalWindow = forwardRef<TerminalHandles>((props, ref) => {
                                         value={input}
                                         onChange={(e) => setInput(e.target.value)}
                                         onKeyDown={handleKeyDown}
-                                        className="w-full bg-transparent border-none outline-none text-gray-200 placeholder:text-gray-500/50 font-mono caret-cyan-400"
+                                        className="w-full bg-transparent border-none outline-none text-gray-200 placeholder:text-cyan-400/40 font-mono caret-cyan-400 text-sm"
                                         autoFocus
                                         autoComplete="off"
                                         spellCheck="false"
                                         placeholder={placeholderText}
                                     />
                                 </div>
-                            </div>
+                            </motion.div>
                         )}
                     </div>
                     <div />
