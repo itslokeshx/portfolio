@@ -38,18 +38,27 @@ const useSmoothTypewriter = (text: string, speed = 10) => {
     const index = useRef(0)
 
     useEffect(() => {
+        // Reset state for clean start (handles Strict Mode and prop changes)
+        index.current = 0
+        setDisplayedText("")
+        setIsComplete(false)
+
+        let timeoutId: NodeJS.Timeout
+
         const type = () => {
             if (index.current < text.length) {
-                setDisplayedText((prev) => prev + text.charAt(index.current))
                 index.current++
+                setDisplayedText(text.slice(0, index.current))
+
                 const variableSpeed = speed + (Math.random() * 15 - 5)
-                setTimeout(type, variableSpeed)
+                timeoutId = setTimeout(type, variableSpeed)
             } else {
                 setIsComplete(true)
             }
         }
-        const initialDelay = setTimeout(type, 100)
-        return () => clearTimeout(initialDelay)
+
+        timeoutId = setTimeout(type, 100)
+        return () => clearTimeout(timeoutId)
     }, [text, speed])
 
     return { displayedText, isComplete }
@@ -168,13 +177,13 @@ function LogLine({ log }: { log: LogEntry }) {
     const { displayedText, isComplete } = useSmoothTypewriter(log.message, 5)
 
     return (
-        <div className="flex items-start gap-2 text-gray-400 font-medium">
-            <span className="text-gray-600 shrink-0">[{log.timestamp}]</span>
-            <span className={`shrink-0 w-16 ${log.level === 'INFO' ? 'text-[#61afef]' :
+        <div className="flex flex-row items-center gap-2 text-gray-400 font-medium w-full">
+            <span className="text-gray-600 shrink-0 whitespace-nowrap">[{log.timestamp}]</span>
+            <span className={`shrink-0 min-w-[3.5rem] whitespace-nowrap ${log.level === 'INFO' ? 'text-[#61afef]' :
                 log.level === 'WARN' ? 'text-[#e5c07b]' :
                     log.level === 'SUCCESS' ? 'text-[#98c379]' : 'text-[#c678dd]'
                 }`}>[{log.level}]</span>
-            <span className={`${isComplete ? log.color : 'text-gray-300'}`}>
+            <span className={`${isComplete ? log.color : 'text-gray-300'} break-words leading-tight`}>
                 {displayedText}
             </span>
         </div>
