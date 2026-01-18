@@ -122,8 +122,8 @@ export function SkillsSection() {
       const mobile = window.innerWidth < 768
       // Aggressively scaled for 320px height to ensure single-screen fit
       const scaleFactor = mobile ? 0.75 : 1
-      const innerRadius = 135 * scaleFactor
-      const outerRadius = 215 * scaleFactor
+      const innerRadius = 115 * scaleFactor
+      const outerRadius = 195 * scaleFactor
 
       skillsRef.current = SKILLS_DATA.map((skill, i) => {
         const isInner = skill.orbit === "inner"
@@ -234,8 +234,8 @@ export function SkillsSection() {
     const centerY = dimensions.height / 2
 
     // Get actual orbit radii from skills (they're set during initialization)
-    const innerOrbitRadius = skillsRef.current.find(s => s.orbit === "inner")?.orbitRadius || 135
-    const outerOrbitRadius = skillsRef.current.find(s => s.orbit === "outer")?.orbitRadius || 215
+    const innerOrbitRadius = skillsRef.current.find(s => s.orbit === "inner")?.orbitRadius || 115
+    const outerOrbitRadius = skillsRef.current.find(s => s.orbit === "outer")?.orbitRadius || 195
 
     const animate = () => {
       if (!isInView) return
@@ -296,7 +296,7 @@ export function SkillsSection() {
       ctx.stroke()
       ctx.setLineDash([])
 
-      const rotationSpeed = hoveredSkill ? 0.0005 : 0.002
+      const rotationSpeed = 0.002
 
       skillsRef.current.forEach((skill) => {
         // Update angle with consistent rotation

@@ -475,25 +475,8 @@ function ProjectRow({
   const rowRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (isExpanded && rowRef.current) {
-      // Wait for the accordion animation to complete (300ms) before scrolling
-      // This ensures we scroll to the final position after other items might have collapsed
-      const timer = setTimeout(() => {
-        if (!rowRef.current) return
-
-        const yOffset = -100 // Buffer for fixed header
-        const element = rowRef.current
-        const y = element.getBoundingClientRect().top + window.scrollY + yOffset
-
-        window.scrollTo({
-          top: y,
-          behavior: 'smooth'
-        })
-      }, 260) // Reduced to match faster animation
-
-      return () => clearTimeout(timer)
-    }
-  }, [isExpanded])
+    // Scroll logic removed as per user request to "let it be like before"
+  }, [])
 
   return (
     <div className="border-b border-white/5" ref={rowRef}>
