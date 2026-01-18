@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, forwardRef, useImperativeHandle } from "react"
 import { motion } from "framer-motion"
 import { Terminal, Cpu, Zap, Wifi, Disc } from "lucide-react"
 
@@ -17,7 +17,7 @@ const ASCII_ART = `
 interface LogEntry {
     id: number
     timestamp: string
-    level: 'INFO' | 'WARN' | 'SUCCESS' | 'SYSTEM'
+    level: 'INFO' | 'WARN' | 'SUCCESS' | 'SYSTEM' | 'ERROR'
     message: string
     color: string
 }
@@ -28,6 +28,11 @@ const BOOT_LOGS: LogEntry[] = [
     { id: 3, timestamp: "10:24:03", level: 'WARN', message: "preparing interactive modules", color: "text-cyan-400/80" },
     { id: 4, timestamp: "10:24:05", level: 'SUCCESS', message: "system_ready.Explore!", color: "text-green-400" }
 ]
+
+// Define the handle type for parent components
+export interface TerminalHandles {
+    addLog: (message: string, level?: LogEntry['level']) => void
+}
 
 // --- Hooks ---
 
@@ -64,9 +69,40 @@ const useSmoothTypewriter = (text: string, speed = 10) => {
     return { displayedText, isComplete }
 }
 
-export function TerminalWindow() {
+export const TerminalWindow = forwardRef<TerminalHandles>((props, ref) => {
     const [logs, setLogs] = useState<LogEntry[]>([])
     const [currentStepId, setCurrentStepId] = useState(1)
+
+    // Expose addLog to parent
+    useImperativeHandle(ref, () => ({
+        addLog: (message: string, level: LogEntry['level'] = 'INFO') => {
+            const now = new Date()
+            const timeString = now.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' })
+
+            let color = "text-gray-400"
+            if (level === 'ERROR') color = "text-red-500"
+            else if (level === 'SUCCESS') color = "text-green-400"
+            else if (level === 'WARN') color = "text-yellow-400"
+            else if (level === 'SYSTEM') color = "text-cyan-400"
+
+            const newLog = {
+                id: Date.now(),
+                timestamp: timeString,
+                level,
+                message,
+                color
+            }
+
+            setLogs(prev => {
+                const lastLog = prev[prev.length - 1]
+                // If the last log matches the new one, replace it to trigger "retyping" (via key change)
+                if (lastLog && lastLog.message === message && lastLog.level === level) {
+                    return [...prev.slice(0, -1), newLog]
+                }
+                return [...prev, newLog]
+            })
+        }
+    }))
 
     // Sequence Logic
     useEffect(() => {
@@ -171,7 +207,8 @@ export function TerminalWindow() {
             </div>
         </motion.div>
     )
-}
+})
+TerminalWindow.displayName = "TerminalWindow"
 
 function LogLine({ log }: { log: LogEntry }) {
     const { displayedText, isComplete } = useSmoothTypewriter(log.message, 5)
@@ -181,7 +218,8 @@ function LogLine({ log }: { log: LogEntry }) {
             <span className="text-gray-600 shrink-0 whitespace-nowrap">[{log.timestamp}]</span>
             <span className={`shrink-0 min-w-[3.5rem] whitespace-nowrap ${log.level === 'INFO' ? 'text-[#61afef]' :
                 log.level === 'WARN' ? 'text-[#e5c07b]' :
-                    log.level === 'SUCCESS' ? 'text-[#98c379]' : 'text-[#c678dd]'
+                    log.level === 'SUCCESS' ? 'text-[#98c379]' :
+                        log.level === 'ERROR' ? 'text-red-500' : 'text-[#c678dd]'
                 }`}>[{log.level}]</span>
             <span className={`${isComplete ? log.color : 'text-gray-300'} break-words leading-tight`}>
                 {displayedText}

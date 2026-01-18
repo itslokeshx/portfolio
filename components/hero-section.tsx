@@ -2,8 +2,8 @@
 
 import { useRef, useEffect, useState } from "react"
 import { motion } from "framer-motion"
-import { ChevronDown, Github, Twitter, Linkedin } from "lucide-react"
-import { TerminalWindow } from "./terminal-window"
+import { ChevronDown, Github, Twitter, Linkedin, ArrowRight } from "lucide-react"
+import { TerminalWindow, TerminalHandles } from "./terminal-window"
 
 // Smooth Typewriter Component
 // Rotating Typewriter Component
@@ -53,6 +53,11 @@ const RotatingText = ({ texts, className = "" }: { texts: string[], className?: 
 
 export function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null)
+  const terminalRef = useRef<TerminalHandles>(null)
+
+  const handleResumeClick = () => {
+    terminalRef.current?.addLog("resume not ready — building projects", "WARN")
+  }
 
   return (
     <section ref={containerRef} className="relative min-h-screen w-full overflow-hidden bg-[#050505] flex flex-col justify-center">
@@ -125,7 +130,10 @@ export function HeroSection() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 1.2 }}
           >
-            <button className="flex items-center gap-2 px-5 py-2 border border-cyan/30 rounded text-cyan text-[11px] tracking-widest font-medium hover:bg-cyan/10 transition-all shadow-[0_0_10px_rgba(0,240,255,0.1)] hover:shadow-[0_0_15px_rgba(0,240,255,0.3)]">
+            <button
+              onClick={handleResumeClick}
+              className="flex items-center gap-2 px-5 py-2 border border-cyan/30 rounded text-cyan text-[11px] tracking-widest font-medium hover:bg-cyan/10 transition-all shadow-[0_0_10px_rgba(0,240,255,0.1)] hover:shadow-[0_0_15px_rgba(0,240,255,0.3)]"
+            >
               INIT RESUME
               <div className="w-1.5 h-1.5 rounded-full bg-cyan/50" />
             </button>
@@ -135,11 +143,11 @@ export function HeroSection() {
       </motion.nav>
 
       {/* Hero Content */}
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-20 pt-28 sm:pt-32 lg:pt-20">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-20 pt-20">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center min-h-[calc(100vh-80px)]">
 
           {/* Left Column */}
-          <div className="flex flex-col justify-center space-y-6 relative z-20">
+          <div className="flex flex-col justify-center space-y-8 relative z-20 pl-4 lg:pl-0">
 
             {/* Header Group */}
             <div className="space-y-6">
@@ -160,7 +168,7 @@ export function HeroSection() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.5, duration: 0.8 }}
-                className="space-y-0 min-h-[50px] leading-none"
+                className="space-y-2 min-h-[50px] leading-none"
               >
                 {/* Refined "Man Made" Colors - Electric Blue & Clean White */}
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white/90 tracking-tight">
@@ -191,43 +199,31 @@ export function HeroSection() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 2.5 }}
-              className="text-gray-300 text-sm sm:text-base leading-6 max-w-[500px] font-light space-y-3"
+              className="text-gray-400 text-[15px] sm:text-[17px] leading-relaxed max-w-[480px] font-light space-y-5"
             >
-              <p>This site is a living workspace.</p>
-              <p>
-                Here, ideas move from rough experiments to usable systems.<br />
-                Some work. Some don&apos;t.
-              </p>
-              <p>Everything teaches me something.</p>
+              <div>
+                <p>This site is a living workspace.</p>
+                <p className="mt-1">
+                  Here, ideas move from rough experiments to usable systems.
+                </p>
+                <p className="mt-1">
+                  Some work. Some don&apos;t.
+                </p>
+              </div>
+              <p className="text-cyan/80 font-mono text-xs tracking-wide">Everything teaches me something.</p>
             </motion.div>
 
-            {/* Actions */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 2.8 }}
-              className="flex flex-wrap gap-4"
-            >
-              <button className="group relative px-5 py-2.5 bg-cyan/10 hover:bg-cyan/20 text-cyan rounded-lg font-medium text-xs sm:text-sm transition-all duration-300 overflow-hidden border border-cyan/30 hover:border-cyan/60 hover:shadow-[0_0_20px_rgba(0,240,255,0.3)]">
-                <div className="absolute inset-0 translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-300 bg-gradient-to-t from-cyan/20 to-transparent" />
-                <span className="relative z-10">View Projects →</span>
-              </button>
-
-              <button className="px-5 py-2.5 border border-gray-800 hover:border-gray-600 text-gray-400 hover:text-white rounded-lg font-medium text-xs sm:text-sm transition-all duration-300 bg-black/40 backdrop-blur-sm">
-                System Status
-              </button>
-            </motion.div>
           </div>
 
           {/* Right Column - Terminal Appearance */}
-          <div className="flex justify-center lg:justify-end">
+          <div className="flex justify-center lg:justify-end items-center h-full">
             <motion.div
               initial={{ scaleY: 0, opacity: 0 }}
               animate={{ scaleY: 1, opacity: 1 }}
               transition={{ duration: 0.8, delay: 1.5, ease: "circOut" }}
-              className="origin-center"
+              className="origin-center w-full max-w-xl"
             >
-              <TerminalWindow />
+              <TerminalWindow ref={terminalRef} />
             </motion.div>
           </div>
 
