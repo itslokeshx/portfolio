@@ -1,121 +1,42 @@
-<div align="center">
-  <br />
-  <a href="https://itslokeshx.vercel.app/" target="_blank">
-    <img src="public/site%20images/home.png" alt="Portfolio Homepage">
-  </a>
-  <br /><br />
+# Portfolio Website
 
-  <h1 align="center">Modern Portfolio Website</h1>
+A modern, responsive personal portfolio website built with Next.js, TypeScript, and Tailwind CSS. It features a Cyberpunk-inspired aesthetic with interactive terminal elements, 3D graphics, and smooth animations.
 
-  <p align="center">
-    A sleek personal portfolio with <strong>Cyberpunk Aesthetics</strong>, <strong>3D Graphics</strong>, and <strong>Interactive Terminal</strong>
-  </p>
+![Homepage Screenshot](public/site%20images/home.png)
 
-  <p align="center">
-    <img src="https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js" alt="Next.js" />
-    <img src="https://img.shields.io/badge/TypeScript-blue?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
-    <img src="https://img.shields.io/badge/Tailwind-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS" />
-    <img src="https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white" alt="Framer Motion" />
-  </p>
-</div>
+## Features
 
----
+- **Cyberpunk Aesthetics**: Immersive dark mode UI featuring neon accents, subtle scanlines, and glitch effects for a cohesive thematic experience.
+- **Interactive Terminal**: A fully functional CLI implementation where users execute commands (`help`, `about`, `projects`) to navigate or trigger actions.
+- **High Performance**: Optimized for Core Web Vitals with 60 FPS animations, ensuring smooth scrolling and transitions via Framer Motion.
+- **Responsive Design**: Mobile-first architecture that scales complex UI elements like the 3D canvas and terminal window across all device sizes.
+- **3D Integration**: Seamlessly blended React Three Fiber elements that provide depth without compromising accessibility or load times.
 
-## ✨ Features
+## Design & Architecture
 
-- 🎨 **Cyberpunk Aesthetic** - Deep void black canvas with neon cyan and violet gradients
-- 🎬 **Boot Sequence** - Cinematic loading animation that transitions into the navbar
-- 💻 **Interactive Terminal CLI** - Navigate using commands (`help`, `about`, `skills`, `projects`, `contact`, `sudo`)
-- ✨ **Glassmorphism Effects** - Advanced backdrop blurs and lighting effects
-- 🖱️ **Custom Cursor** - Dynamic cursor that adapts to UI elements
-- 🎞️ **Smooth Animations** - Powered by Framer Motion for 60fps performance
-- 📱 **Fully Responsive** - Optimized for all screen sizes with touch gestures
-- ⚡ **Performance Optimized** - Consistent 60fps animations across all devices
+- **Component Architecture**: Follows specific design patterns separating logic (custom hooks) from presentation (dumb components) for better maintainability.
+- **State Management**: Utilizes lightweight React Context for managing application-wide state such as terminal command history and sound settings.
+- **Theming System**: Implements a robust Tailwind-based design system using CSS variables for consistent spacing, typography, and color palettes.
+- **Accessibility**: Built with semantic HTML and appropriate ARIA labels, ensuring the custom interactive elements remain usable for all visitors.
 
----
+## Tech Stack
 
-## 🛠️ Tech Stack
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS, Shadcn UI, Radix UI
+- **Animation**: Framer Motion, React Three Fiber
+- **Icons**: Lucide React
 
-- **[Next.js 14](https://nextjs.org/)** - React framework with App Router
-- **[TypeScript](https://www.typescriptlang.org/)** - Type-safe development
-- **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first CSS framework
-- **[Framer Motion](https://www.framer.com/motion/)** - Production-ready animations
-- **[React Three Fiber](https://docs.pmnd.rs/react-three-fiber)** - 3D graphics rendering
-- **[Radix UI](https://www.radix-ui.com/)** & **[shadcn/ui](https://ui.shadcn.com/)** - Accessible UI components
-- **[Lucide React](https://lucide.dev/)** - Icon library
+## Project Structure
 
----
+- `app/`: Next.js App Router pages and layouts.
+- `components/`: Reusable React components (UI, specific sections).
+- `public/`: Static assets (images, fonts).
+- `lib/`: Utility functions and helper classes.
+- `styles/`: Global styles and Tailwind configuration.
 
-## 🚀 Getting Started
+## License
 
-```bash
-# Clone and install
-git clone https://github.com/yourusername/portfolio.git
-cd portfolio
-pnpm install
+This project is licensed under the MIT License.
 
-# Run development server
-pnpm dev
-```
 
-Open [http://localhost:3000](http://localhost:3000)
-
-**Production build:**
-```bash
-pnpm build && pnpm start
-```
-
----
-
-## 📂 Project Structure
-
-```
-portfolio/
-├── app/                    # Next.js App Router
-│   ├── layout.tsx         # Root layout
-│   ├── page.tsx           # Home page
-│   └── globals.css        # Global styles
-├── components/            # React components
-│   ├── hero-section.tsx
-│   ├── terminal-window.tsx
-│   ├── boot-sequence.tsx
-│   └── ui/                # shadcn/ui components
-├── lib/                   # Utilities
-├── public/                # Static assets
-└── Config files           # next.config, tailwind, etc.
-```
-
----
-
-## 📸 Screenshots
-
-<div align="center">
-  <img src="public/site%20images/home.png" alt="Homepage" width="800" />
-  <p><em>Cyberpunk-themed portfolio homepage</em></p>
-</div>
-
----
-
-## 👤 Author
-
-**Lokesh**
-- GitHub: [@itslokeshx](https://github.com/itslokeshx)
-- Portfolio: [itslokeshx.vercel.app](https://itslokeshx.vercel.app/)
-
----
-
-## 📝 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
----
-
-<div align="center">
-  <br />
-  <p><strong>Built with Next.js 14 | TypeScript | Tailwind CSS | Framer Motion</strong></p>
-  <p>Made with 💙 by <strong>Lokesh</strong> © 2026</p>
-  <br />
-  <p>
-    <sub>If this project helped you, consider giving it a ⭐️</sub>
-  </p>
-</div>
