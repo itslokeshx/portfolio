@@ -829,7 +829,7 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
         </div>
 
         {/* Featured Projects List */}
-        <div className="space-y-0 mb-16">
+        <div className="space-y-0 mb-4 md:mb-8">
           {featuredProjects.map((project, index) => (
             <ProjectRow
               key={project.id}
@@ -858,7 +858,7 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
               setShowArchive(!showArchive)
             }}
             className={`
-              group relative py-8 px-4 cursor-pointer transition-all duration-300
+              group relative py-4 md:py-8 px-4 cursor-pointer transition-all duration-300
               ${showArchive ? "bg-white/[0.02]" : "hover:bg-white/[0.02]"}
             `}
           >
