@@ -1,91 +1,86 @@
-# 🚀 Lokesh's Portfolio
-
-A modern, interactive portfolio website showcasing my journey as a web developer with 2+ years of experience in HTML, CSS, JavaScript and growing expertise in the MERN stack.
-
-![Portfolio Preview](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-38bdf8?style=for-the-badge&logo=tailwind-css)
-
-## ✨ Features
-
-- **🎨 Cyber-Core Design**: Futuristic UI with particle animations, orbital constellations, and holographic effects
-- **🌟 Interactive Sections**: 
-  - Particle-based hero animation
-  - 3D orbital skills constellation
-  - Expandable project showcase with 37+ projects
-  - Animated contact section with magnetic buttons
-- **📱 Fully Responsive**: Optimized for all devices
-- **⚡ Performance Optimized**: Built with Next.js 14 and App Router
-- **🎯 SEO Ready**: Proper meta tags and semantic HTML
-
-## 🛠️ Tech Stack
-
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
-- **Graphics**: HTML5 Canvas
-- **Icons**: Lucide React
-- **Fonts**: Space Grotesk, Orbitron
+# ⚡ SYSTEM_ONLINE // LOKESH_PORTFOLIO
 
 
-## 🎯 Key Sections
-
-### Hero Section
-- Particle-based name animation
-- Dynamic tech stack display
-- System-themed UI elements
-
-### About Section
-- Orbital constellation visualization
-- Real-time stats display
-- Terminal-style bio
-
-### Skills Section
-- Interactive skills constellation
-- Hover for detailed proficiency
-- 10+ technologies with experience levels
-
-### Projects Section
-- 5 featured projects
-- 32+ archive projects
-- Live demo links
-- Searchable and filterable
-
-### Contact Section
-- Social media links
-- Email contact
-- Location information
-
-## 📊 Projects Showcase
-
-**Featured Projects:**
-- Second Brain - MERN Stack knowledge management
-- MemeHub - Social meme sharing platform
-- Automated WA Messenger - WhatsApp automation backend
-- SaveMyTab - Chrome extension for tab management
-- CV Application - React resume builder
-
-**Total Projects**: 37+ across MERN, React, Node.js, TypeScript, JavaScript, HTML/CSS, PHP, and Python
-
-## 🎨 Customization
-
-To customize with your own data, update:
-- `app/layout.tsx` - Site metadata
-- `components/hero-section.tsx` - Name, tagline, skills
-- `components/about-section.tsx` - Bio, stats, orbit nodes
-- `components/skills-section.tsx` - Skills data
-- `components/featured-projects.tsx` - Projects data
-- `components/contact-section.tsx` - Contact info, social links
-
-
-## 🤝 Connect
-
-- **GitHub**: [@itslokeshx](https://github.com/itslokeshx)
-- **LinkedIn**: [/in/itslokeshx](https://www.linkedin.com/in/itslokeshx/)
-- **Twitter/X**: [@itslokeshx](https://x.com/itslokeshx)
-- **Email**: itslokeshx@gmail.com
+> A modern, interactive portfolio exploring the intersection of design and functionality. Built with Next.js 14, Framer Motion, and Tailwind CSS, focusing on micro-interactions, seamless transitions, and a "Cyber-Minimal" aesthetic.
 
 ---
 
-**Built with 💙 by Lokesh** |
+## 💎 Experience
+
+Designed to be immersive and responsive.
+
+### 🎨 Visual Design
+-   **Dark Aesthetics**: Deep `bg-[#050505]` canvas with precision-tuned cyan/violet gradients.
+-   **Glassmorphism**: Advanced backdrop blurs with varied opacity and subtle border lighting.
+-   **Identity Transition**: A custom `layoutId` animation that seamlessly transitions the "CONNECTED" status from the boot loader to the navbar.
+-   **Dynamic Glow**: Interactive lighting effects on buttons and active states that react to user input.
+
+### 🕹️ Interactive Features
+-   **Smart Navigation**:
+    -   **Scroll Spy**: Real-time detection of active sections using `IntersectionObserver`.
+    -   **Smooth Scroll**: Custom engine for instant, fluid movement between sections.
+-   **Magnetic Interfaces**: Social buttons in the footer use spring physics to magnetically attract to the cursor.
+-   **Parallax Depth**: Background elements move subtly with scroll to create a sense of depth.
+
+---
+
+## ⌨️ The Terminal
+
+The Hero section features a fully functional CLI (Command Line Interface) that acts as an alternative navigation controller and information hub.
+
+**Usage:** Click the terminal to focus. Type commands and hit `ENTER`.
+
+### Commands
+| Command | Description |
+| :--- | :--- |
+| `help` | Lists available commands |
+| `about` | Displays bio and background |
+| `skills` | Lists technical stack and expertise |
+| `projects` | Shows featured work |
+| `contact` | Displays contact information |
+| `clear` | Clears the terminal screen |
+
+### 🕵️ Easter Eggs & Hidden Features
+-   **`sudo`**: Tries to elevate privileges...
+-   **`whoami`**: Identifies the current user session.
+-   **`status`**: Checks system operational status.
+-   **`focus`**: Aligns the viewport.
+-   **Navbar Integration**: Clicking "EXECUTE RESUME" in the navbar directly triggers a log event in the terminal.
+
+---
+
+## 🛠️ Tech Stack
+
+Powered by modern web technologies.
+
+-   **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
+-   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+-   **Animation**: [Framer Motion](https://www.framer.com/motion/)
+-   **Icons**: [Lucide React](https://lucide.dev/)
+-   **Typeface**: Geist Mono / Inter
+
+### Key Components
+```bash
+├── components/
+│   ├── boot-sequence.tsx   # Initial loader animation
+│   ├── site-header.tsx     # Navbar with active state tracking
+│   ├── terminal-window.tsx # Interactive CLI logic
+│   ├── hero-section.tsx    # Landing area
+│   └── contact-section.tsx # Contact form & interactions
+```
+
+---
+
+## 🎨 Design System
+
+-   **Primary**: `#050505` (Void Black)
+-   **Accent**: `cyan-500` (Cyber Blue)
+-   **Text**: `gray-200` to `white`
+-   **Motion**: Smooth, circular easings for a premium feel.
+
+---
+
+<div align="center">
+  <p>SYS.VER.1.0 // 2026 // ALL_SYSTEMS_NOMINAL</p>
+  <p>Designed & Developed by <strong>LOKESH</strong></p>
+</div>
