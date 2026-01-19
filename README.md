@@ -1,117 +1,121 @@
 <div align="center">
   <br />
-  <a href="https://your-live-link.com">
-    <img src="public/site%20images/home.png" alt="Project Banner">
+  <a href="https://itslokeshx.vercel.app/" target="_blank">
+    <img src="public/site%20images/home.png" alt="Portfolio Homepage">
   </a>
-  <br />
+  <br /><br />
 
-  <h1 align="center">SYSTEM_ONLINE // LOKESH_PORTFOLIO</h1>
+  <h1 align="center">Modern Portfolio Website</h1>
 
   <p align="center">
-    A next-generation personal portfolio exploring the intersection of <strong>Cyberpunk Aesthetics</strong>, <strong>React Three Fiber</strong>, and <strong>Interactive Storytelling</strong>.
+    A sleek personal portfolio with <strong>Cyberpunk Aesthetics</strong>, <strong>3D Graphics</strong>, and <strong>Interactive Terminal</strong>
   </p>
 
   <p align="center">
-    <a href="#-features"><strong>Features</strong></a> ·
-    <a href="#-tech-stack"><strong>Tech Stack</strong></a> ·
-    <a href="#-installation"><strong>Installation</strong></a> ·
-    <a href="#-terminal-commands"><strong>Terminal</strong></a>
+    <img src="https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js" alt="Next.js" />
+    <img src="https://img.shields.io/badge/TypeScript-blue?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+    <img src="https://img.shields.io/badge/Tailwind-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS" />
+    <img src="https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white" alt="Framer Motion" />
   </p>
 </div>
 
 ---
 
-## ⚡ Overview
+## ✨ Features
 
-Welcome to the digital neural interface of **Lokesh**. This is not just a resume site; it's an immersive experience designed to demonstrate mastery over modern web technologies. 
-
-Built with **Next.js 14**, the site features a custom **Boot Sequence**, a fully functional **Command Line Interface (CLI)**, and a highly optimized **Mobile Experience**. Every interaction, from the "Connected" navbar transition to the magnetic footer buttons, is crafted for maximum visual impact and performance.
-
-> *"The future is already here – it's just not evenly distributed."*
-
----
-
-## 💎 Features
-
-### 🎨 Visual & UI Design
-- **Cyber-Minimal Aesthetic**: A deep void black (`#050505`) canvas accented with neon cyan and violet gradients.
-- **Boot Sequence**: A cinematic initial loading screen that authenticates the user and seamless transitions the "CONNECTED" status into the permanent navbar.
-- **Glassmorphism 2.0**: Advanced backdrop blurs, noise textures, and impossible lighting geometry.
-- **Micro-Interactions**: Elements react to cursor proximity, magnetic pulls, and click impacts.
-
-### 📱 Best-in-Class Mobile Experinence
-- **Adaptive Layouts**: Complex grid systems like the "Skills Constellation" transform into touch-optimized scrolling cards on mobile.
-- **Gestural Navigation**: Horizontal swipeable filters with dynamic `<` and `>` scroll hints.
-- **Performance**: Optimized animations ensuring 60fps even on handheld devices.
-
-### 🕹️ The Terminal (CLI)
-A fully interactive terminal accessible from the Hero section. It's not just a prop—it's a functional navigation controller.
-
-| Command | Action |
-| :--- | :--- |
-| `help` | Lists available classified commands |
-| `about` | Decrypts bio and background data |
-| `skills` | Visualizes the technical stack |
-| `projects` | Loads the project archive |
-| `contact` | Establishes a communication channel |
-| `sudo` | [REDACTED] - Try it at your own risk |
+- 🎨 **Cyberpunk Aesthetic** - Deep void black canvas with neon cyan and violet gradients
+- 🎬 **Boot Sequence** - Cinematic loading animation that transitions into the navbar
+- 💻 **Interactive Terminal CLI** - Navigate using commands (`help`, `about`, `skills`, `projects`, `contact`, `sudo`)
+- ✨ **Glassmorphism Effects** - Advanced backdrop blurs and lighting effects
+- 🖱️ **Custom Cursor** - Dynamic cursor that adapts to UI elements
+- 🎞️ **Smooth Animations** - Powered by Framer Motion for 60fps performance
+- 📱 **Fully Responsive** - Optimized for all screen sizes with touch gestures
+- ⚡ **Performance Optimized** - Consistent 60fps animations across all devices
 
 ---
 
 ## 🛠️ Tech Stack
 
-This project leverages the bleeding edge of the React ecosystem:
-
-- **Core**: [Next.js 14 (App Router)](https://nextjs.org/)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **Animation**: [Framer Motion](https://www.framer.com/motion/)
-- **3D Graphics**: [React Three Fiber](https://docs.pmnd.rs/react-three-fiber) & [Drei](https://github.com/pmndrs/drei)
-- **Icons**: [Lucide React](https://lucide.dev/)
+- **[Next.js 14](https://nextjs.org/)** - React framework with App Router
+- **[TypeScript](https://www.typescriptlang.org/)** - Type-safe development
+- **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first CSS framework
+- **[Framer Motion](https://www.framer.com/motion/)** - Production-ready animations
+- **[React Three Fiber](https://docs.pmnd.rs/react-three-fiber)** - 3D graphics rendering
+- **[Radix UI](https://www.radix-ui.com/)** & **[shadcn/ui](https://ui.shadcn.com/)** - Accessible UI components
+- **[Lucide React](https://lucide.dev/)** - Icon library
 
 ---
 
-## 🚀 Installation
-
-Clone the repository and initialize the neural link:
+## 🚀 Getting Started
 
 ```bash
-# Clone the repository
-git clone https://github.com/itslokeshx/portfolio.git
-
-# Navigate to the project directory
+# Clone and install
+git clone https://github.com/yourusername/portfolio.git
 cd portfolio
+pnpm install
 
-# Install dependencies
-npm install
-
-# Run the development server
-npm run dev
+# Run development server
+pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the system.
+Open [http://localhost:3000](http://localhost:3000)
+
+**Production build:**
+```bash
+pnpm build && pnpm start
+```
 
 ---
 
 ## 📂 Project Structure
 
-```bash
-├── app/                  # Next.js App Router
-│   ├── globals.css       # Global styles & Tailwind directives
-│   └── page.tsx          # Main entry route
-├── components/           # React Components
-│   ├── boot-sequence.tsx # Initial loading logic
-│   ├── featured-projects.tsx # Project carousel & filters
-│   ├── hero-section.tsx  # Hero & Terminal container
-│   ├── site-header.tsx   # Navbar & Transitions
-│   └── ui/               # Reusable UI primitives
-└── public/               # Static Assets
-    └── site images/      # Portfolio screenshots
+```
+portfolio/
+├── app/                    # Next.js App Router
+│   ├── layout.tsx         # Root layout
+│   ├── page.tsx           # Home page
+│   └── globals.css        # Global styles
+├── components/            # React components
+│   ├── hero-section.tsx
+│   ├── terminal-window.tsx
+│   ├── boot-sequence.tsx
+│   └── ui/                # shadcn/ui components
+├── lib/                   # Utilities
+├── public/                # Static assets
+└── Config files           # next.config, tailwind, etc.
 ```
 
 ---
 
+## 📸 Screenshots
+
 <div align="center">
-  <p>SYS.VER.2.0 // 2026 // ALL_SYSTEMS_NOMINAL</p>
-  <p>Designed & Developed with ❤️ by <strong>LOKESH</strong></p>
+  <img src="public/site%20images/home.png" alt="Homepage" width="800" />
+  <p><em>Cyberpunk-themed portfolio homepage</em></p>
+</div>
+
+---
+
+## 👤 Author
+
+**Lokesh**
+- GitHub: [@itslokeshx](https://github.com/itslokeshx)
+- Portfolio: [itslokeshx.vercel.app](https://itslokeshx.vercel.app/)
+
+---
+
+## 📝 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+<div align="center">
+  <br />
+  <p><strong>Built with Next.js 14 | TypeScript | Tailwind CSS | Framer Motion</strong></p>
+  <p>Made with 💙 by <strong>Lokesh</strong> © 2026</p>
+  <br />
+  <p>
+    <sub>If this project helped you, consider giving it a ⭐️</sub>
+  </p>
 </div>

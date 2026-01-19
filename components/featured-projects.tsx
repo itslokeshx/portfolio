@@ -941,13 +941,13 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="absolute left-0 top-0 bottom-2 w-12 bg-gradient-to-r from-[#0a0a0a] to-transparent pointer-events-none md:hidden flex items-center justify-start pl-4"
+                        className="absolute left-0 top-0 bottom-2 w-8 pointer-events-none md:hidden flex items-center justify-start pl-2"
                       >
                         <motion.div
                           animate={{ x: [0, -3, 0], opacity: [0.5, 1, 0.5] }}
                           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                         >
-                          <span className="text-cyan font-bold text-xs">{"<"}</span>
+                          <span className="text-cyan font-bold text-xs shadow-black drop-shadow-md">{"<"}</span>
                         </motion.div>
                       </motion.div>
                     )}
@@ -960,13 +960,13 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="absolute right-0 top-0 bottom-2 w-12 bg-gradient-to-l from-[#0a0a0a] to-transparent pointer-events-none md:hidden flex items-center justify-end pr-4"
+                        className="absolute right-0 top-0 bottom-2 w-8 pointer-events-none md:hidden flex items-center justify-end pr-2"
                       >
                         <motion.div
                           animate={{ x: [0, 3, 0], opacity: [0.5, 1, 0.5] }}
                           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                         >
-                          <span className="text-cyan font-bold text-xs">{">"}</span>
+                          <span className="text-cyan font-bold text-xs shadow-black drop-shadow-md">{">"}</span>
                         </motion.div>
                       </motion.div>
                     )}
