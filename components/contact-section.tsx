@@ -185,13 +185,17 @@ export function ContactSection() {
               <div className="flex items-center justify-center md:justify-end">
                 <a
                   href="mailto:itslokeshx@gmail.com"
-                  className="group relative px-8 py-4 bg-cyan/5 border border-cyan/20 text-cyan font-mono text-sm tracking-widest rounded-xl overflow-hidden hover:bg-cyan hover:text-black hover:border-cyan hover:shadow-[0_0_30px_rgba(0,240,255,0.4)] transition-all duration-300 active:scale-95"
+                  className="group relative px-8 py-4 bg-cyan/5 border border-cyan/20 text-cyan font-mono font-semibold text-sm tracking-widest rounded-xl overflow-hidden hover:bg-cyan hover:text-black hover:border-cyan hover:shadow-[0_0_25px_rgba(0,240,255,0.4)] transition-all duration-300 active:scale-[0.98] flex items-center gap-3"
                 >
-                  <div className="flex items-center gap-3 relative z-10">
-                    <span>SEND_MESSAGE</span>
+                  <span className="relative z-10">SEND_MESSAGE</span>
+                  <div className="relative overflow-hidden w-4 h-4 z-10">
                     <Send
                       size={16}
-                      className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
+                      className="absolute inset-0 transition-transform duration-300 group-hover:translate-x-4 group-hover:-translate-y-4"
+                    />
+                    <Send
+                      size={16}
+                      className="absolute inset-0 -translate-x-4 translate-y-4 transition-transform duration-300 group-hover:translate-x-0 group-hover:translate-y-0"
                     />
                   </div>
                   {/* Scanline effect on hover */}
@@ -225,7 +229,7 @@ export function ContactSection() {
           <p className="text-sm text-mist/40 font-mono">
             Designed & Developed by <span className="text-cyan">LOKESH</span>
           </p>
-          <p className="text-xs text-mist/20 font-mono">SYS.VER.2.0 // 2026 // ALL_SYSTEMS_NOMINAL</p>
+          <p className="text-xs text-mist/20 font-mono">SYS.VER.1.0 // 2026 // ALL_SYSTEMS_NOMINAL</p>
         </motion.div>
       </motion.div>
     </section>

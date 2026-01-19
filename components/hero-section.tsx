@@ -64,8 +64,14 @@ export function HeroSection() {
   const terminalDelay = isMobile ? startDelay : startDelay + 0.4
 
   const handleResumeClick = () => {
-    terminalRef.current?.addLog("resume in progress —  building projects", "WARN")
+    terminalRef.current?.addLog("resume in progress —  building projects", "warning")
   }
+
+  useEffect(() => {
+    const handleResumeEvent = () => handleResumeClick()
+    window.addEventListener("trigger-resume", handleResumeEvent)
+    return () => window.removeEventListener("trigger-resume", handleResumeEvent)
+  }, [])
 
   return (
     <section id="home" ref={containerRef} className="relative min-h-screen w-full overflow-hidden bg-[#050505] flex flex-col justify-center">
@@ -81,78 +87,11 @@ export function HeroSection() {
       {/* Radial gradient */}
       <div className="absolute inset-0 z-0 bg-gradient-radial from-titanium/50 via-transparent to-transparent pointer-events-none" />
 
-      {/* Navigation Bar */}
-      <motion.nav
-        initial={{ borderBottomColor: "rgba(255,255,255,0)" }}
-        animate={{ borderBottomColor: "rgba(255,255,255,0.05)" }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        className="fixed top-0 left-0 right-0 z-50 h-16 bg-[#050505]/80 backdrop-blur-md"
-      >
-        <div className="max-w-[1400px] mx-auto px-6 h-full flex items-center justify-between">
 
-          {/* Left: Connected Status (Target for Loader Transition) */}
-          <div className="flex items-center gap-4 pl-4 pt-1">
-            {/* Note: The loader "CONNECTED" text flies to roughly this position (top: 28px, left: 64px) */}
-            {/* We fade this in slightly later to ensure smooth handoff if using layoutId across components isn't perfect, 
-                 OR we use the same visual style so it matches perfectly. */}
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.1, duration: 0.3 }} // Fast load
-              className="flex items-center gap-4"
-            >
-              <div className="w-8 h-8 rounded border border-cyan/50 bg-cyan/5 flex items-center justify-center shadow-[0_0_10px_rgba(0,240,255,0.2)]">
-                <span className="text-cyan font-mono font-bold text-sm">{"{ }"}</span>
-              </div>
-
-              <div className="flex flex-col leading-none">
-                <div className="flex items-center gap-2">
-                  <motion.span layoutId="connected-text" className="text-cyan font-bold tracking-[0.2em] text-sm drop-shadow-[0_0_8px_rgba(0,240,255,0.4)] inline-block">CONNECTED</motion.span>
-                  <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse shadow-[0_0_5px_#22c55e]" />
-                </div>
-                <span className="text-carbon text-[10px] font-mono tracking-wider mt-1">DEV.SYS.01</span>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Center Links - "Constructing" in */}
-          <div className="hidden lg:flex items-center gap-8 xl:gap-12">
-            {["HOME", "ABOUT", "SKILLS", "PROJECTS", "CONTACT"].map((item, i) => (
-              <motion.a
-                key={item}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.5 + (i * 0.05) }}
-                href={`#${item.toLowerCase()}`}
-                className="text-[11px] font-medium text-gray-400 hover:text-cyan tracking-[0.2em] transition-colors duration-300"
-              >
-                {item}
-              </motion.a>
-            ))}
-          </div>
-
-          {/* Right Button */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 1.8 }} // Button appears last
-          >
-            <button
-              onClick={handleResumeClick}
-              className="flex items-center gap-2 px-3 py-1.5 sm:px-5 sm:py-2 border border-cyan/30 rounded text-cyan text-[10px] sm:text-[11px] tracking-widest font-medium hover:bg-cyan/10 transition-all shadow-[0_0_10px_rgba(0,240,255,0.1)] hover:shadow-[0_0_15px_rgba(0,240,255,0.3)] backdrop-blur-md bg-void/30"
-            >
-              EXECUTE RESUME
-              <div className="w-1.5 h-1.5 rounded-full bg-cyan/50" />
-            </button>
-          </motion.div>
-
-        </div>
-      </motion.nav>
 
       {/* Hero Content */}
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-20 pt-20 pb-10">
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-20 items-center min-h-[calc(100vh-80px)]">
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-20 pt-[100px] md:pt-24 pb-10">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-20 items-center min-h-[calc(100vh-100px)] md:min-h-[calc(100vh-80px)]">
 
           {/* Left Column */}
           <div className="flex flex-col justify-center space-y-8 relative z-20 pl-4 lg:pl-0 order-2 lg:order-1">
@@ -165,9 +104,9 @@ export function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: textDelay, duration: 0.8 }} // Slow, smooth fade after hold
               >
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan/10 border border-cyan/20 backdrop-blur-sm">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse" />
-                  <span className="text-cyan text-[9px] sm:text-[10px] font-mono tracking-[0.2em] uppercase">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan/50 animate-pulse shadow-[0_0_5px_rgba(0,240,255,0.4)]" />
+                  <span className="text-gray-300 text-[9px] sm:text-[10px] font-mono tracking-[0.2em] uppercase">
                     System Online
                   </span>
                 </div>

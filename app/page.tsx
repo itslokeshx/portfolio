@@ -11,6 +11,7 @@ import { AboutSection } from "@/components/about-section"
 import { SkillsSection } from "@/components/skills-section"
 import { FeaturedProjects } from "@/components/featured-projects"
 import { ContactSection } from "@/components/contact-section"
+import { SiteHeader } from "@/components/site-header"
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
@@ -25,12 +26,13 @@ export default function Home() {
       {!isLoading && (
         <>
           <ScrollProgress />
+          <SiteHeader />
 
           <main className="relative">
             <HeroSection />
             <AboutSection />
             <SkillsSection />
-            <FeaturedProjects onViewAll={() => {}} />
+            <FeaturedProjects onViewAll={() => { }} />
             <ContactSection />
           </main>
         </>
