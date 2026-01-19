@@ -245,16 +245,15 @@ export function ProjectsGridModal({ isOpen, onClose }: ProjectsGridModalProps) {
               </div>
 
               {/* Filters */}
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5 md:gap-2">
                 {CATEGORIES.map((category) => (
                   <button
                     key={category}
                     onClick={() => setActiveCategory(category)}
-                    className={`px-5 py-2 rounded-full font-mono text-sm transition-all ${
-                      activeCategory === category
-                        ? "bg-cyan border-cyan text-void glow-cyan"
-                        : "border-2 border-cyan/30 text-cyan hover:border-cyan/60"
-                    }`}
+                    className={`px-3 py-1.5 md:px-5 md:py-2 rounded-full font-mono text-xs md:text-sm transition-all ${activeCategory === category
+                      ? "bg-cyan border-cyan text-void glow-cyan"
+                      : "border-2 border-cyan/30 text-cyan hover:border-cyan/60"
+                      }`}
                   >
                     {category}
                   </button>

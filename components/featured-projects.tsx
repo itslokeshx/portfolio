@@ -789,6 +789,23 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
   const [showArchive, setShowArchive] = useState(false)
   const [isArchiveTriggerHovered, setIsArchiveTriggerHovered] = useState(false)
   const [activeFilter, setActiveFilter] = useState("HTML/CSS")
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const [canScrollLeft, setCanScrollLeft] = useState(false)
+  const [canScrollRight, setCanScrollRight] = useState(true)
+
+  const checkScroll = () => {
+    if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current
+      setCanScrollLeft(scrollLeft > 0)
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10)
+    }
+  }
+
+  useEffect(() => {
+    checkScroll()
+    window.addEventListener("resize", checkScroll)
+    return () => window.removeEventListener("resize", checkScroll)
+  }, [showArchive])
 
   const categories = ["HTML/CSS", "JAVASCRIPT", "API", "REACT", "NODE/EXPRESS", "TYPESCRIPT", "MERN STACK", "PHP & SQL", "PYTHON"]
 
@@ -878,25 +895,69 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
               transition={{ duration: 0.5, ease: "easeInOut" }}
               className="overflow-hidden bg-[#0a0a0a]"
             >
-              <div className="px-4 py-12">
+              <div className="px-4 py-6 md:py-12">
 
                 {/* Filter Tabs */}
-                <div className="flex flex-wrap gap-4 mb-16">
-                  {categories.map((cat) => (
-                    <button
-                      key={cat}
-                      onClick={() => setActiveFilter(cat)}
-                      className={`
-                        px-7 py-3 rounded-full text-xs font-bold font-mono border transition-all duration-300 uppercase tracking-wide whitespace-nowrap
-                        ${activeFilter === cat
-                          ? "bg-cyan text-black border-cyan shadow-[0_0_20px_rgba(0,240,255,0.4)]"
-                          : "bg-transparent border-white/10 text-slate-500 hover:border-cyan/50 hover:text-cyan"
-                        }
-                      `}
-                    >
-                      {cat}
-                    </button>
-                  ))}
+                <div className="relative mb-8 md:mb-16">
+                  <div
+                    ref={scrollRef}
+                    onScroll={checkScroll}
+                    className="flex overflow-x-auto no-scrollbar md:flex-wrap gap-3 pb-2 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0 scroll-smooth"
+                  >
+                    {categories.map((cat) => (
+                      <button
+                        key={cat}
+                        onClick={() => setActiveFilter(cat)}
+                        className={`
+                          px-5 py-2 md:px-7 md:py-3 rounded-full text-[10px] md:text-xs font-bold font-mono border transition-all duration-300 uppercase tracking-wide whitespace-nowrap flex-shrink-0
+                          ${activeFilter === cat
+                            ? "bg-cyan text-black border-cyan shadow-[0_0_20px_rgba(0,240,255,0.4)]"
+                            : "bg-transparent border-white/10 text-slate-500 hover:border-cyan/50 hover:text-cyan"
+                          }
+                        `}
+                      >
+                        {cat}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Left Scroll Hint */}
+                  <AnimatePresence>
+                    {canScrollLeft && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="absolute left-0 top-0 bottom-2 w-12 bg-gradient-to-r from-[#0a0a0a] to-transparent pointer-events-none md:hidden flex items-center justify-start pl-4"
+                      >
+                        <motion.div
+                          animate={{ x: [0, -3, 0], opacity: [0.5, 1, 0.5] }}
+                          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                        >
+                          <span className="text-cyan font-bold text-xs">{"<"}</span>
+                        </motion.div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  {/* Right Scroll Hint */}
+                  <AnimatePresence>
+                    {canScrollRight && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="absolute right-0 top-0 bottom-2 w-12 bg-gradient-to-l from-[#0a0a0a] to-transparent pointer-events-none md:hidden flex items-center justify-end pr-4"
+                      >
+                        <motion.div
+                          animate={{ x: [0, 3, 0], opacity: [0.5, 1, 0.5] }}
+                          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                        >
+                          <span className="text-cyan font-bold text-xs">{">"}</span>
+                        </motion.div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
 
                 {/* Projects Grid */}

@@ -70,8 +70,8 @@ export function SiteHeader() {
                 "fixed top-0 left-0 right-0 z-50 h-16 transition-all duration-300",
                 isScrolled ? "bg-[#050505]/80 backdrop-blur-md border-b border-white/5" : "bg-transparent border-b border-transparent"
             )}
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
+            initial={{ opacity: 0, y: 0 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "circOut" }}
         >
             <div className="max-w-[1400px] mx-auto px-4 md:px-6 h-full flex items-center justify-between">
