@@ -15,23 +15,26 @@ const ASCII_ART = `
 `
 
 interface LogEntry {
-    id: number
-    timestamp?: string
-    level?: 'INFO' | 'WARN' | 'SUCCESS' | 'SYSTEM' | 'ERROR'
+    id: string | number
     message: string | React.ReactNode
+    level?: 'info' | 'success' | 'warning' | 'error' | 'system'
+    timestamp?: string
+    isCommand?: boolean
     color?: string
-    isCommand?: boolean // Trims timestamp/level for user commands
 }
 
 
 
 const COMMANDS = {
     help: "Show available commands",
-    skills: "List technical skills",
-    projects: "View key projects",
-    about: "About me",
-    contact: "Contact information",
-    clear: "Clear terminal"
+    whoami: "System identity",
+    status: "Runtime state",
+    focus: "Current direction",
+    logs: "Recent activity",
+    thought: "System reflection",
+    clear: "Clear terminal",
+    sudo: "Admin privilege (Hidden)"
+
 } as const
 
 type CommandType = keyof typeof COMMANDS
@@ -39,6 +42,39 @@ type CommandType = keyof typeof COMMANDS
 // Define the handle type for parent components
 export interface TerminalHandles {
     addLog: (message: string, level?: LogEntry['level']) => void
+}
+
+// Typewriter Component
+const Typewriter = ({ text, delay = 0, speed = 5, onComplete }: { text: string, delay?: number, speed?: number, onComplete?: () => void }) => {
+    const [displayText, setDisplayText] = useState("")
+    const [started, setStarted] = useState(false)
+
+    useEffect(() => {
+        const startTimeout = setTimeout(() => {
+            setStarted(true)
+        }, delay)
+        return () => clearTimeout(startTimeout)
+    }, [delay])
+
+    useEffect(() => {
+        if (!started) return
+
+        let i = 0
+        const interval = setInterval(() => {
+            if (i >= text.length) {
+                clearInterval(interval)
+                setDisplayText(text) // Ensure full text is shown
+                onComplete?.()
+                return
+            }
+            setDisplayText(text.substring(0, i + 1))
+            i++
+        }, speed)
+
+        return () => clearInterval(interval)
+    }, [text, speed, started, onComplete])
+
+    return <span>{displayText}</span>
 }
 
 export const TerminalWindow = forwardRef<TerminalHandles>((props, ref) => {
@@ -54,14 +90,15 @@ export const TerminalWindow = forwardRef<TerminalHandles>((props, ref) => {
 
     const placeholderPrompts = [
         "type 'help' to get started",
-        "try 'projects' to see my work",
-        "run 'skills' to view tech stack",
-        "type 'contact' to say hello"
+        "try 'whoami' to know more",
+        "check 'status' or 'focus'",
+        "run 'thought' for insight"
     ]
 
     const inputRef = useRef<HTMLInputElement>(null)
     const containerRef = useRef<HTMLDivElement>(null)
     const scrollRef = useRef<HTMLDivElement>(null)
+
 
     // Helper for correct 24h local time format (HH:MM:SS)
     const getLocalTime = (date: Date = new Date()) => {
@@ -76,10 +113,10 @@ export const TerminalWindow = forwardRef<TerminalHandles>((props, ref) => {
         const now = new Date()
 
         const bootLogs: LogEntry[] = [
-            { id: 1, timestamp: getLocalTime(now), level: 'SYSTEM', message: "initializing workspace", color: "text-cyan-400" },
-            { id: 2, timestamp: getLocalTime(new Date(now.getTime() + 400)), level: 'INFO', message: "loading projects & skills", color: "text-gray-400" },
-            { id: 3, timestamp: getLocalTime(new Date(now.getTime() + 800)), level: 'WARN', message: "preparing interactive modules", color: "text-cyan-400/80" },
-            { id: 4, timestamp: getLocalTime(new Date(now.getTime() + 1200)), level: 'SUCCESS', message: "system_ready.Explore!", color: "text-green-400" }
+            { id: 'boot-1', timestamp: getLocalTime(now), level: 'system', message: "INITIALIZING NEURAL INTERFACE...", color: "text-cyan-400" },
+            { id: 'boot-2', timestamp: getLocalTime(new Date(now.getTime() + 400)), level: 'info', message: "LOADING CORE MODULES...", color: "text-blue-400" },
+            { id: 'boot-3', timestamp: getLocalTime(new Date(now.getTime() + 800)), level: 'warning', message: "ESTABLISHING SECURE CONNECTION...", color: "text-yellow-400" },
+            { id: 'boot-4', timestamp: getLocalTime(new Date(now.getTime() + 1200)), level: 'success', message: "ACCESS GRANTED", color: "text-green-400" }
         ]
 
         let timeouts: NodeJS.Timeout[] = []
@@ -134,7 +171,10 @@ export const TerminalWindow = forwardRef<TerminalHandles>((props, ref) => {
     // Scroll to bottom on history update - STRICTLY INTERNAL SCROLL
     useEffect(() => {
         if (scrollRef.current) {
-            scrollRef.current.scrollTop = scrollRef.current.scrollHeight
+            scrollRef.current.scrollTo({
+                top: scrollRef.current.scrollHeight,
+                behavior: 'smooth'
+            })
         }
     }, [history])
 
@@ -145,14 +185,14 @@ export const TerminalWindow = forwardRef<TerminalHandles>((props, ref) => {
 
     // Expose addLog to parent
     useImperativeHandle(ref, () => ({
-        addLog: (message: string, level: LogEntry['level'] = 'INFO') => {
+        addLog: (message: string, level: LogEntry['level'] = 'info') => {
             // Message color logic (distinct from level color)
             let color = "text-gray-300"
-            if (level === 'ERROR') color = "text-red-500"
-            else if (level === 'SUCCESS') color = "text-green-400"
-            else if (level === 'WARN') color = "text-yellow-400"
-            else if (level === 'SYSTEM') color = "text-cyan-400"
-            else if (level === 'INFO') color = "text-gray-400"
+            if (level === 'error') color = "text-red-500"
+            else if (level === 'success') color = "text-green-400"
+            else if (level === 'warning') color = "text-yellow-400"
+            else if (level === 'system') color = "text-cyan-400"
+            else if (level === 'info') color = "text-gray-400"
 
             const newLog = {
                 id: Date.now(),
@@ -177,7 +217,7 @@ export const TerminalWindow = forwardRef<TerminalHandles>((props, ref) => {
 
         // Add command to history
         setHistory(prev => [...prev, {
-            id: Date.now(),
+            id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
             message: <span className="flex items-center gap-2"><span className="text-green-400">➜</span> <span className="text-white">{cmd}</span></span>,
             isCommand: true
         }])
@@ -185,62 +225,94 @@ export const TerminalWindow = forwardRef<TerminalHandles>((props, ref) => {
         switch (cleanCmd) {
             case "help":
                 addResponse([
-                    "available commands:",
-                    "  skills    - List technical skills",
-                    "  projects  - View key projects",
-                    "  about     - About me",
-                    "  contact   - Contact information",
-                    "  clear     - Clear terminal"
-                ])
-                break
-            case "clear":
-                setHistory([])
-                break
-            case "skills":
-                addResponse([
-                    <div key="s1">
-                        <span className="text-cyan-400">Frontend     → </span>
-                        <span>HTML · CSS · React · JavaScript</span>
-                    </div>,
-                    <div key="s2">
-                        <span className="text-cyan-400">Backend      → </span>
-                        <span>Node.js · Express.js</span>
-                    </div>,
-                    <div key="s3">
-                        <span className="text-cyan-400">Database     → </span>
-                        <span>MongoDB · SQL / MySQL</span>
-                    </div>,
-                    <div key="s4">
-                        <span className="text-cyan-400">Tools & Lang → </span>
-                        <span>C · Python · Git / GitHub</span>
+                    <Typewriter key="h1" text="available commands:" speed={5} />,
+                    "",
+                    <div key="help-grid" className="grid grid-cols-[100px_1fr] gap-x-2 gap-y-1">
+                        <span className="text-cyan-400"><Typewriter text="whoami" delay={50} speed={10} /></span><span className="text-gray-400">→ <Typewriter text="system identity" delay={60} speed={5} /></span>
+                        <span className="text-cyan-400"><Typewriter text="status" delay={100} speed={10} /></span><span className="text-gray-400">→ <Typewriter text="runtime state" delay={110} speed={5} /></span>
+                        <span className="text-cyan-400"><Typewriter text="focus" delay={150} speed={10} /></span><span className="text-gray-400">→ <Typewriter text="current direction" delay={160} speed={5} /></span>
+                        <span className="text-cyan-400"><Typewriter text="logs" delay={200} speed={10} /></span><span className="text-gray-400">→ <Typewriter text="recent activity" delay={210} speed={5} /></span>
+                        <span className="text-cyan-400"><Typewriter text="thought" delay={250} speed={10} /></span><span className="text-gray-400">→ <Typewriter text="system reflection" delay={260} speed={5} /></span>
+                        <span className="text-cyan-400"><Typewriter text="clear" delay={300} speed={10} /></span><span className="text-gray-400">→ <Typewriter text="clear terminal" delay={310} speed={5} /></span>
                     </div>
                 ])
                 break
-            case "projects":
+
+            case "whoami":
                 addResponse([
-                    "→ Second Brain",
-                    "→ MemeHub",
-                    "→ Automated WA Messenger",
-                    "→ SaveMyTab",
-                    "→ CV Application",
-                    <br key="br" />,
-                    <span key="more" className="text-gray-500 italic">more projects → visit Projects section</span>
+                    <div key="whoami" className="flex flex-col gap-1">
+                        <span className="text-white font-bold"><Typewriter text="lokesh@workspace" speed={5} /></span>
+                        <span className="text-gray-300"><Typewriter text="Web developer" delay={50} speed={5} /></span>
+                        <span className="text-gray-400 italic"><Typewriter text="learning by building real systems" delay={100} speed={5} /></span>
+                        <br />
+                        {/* <div className="flex flex-col gap-1 pl-2 border-l-2 border-cyan-500/30">
+                            <span className="flex items-center gap-2 text-green-400">✔ <span className="text-gray-300"><Typewriter text="Personal" delay={150} speed={5} /></span></span>
+                            <span className="flex items-center gap-2 text-green-400">✔ <span className="text-gray-300"><Typewriter text="Grounded" delay={200} speed={5} /></span></span>
+                            <span className="flex items-center gap-2 text-green-400">✔ <span className="text-gray-300"><Typewriter text="No ego" delay={250} speed={5} /></span></span>
+                            <span className="flex items-center gap-2 text-green-400">✔ <span className="text-gray-300"><Typewriter text="Very jury-safe" delay={300} speed={5} /></span></span>
+                        </div> */}
+                    </div>
                 ])
                 break
-            case "about":
+
+            case "status":
                 addResponse([
-                    "I learn by building real things.",
-                    "Curiosity drives me.",
-                    "Projects shape who I become."
+                    <div key="status" className="flex flex-col gap-1">
+                        <div><span className="text-cyan-400">SYSTEM:</span>   <span className="text-green-400"><Typewriter text="ONLINE" delay={50} speed={10} /></span></div>
+                        <div><span className="text-cyan-400">WORKFLOW:</span> <span className="text-yellow-400"><Typewriter text="ACTIVE" delay={100} speed={10} /></span></div>
+                        <div><span className="text-cyan-400">STATE:</span>    <span className="text-purple-400"><Typewriter text="EVOLVING" delay={150} speed={10} /></span></div>
+                    </div>
                 ])
                 break
-            case "contact":
+
+            case "focus":
                 addResponse([
-                    <span key="gh" className="flex gap-2">GitHub   → <a href="https://github.com/itslokeshx" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline hover:text-cyan-300 transition-colors">https://github.com/itslokeshx</a></span>,
-                    <span key="li" className="flex gap-2">LinkedIn → <a href="https://www.linkedin.com/in/itslokeshx/" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline hover:text-cyan-300 transition-colors">https://www.linkedin.com/in/itslokeshx/</a></span>,
-                    <span key="em" className="flex gap-2">Email    → <a href="mailto:itslokeshx@gmail.com" className="text-cyan-400 hover:underline hover:text-cyan-300 transition-colors">itslokeshx@gmail.com</a></span>
+                    <div key="focus" className="flex flex-col gap-1">
+                        <span className="text-gray-300 underline underline-offset-4 decoration-cyan-500/30 mb-2"><Typewriter text="current focus:" speed={5} /></span>
+                        <span className="flex items-center gap-2"><span className="text-cyan-400">→</span> <Typewriter text="building usable products" delay={50} speed={5} /></span>
+                        <span className="flex items-center gap-2"><span className="text-cyan-400">→</span> <Typewriter text="strengthening fundamentals" delay={100} speed={5} /></span>
+                        <span className="flex items-center gap-2"><span className="text-cyan-400">→</span> <Typewriter text="refining interaction details" delay={150} speed={5} /></span>
+                    </div>
                 ])
                 break
+
+            case "logs":
+                addResponse([
+                    <div key="logs" className="flex flex-col gap-1 font-mono text-xs">
+                        <span className="flex gap-2"><span className="text-cyan-400">[INFO]</span> <span className="text-gray-400"><Typewriter text="iterating on product ideas" delay={0} speed={5} /></span></span>
+                        <span className="flex gap-2"><span className="text-cyan-400">[INFO]</span> <span className="text-gray-400"><Typewriter text="refining system design" delay={50} speed={5} /></span></span>
+                        <span className="flex gap-2"><span className="text-cyan-400">[INFO]</span> <span className="text-gray-400"><Typewriter text="learning through implementation" delay={100} speed={5} /></span></span>
+                    </div>
+                ])
+                break
+
+            case "thought":
+                const thoughts = [
+                    "• clarity comes from building",
+                    "• small systems teach big lessons",
+                    "• progress compounds quietly",
+                    "• simplicity reveals intent",
+                    "• real work exposes gaps"
+                ]
+                const randomThought = thoughts[Math.floor(Math.random() * thoughts.length)]
+                addResponse([
+                    <span key="thought" className="text-emerald-300 italic"><Typewriter text={randomThought} speed={15} /></span>
+                ])
+                break
+
+            case "sudo":
+                addResponse([
+                    <div key="sudo" className="text-red-400 flex flex-col">
+                        <span><Typewriter text="permission denied." speed={20} /></span>
+                        <span className="text-gray-400"><Typewriter text="focus over shortcuts." delay={200} speed={20} /></span>
+                    </div>
+                ])
+                break
+
+            case "clear":
+                setHistory([])
+                break
+
             default:
                 if (cleanCmd !== "") {
                     addResponse([`Command not found: ${cleanCmd}. Type 'help' for options.`])
@@ -251,15 +323,14 @@ export const TerminalWindow = forwardRef<TerminalHandles>((props, ref) => {
     }
 
     const addResponse = (lines: (string | React.ReactNode)[]) => {
-        lines.forEach((line, i) => {
-            setTimeout(() => {
-                setHistory(prev => [...prev, {
-                    id: Date.now() + i,
-                    message: line,
-                    color: "text-gray-300"
-                }])
-            }, i * 100)
+        const newLogs = lines.map((line) => {
+            return {
+                id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+                message: line,
+                color: "text-gray-300"
+            }
         })
+        setHistory(prev => [...prev, ...newLogs])
     }
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -271,11 +342,11 @@ export const TerminalWindow = forwardRef<TerminalHandles>((props, ref) => {
     // Helper to get level color (matches original specific colors)
     const getLevelColor = (level?: string) => {
         switch (level) {
-            case 'INFO': return 'text-[#61afef]'
-            case 'WARN': return 'text-[#e5c07b]'
-            case 'SUCCESS': return 'text-[#98c379]'
-            case 'ERROR': return 'text-red-500'
-            case 'SYSTEM': return 'text-[#c678dd]'
+            case 'info': return 'text-[#61afef]'
+            case 'warning': return 'text-[#e5c07b]'
+            case 'success': return 'text-[#98c379]'
+            case 'error': return 'text-red-500'
+            case 'system': return 'text-[#c678dd]'
             default: return 'text-gray-500'
         }
     }
