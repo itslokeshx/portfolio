@@ -21,7 +21,7 @@ const featuredProjects: Project[] = [
     title: "Second Brain",
     category: "MERN STACK",
     description:
-      "🧠 A self-hosted backend and sync system built on top of the Focus To-Do web frontend, enabling offline-first usage with MongoDB cloud sync and full data ownership.",
+      "**Problem:** Most productivity tools fail to protect years of focus data, locking backups behind paywalls and fragile local storage.\n**Impact:** When systems crash, long-term progress disappears, breaking consistency and trust.\n**Solution:** I built a local-first productivity system that works fully offline while securely backing up data for permanent ownership.",
     stack: ["MongoDB", "Express", "React", "Node.js", "IndexedDB"],
     image: "/Project_images/second-brain.png",
     color: "#0F172A",
@@ -33,7 +33,7 @@ const featuredProjects: Project[] = [
     title: "MemeHub",
     category: "MERN STACK",
     description:
-      "🖼️ MemeHub – A full-stack MERN meme-sharing platform where users can upload, browse, and search memes. Built with React, Tailwind, Node.js, Express, MongoDB, and Cloudinary. 🚀",
+      "**Problem:** Meme platforms treat users as passive consumers with little control over content quality or structure.\n**Impact:** This results in cluttered libraries, weak moderation, and no sense of community ownership.\n**Solution:** I built a community-driven meme platform with collaborative editing, moderation tools, and scalable content delivery.",
     stack: ["MongoDB", "Express", "React", "Node.js", "Cloudinary"],
     image: "/Project_images/memehub.png",
     color: "#111827",
@@ -45,7 +45,7 @@ const featuredProjects: Project[] = [
     title: "Automated WA Messenger",
     category: "NODE/EXPRESS",
     description:
-      "🚀 WhatsApp Automation API — A Node.js backend to schedule and send WhatsApp Business messages via REST API. 📅🤖",
+      "**Problem:** Small businesses were forced to pay recurring fees for basic WhatsApp automation.\n**Impact:** These unnecessary subscriptions reduced profit margins and limited customer engagement.\n**Solution:** I built a zero-subscription automation system using the WhatsApp Cloud API to send and schedule messages reliably.",
     stack: ["Node.js", "Express", "Cron", "WhatsApp Cloud API"],
     image: "/Project_images/Whatsapp_Automation.png",
     color: "#00FF94",
@@ -56,7 +56,7 @@ const featuredProjects: Project[] = [
     id: 4,
     title: "SaveMyTab",
     category: "CHROME EXT",
-    description: "🔖 SaveMyTab – A lightweight Chrome extension to save, manage, and delete tabs or URLs. Keep your research, dev work, or casual browsing organized without cluttering bookmarks! 🚀",
+    description: "**Problem:** Modern workflows encourage tab overload, silently draining focus and mental clarity.\n**Impact:** Constant context switching slows productivity and increases cognitive fatigue.\n**Solution:** I built a lightweight browser extension that saves essential tabs instantly and keeps workspaces clean.",
     stack: ["JavaScript", "Chrome API", "HTML/CSS"],
     image: "/Project_images/SaveMyTab.jpeg",
     color: "#FF9F00",
@@ -67,7 +67,7 @@ const featuredProjects: Project[] = [
     id: 5,
     title: "CV Application",
     category: "REACT",
-    description: "📄 CV Builder – A modern, responsive React application for creating and customizing CVs with real-time preview. Built with React 18, Vite, and Tailwind CSS, it lets you manage sections like Education, Experience, Skills, and Profile Summary seamlessly. 🚀",
+    description: "**Problem:** Traditional CV builders provide feedback only after exporting, forcing users to guess layouts.\n**Impact:** Users waste time with repeated revisions and unnecessary exports.\n**Solution:** I built a real-time CV builder that updates the resume instantly as users edit.",
     stack: ["React", "Vite"],
     image: "/Project_images/CV.jpeg",
     color: "#9333EA",
@@ -632,7 +632,20 @@ function ProjectRow({
                     <h4 className="text-xs text-cyan uppercase tracking-wider mb-3 font-mono border-b border-cyan/20 pb-2 inline-block">
                       // DOSSIER
                     </h4>
-                    <p className="text-sm text-slate-300 leading-relaxed mb-4">{project.description}</p>
+                    <div className="text-sm text-slate-300 leading-relaxed mb-4 space-y-2">
+                      {project.description.split('\n').map((line, i) => {
+                        const parts = line.split('**');
+                        if (parts.length === 3) {
+                          return (
+                            <p key={i}>
+                              <strong className="text-cyan">{parts[1]}</strong>
+                              {parts[2]}
+                            </p>
+                          );
+                        }
+                        return <p key={i}>{line}</p>;
+                      })}
+                    </div>
                   </div>
 
                   <div className="space-y-6">
