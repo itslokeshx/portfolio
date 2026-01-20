@@ -1,41 +1,29 @@
-# Stage 1: Build the application
-FROM node:20-alpine AS builder
+# Use Node.js 20 Alpine (Required for Next.js 16)
+FROM node:20-alpine
 
+# Set working directory
 WORKDIR /app
 
 # Install pnpm
 RUN npm install -g pnpm
 
-# Copy package files
+# Copy package files first to leverage cache
 COPY package.json pnpm-lock.yaml ./
 
-# Install dependencies
-RUN pnpm install --no-frozen-lockfile
+# Install dependencies (production only to save space, but we need devDeps for build usually, so install all then prune)
+# Actually for next build we need dev dependencies.
+RUN pnpm install --frozen-lockfile
 
-# Copy source code
+# Copy the rest of the application code
 COPY . .
 
-# Build the application (static export to /out)
+# Build the Next.js application
 RUN pnpm run build
 
-# Stage 2: Serve the application
-FROM nginx:alpine
-
-# Remove default nginx config
-RUN rm /etc/nginx/conf.d/default.conf
-
-# Copy custom nginx config
-COPY nginx.conf /etc/nginx/conf.d/port8080.conf
-
-# Copy built assets from builder stage
-COPY --from=builder /app/out /usr/share/nginx/html
-
-# Use a non-root user matching the one in nginx:alpine (optional, but good practice if possible, though strict requirement varies)
-# For simplicity and broad compatibility on Cloud Run (which handles user mapping well), standard nginx user is fine.
-# We ensure permissions are correct if we were doing more complex things, but copying usually works.
-
-# Expose port 8080 (Matches the listener in nginx.conf)
+# Cloud Run sets the PORT environment variable.
+# Next.js automatically listens on PORT if it's set.
+ENV PORT=8080
 EXPOSE 8080
 
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Start the application
+CMD ["pnpm", "start"]
