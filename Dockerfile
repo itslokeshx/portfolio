@@ -1,29 +1,25 @@
-# Use Node.js 20 Alpine (Required for Next.js 16)
 FROM node:20-alpine
 
-# Set working directory
 WORKDIR /app
 
-# Install pnpm
-RUN npm install -g pnpm
-
-# Copy package files first to leverage cache
+# Copy package files
 COPY package.json pnpm-lock.yaml ./
 
-# Install dependencies (production only to save space, but we need devDeps for build usually, so install all then prune)
-# Actually for next build we need dev dependencies.
-RUN pnpm install --frozen-lockfile
+# Install pnpm and dependencies
+RUN npm install -g pnpm && \
+    pnpm install --no-frozen-lockfile
 
-# Copy the rest of the application code
+# Copy all source files
 COPY . .
 
-# Build the Next.js application
+# Build the app
 RUN pnpm run build
 
-# Cloud Run sets the PORT environment variable.
-# Next.js automatically listens on PORT if it's set.
+# Set environment
+ENV NODE_ENV=production
 ENV PORT=8080
+
 EXPOSE 8080
 
-# Start the application
+# Start the server
 CMD ["pnpm", "start"]

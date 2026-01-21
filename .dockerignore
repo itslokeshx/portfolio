@@ -1,9 +1,9 @@
 node_modules
 .next
-out
 .git
 .github
-.vscode
-Dockerfile
-README.md
+*.md
 .env*.local
+out
+.vscode
+.DS_Store
