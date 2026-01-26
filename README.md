@@ -1,42 +1,114 @@
-# Portfolio Website
+# A Portfolio Built as a System
 
-A modern, responsive personal portfolio website built with Next.js, TypeScript, and Tailwind CSS. It features a Cyberpunk-inspired aesthetic with interactive terminal elements, 3D graphics, and smooth animations.
+This repository contains the source code for my personal portfolio.
 
-![Homepage Screenshot](public/site%20images/home.png)
+Rather than treating a portfolio as a résumé or a gallery, I approached it as a **system** — something that reflects how I think, structure problems, and improve through iteration, with AI as a collaborator in the process.
 
-## Features
+---
 
-- **Cyberpunk Aesthetics**: Immersive dark mode UI featuring neon accents, subtle scanlines, and glitch effects for a cohesive thematic experience.
-- **Interactive Terminal**: A fully functional CLI implementation where users execute commands (`help`, `about`, `projects`) to navigate or trigger actions.
-- **High Performance**: Optimized for Core Web Vitals with 60 FPS animations, ensuring smooth scrolling and transitions via Framer Motion.
-- **Responsive Design**: Mobile-first architecture that scales complex UI elements like the 3D canvas and terminal window across all device sizes.
-- **3D Integration**: Seamlessly blended React Three Fiber elements that provide depth without compromising accessibility or load times.
+## 🔗 Live Deployment
 
-## Design & Architecture
+https://lokesh-portfolio-593868443355.us-central1.run.app
 
-- **Component Architecture**: Follows specific design patterns separating logic (custom hooks) from presentation (dumb components) for better maintainability.
-- **State Management**: Utilizes lightweight React Context for managing application-wide state such as terminal command history and sound settings.
-- **Theming System**: Implements a robust Tailwind-based design system using CSS variables for consistent spacing, typography, and color palettes.
-- **Accessibility**: Built with semantic HTML and appropriate ARIA labels, ensuring the custom interactive elements remain usable for all visitors.
+---
 
-## Tech Stack
+## 🖼️ Screenshots
 
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS, Shadcn UI, Radix UI
-- **Animation**: Framer Motion, React Three Fiber
-- **Icons**: Lucide React
+**Homepage Overview**
 
-## Project Structure
+![Portfolio Homepage](public/site%20images/home.png)
 
-- `app/`: Next.js App Router pages and layouts.
-- `components/`: Reusable React components (UI, specific sections).
-- `public/`: Static assets (images, fonts).
-- `lib/`: Utility functions and helper classes.
-- `styles/`: Global styles and Tailwind configuration.
+---
 
-## License
+## 🎯 Intent
 
-This project is licensed under the MIT License.
+Most portfolios focus on outcomes.
 
+This one focuses on **decision-making**.
 
+Every part of this project — layout, interaction, architecture, and deployment — was treated as a small but real product. AI tools were used to explore options, challenge assumptions, and accelerate iteration, while final decisions remained deliberate and human-driven.
+
+The goal was not visual novelty, but clarity, coherence, and an honest representation of how I build when AI is part of my workflow.
+
+---
+
+## 🎨 Design Approach
+
+The interface is intentionally restrained.
+
+- Structure over decoration  
+- Signal over noise  
+- Fewer elements, used deliberately  
+
+Early layout and hierarchy exploration were informed through AI-assisted ideation before being refined manually.
+
+---
+
+## 🧩 Implementation Notes
+
+- Built with **Next.js (App Router)** and **TypeScript**
+- AI was used during development to reason about component boundaries, refactoring options, and system flow
+- Components are structured to separate intent, logic, and presentation
+- Motion is subtle and functional, not ornamental
+- Performance and responsiveness are treated as baseline requirements
+
+3D and animation elements are used only where they add meaning — not spectacle.
+
+---
+
+## 🛠️ Technology Stack
+
+- **Framework:** Next.js 14  
+- **Language:** TypeScript  
+- **Styling:** Tailwind CSS, shadcn/ui, Radix UI  
+- **Motion & Graphics:** Framer Motion, React Three Fiber  
+- **Icons:** Lucide React  
+- **Containerization:** Docker  
+
+---
+
+## ☁️ Deployment
+
+This project is deployed exactly as it exists in this repository.
+
+- Containerized using Docker  
+- Deployed on **Google Cloud Run**  
+- Configured to scale to zero when idle  
+- Designed to remain within free-tier limits  
+- Treated as a production system, not a demo  
+
+---
+
+## 🤖 Use of Google AI Tools
+
+Google AI tools were used as collaborators to support exploration and iteration.
+
+- **Google Stitch AI** — used during early design to explore layout structure and information hierarchy  
+- **Google Antigravity** — used during development to assist with architectural reasoning and refactoring  
+
+All final design and technical decisions were made deliberately and implemented manually.
+
+---
+
+## 📁 Project Structure
+
+```
+
+app/         → Routing, layouts, and page composition
+components/  → Reusable UI and system components
+lib/         → Utilities and shared logic
+public/      → Static assets
+styles/      → Global styles and Tailwind configuration
+
+```
+
+---
+
+Built for the **New Year, New You Portfolio Challenge**  
+Presented by **Google AI × DEV Community**
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.  
