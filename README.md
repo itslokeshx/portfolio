@@ -113,7 +113,7 @@ Presented by **Google AI × DEV Community**
 
 <div align="center">
 
-[![Star History Chart](https://api.star-history.com/svg?repos=itslokeshx/CorteXia&type=Date)](https://star-history.com/#itslokeshx/CorteXia&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=itslokeshx/portfolio&type=Date)](https://star-history.com/#itslokeshx/portfolio&Date)
 
 </div>
 
