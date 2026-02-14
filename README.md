@@ -109,6 +109,18 @@ Presented by **Google AI × DEV Community**
 
 ---
 
+## 🌟 Star History
+
+If CorteXia helps you achieve more, **star this repository** to show your support! ⭐
+
+<div align="center">
+
+[![Star History Chart](https://api.star-history.com/svg?repos=itslokeshx/CorteXia&type=Date)](https://star-history.com/#itslokeshx/CorteXia&Date)
+
+</div>
+
+---
+
 ## 📄 License
 
 This project is licensed under the **MIT License**.  
