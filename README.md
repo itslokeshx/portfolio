@@ -8,7 +8,7 @@ Rather than treating a portfolio as a résumé or a gallery, I approached it as 
 
 ## 🔗 Live Deployment
 
-https://lokesh-portfolio-593868443355.us-central1.run.app
+[https://itslokeshx.vercel.app/](https://itslokeshx.vercel.app/)
 
 ---
 
