@@ -1,115 +1,90 @@
-# A Portfolio Built as a System
+<div align="center">
 
-This repository contains the source code for my personal portfolio.
+# Portfolio
 
-Rather than treating a portfolio as a résumé or a gallery, I approached it as a **system** — something that reflects how I think, structure problems, and improve through iteration, with AI as a collaborator in the process.
+A personal developer portfolio built with Next.js, TypeScript, and Three.js.
 
----
+[![Live Site](https://img.shields.io/badge/Live-itslokeshx.vercel.app-00fff5?style=flat-square&labelColor=0a0a0a)](https://itslokeshx.vercel.app/)
+[![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
 
-## 🔗 Live Deployment
+<br />
 
-[https://itslokeshx.vercel.app/](https://itslokeshx.vercel.app/)
+<img src="public/site%20images/home.png" alt="Portfolio Preview" width="100%" />
 
----
+</div>
 
-## 🖼️ Screenshots
+## About
 
-**Homepage Overview**
+A terminal-themed portfolio designed around clarity and intentional interaction. Rather than a static résumé page, the site is structured as a cohesive system — each section uses terminal UI patterns, monospaced typography, and subtle animation to reflect how I approach building software.
 
-![Portfolio Homepage](public/site%20images/home.png)
+## Features
 
----
+- **Terminal-styled interface** — Custom chrome with boot sequences, status indicators, and monospaced layout
+- **Interactive skills constellation** — Orbit-based visualization where each node shows proficiency and related projects on hover
+- **Smooth motion design** — Framer Motion-powered transitions, staggered reveals, and typewriter effects
+- **Responsive across devices** — Tested and optimized from desktop to mobile
+- **Production-grade deployment** — Dockerized and deployed on Google Cloud Run with scale-to-zero
 
-## 🎯 Intent
+## Screenshots
 
-Most portfolios focus on outcomes.
+<table>
+<tr>
+<td><img src="public/site%20images/about.png" alt="About" /></td>
+<td><img src="public/site%20images/skill1.png" alt="Skills" /></td>
+</tr>
+<tr>
+<td><img src="public/site%20images/project1.png" alt="Projects" /></td>
+<td><img src="public/site%20images/contact.png" alt="Contact" /></td>
+</tr>
+</table>
 
-This one focuses on **decision-making**.
+## Tech Stack
 
-Every part of this project — layout, interaction, architecture, and deployment — was treated as a small but real product. AI tools were used to explore options, challenge assumptions, and accelerate iteration, while final decisions remained deliberate and human-driven.
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS, shadcn/ui, Radix UI |
+| Animation | Framer Motion |
+| 3D | Three.js, React Three Fiber |
+| Icons | Lucide React |
+| Analytics | Vercel Analytics |
+| Container | Docker |
+| Hosting | Google Cloud Run |
 
-The goal was not visual novelty, but clarity, coherence, and an honest representation of how I build when AI is part of my workflow.
-
----
-
-## 🎨 Design Approach
-
-The interface is intentionally restrained.
-
-- Structure over decoration  
-- Signal over noise  
-- Fewer elements, used deliberately  
-
-Early layout and hierarchy exploration were informed through AI-assisted ideation before being refined manually.
-
----
-
-## 🧩 Implementation Notes
-
-- Built with **Next.js (App Router)** and **TypeScript**
-- AI was used during development to reason about component boundaries, refactoring options, and system flow
-- Components are structured to separate intent, logic, and presentation
-- Motion is subtle and functional, not ornamental
-- Performance and responsiveness are treated as baseline requirements
-
-3D and animation elements are used only where they add meaning — not spectacle.
-
----
-
-## 🛠️ Technology Stack
-
-- **Framework:** Next.js 14  
-- **Language:** TypeScript  
-- **Styling:** Tailwind CSS, shadcn/ui, Radix UI  
-- **Motion & Graphics:** Framer Motion, React Three Fiber  
-- **Icons:** Lucide React  
-- **Containerization:** Docker  
-
----
-
-## ☁️ Deployment
-
-This project is deployed exactly as it exists in this repository.
-
-- Containerized using Docker  
-- Deployed on **Google Cloud Run**  
-- Configured to scale to zero when idle  
-- Designed to remain within free-tier limits  
-- Treated as a production system, not a demo  
-
----
-
-## 🤖 Use of Google AI Tools
-
-Google AI tools were used as collaborators to support exploration and iteration.
-
-- **Google Stitch AI** — used during early design to explore layout structure and information hierarchy  
-- **Google Antigravity** — used during development to assist with architectural reasoning and refactoring  
-
-All final design and technical decisions were made deliberately and implemented manually.
-
----
-
-## 📁 Project Structure
+## Project Structure
 
 ```
-
-app/         → Routing, layouts, and page composition
-components/  → Reusable UI and system components
-lib/         → Utilities and shared logic
-public/      → Static assets
-styles/      → Global styles and Tailwind configuration
-
+app/           → Routes, layouts, page composition
+components/    → Reusable UI and section components
+hooks/         → Custom React hooks
+lib/           → Utilities and shared logic
+public/        → Static assets and project images
+styles/        → Global styles and Tailwind config
 ```
 
----
+## Getting Started
 
-Built for the **New Year, New You Portfolio Challenge**  
-Presented by **Google AI × DEV Community**
+```bash
+# Clone
+git clone https://github.com/itslokeshx/portfolio.git
+cd portfolio
 
----
+# Install dependencies
+pnpm install
 
-## 🌟 Star History
+# Run locally
+pnpm dev
+```
+
+### Docker
+
+```bash
+docker build -t portfolio .
+docker run -p 3000:3000 portfolio
+```
+
+## Star History
 
 <div align="center">
 
@@ -117,8 +92,6 @@ Presented by **Google AI × DEV Community**
 
 </div>
 
----
+## License
 
-## 📄 License
-
-This project is licensed under the **MIT License**.  
+[MIT](LICENSE)
