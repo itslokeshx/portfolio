@@ -1,32 +1,32 @@
-"use client"
-import { useState, useRef, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Github, ExternalLink, Plus, ChevronDown } from "lucide-react"
+"use client";
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Github, ExternalLink, Plus, ChevronDown } from "lucide-react";
 
 interface Project {
-  id: number
-  title: string
-  category: string
-  description: string
-  stack: string[]
-  image: string
-  color: string
-  github: string
-  demo: string
+  id: number;
+  title: string;
+  category: string;
+  description: string;
+  stack: string[];
+  image: string;
+  color: string;
+  github: string;
+  demo: string;
 }
 
 const featuredProjects: Project[] = [
   {
     id: 1,
-    title: "Second Brain",
+    title: "CorteXia",
     category: "MERN STACK",
     description:
-      "**Problem:** Most productivity tools fail to protect years of focus data, locking backups behind paywalls and fragile local storage.\n**Impact:** When systems crash, long-term progress disappears, breaking consistency and trust.\n**Solution:** I built a local-first productivity system that works fully offline while securely backing up data for permanent ownership.",
-    stack: ["MongoDB", "Express", "React", "Node.js", "IndexedDB"],
-    image: "/Project_images/second-brain.png",
-    color: "#0F172A",
-    github: "https://github.com/itslokeshx/Second-Brain",
-    demo: "https://second-brain-hub.vercel.app/",
+      "**Problem:** Productivity tools are fragmented and AI lacks real context.\n**Impact:** Users lose clarity, consistency, and alignment between daily actions and long-term goals.\n**Solution:** CorteXia — an AI-powered unified workspace connecting tasks, goals, habits, finance, and journaling into one intelligent system.",
+    stack: ["MongoDB", "Express", "React", "Node.js", "AI"],
+    image: "/Project_images/Cortexia.png",
+    color: "#6D28D9",
+    github: "https://github.com/itslokeshx/CorteXia",
+    demo: "https://corte-xia.vercel.app/",
   },
   {
     id: 2,
@@ -56,7 +56,8 @@ const featuredProjects: Project[] = [
     id: 4,
     title: "SaveMyTab",
     category: "CHROME EXT",
-    description: "**Problem:** Modern workflows encourage tab overload, silently draining focus and mental clarity.\n**Impact:** Constant context switching slows productivity and increases cognitive fatigue.\n**Solution:** I built a lightweight browser extension that saves essential tabs instantly and keeps workspaces clean.",
+    description:
+      "**Problem:** Modern workflows encourage tab overload, silently draining focus and mental clarity.\n**Impact:** Constant context switching slows productivity and increases cognitive fatigue.\n**Solution:** I built a lightweight browser extension that saves essential tabs instantly and keeps workspaces clean.",
     stack: ["JavaScript", "Chrome API", "HTML/CSS"],
     image: "/Project_images/SaveMyTab.jpeg",
     color: "#FF9F00",
@@ -67,24 +68,40 @@ const featuredProjects: Project[] = [
     id: 5,
     title: "CV Application",
     category: "REACT",
-    description: "**Problem:** Traditional CV builders provide feedback only after exporting, forcing users to guess layouts.\n**Impact:** Users waste time with repeated revisions and unnecessary exports.\n**Solution:** I built a real-time CV builder that updates the resume instantly as users edit.",
+    description:
+      "**Problem:** Traditional CV builders provide feedback only after exporting, forcing users to guess layouts.\n**Impact:** Users waste time with repeated revisions and unnecessary exports.\n**Solution:** I built a real-time CV builder that updates the resume instantly as users edit.",
     stack: ["React", "Vite"],
     image: "/Project_images/CV.jpeg",
     color: "#9333EA",
     github: "https://github.com/itslokeshx/CV-application",
     demo: "https://cv-application-nine-gamma.vercel.app/",
   },
-]
+];
 
 const allProjects: Project[] = [
   ...featuredProjects,
+
+  // MERN STACK Projects
+  {
+    id: 38,
+    title: "Second Brain",
+    category: "MERN STACK",
+    description:
+      "**Problem:** Most productivity tools fail to protect years of focus data, locking backups behind paywalls and fragile local storage.\n**Impact:** When systems crash, long-term progress disappears, breaking consistency and trust.\n**Solution:** I built a local-first productivity system that works fully offline while securely backing up data for permanent ownership.",
+    stack: ["MongoDB", "Express", "React", "Node.js", "IndexedDB"],
+    image: "/Project_images/second-brain.png",
+    color: "#0F172A",
+    github: "https://github.com/itslokeshx/Second-Brain",
+    demo: "https://second-brain-hub.vercel.app/",
+  },
 
   // HTML/CSS Projects (in specified order)
   {
     id: 30,
     title: "Tesla Tribute Page",
     category: "HTML/CSS",
-    description: "A tribute page for Nikola Tesla — my first web development project built with HTML & CSS.",
+    description:
+      "A tribute page for Nikola Tesla — my first web development project built with HTML & CSS.",
     stack: ["HTML", "CSS"],
     image: "/Project_images/Tesla.jpeg",
     color: "#E34F26",
@@ -95,7 +112,8 @@ const allProjects: Project[] = [
     id: 33,
     title: "Newsletter Subscription",
     category: "HTML/CSS",
-    description: "A static Newsletter Subscription page built with HTML, CSS, and JavaScript. Designed as a Frontend Mentor challenge, featuring a responsive layout and form validation for email subscription.",
+    description:
+      "A static Newsletter Subscription page built with HTML, CSS, and JavaScript. Designed as a Frontend Mentor challenge, featuring a responsive layout and form validation for email subscription.",
     stack: ["HTML", "CSS"],
     image: "/Project_images/newsLetter.jpeg",
     color: "#E34F26",
@@ -106,7 +124,8 @@ const allProjects: Project[] = [
     id: 31,
     title: "News Homepage",
     category: "HTML/CSS",
-    description: "A static News Homepage built with HTML, CSS, and JavaScript. Fully responsive and designed as part of a Frontend Mentor Challenge.",
+    description:
+      "A static News Homepage built with HTML, CSS, and JavaScript. Fully responsive and designed as part of a Frontend Mentor Challenge.",
     stack: ["HTML", "CSS"],
     image: "/Project_images/News_page.jpeg",
     color: "#E34F26",
@@ -117,7 +136,8 @@ const allProjects: Project[] = [
     id: 32,
     title: "Result Summary",
     category: "HTML/CSS",
-    description: "A static Result Summary Page built with HTML and CSS. Created as a Frontend Mentor challenge to practice responsive layouts and clean UI design.",
+    description:
+      "A static Result Summary Page built with HTML and CSS. Created as a Frontend Mentor challenge to practice responsive layouts and clean UI design.",
     stack: ["HTML", "CSS"],
     image: "/Project_images/result.jpeg",
     color: "#E34F26",
@@ -128,7 +148,8 @@ const allProjects: Project[] = [
     id: 34,
     title: "Love Calce 1.0",
     category: "HTML/CSS",
-    description: "❤️ Love Calculator 1.0 – A fun web app that shows love percentage with GIF reactions. Enter your name & crush's name, get instant love results! 💘",
+    description:
+      "❤️ Love Calculator 1.0 – A fun web app that shows love percentage with GIF reactions. Enter your name & crush's name, get instant love results! 💘",
     stack: ["HTML", "CSS"],
     image: "/Project_images/Love_Cale_1.0.png",
     color: "#E34F26",
@@ -141,7 +162,8 @@ const allProjects: Project[] = [
     id: 19,
     title: "Study Hub sem4",
     category: "JAVASCRIPT",
-    description: "📚 SEM 4 Study Hub – A simple site to share PYQs, assignments, tasks, and study resources for our class. Built with HTML, CSS, and JavaScript for easy access to notes & materials.",
+    description:
+      "📚 SEM 4 Study Hub – A simple site to share PYQs, assignments, tasks, and study resources for our class. Built with HTML, CSS, and JavaScript for easy access to notes & materials.",
     stack: ["JavaScript", "HTML", "CSS"],
     image: "/Project_images/Sem4.png",
     color: "#F7DF1E",
@@ -152,7 +174,8 @@ const allProjects: Project[] = [
     id: 25,
     title: "EB Bill Calculator",
     category: "JAVASCRIPT",
-    description: "⚡💡 A real-time Electricity Bill Calculator built with HTML, CSS, and JavaScript. 🔢 Enter the number of units consumed, and the app instantly shows the 💰 amount to pay based on Tamil Nadu domestic tariff rates.",
+    description:
+      "⚡💡 A real-time Electricity Bill Calculator built with HTML, CSS, and JavaScript. 🔢 Enter the number of units consumed, and the app instantly shows the 💰 amount to pay based on Tamil Nadu domestic tariff rates.",
     stack: ["JavaScript", "HTML", "CSS"],
     image: "/Project_images/EB_BILL.jpeg",
     color: "#F7DF1E",
@@ -163,7 +186,8 @@ const allProjects: Project[] = [
     id: 26,
     title: "Love Calculator 2.0",
     category: "JAVASCRIPT",
-    description: "❤️ Love Calculator 2.0 – A fun web app that shows love percentage with GIF reactions. Enter your name & crush's name, get instant love results! 💘",
+    description:
+      "❤️ Love Calculator 2.0 – A fun web app that shows love percentage with GIF reactions. Enter your name & crush's name, get instant love results! 💘",
     stack: ["JavaScript", "HTML", "CSS"],
     image: "/Project_images/Love_Cal.jpeg",
     color: "#F7DF1E",
@@ -174,7 +198,8 @@ const allProjects: Project[] = [
     id: 13,
     title: "Cat Meme App",
     category: "JAVASCRIPT",
-    description: "🐱 Cat Meme Generator – Select an emotion, choose GIFs or images, and get an instant cat meme! Built with vanilla JS to practice DOM manipulation & filtering.",
+    description:
+      "🐱 Cat Meme Generator – Select an emotion, choose GIFs or images, and get an instant cat meme! Built with vanilla JS to practice DOM manipulation & filtering.",
     stack: ["JavaScript", "HTML", "CSS"],
     image: "/Project_images/cat_meme.png",
     color: "#F7DF1E",
@@ -185,7 +210,8 @@ const allProjects: Project[] = [
     id: 20,
     title: "Password Generator",
     category: "JAVASCRIPT",
-    description: "🔐 Random Password Generator – Generate secure passwords (Weak, Medium, Strong) with numbers, letters & symbols. Built in vanilla JS with copy-to-clipboard.",
+    description:
+      "🔐 Random Password Generator – Generate secure passwords (Weak, Medium, Strong) with numbers, letters & symbols. Built in vanilla JS with copy-to-clipboard.",
     stack: ["JavaScript", "HTML", "CSS"],
     image: "/Project_images/Password_gen.png",
     color: "#F7DF1E",
@@ -196,7 +222,8 @@ const allProjects: Project[] = [
     id: 29,
     title: "Temperature Calculator",
     category: "JAVASCRIPT",
-    description: "A simple and responsive Temperature Converter web app built with HTML, CSS, and JavaScript. Instantly convert between Celsius, Fahrenheit, and Kelvin.",
+    description:
+      "A simple and responsive Temperature Converter web app built with HTML, CSS, and JavaScript. Instantly convert between Celsius, Fahrenheit, and Kelvin.",
     stack: ["JavaScript", "HTML", "CSS"],
     image: "/Project_images/Temp_Cal.jpeg",
     color: "#F7DF1E",
@@ -207,7 +234,8 @@ const allProjects: Project[] = [
     id: 15,
     title: "Ordering App",
     category: "JAVASCRIPT",
-    description: "🍔 Ordering App – A simple online food ordering simulation built with HTML, CSS & JavaScript. Add/remove items in real-time with a dynamic cart.",
+    description:
+      "🍔 Ordering App – A simple online food ordering simulation built with HTML, CSS & JavaScript. Add/remove items in real-time with a dynamic cart.",
     stack: ["JavaScript", "HTML", "CSS"],
     image: "/Project_images/ordering-app.png",
     color: "#F7DF1E",
@@ -218,7 +246,8 @@ const allProjects: Project[] = [
     id: 24,
     title: "Age Calculator",
     category: "JAVASCRIPT",
-    description: "🎂📅 A simple Age Calculator built with HTML, CSS, and JavaScript. 👤 Enter your birthdate and instantly find out your exact age in years, months, and days!",
+    description:
+      "🎂📅 A simple Age Calculator built with HTML, CSS, and JavaScript. 👤 Enter your birthdate and instantly find out your exact age in years, months, and days!",
     stack: ["JavaScript", "HTML", "CSS"],
     image: "/Project_images/Age_cal.jpeg",
     color: "#F7DF1E",
@@ -229,7 +258,8 @@ const allProjects: Project[] = [
     id: 28,
     title: "Math Calce",
     category: "JAVASCRIPT",
-    description: "🧮 A simple Math Calculator built with HTML, CSS, and JavaScript as a small JS challenge",
+    description:
+      "🧮 A simple Math Calculator built with HTML, CSS, and JavaScript as a small JS challenge",
     stack: ["JavaScript", "HTML", "CSS"],
     image: "/Project_images/Math_cal.png",
     color: "#F7DF1E",
@@ -240,7 +270,8 @@ const allProjects: Project[] = [
     id: 14,
     title: "Otakumens",
     category: "JAVASCRIPT",
-    description: "A clean and responsive website showcasing popular anime. Built using HTML, CSS, and JavaScript.",
+    description:
+      "A clean and responsive website showcasing popular anime. Built using HTML, CSS, and JavaScript.",
     stack: ["JavaScript", "HTML", "CSS"],
     image: "/Project_images/Otakumens.png",
     color: "#F7DF1E",
@@ -251,7 +282,8 @@ const allProjects: Project[] = [
     id: 16,
     title: "Fitness Site",
     category: "JAVASCRIPT",
-    description: "💪🌐 A simple Fitness Website built with HTML, CSS, and JavaScript in 1hour during a college symposium web dev challenge. 🏆",
+    description:
+      "💪🌐 A simple Fitness Website built with HTML, CSS, and JavaScript in 1hour during a college symposium web dev challenge. 🏆",
     stack: ["JavaScript", "HTML", "CSS"],
     image: "/Project_images/fitness_site.png",
     color: "#F7DF1E",
@@ -262,7 +294,8 @@ const allProjects: Project[] = [
     id: 18,
     title: "Study Hub sem3",
     category: "JAVASCRIPT",
-    description: "📚 SEM 3 Study Hub – A simple site to share class notes, PYQs, assignments, and resources for easy access. Built with HTML, CSS, and JavaScript for collaborative learning.",
+    description:
+      "📚 SEM 3 Study Hub – A simple site to share class notes, PYQs, assignments, and resources for easy access. Built with HTML, CSS, and JavaScript for collaborative learning.",
     stack: ["JavaScript", "HTML", "CSS"],
     image: "/Project_images/Sem3.png",
     color: "#F7DF1E",
@@ -273,7 +306,8 @@ const allProjects: Project[] = [
     id: 21,
     title: "To-Do List",
     category: "JAVASCRIPT",
-    description: "A simple and responsive To-Do List web app built with HTML, CSS, and JavaScript. Add, manage, and organize your daily tasks easily right in your browser.",
+    description:
+      "A simple and responsive To-Do List web app built with HTML, CSS, and JavaScript. Add, manage, and organize your daily tasks easily right in your browser.",
     stack: ["JavaScript", "HTML", "CSS"],
     image: "/Project_images/To_Do.png",
     color: "#F7DF1E",
@@ -284,7 +318,8 @@ const allProjects: Project[] = [
     id: 22,
     title: "Color Flipper",
     category: "JAVASCRIPT",
-    description: "🎨 Color Flipper – A simple JavaScript project that changes background colors randomly on button click. A basic project from FreeCodeCamp to practice with DOM & Math.random()",
+    description:
+      "🎨 Color Flipper – A simple JavaScript project that changes background colors randomly on button click. A basic project from FreeCodeCamp to practice with DOM & Math.random()",
     stack: ["JavaScript", "HTML", "CSS"],
     image: "/Project_images/Color_flipper.png",
     color: "#F7DF1E",
@@ -295,7 +330,8 @@ const allProjects: Project[] = [
     id: 17,
     title: "Counter",
     category: "JAVASCRIPT",
-    description: "A simple counter app built with HTML, CSS, and JavaScript. A basic project from FreeCodeCamp to practice DOM manipulation and JavaScript fundamentals.",
+    description:
+      "A simple counter app built with HTML, CSS, and JavaScript. A basic project from FreeCodeCamp to practice DOM manipulation and JavaScript fundamentals.",
     stack: ["JavaScript", "HTML", "CSS"],
     image: "/Project_images/counter.png",
     color: "#F7DF1E",
@@ -308,7 +344,8 @@ const allProjects: Project[] = [
     id: 6,
     title: "Travel Journal",
     category: "REACT",
-    description: "🌍 Travel Journal – A simple React project for practicing props and dynamic data rendering. Users can explore a travel journal layout with destination cards powered by reusable components. Built with React + Vite, styled for a clean and minimal look. 🚀",
+    description:
+      "🌍 Travel Journal – A simple React project for practicing props and dynamic data rendering. Users can explore a travel journal layout with destination cards powered by reusable components. Built with React + Vite, styled for a clean and minimal look. 🚀",
     stack: ["React", "HTML", "CSS"],
     image: "/Project_images/Trave_journal.png",
     color: "#61DAFB",
@@ -319,7 +356,8 @@ const allProjects: Project[] = [
     id: 7,
     title: "Business Card",
     category: "REACT",
-    description: "🚀 Tesla Digital Business Card – A React + Vite project imagining how Tesla's digital business card might look. Clean, fast, and responsive.",
+    description:
+      "🚀 Tesla Digital Business Card – A React + Vite project imagining how Tesla's digital business card might look. Clean, fast, and responsive.",
     stack: ["React", "CSS"],
     image: "/Project_images/BusinessCard.png",
     color: "#61DAFB",
@@ -332,7 +370,8 @@ const allProjects: Project[] = [
     id: 8,
     title: "YaaziCut",
     category: "TYPESCRIPT",
-    description: "YaaziCut is a minimal, lossless video splitter for Linux and Windows—drag your video, pick how many segments, and split instantly. No frills, no re-encoding, just fast and simple video division.",
+    description:
+      "YaaziCut is a minimal, lossless video splitter for Linux and Windows—drag your video, pick how many segments, and split instantly. No frills, no re-encoding, just fast and simple video division.",
     stack: ["Electron", "TypeScript", "Node.js"],
     image: "/Project_images/YaaziCut.png",
     color: "#3178C6",
@@ -356,7 +395,8 @@ const allProjects: Project[] = [
     id: 10,
     title: "QR Code Generator",
     category: "NODE/EXPRESS",
-    description: "⚡ QR Code Generator – A simple Node.js CLI app that generates a QR code from a URL and saves user input (name + URL) into a text file. 🚀 Built with Inquirer, qr-image, and Node.js.",
+    description:
+      "⚡ QR Code Generator – A simple Node.js CLI app that generates a QR code from a URL and saves user input (name + URL) into a text file. 🚀 Built with Inquirer, qr-image, and Node.js.",
     stack: ["Node.js", "Inquirer"],
     image: "/Project_images/QR.jpeg",
     color: "#68A063",
@@ -367,7 +407,8 @@ const allProjects: Project[] = [
     id: 11,
     title: "Github User Details",
     category: "API",
-    description: "📊 GitHub User Details – Fetch and display any GitHub user's profile info in real-time. Built with HTML, CSS, and vanilla JavaScript using the GitHub API.",
+    description:
+      "📊 GitHub User Details – Fetch and display any GitHub user's profile info in real-time. Built with HTML, CSS, and vanilla JavaScript using the GitHub API.",
     stack: ["JavaScript", "API"],
     image: "/Project_images/GIthub_user_details.jpeg",
     color: "#68A063",
@@ -378,7 +419,8 @@ const allProjects: Project[] = [
     id: 12,
     title: "Advice Generator",
     category: "API",
-    description: "A Frontend Mentor project – Random Advice Generator built with HTML, CSS, and JavaScript. Uses an API to fetch and display random pieces of advice with a single click.",
+    description:
+      "A Frontend Mentor project – Random Advice Generator built with HTML, CSS, and JavaScript. Uses an API to fetch and display random pieces of advice with a single click.",
     stack: ["JavaScript", "API"],
     image: "/Project_images/Advice_Gen.jpeg",
     color: "#68A063",
@@ -389,7 +431,8 @@ const allProjects: Project[] = [
     id: 23,
     title: "Color Scheme Generator",
     category: "API",
-    description: "🎨 Color Scheme Generator – A Scrimba API project that generates dynamic color palettes using the Color API. Pick a base color & scheme type, get instant palettes.",
+    description:
+      "🎨 Color Scheme Generator – A Scrimba API project that generates dynamic color palettes using the Color API. Pick a base color & scheme type, get instant palettes.",
     stack: ["JavaScript", "API"],
     image: "/Project_images/Color_scheme.png",
     color: "#F7DF1E",
@@ -402,7 +445,8 @@ const allProjects: Project[] = [
     id: 35,
     title: "Hostel Management",
     category: "PHP & SQL",
-    description: "🏫 Hostel Management System – A responsive web app for managing student registrations, room availability, and complaints. 💻 Built with PHP, MySQL, HTML, CSS, and JavaScript.",
+    description:
+      "🏫 Hostel Management System – A responsive web app for managing student registrations, room availability, and complaints. 💻 Built with PHP, MySQL, HTML, CSS, and JavaScript.",
     stack: ["PHP", "MySQL", "HTML"],
     image: "/Project_images/hostel_management.png",
     color: "#777BB4",
@@ -415,49 +459,58 @@ const allProjects: Project[] = [
     id: 37,
     title: "MindfulAI",
     category: "PYTHON",
-    description: "🧠 MindfulAI is an intelligent and empathetic web app providing AI-powered mental health support. It features emotion detection 💬, personalized recommendations 🧾, a user dashboard 👤, and secure login 🔐. Built with Flask, Supabase, and Gemini API.",
+    description:
+      "🧠 MindfulAI is an intelligent and empathetic web app providing AI-powered mental health support. It features emotion detection 💬, personalized recommendations 🧾, a user dashboard 👤, and secure login 🔐. Built with Flask, Supabase, and Gemini API.",
     stack: ["Python", "AI/ML"],
     image: "/Project_images/MindfullAI.png",
     color: "#3776AB",
     github: "https://github.com/itslokeshx/mindfulAI",
     demo: "https://mindfulai-cggh.onrender.com/",
   },
-]
+];
 
 // Shuffle Text Effect Component
-function ShuffleText({ text, isActive, className }: { text: string; isActive: boolean; className?: string }) {
-  const [displayText, setDisplayText] = useState(text)
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ_"
+function ShuffleText({
+  text,
+  isActive,
+  className,
+}: {
+  text: string;
+  isActive: boolean;
+  className?: string;
+}) {
+  const [displayText, setDisplayText] = useState(text);
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ_";
 
   useEffect(() => {
     if (!isActive) {
-      setDisplayText(text)
-      return
+      setDisplayText(text);
+      return;
     }
 
-    let frame = 0
+    let frame = 0;
     const interval = setInterval(() => {
       setDisplayText(
         text
           .split("")
           .map((char, index) => {
-            if (char === " ") return " "
-            if (frame > index) return text[index]
-            return chars[Math.floor(Math.random() * chars.length)]
+            if (char === " ") return " ";
+            if (frame > index) return text[index];
+            return chars[Math.floor(Math.random() * chars.length)];
           })
           .join(""),
-      )
-      frame += 1
+      );
+      frame += 1;
       if (frame > text.length + 5) {
-        clearInterval(interval)
-        setDisplayText(text)
+        clearInterval(interval);
+        setDisplayText(text);
       }
-    }, 30)
+    }, 30);
 
-    return () => clearInterval(interval)
-  }, [isActive, text])
+    return () => clearInterval(interval);
+  }, [isActive, text]);
 
-  return <span className={className}>{displayText}</span>
+  return <span className={className}>{displayText}</span>;
 }
 
 function ProjectRow({
@@ -466,17 +519,17 @@ function ProjectRow({
   isExpanded,
   onToggle,
 }: {
-  project: Project
-  index: number
-  isExpanded: boolean
-  onToggle: () => void
+  project: Project;
+  index: number;
+  isExpanded: boolean;
+  onToggle: () => void;
 }) {
-  const [isHovered, setIsHovered] = useState(false)
-  const rowRef = useRef<HTMLDivElement>(null)
+  const [isHovered, setIsHovered] = useState(false);
+  const rowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Scroll logic removed as per user request to "let it be like before"
-  }, [])
+  }, []);
 
   return (
     <div className="border-b border-white/5" ref={rowRef}>
@@ -513,17 +566,24 @@ function ProjectRow({
               initial={{ opacity: 0 }}
               animate={{ opacity: isHovered && !isExpanded ? 1 : 0 }}
               transition={{ duration: 0.3 }}
-              className={`absolute inset-0 rounded-lg overflow-hidden border-2 ${project.id === 1
-                ? 'border-cyan shadow-[0_0_20px_rgba(0,240,255,0.25)]'
-                : project.id === 2
-                  ? 'border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.25)]'
-                  : project.id === 5
-                    ? 'border-slate-600 shadow-[0_0_20px_rgba(71,85,105,0.25)]'
-                    : ''
-                }`}
+              className={`absolute inset-0 rounded-lg overflow-hidden border-2 ${
+                project.id === 1
+                  ? "border-cyan shadow-[0_0_20px_rgba(0,240,255,0.25)]"
+                  : project.id === 2
+                    ? "border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.25)]"
+                    : project.id === 5
+                      ? "border-slate-600 shadow-[0_0_20px_rgba(71,85,105,0.25)]"
+                      : ""
+              }`}
               style={{
-                borderColor: project.id === 1 || project.id === 2 ? undefined : project.color,
-                boxShadow: project.id === 1 || project.id === 2 ? undefined : `0 0 20px ${project.color}40`
+                borderColor:
+                  project.id === 1 || project.id === 2
+                    ? undefined
+                    : project.color,
+                boxShadow:
+                  project.id === 1 || project.id === 2
+                    ? undefined
+                    : `0 0 20px ${project.color}40`,
               }}
             >
               <img
@@ -574,8 +634,9 @@ function ProjectRow({
                       transition={{ duration: 1.5, delay: 0.3 }}
                       className="absolute inset-0 z-10 pointer-events-none"
                       style={{
-                        backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 400 400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' /%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' /%3E%3C/svg%3E")',
-                        mixBlendMode: 'overlay'
+                        backgroundImage:
+                          "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E\")",
+                        mixBlendMode: "overlay",
                       }}
                     />
 
@@ -584,26 +645,27 @@ function ProjectRow({
                       src={project.image || "/placeholder.svg"}
                       alt={project.title}
                       initial={{
-                        filter: 'blur(60px) brightness(0.4) contrast(1.3) saturate(0.3)',
-                        opacity: 0.3
+                        filter:
+                          "blur(60px) brightness(0.4) contrast(1.3) saturate(0.3)",
+                        opacity: 0.3,
                       }}
                       animate={{
                         filter: [
-                          'blur(60px) brightness(0.4) contrast(1.3) saturate(0.3)',
-                          'blur(30px) brightness(0.7) contrast(1.15) saturate(0.7)',
-                          'blur(10px) brightness(0.9) contrast(1.05) saturate(0.95)',
-                          'blur(0px) brightness(1) contrast(1) saturate(1)'
+                          "blur(60px) brightness(0.4) contrast(1.3) saturate(0.3)",
+                          "blur(30px) brightness(0.7) contrast(1.15) saturate(0.7)",
+                          "blur(10px) brightness(0.9) contrast(1.05) saturate(0.95)",
+                          "blur(0px) brightness(1) contrast(1) saturate(1)",
                         ],
-                        opacity: [0.3, 0.6, 0.9, 1]
+                        opacity: [0.3, 0.6, 0.9, 1],
                       }}
                       transition={{
                         duration: 0.8,
                         times: [0, 0.3, 0.65, 1],
-                        ease: [0.22, 1, 0.36, 1]
+                        ease: [0.22, 1, 0.36, 1],
                       }}
                       className="w-full h-full object-cover"
                       style={{
-                        willChange: 'filter, opacity'
+                        willChange: "filter, opacity",
                       }}
                     />
 
@@ -614,7 +676,8 @@ function ProjectRow({
                       transition={{ duration: 1.5, delay: 0.5 }}
                       className="absolute inset-0 pointer-events-none z-20"
                       style={{
-                        backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 240, 255, 0.03) 2px, rgba(0, 240, 255, 0.03) 4px)'
+                        backgroundImage:
+                          "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 240, 255, 0.03) 2px, rgba(0, 240, 255, 0.03) 4px)",
                       }}
                     />
 
@@ -633,8 +696,8 @@ function ProjectRow({
                       // DOSSIER
                     </h4>
                     <div className="text-sm text-slate-300 leading-relaxed mb-4 space-y-2">
-                      {project.description.split('\n').map((line, i) => {
-                        const parts = line.split('**');
+                      {project.description.split("\n").map((line, i) => {
+                        const parts = line.split("**");
                         if (parts.length === 3) {
                           return (
                             <p key={i}>
@@ -683,7 +746,10 @@ function ProjectRow({
                           className="group/btn px-4 py-2 rounded-lg bg-cyan/5 border border-cyan/20 text-cyan font-medium font-mono text-sm tracking-wide backdrop-blur-sm transition-all duration-300 hover:bg-cyan hover:text-black hover:border-cyan hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] flex items-center gap-2"
                         >
                           Live Demo
-                          <ExternalLink size={16} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-300" />
+                          <ExternalLink
+                            size={16}
+                            className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-300"
+                          />
                         </a>
                       ) : (
                         <button
@@ -701,8 +767,8 @@ function ProjectRow({
           </motion.div>
         )}
       </AnimatePresence>
-    </div >
-  )
+    </div>
+  );
 }
 
 // Archive Card Component
@@ -749,17 +815,24 @@ function ArchiveCard({ project }: { project: Project }) {
       {/* Card Content */}
       <div className="p-6 flex flex-col flex-grow">
         <div className="flex items-start justify-between mb-3">
-          <h3 className="text-xl font-bold text-slate-200 group-hover:text-cyan transition-colors">{project.title}</h3>
+          <h3 className="text-xl font-bold text-slate-200 group-hover:text-cyan transition-colors">
+            {project.title}
+          </h3>
           <span className="text-[10px] font-mono text-cyan/70 border border-cyan/20 px-2 py-1 rounded">
             {project.category}
           </span>
         </div>
 
-        <p className="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">{project.description}</p>
+        <p className="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">
+          {project.description}
+        </p>
 
         <div className="flex flex-wrap gap-2 mt-auto">
           {project.stack.slice(0, 3).map((tech) => (
-            <span key={tech} className="text-[10px] text-slate-500 bg-white/5 px-2 py-1 rounded font-mono">
+            <span
+              key={tech}
+              className="text-[10px] text-slate-500 bg-white/5 px-2 py-1 rounded font-mono"
+            >
               {tech}
             </span>
           ))}
@@ -794,38 +867,53 @@ function ArchiveCard({ project }: { project: Project }) {
         </div>
       </div>
     </motion.div>
-  )
+  );
 }
 
 export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
-  const [expandedFeatured, setExpandedFeatured] = useState<number | null>(null)
-  const [showArchive, setShowArchive] = useState(false)
-  const [isArchiveTriggerHovered, setIsArchiveTriggerHovered] = useState(false)
-  const [activeFilter, setActiveFilter] = useState("HTML/CSS")
-  const scrollRef = useRef<HTMLDivElement>(null)
-  const [canScrollLeft, setCanScrollLeft] = useState(false)
-  const [canScrollRight, setCanScrollRight] = useState(true)
+  const [expandedFeatured, setExpandedFeatured] = useState<number | null>(null);
+  const [showArchive, setShowArchive] = useState(false);
+  const [isArchiveTriggerHovered, setIsArchiveTriggerHovered] = useState(false);
+  const [activeFilter, setActiveFilter] = useState("HTML/CSS");
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
   const checkScroll = () => {
     if (scrollRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current
-      setCanScrollLeft(scrollLeft > 0)
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10)
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
     }
-  }
+  };
 
   useEffect(() => {
-    checkScroll()
-    window.addEventListener("resize", checkScroll)
-    return () => window.removeEventListener("resize", checkScroll)
-  }, [showArchive])
+    checkScroll();
+    window.addEventListener("resize", checkScroll);
+    return () => window.removeEventListener("resize", checkScroll);
+  }, [showArchive]);
 
-  const categories = ["HTML/CSS", "JAVASCRIPT", "API", "REACT", "NODE/EXPRESS", "TYPESCRIPT", "MERN STACK", "PHP & SQL", "PYTHON"]
+  const categories = [
+    "HTML/CSS",
+    "JAVASCRIPT",
+    "API",
+    "REACT",
+    "NODE/EXPRESS",
+    "TYPESCRIPT",
+    "MERN STACK",
+    "PHP & SQL",
+    "PYTHON",
+  ];
 
-  const filteredProjects = allProjects.filter((p) => p.category === activeFilter)
+  const filteredProjects = allProjects.filter(
+    (p) => p.category === activeFilter,
+  );
 
   return (
-    <section id="projects" className="relative py-32 bg-[#050505] overflow-hidden">
+    <section
+      id="projects"
+      className="relative py-32 bg-[#050505] overflow-hidden"
+    >
       <motion.div
         className="container mx-auto px-6"
         initial={{ opacity: 0, y: 50 }}
@@ -835,7 +923,9 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
       >
         {/* Header */}
         <div className="mb-12">
-          <p className="font-mono text-cyan/60 text-sm mb-4">// FEATURED_PROJECTS</p>
+          <p className="font-mono text-cyan/60 text-sm mb-4">
+            // FEATURED_PROJECTS
+          </p>
           <h2 className="text-4xl md:text-5xl font-black text-slate-300 tracking-tight">
             FEATURED <span className="text-cyan">WORK</span>
           </h2>
@@ -851,9 +941,9 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
               isExpanded={expandedFeatured === index}
               onToggle={() => {
                 if (expandedFeatured !== index) {
-                  setShowArchive(false)
+                  setShowArchive(false);
                 }
-                setExpandedFeatured(expandedFeatured === index ? null : index)
+                setExpandedFeatured(expandedFeatured === index ? null : index);
               }}
             />
           ))}
@@ -866,9 +956,9 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
             onMouseLeave={() => setIsArchiveTriggerHovered(false)}
             onClick={() => {
               if (!showArchive) {
-                setExpandedFeatured(null)
+                setExpandedFeatured(null);
               }
-              setShowArchive(!showArchive)
+              setShowArchive(!showArchive);
             }}
             className={`
               group relative py-4 md:py-8 px-4 cursor-pointer transition-all duration-300
@@ -885,7 +975,10 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
                 <span
                   className={`font-bold text-3xl md:text-5xl transition-colors ${showArchive || isArchiveTriggerHovered ? "text-white" : "text-slate-400"}`}
                 >
-                  <ShuffleText text="VIEW ALL PROJECTS" isActive={isArchiveTriggerHovered} />
+                  <ShuffleText
+                    text="VIEW ALL PROJECTS"
+                    isActive={isArchiveTriggerHovered}
+                  />
                 </span>
               </div>
               <motion.div
@@ -909,7 +1002,6 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
               className="overflow-hidden bg-[#0a0a0a]"
             >
               <div className="px-4 py-6 md:py-12">
-
                 {/* Filter Tabs */}
                 <div className="relative mb-8 md:mb-16">
                   <div
@@ -923,9 +1015,10 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
                         onClick={() => setActiveFilter(cat)}
                         className={`
                           px-5 py-2 md:px-7 md:py-3 rounded-full text-[10px] md:text-xs font-bold font-mono border transition-all duration-300 uppercase tracking-wide whitespace-nowrap flex-shrink-0
-                          ${activeFilter === cat
-                            ? "bg-cyan text-black border-cyan shadow-[0_0_20px_rgba(0,240,255,0.4)]"
-                            : "bg-transparent border-white/10 text-slate-500 hover:border-cyan/50 hover:text-cyan"
+                          ${
+                            activeFilter === cat
+                              ? "bg-cyan text-black border-cyan shadow-[0_0_20px_rgba(0,240,255,0.4)]"
+                              : "bg-transparent border-white/10 text-slate-500 hover:border-cyan/50 hover:text-cyan"
                           }
                         `}
                       >
@@ -945,9 +1038,15 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
                       >
                         <motion.div
                           animate={{ x: [0, -3, 0], opacity: [0.5, 1, 0.5] }}
-                          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                          transition={{
+                            duration: 1.5,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                          }}
                         >
-                          <span className="text-cyan font-bold text-xs shadow-black drop-shadow-md">{"<"}</span>
+                          <span className="text-cyan font-bold text-xs shadow-black drop-shadow-md">
+                            {"<"}
+                          </span>
                         </motion.div>
                       </motion.div>
                     )}
@@ -964,9 +1063,15 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
                       >
                         <motion.div
                           animate={{ x: [0, 3, 0], opacity: [0.5, 1, 0.5] }}
-                          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                          transition={{
+                            duration: 1.5,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                          }}
                         >
-                          <span className="text-cyan font-bold text-xs shadow-black drop-shadow-md">{">"}</span>
+                          <span className="text-cyan font-bold text-xs shadow-black drop-shadow-md">
+                            {">"}
+                          </span>
                         </motion.div>
                       </motion.div>
                     )}
@@ -983,7 +1088,9 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
                 ) : (
                   <div className="text-center py-16">
                     <p className="text-mist/50 font-mono">NO PROJECTS FOUND</p>
-                    <p className="text-mist/30 text-sm mt-2">Try adjusting your search or filters</p>
+                    <p className="text-mist/30 text-sm mt-2">
+                      Try adjusting your search or filters
+                    </p>
                   </div>
                 )}
               </div>
@@ -992,5 +1099,5 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
         </AnimatePresence>
       </motion.div>
     </section>
-  )
+  );
 }
