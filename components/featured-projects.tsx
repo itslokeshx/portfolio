@@ -79,9 +79,31 @@ const featuredProjects: Project[] = [
 ];
 
 const allProjects: Project[] = [
-  ...featuredProjects,
-
   // MERN STACK Projects
+  {
+    id: 1,
+    title: "CorteXia",
+    category: "MERN STACK",
+    description:
+      "**Problem:** Productivity tools are fragmented and AI lacks real context.\n**Impact:** Users lose clarity, consistency, and alignment between daily actions and long-term goals.\n**Solution:** CorteXia — an AI-powered unified workspace connecting tasks, goals, habits, finance, and journaling into one intelligent system.",
+    stack: ["MongoDB", "Express", "React", "Node.js", "AI"],
+    image: "/Project_images/Cortexia.png",
+    color: "#6D28D9",
+    github: "https://github.com/itslokeshx/CorteXia",
+    demo: "https://corte-xia.vercel.app/",
+  },
+  {
+    id: 2,
+    title: "MemeHub",
+    category: "MERN STACK",
+    description:
+      "**Problem:** Meme platforms treat users as passive consumers with little control over content quality or structure.\n**Impact:** This results in cluttered libraries, weak moderation, and no sense of community ownership.\n**Solution:** I built a community-driven meme platform with collaborative editing, moderation tools, and scalable content delivery.",
+    stack: ["MongoDB", "Express", "React", "Node.js", "Cloudinary"],
+    image: "/Project_images/memehub.png",
+    color: "#111827",
+    github: "https://github.com/itslokeshx/MemeHub",
+    demo: "https://memehub-m4gy.onrender.com/",
+  },
   {
     id: 38,
     title: "Second Brain",
@@ -341,6 +363,18 @@ const allProjects: Project[] = [
 
   // React Projects
   {
+    id: 5,
+    title: "CV Application",
+    category: "REACT",
+    description:
+      "**Problem:** Traditional CV builders provide feedback only after exporting, forcing users to guess layouts.\n**Impact:** Users waste time with repeated revisions and unnecessary exports.\n**Solution:** I built a real-time CV builder that updates the resume instantly as users edit.",
+    stack: ["React", "Vite"],
+    image: "/Project_images/CV.jpeg",
+    color: "#9333EA",
+    github: "https://github.com/itslokeshx/CV-application",
+    demo: "https://cv-application-nine-gamma.vercel.app/",
+  },
+  {
     id: 6,
     title: "Travel Journal",
     category: "REACT",
@@ -392,6 +426,18 @@ const allProjects: Project[] = [
 
   // Node.js & APIs
   {
+    id: 3,
+    title: "Automated WA Messenger",
+    category: "NODE/EXPRESS",
+    description:
+      "**Problem:** Small businesses were forced to pay recurring fees for basic WhatsApp automation.\n**Impact:** These unnecessary subscriptions reduced profit margins and limited customer engagement.\n**Solution:** I built a zero-subscription automation system using the WhatsApp Cloud API to send and schedule messages reliably.",
+    stack: ["Node.js", "Express", "Cron", "WhatsApp Cloud API"],
+    image: "/Project_images/Whatsapp_Automation.png",
+    color: "#00FF94",
+    github: "https://github.com/itslokeshx/Automated-whatsapp-message",
+    demo: "https://github.com/itslokeshx/Automated-whatsapp-message",
+  },
+  {
     id: 10,
     title: "QR Code Generator",
     category: "NODE/EXPRESS",
@@ -438,6 +484,20 @@ const allProjects: Project[] = [
     color: "#F7DF1E",
     github: "https://github.com/itslokeshx/color-scheme-generator",
     demo: "https://itslokeshx.github.io/color-scheme-generator/",
+  },
+
+  // Chrome Extension
+  {
+    id: 4,
+    title: "SaveMyTab",
+    category: "CHROME EXT",
+    description:
+      "**Problem:** Modern workflows encourage tab overload, silently draining focus and mental clarity.\n**Impact:** Constant context switching slows productivity and increases cognitive fatigue.\n**Solution:** I built a lightweight browser extension that saves essential tabs instantly and keeps workspaces clean.",
+    stack: ["JavaScript", "Chrome API", "HTML/CSS"],
+    image: "/Project_images/SaveMyTab.jpeg",
+    color: "#FF9F00",
+    github: "https://github.com/itslokeshx/SaveMyTab",
+    demo: "https://github.com/itslokeshx/SaveMyTab",
   },
 
   // PHP & MySQL
