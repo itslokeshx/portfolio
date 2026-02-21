@@ -1,101 +1,116 @@
-"use client"
+"use client";
 
-import { useRef, useEffect, useState } from "react"
-import { motion } from "framer-motion"
-import { ChevronDown, Github, Twitter, Linkedin, ArrowRight } from "lucide-react"
-import { TerminalWindow, TerminalHandles } from "./terminal-window"
-import { useIsMobile } from "@/hooks/use-mobile"
+import { useRef, useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import {
+  ChevronDown,
+  Github,
+  Twitter,
+  Linkedin,
+  ArrowRight,
+} from "lucide-react";
+import { TerminalWindow, TerminalHandles } from "./terminal-window";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 // Smooth Typewriter Component
 // Rotating Typewriter Component
-const RotatingText = ({ texts, className = "" }: { texts: string[], className?: string }) => {
-  const [currentTextIndex, setCurrentTextIndex] = useState(0)
-  const [displayText, setDisplayText] = useState("")
-  const [isDeleting, setIsDeleting] = useState(false)
-  const [typingSpeed, setTypingSpeed] = useState(50)
+const RotatingText = ({
+  texts,
+  className = "",
+}: {
+  texts: string[];
+  className?: string;
+}) => {
+  const [currentTextIndex, setCurrentTextIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [typingSpeed, setTypingSpeed] = useState(50);
 
   useEffect(() => {
     const handleTyping = () => {
-      const fullText = texts[currentTextIndex]
+      const fullText = texts[currentTextIndex];
 
-      setDisplayText(current => {
+      setDisplayText((current) => {
         if (isDeleting) {
-          return fullText.substring(0, current.length - 1)
+          return fullText.substring(0, current.length - 1);
         } else {
-          return fullText.substring(0, current.length + 1)
+          return fullText.substring(0, current.length + 1);
         }
-      })
+      });
 
       // Speed Logic
       if (!isDeleting && displayText === fullText) {
         // Finished typing, pause before deleting
-        setTimeout(() => setIsDeleting(true), 2000)
+        setTimeout(() => setIsDeleting(true), 2000);
       } else if (isDeleting && displayText === "") {
         // Finished deleting, move to next text
-        setIsDeleting(false)
-        setCurrentTextIndex((prev) => (prev + 1) % texts.length)
+        setIsDeleting(false);
+        setCurrentTextIndex((prev) => (prev + 1) % texts.length);
       }
 
-      setTypingSpeed(isDeleting ? 30 : 50)
-    }
+      setTypingSpeed(isDeleting ? 30 : 50);
+    };
 
-    const timer = setTimeout(handleTyping, typingSpeed)
-    return () => clearTimeout(timer)
-  }, [displayText, isDeleting, currentTextIndex, texts, typingSpeed])
+    const timer = setTimeout(handleTyping, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [displayText, isDeleting, currentTextIndex, texts, typingSpeed]);
 
   return (
     <span className={className}>
       {displayText}
       <span className="inline-block w-[2px] h-[1em] bg-cyan/80 ml-1 align-middle animate-pulse" />
     </span>
-  )
-}
-
+  );
+};
 
 export function HeroSection() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const terminalRef = useRef<TerminalHandles>(null)
-  const isMobile = useIsMobile()
+  const containerRef = useRef<HTMLDivElement>(null);
+  const terminalRef = useRef<TerminalHandles>(null);
+  const isMobile = useIsMobile();
 
   // Desktop: Text (1.8s) -> Terminal (2.4s)
   // Mobile: Terminal (1.8s) -> Text (2.2s)
-  const startDelay = 0.8
-  const textDelay = isMobile ? startDelay + 0.3 : startDelay
-  const terminalDelay = isMobile ? startDelay : startDelay + 0.4
+  const startDelay = 0.8;
+  const textDelay = isMobile ? startDelay + 0.3 : startDelay;
+  const terminalDelay = isMobile ? startDelay : startDelay + 0.4;
 
   const handleResumeClick = () => {
-    terminalRef.current?.addLog("resume in progress —  building projects", "warning")
-  }
+    const link = document.createElement("a");
+    link.href = "/Resume.pdf";
+    link.download = "Resume.pdf";
+    link.click();
+  };
 
   useEffect(() => {
-    const handleResumeEvent = () => handleResumeClick()
-    window.addEventListener("trigger-resume", handleResumeEvent)
-    return () => window.removeEventListener("trigger-resume", handleResumeEvent)
-  }, [])
+    const handleResumeEvent = () => handleResumeClick();
+    window.addEventListener("trigger-resume", handleResumeEvent);
+    return () =>
+      window.removeEventListener("trigger-resume", handleResumeEvent);
+  }, []);
 
   return (
-    <section id="home" ref={containerRef} className="relative min-h-screen w-full overflow-hidden bg-[#050505] flex flex-col justify-center">
+    <section
+      id="home"
+      ref={containerRef}
+      className="relative min-h-screen w-full overflow-hidden bg-[#050505] flex flex-col justify-center"
+    >
       {/* Background Grid - Seamless continuation */}
       <div
         className="absolute inset-0 z-0 opacity-[0.05] pointer-events-none"
         style={{
           backgroundImage: `linear-gradient(rgba(0, 240, 255, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 240, 255, 0.3) 1px, transparent 1px)`,
-          backgroundSize: '50px 50px'
+          backgroundSize: "50px 50px",
         }}
       />
 
       {/* Radial gradient */}
       <div className="absolute inset-0 z-0 bg-gradient-radial from-titanium/50 via-transparent to-transparent pointer-events-none" />
 
-
-
       {/* Hero Content */}
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-20 pt-[100px] md:pt-24 pb-10">
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-20 items-center min-h-[calc(100vh-100px)] md:min-h-[calc(100vh-80px)]">
-
           {/* Left Column */}
           <div className="flex flex-col justify-center space-y-8 relative z-20 pl-4 lg:pl-0 order-2 lg:order-1">
-
             {/* Header Group */}
             <div className="space-y-6">
               <motion.div
@@ -135,7 +150,7 @@ export function HeroSection() {
                         "by building real things.",
                         "by solving real problems.",
                         "by learning through failure.",
-                        "by refining what works."
+                        "by refining what works.",
                       ]}
                     />
                   </h1>
@@ -156,13 +171,12 @@ export function HeroSection() {
                 <p className="mt-1">
                   Ideas start as experiments and evolve into usable systems.
                 </p>
-                <p className="mt-1">
-                  Some succeed. Some fail.
-                </p>
+                <p className="mt-1">Some succeed. Some fail.</p>
               </div>
-              <p className="text-cyan font-mono text-sm sm:text-[15px] tracking-wide drop-shadow-[0_0_5px_rgba(0,240,255,0.5)]">Every build leaves me better than before.</p>
+              <p className="text-cyan font-mono text-sm sm:text-[15px] tracking-wide drop-shadow-[0_0_5px_rgba(0,240,255,0.5)]">
+                Every build leaves me better than before.
+              </p>
             </motion.div>
-
           </div>
 
           {/* Right Column - Terminal Appearance */}
@@ -171,21 +185,21 @@ export function HeroSection() {
               key={isMobile ? "mobile-term" : "desktop-term"}
               initial={{ scaleY: 0, opacity: 0 }}
               animate={{ scaleY: 1, opacity: 1 }}
-              transition={{ duration: 0.8, delay: terminalDelay, ease: "circOut" }} // Terminal follows description
+              transition={{
+                duration: 0.8,
+                delay: terminalDelay,
+                ease: "circOut",
+              }} // Terminal follows description
               className="origin-center w-full max-w-xl"
             >
               <TerminalWindow ref={terminalRef} />
             </motion.div>
           </div>
-
         </div>
       </div>
 
-
-
       {/* Smooth Transition Fade */}
-      < div className="absolute bottom-0 left-0 right-0 h-48 md:h-64 bg-gradient-to-t from-void via-void/40 to-transparent pointer-events-none z-5" />
-
-    </section >
-  )
+      <div className="absolute bottom-0 left-0 right-0 h-48 md:h-64 bg-gradient-to-t from-void via-void/40 to-transparent pointer-events-none z-5" />
+    </section>
+  );
 }
