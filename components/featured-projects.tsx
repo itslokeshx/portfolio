@@ -30,15 +30,15 @@ const featuredProjects: Project[] = [
   },
   {
     id: 2,
-    title: "MemeHub",
+    title: "DevIntel",
     category: "MERN STACK",
     description:
-      "**Problem:** Meme platforms treat users as passive consumers with little control over content quality or structure.\n**Impact:** This results in cluttered libraries, weak moderation, and no sense of community ownership.\n**Solution:** I built a community-driven meme platform with collaborative editing, moderation tools, and scalable content delivery.",
-    stack: ["MongoDB", "Express", "React", "Node.js", "Cloudinary"],
-    image: "/Project_images/memehub.png",
-    color: "#111827",
-    github: "https://github.com/itslokeshx/MemeHub",
-    demo: "https://memehub-m4gy.onrender.com/",
+      "**Problem:** GitHub profiles show raw stats with no meaningful interpretation of a developer's true potential.\n**Impact:** Developers lack actionable insights about their coding patterns, strengths, and career growth direction.\n**Solution:** DevIntel — an AI-powered intelligence platform that decodes GitHub activity into personalized insights, developer archetypes, and competitive analysis.",
+    stack: ["React", "Node.js", "MongoDB", "Llama AI", "GraphQL"],
+    image: "/Project_images/devintel.png",
+    color: "#0F172A",
+    github: "https://github.com/itslokeshx/DevIntel",
+    demo: "https://dev-intel.vercel.app/",
   },
   {
     id: 3,
@@ -94,15 +94,15 @@ const allProjects: Project[] = [
   },
   {
     id: 2,
-    title: "MemeHub",
+    title: "DevIntel",
     category: "MERN STACK",
     description:
-      "**Problem:** Meme platforms treat users as passive consumers with little control over content quality or structure.\n**Impact:** This results in cluttered libraries, weak moderation, and no sense of community ownership.\n**Solution:** I built a community-driven meme platform with collaborative editing, moderation tools, and scalable content delivery.",
-    stack: ["MongoDB", "Express", "React", "Node.js", "Cloudinary"],
-    image: "/Project_images/memehub.png",
-    color: "#111827",
-    github: "https://github.com/itslokeshx/MemeHub",
-    demo: "https://memehub-m4gy.onrender.com/",
+      "**Problem:** GitHub profiles show raw stats with no meaningful interpretation of a developer's true potential.\n**Impact:** Developers lack actionable insights about their coding patterns, strengths, and career growth direction.\n**Solution:** DevIntel — an AI-powered intelligence platform that decodes GitHub activity into personalized insights, developer archetypes, and competitive analysis.",
+    stack: ["React", "Node.js", "MongoDB", "Llama AI", "GraphQL"],
+    image: "/Project_images/devintel.png",
+    color: "#0F172A",
+    github: "https://github.com/itslokeshx/DevIntel",
+    demo: "https://dev-intel.vercel.app/",
   },
   {
     id: 38,
@@ -626,15 +626,14 @@ function ProjectRow({
               initial={{ opacity: 0 }}
               animate={{ opacity: isHovered && !isExpanded ? 1 : 0 }}
               transition={{ duration: 0.3 }}
-              className={`absolute inset-0 rounded-lg overflow-hidden border-2 ${
-                project.id === 1
+              className={`absolute inset-0 rounded-lg overflow-hidden border-2 ${project.id === 1
                   ? "border-cyan shadow-[0_0_20px_rgba(0,240,255,0.25)]"
                   : project.id === 2
                     ? "border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.25)]"
                     : project.id === 5
                       ? "border-slate-600 shadow-[0_0_20px_rgba(71,85,105,0.25)]"
                       : ""
-              }`}
+                }`}
               style={{
                 borderColor:
                   project.id === 1 || project.id === 2
@@ -1075,10 +1074,9 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
                         onClick={() => setActiveFilter(cat)}
                         className={`
                           px-5 py-2 md:px-7 md:py-3 rounded-full text-[10px] md:text-xs font-bold font-mono border transition-all duration-300 uppercase tracking-wide whitespace-nowrap flex-shrink-0
-                          ${
-                            activeFilter === cat
-                              ? "bg-cyan text-black border-cyan shadow-[0_0_20px_rgba(0,240,255,0.4)]"
-                              : "bg-transparent border-white/10 text-slate-500 hover:border-cyan/50 hover:text-cyan"
+                          ${activeFilter === cat
+                            ? "bg-cyan text-black border-cyan shadow-[0_0_20px_rgba(0,240,255,0.4)]"
+                            : "bg-transparent border-white/10 text-slate-500 hover:border-cyan/50 hover:text-cyan"
                           }
                         `}
                       >

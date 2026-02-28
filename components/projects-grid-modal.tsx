@@ -16,11 +16,11 @@ const ALL_PROJECTS = [
   },
   {
     id: 2,
-    title: "MemeHub",
+    title: "DevIntel",
     category: "WEB",
-    year: "2024",
-    description: "Viral meme discovery platform",
-    stack: ["React", "Tailwind", "API"],
+    year: "2025",
+    description: "AI-powered GitHub intelligence platform",
+    stack: ["React", "Node.js", "Llama AI"],
     featured: true,
   },
   {

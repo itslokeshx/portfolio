@@ -53,7 +53,7 @@ const SKILLS_DATA = [
     name: "React",
     proficiency: 60,
     experience: "Beginner",
-    projects: ["CV Application", "Travel Journal", "Business Card", "MemeHub", "Second Brain"],
+    projects: ["CV Application", "Travel Journal", "Business Card", "DevIntel", "Second Brain"],
     orbit: "inner",
   },
   {
@@ -67,14 +67,14 @@ const SKILLS_DATA = [
     name: "Express.js",
     proficiency: 40,
     experience: "Learning",
-    projects: ["Automated WhatsApp Messager", "Second Brain", "MemeHub"],
+    projects: ["Automated WhatsApp Messager", "Second Brain", "DevIntel"],
     orbit: "outer",
   },
   {
     name: "MongoDB",
     proficiency: 40,
     experience: "Learning",
-    projects: ["Second Brain", "MemeHub"],
+    projects: ["Second Brain", "DevIntel"],
     orbit: "outer",
   },
   {
