@@ -6,10 +6,28 @@ import { useRef, useState, useEffect } from "react"
 import { motion, useMotionValue, useSpring, useInView } from "framer-motion"
 import { Github, Linkedin, Twitter, Mail, MapPin, Send } from "lucide-react"
 
+const DevTo = (props: any) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <path d="M10 15V9a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1Z" />
+    <path d="M14 12h2" />
+    <path d="M14 8h2a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1h-2" />
+    <path d="M14 13h2a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1h-2" />
+  </svg>
+)
+
 const SOCIAL_LINKS = [
   { name: "GitHub", icon: Github, url: "https://github.com/itslokeshx", handle: "@itslokeshx" },
   { name: "LinkedIn", icon: Linkedin, url: "https://www.linkedin.com/in/itslokeshx/", handle: "/in/itslokeshx" },
   { name: "X (Twitter)", icon: Twitter, url: "https://x.com/itslokeshx", handle: "@itslokeshx" },
+  { name: "Dev.to", icon: DevTo, url: "https://dev.to/itslokeshx", handle: "itslokeshx" },
 ]
 
 function MagneticButton({ children, href, label }: { children: React.ReactNode; href: string; label: string }) {
