@@ -227,11 +227,13 @@ export function ContactSection() {
             {/* Divider */}
             <div className="border-t border-white/5 pt-6 sm:pt-8 mb-4 sm:mb-8">
               <div className="text-[10px] sm:text-xs text-mist/40 mb-4 sm:mb-6 text-center">// SOCIAL_UPLINKS</div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 justify-items-center">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 justify-center max-w-2xl mx-auto">
                 {SOCIAL_LINKS.map((link) => (
-                  <MagneticButton key={link.name} href={link.url} label={link.handle}>
-                    <link.icon className="w-6 h-6 sm:w-7 sm:h-7 text-mist/60 group-hover:text-cyan transition-colors" />
-                  </MagneticButton>
+                  <div key={link.name} className="flex justify-center">
+                    <MagneticButton href={link.url} label={link.handle}>
+                      <link.icon className="w-6 h-6 sm:w-7 sm:h-7 text-mist/60 group-hover:text-cyan transition-colors" />
+                    </MagneticButton>
+                  </div>
                 ))}
               </div>
             </div>
