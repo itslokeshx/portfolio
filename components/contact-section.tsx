@@ -16,10 +16,11 @@ const DevTo = (props: any) => (
     strokeLinejoin="round"
     {...props}
   >
-    <path d="M10 15V9a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1Z" />
-    <path d="M14 12h2" />
-    <path d="M14 8h2a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1h-2" />
-    <path d="M14 13h2a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1h-2" />
+    <rect width="18" height="18" x="3" y="3" rx="2" />
+    <path d="M6 9v6h1.5a1.5 1.5 0 0 0 1.5-1.5v-3A1.5 1.5 0 0 0 7.5 9z" />
+    <path d="M13 9h-2v6h2" />
+    <path d="M11 12h1.5" />
+    <path d="M15 9l1.5 6 1.5-6" />
   </svg>
 )
 
