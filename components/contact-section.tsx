@@ -70,12 +70,13 @@ function MagneticButton({ children, href, label }: { children: React.ReactNode; 
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       whileHover={{ scale: 1.05 }}
-      className="group flex flex-col items-center gap-3"
+      whileTap={{ scale: 0.95 }}
+      className="group flex flex-col items-center gap-2 sm:gap-3 touch-none"
     >
-      <div className="w-20 h-20 md:w-24 md:h-24 bg-[#0a0a0a] border border-white/10 rounded-2xl flex items-center justify-center group-hover:border-cyan/50 group-hover:shadow-[0_0_30px_rgba(0,240,255,0.3)] transition-all duration-300">
+      <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-[#0a0a0a] border border-white/10 rounded-xl sm:rounded-2xl flex items-center justify-center group-hover:border-cyan/50 group-hover:shadow-[0_0_30px_rgba(0,240,255,0.3)] transition-all duration-300">
         {children}
       </div>
-      <span className="text-xs font-mono text-mist/50 group-hover:text-cyan transition-colors">{label}</span>
+      <span className="text-[10px] sm:text-xs font-mono text-mist/50 group-hover:text-cyan transition-colors">{label}</span>
     </motion.a>
   )
 }
@@ -154,11 +155,11 @@ export function ContactSection() {
           {/* Terminal Content */}
           <div className="p-6 md:p-8 font-mono">
             {/* Command Input */}
-            <div className="mb-6">
-              <div className="flex items-center gap-2 text-sm">
+            <div className="mb-4 sm:mb-6">
+              <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm">
                 <span className="text-green-400">→</span>
-                <span className="text-mist/40">~</span>
-                <span className="text-cyan">{typedText}</span>
+                <span className="text-mist/40 max-w-[20px] overflow-hidden sm:max-w-max">~</span>
+                <span className="text-cyan truncate flex-1">{typedText}</span>
                 <span className="animate-pulse text-cyan">█</span>
               </div>
               {/* Command Output */}
@@ -224,12 +225,12 @@ export function ContactSection() {
             </div>
 
             {/* Divider */}
-            <div className="border-t border-white/5 pt-8 mb-8">
-              <div className="text-xs text-mist/40 mb-6 text-center">// SOCIAL_UPLINKS</div>
-              <div className="flex flex-wrap gap-4 sm:gap-6 justify-center">
+            <div className="border-t border-white/5 pt-6 sm:pt-8 mb-4 sm:mb-8">
+              <div className="text-[10px] sm:text-xs text-mist/40 mb-4 sm:mb-6 text-center">// SOCIAL_UPLINKS</div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 justify-items-center">
                 {SOCIAL_LINKS.map((link) => (
                   <MagneticButton key={link.name} href={link.url} label={link.handle}>
-                    <link.icon size={24} className="sm:w-7 sm:h-7 text-mist/60 group-hover:text-cyan transition-colors" />
+                    <link.icon className="w-6 h-6 sm:w-7 sm:h-7 text-mist/60 group-hover:text-cyan transition-colors" />
                   </MagneticButton>
                 ))}
               </div>
