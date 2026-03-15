@@ -463,6 +463,18 @@ const allProjects: Project[] = [
     demo: "https://github.com/itslokeshx/QR-Code-Generator",
   },
   {
+    id: 4,
+    title: "SaveMyTab",
+    category: "API",
+    description:
+      "**Problem:** Modern workflows encourage tab overload, silently draining focus and mental clarity.\n**Impact:** Constant context switching slows productivity and increases cognitive fatigue.\n**Solution:** I built a lightweight browser extension that saves essential tabs instantly and keeps workspaces clean.",
+    stack: ["JavaScript", "Chrome API", "HTML/CSS"],
+    image: "/Project_images/SaveMyTab.jpeg",
+    color: "#FF9F00",
+    github: "https://github.com/itslokeshx/SaveMyTab",
+    demo: "https://github.com/itslokeshx/SaveMyTab",
+  },
+  {
     id: 11,
     title: "Github User Details",
     category: "API",
@@ -497,20 +509,6 @@ const allProjects: Project[] = [
     color: "#F7DF1E",
     github: "https://github.com/itslokeshx/color-scheme-generator",
     demo: "https://itslokeshx.github.io/color-scheme-generator/",
-  },
-
-  // Chrome Extension
-  {
-    id: 4,
-    title: "SaveMyTab",
-    category: "API",
-    description:
-      "**Problem:** Modern workflows encourage tab overload, silently draining focus and mental clarity.\n**Impact:** Constant context switching slows productivity and increases cognitive fatigue.\n**Solution:** I built a lightweight browser extension that saves essential tabs instantly and keeps workspaces clean.",
-    stack: ["JavaScript", "Chrome API", "HTML/CSS"],
-    image: "/Project_images/SaveMyTab.jpeg",
-    color: "#FF9F00",
-    github: "https://github.com/itslokeshx/SaveMyTab",
-    demo: "https://github.com/itslokeshx/SaveMyTab",
   },
 
   // PHP & MySQL
