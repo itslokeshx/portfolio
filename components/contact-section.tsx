@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useRef, useState, useEffect } from "react"
-import { motion, useMotionValue, useSpring, useInView } from "framer-motion"
-import { Github, Linkedin, Twitter, Mail, MapPin, Send } from "lucide-react"
+import { useRef, useState, useEffect } from "react";
+import { motion, useMotionValue, useSpring, useInView } from "framer-motion";
+import { Github, Linkedin, Twitter, Mail, MapPin, Send } from "lucide-react";
 
 const DevTo = (props: any) => (
   <svg
@@ -22,43 +22,71 @@ const DevTo = (props: any) => (
     <path d="M11 12h1.5" />
     <path d="M15 9l1.5 6 1.5-6" />
   </svg>
-)
+);
 
 const SOCIAL_LINKS = [
-  { name: "GitHub", icon: Github, url: "https://github.com/itslokeshx", handle: "@itslokeshx" },
-  { name: "LinkedIn", icon: Linkedin, url: "https://www.linkedin.com/in/itslokeshx/", handle: "/in/itslokeshx" },
-  { name: "X (Twitter)", icon: Twitter, url: "https://x.com/itslokeshx", handle: "@itslokeshx" },
-  { name: "Dev.to", icon: DevTo, url: "https://dev.to/itslokeshx", handle: "itslokeshx" },
-]
+  {
+    name: "GitHub",
+    icon: Github,
+    url: "https://github.com/itslokeshx",
+    handle: "@itslokeshx",
+  },
+  {
+    name: "LinkedIn",
+    icon: Linkedin,
+    url: "https://www.linkedin.com/in/itslokeshx/",
+    handle: "/in/itslokeshx",
+  },
+  {
+    name: "X (Twitter)",
+    icon: Twitter,
+    url: "https://x.com/itslokeshx",
+    handle: "@itslokeshx",
+  },
+  {
+    name: "Dev.to",
+    icon: DevTo,
+    url: "https://dev.to/itslokeshx",
+    handle: "itslokeshx",
+  },
+];
 
-function MagneticButton({ children, href, label }: { children: React.ReactNode; href: string; label: string }) {
-  const ref = useRef<HTMLAnchorElement>(null)
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
+function MagneticButton({
+  children,
+  href,
+  label,
+}: {
+  children: React.ReactNode;
+  href: string;
+  label: string;
+}) {
+  const ref = useRef<HTMLAnchorElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
 
-  const springConfig = { stiffness: 150, damping: 15 }
-  const springX = useSpring(x, springConfig)
-  const springY = useSpring(y, springConfig)
+  const springConfig = { stiffness: 150, damping: 15 };
+  const springX = useSpring(x, springConfig);
+  const springY = useSpring(y, springConfig);
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!ref.current) return
-    const rect = ref.current.getBoundingClientRect()
-    const centerX = rect.left + rect.width / 2
-    const centerY = rect.top + rect.height / 2
-    const distX = e.clientX - centerX
-    const distY = e.clientY - centerY
-    const distance = Math.sqrt(distX * distX + distY * distY)
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const distX = e.clientX - centerX;
+    const distY = e.clientY - centerY;
+    const distance = Math.sqrt(distX * distX + distY * distY);
 
     if (distance < 100) {
-      x.set(distX * 0.4)
-      y.set(distY * 0.4)
+      x.set(distX * 0.4);
+      y.set(distY * 0.4);
     }
-  }
+  };
 
   const handleMouseLeave = () => {
-    x.set(0)
-    y.set(0)
-  }
+    x.set(0);
+    y.set(0);
+  };
 
   return (
     <motion.a
@@ -76,37 +104,57 @@ function MagneticButton({ children, href, label }: { children: React.ReactNode; 
       <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-[#0a0a0a] border border-white/10 rounded-xl sm:rounded-2xl flex items-center justify-center group-hover:border-cyan/50 group-hover:shadow-[0_0_30px_rgba(0,240,255,0.3)] transition-all duration-300">
         {children}
       </div>
-      <span className="text-[10px] sm:text-xs font-mono text-mist/50 group-hover:text-cyan transition-colors">{label}</span>
+      <span className="text-[10px] sm:text-xs font-mono text-mist/50 group-hover:text-cyan transition-colors">
+        {label}
+      </span>
     </motion.a>
-  )
+  );
 }
 
 export function ContactSection() {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(sectionRef, { once: true, margin: "-20%" })
-  const [typedText, setTypedText] = useState("")
-  const [commandOutput, setCommandOutput] = useState<string[]>([])
-  const fullText = "INITIATE_COMM_LINK"
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-20%" });
+  const [typedText, setTypedText] = useState("");
+  const [commandOutput, setCommandOutput] = useState<string[]>([]);
+  const fullText = "INITIATE_COMM_LINK";
 
   useEffect(() => {
-    if (!isInView) return
+    if (!isInView) return;
 
-    let index = 0
+    let index = 0;
     const interval = setInterval(() => {
       if (index <= fullText.length) {
-        setTypedText(fullText.slice(0, index))
-        index++
+        setTypedText(fullText.slice(0, index));
+        index++;
       } else {
-        clearInterval(interval)
+        clearInterval(interval);
         // Add command outputs sequentially
-        setTimeout(() => setCommandOutput((prev) => [...prev, "> Establishing secure connection..."]), 500)
-        setTimeout(() => setCommandOutput((prev) => [...prev, "> Connection established."]), 1200)
-        setTimeout(() => setCommandOutput((prev) => [...prev, "> Ready to receive transmission."]), 1900)
+        setTimeout(
+          () =>
+            setCommandOutput((prev) => [
+              ...prev,
+              "> Establishing secure connection...",
+            ]),
+          500,
+        );
+        setTimeout(
+          () =>
+            setCommandOutput((prev) => [...prev, "> Connection established."]),
+          1200,
+        );
+        setTimeout(
+          () =>
+            setCommandOutput((prev) => [
+              ...prev,
+              "> Ready to receive transmission.",
+            ]),
+          1900,
+        );
       }
-    }, 60)
+    }, 60);
 
-    return () => clearInterval(interval)
-  }, [isInView])
+    return () => clearInterval(interval);
+  }, [isInView]);
 
   return (
     <section
@@ -149,7 +197,9 @@ export function ContactSection() {
               <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
               <div className="w-3 h-3 rounded-full bg-green-500/80" />
             </div>
-            <span className="flex-1 text-center text-xs font-mono text-mist/40">lokesh@neural-link ~ comm_channel</span>
+            <span className="flex-1 text-center text-xs font-mono text-mist/40">
+              lokesh@neural-link ~ comm_channel
+            </span>
           </div>
 
           {/* Terminal Content */}
@@ -158,7 +208,9 @@ export function ContactSection() {
             <div className="mb-4 sm:mb-6">
               <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm">
                 <span className="text-green-400">→</span>
-                <span className="text-mist/40 max-w-[20px] overflow-hidden sm:max-w-max">~</span>
+                <span className="text-mist/40 max-w-[20px] overflow-hidden sm:max-w-max">
+                  ~
+                </span>
                 <span className="text-cyan truncate flex-1">{typedText}</span>
                 <span className="animate-pulse text-cyan">█</span>
               </div>
@@ -185,8 +237,13 @@ export function ContactSection() {
                     <Mail className="text-cyan" size={18} />
                   </div>
                   <div>
-                    <span className="text-[10px] text-mist/40 uppercase tracking-wider block">EMAIL</span>
-                    <a href="mailto:itslokeshx@gmail.com" className="text-sm text-mist hover:text-cyan transition-colors">
+                    <span className="text-[10px] text-mist/40 uppercase tracking-wider block">
+                      EMAIL
+                    </span>
+                    <a
+                      href="mailto:itslokeshx@gmail.com"
+                      className="text-sm text-mist hover:text-cyan transition-colors"
+                    >
                       itslokeshx@gmail.com
                     </a>
                   </div>
@@ -196,8 +253,12 @@ export function ContactSection() {
                     <MapPin className="text-cyan" size={18} />
                   </div>
                   <div>
-                    <span className="text-[10px] text-mist/40 uppercase tracking-wider block">LOCATION</span>
-                    <span className="text-sm text-mist">Kanchipuram, Tamil Nadu</span>
+                    <span className="text-[10px] text-mist/40 uppercase tracking-wider block">
+                      LOCATION
+                    </span>
+                    <span className="text-sm text-mist">
+                      Kanchipuram, Tamil Nadu
+                    </span>
                   </div>
                 </div>
               </div>
@@ -226,7 +287,9 @@ export function ContactSection() {
 
             {/* Divider */}
             <div className="border-t border-white/5 pt-6 sm:pt-8 mb-4 sm:mb-8">
-              <div className="text-[10px] sm:text-xs text-mist/40 mb-4 sm:mb-6 text-center">// SOCIAL_UPLINKS</div>
+              <div className="text-[10px] sm:text-xs text-mist/40 mb-4 sm:mb-6 text-center">
+                // SOCIAL_UPLINKS
+              </div>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 justify-center max-w-2xl mx-auto">
                 {SOCIAL_LINKS.map((link) => (
                   <div key={link.name} className="flex justify-center">
@@ -249,11 +312,13 @@ export function ContactSection() {
           className="text-center mt-12 mb-8 space-y-2"
         >
           <p className="text-sm text-mist/40 font-mono">
-            Designed & Developed by <span className="text-cyan">LOKESH</span>
+            Designed & Developed by <span className="text-cyan">LOKI</span>
           </p>
-          <p className="text-xs text-mist/20 font-mono">SYS.VER.1.0 // 2026 // ALL_SYSTEMS_NOMINAL</p>
+          <p className="text-xs text-mist/20 font-mono">
+            SYS.VER.1.0 // 2026 // ALL_SYSTEMS_NOMINAL
+          </p>
         </motion.div>
       </motion.div>
     </section>
-  )
+  );
 }
