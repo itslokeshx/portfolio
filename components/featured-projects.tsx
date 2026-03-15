@@ -17,6 +17,18 @@ interface Project {
 
 const featuredProjects: Project[] = [
   {
+    id: 0,
+    title: "SoulSync",
+    category: "FULL STACK",
+    description:
+      "**Problem:** Music streaming requires expensive subscriptions while offering fragmented features.\n**Impact:** Users pay ₹119/month for basic features and lack collaborative listening experiences.\n**Solution:** SoulSync — a free, open-source music streaming platform with AI-powered playlists, real-time duo sessions, intelligent search, and native Android support. No ads. No limits. Ever.",
+    stack: ["React", "Node.js", "MongoDB", "Socket.io", "Groq AI", "Capacitor"],
+    image: "/Project_images/soulsync.png",
+    color: "#00F0FF",
+    github: "https://github.com/itslokeshx/SoulSync",
+    demo: "https://soul-sync-beta.vercel.app/",
+  },
+  {
     id: 1,
     title: "CorteXia",
     category: "MERN STACK",
@@ -51,18 +63,6 @@ const featuredProjects: Project[] = [
     color: "#00FF94",
     github: "https://github.com/itslokeshx/Automated-whatsapp-message",
     demo: "https://github.com/itslokeshx/Automated-whatsapp-message",
-  },
-  {
-    id: 4,
-    title: "SaveMyTab",
-    category: "CHROME EXT",
-    description:
-      "**Problem:** Modern workflows encourage tab overload, silently draining focus and mental clarity.\n**Impact:** Constant context switching slows productivity and increases cognitive fatigue.\n**Solution:** I built a lightweight browser extension that saves essential tabs instantly and keeps workspaces clean.",
-    stack: ["JavaScript", "Chrome API", "HTML/CSS"],
-    image: "/Project_images/SaveMyTab.jpeg",
-    color: "#FF9F00",
-    github: "https://github.com/itslokeshx/SaveMyTab",
-    demo: "https://github.com/itslokeshx/SaveMyTab",
   },
   {
     id: 5,
@@ -626,14 +626,15 @@ function ProjectRow({
               initial={{ opacity: 0 }}
               animate={{ opacity: isHovered && !isExpanded ? 1 : 0 }}
               transition={{ duration: 0.3 }}
-              className={`absolute inset-0 rounded-lg overflow-hidden border-2 ${project.id === 1
+              className={`absolute inset-0 rounded-lg overflow-hidden border-2 ${
+                project.id === 1
                   ? "border-cyan shadow-[0_0_20px_rgba(0,240,255,0.25)]"
                   : project.id === 2
                     ? "border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.25)]"
                     : project.id === 5
                       ? "border-slate-600 shadow-[0_0_20px_rgba(71,85,105,0.25)]"
                       : ""
-                }`}
+              }`}
               style={{
                 borderColor:
                   project.id === 1 || project.id === 2
@@ -1074,9 +1075,10 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
                         onClick={() => setActiveFilter(cat)}
                         className={`
                           px-5 py-2 md:px-7 md:py-3 rounded-full text-[10px] md:text-xs font-bold font-mono border transition-all duration-300 uppercase tracking-wide whitespace-nowrap flex-shrink-0
-                          ${activeFilter === cat
-                            ? "bg-cyan text-black border-cyan shadow-[0_0_20px_rgba(0,240,255,0.4)]"
-                            : "bg-transparent border-white/10 text-slate-500 hover:border-cyan/50 hover:text-cyan"
+                          ${
+                            activeFilter === cat
+                              ? "bg-cyan text-black border-cyan shadow-[0_0_20px_rgba(0,240,255,0.4)]"
+                              : "bg-transparent border-white/10 text-slate-500 hover:border-cyan/50 hover:text-cyan"
                           }
                         `}
                       >
