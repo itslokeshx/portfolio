@@ -81,6 +81,19 @@ const featuredProjects: Project[] = [
 const allProjects: Project[] = [
   // MERN STACK Projects
   {
+    id: 39,
+    title: "SoulSync",
+    category: "MERN STACK",
+    description:
+      "**Problem:** Music streaming requires expensive subscriptions while offering fragmented features.\n**Impact:** Users pay ₹119/month for basic features and miss collaborative listening tools.\n**Solution:** SoulSync — a free, open-source music streaming platform with AI-powered playlists, real-time duo sessions, intelligent search, and native Android support.",
+    stack: ["React", "Node.js", "MongoDB", "Socket.io", "Groq AI", "Capacitor"],
+    image: "/Project_images/soulsync.png",
+    color: "#00F0FF",
+    github: "https://github.com/itslokeshx/SoulSync",
+    demo: "https://soul-sync-beta.vercel.app/",
+  },
+
+  {
     id: 1,
     title: "CorteXia",
     category: "MERN STACK",
@@ -490,7 +503,7 @@ const allProjects: Project[] = [
   {
     id: 4,
     title: "SaveMyTab",
-    category: "CHROME EXT",
+    category: "API",
     description:
       "**Problem:** Modern workflows encourage tab overload, silently draining focus and mental clarity.\n**Impact:** Constant context switching slows productivity and increases cognitive fatigue.\n**Solution:** I built a lightweight browser extension that saves essential tabs instantly and keeps workspaces clean.",
     stack: ["JavaScript", "Chrome API", "HTML/CSS"],
