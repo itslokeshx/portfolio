@@ -128,6 +128,14 @@ const ALL_PROJECTS = [
     description: "Daily habit tracking app",
     stack: ["React", "Chart.js", "MongoDB"],
   },
+  {
+    id: 16,
+    title: "CineList",
+    category: "WEB",
+    year: "2026",
+    description: "Movie discovery and watchlist management application",
+    stack: ["React", "Vite", "OMDB API"],
+  },
 ]
 
 const CATEGORIES = ["ALL", "WEB", "BACKEND", "TOOLS", "FUN"]

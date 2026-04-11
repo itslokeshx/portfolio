@@ -376,6 +376,18 @@ const allProjects: Project[] = [
 
   // React Projects
   {
+    id: 40,
+    title: "CineList",
+    category: "REACT",
+    description:
+      "A sleek, modern movie discovery and watchlist management application. Search millions of movies, save your favorites, and keep track of films you want to watch.",
+    stack: ["React 19", "React Router", "Vite", "OMDB API", "localStorage"],
+    image: "/Project_images/cinelist.png",
+    color: "#61DAFB",
+    github: "https://github.com/itslokeshx/CineList",
+    demo: "https://save-your-movie.vercel.app/",
+  },
+  {
     id: 5,
     title: "CV Application",
     category: "REACT",
