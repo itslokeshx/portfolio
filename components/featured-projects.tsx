@@ -1141,7 +1141,7 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
                           }
                         `}
                       >
-                        {cat}
+                        {cat} ({allProjects.filter(p => p.category === cat).length})
                       </button>
                     ))}
                   </div>
