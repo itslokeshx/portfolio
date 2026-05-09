@@ -55,7 +55,7 @@ const featuredProjects: Project[] = [
   {
     id: 3,
     title: "Roots",
-    category: "FULL STACK",
+    category: "MERN STACK",
     description:
       "**Problem:** Mental health apps focus on surface-level mood tracking without uncovering underlying psychological patterns.\n**Impact:** Users manage symptoms but never understand the root causes driving their anxiety, burnout, or relationship struggles.\n**Solution:** Roots — an AI-guided psychological excavation app with 40-question depth sessions, living memory profiles, and personalized healing practices.",
     stack: ["React", "Node.js", "MongoDB", "Groq AI", "SSE"],
@@ -133,7 +133,7 @@ const allProjects: Project[] = [
   {
     id: 41,
     title: "Roots",
-    category: "FULL STACK",
+    category: "MERN STACK",
     description:
       "**Problem:** Mental health apps focus on surface-level mood tracking without uncovering underlying psychological patterns.\n**Impact:** Users manage symptoms but never understand the root causes driving their anxiety, burnout, or relationship struggles.\n**Solution:** Roots — an AI-guided psychological excavation app with 40-question depth sessions, living memory profiles, and personalized healing practices.",
     stack: ["React", "Node.js", "MongoDB", "Groq AI", "SSE"],
@@ -554,7 +554,7 @@ const allProjects: Project[] = [
   {
     id: 35,
     title: "Hostel Management",
-    category: "FULL STACK",
+    category: "PHP/PYTHON",
     description:
       "🏫 Hostel Management System – A responsive web app for managing student registrations, room availability, and complaints. 💻 Built with PHP, MySQL, HTML, CSS, and JavaScript.",
     stack: ["PHP", "MySQL", "HTML"],
@@ -568,7 +568,7 @@ const allProjects: Project[] = [
   {
     id: 37,
     title: "MindfulAI",
-    category: "FULL STACK",
+    category: "PHP/PYTHON",
     description:
       "🧠 MindfulAI is an intelligent and empathetic web app providing AI-powered mental health support. It features emotion detection 💬, personalized recommendations 🧾, a user dashboard 👤, and secure login 🔐. Built with Flask, Supabase, and Gemini API.",
     stack: ["Python", "AI/ML"],
@@ -990,14 +990,14 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
   }, [showArchive]);
 
   const categories = [
-    "DESKTOP APP",
     "HTML/CSS",
     "JAVASCRIPT",
     "REACT",
     "NODE/EXPRESS",
-    "TYPESCRIPT",
-    "FULL STACK",
     "MERN STACK",
+    "DESKTOP APP",
+    "TYPESCRIPT",
+    "PHP/PYTHON",
   ];
 
   const filteredProjects = allProjects.filter(
