@@ -155,18 +155,6 @@ const allProjects: Project[] = [
     demo: "https://chatty-six-flax.vercel.app/",
   },
   {
-    id: 38,
-    title: "Second Brain",
-    category: "MERN STACK",
-    description:
-      "**Problem:** Most productivity tools fail to protect years of focus data, locking backups behind paywalls and fragile local storage.\n**Impact:** When systems crash, long-term progress disappears, breaking consistency and trust.\n**Solution:** I built a local-first productivity system that works fully offline while securely backing up data for permanent ownership.",
-    stack: ["MongoDB", "Express", "React", "Node.js", "IndexedDB"],
-    image: "/Project_images/second-brain.png",
-    color: "#0F172A",
-    github: "https://github.com/itslokeshx/Second-Brain",
-    demo: "https://second-brain-hub.vercel.app/",
-  },
-  {
     id: 43,
     title: "Mini Message Board",
     category: "MERN STACK",
@@ -177,6 +165,18 @@ const allProjects: Project[] = [
     color: "#00F0FF",
     github: "https://github.com/itslokeshx/Mini-Message-Board",
     demo: "https://mini-message-board-seven.vercel.app/",
+  },
+  {
+    id: 38,
+    title: "Second Brain",
+    category: "MERN STACK",
+    description:
+      "**Problem:** Most productivity tools fail to protect years of focus data, locking backups behind paywalls and fragile local storage.\n**Impact:** When systems crash, long-term progress disappears, breaking consistency and trust.\n**Solution:** I built a local-first productivity system that works fully offline while securely backing up data for permanent ownership.",
+    stack: ["MongoDB", "Express", "React", "Node.js", "IndexedDB"],
+    image: "/Project_images/second-brain.png",
+    color: "#0F172A",
+    github: "https://github.com/itslokeshx/Second-Brain",
+    demo: "https://second-brain-hub.vercel.app/",
   },
 
   // HTML/CSS Projects (in specified order)
@@ -474,6 +474,18 @@ const allProjects: Project[] = [
 
   // React Projects
   {
+    id: 44,
+    title: "Memory Game",
+    category: "REACT",
+    description:
+      "A Pokémon memory card game built with React and Vite. Test your memory by clicking cards without repeating — features difficulty levels, dark mode UI, Fisher-Yates shuffling, persistent high scores, and PokéAPI integration.",
+    stack: ["React", "Vite", "PokéAPI", "CSS"],
+    image: "/Project_images/memory-game.png",
+    color: "#61DAFB",
+    github: "https://github.com/itslokeshx/memory-game",
+    demo: "https://memory-card-zeta-woad.vercel.app/",
+  },
+  {
     id: 40,
     title: "CineList",
     category: "REACT",
@@ -520,18 +532,6 @@ const allProjects: Project[] = [
     color: "#61DAFB",
     github: "https://github.com/itslokeshx/Business-card",
     demo: "https://business-card-chi-plum.vercel.app/",
-  },
-  {
-    id: 44,
-    title: "Memory Game",
-    category: "REACT",
-    description:
-      "A Pokémon memory card game built with React and Vite. Test your memory by clicking cards without repeating — features difficulty levels, dark mode UI, Fisher-Yates shuffling, persistent high scores, and PokéAPI integration.",
-    stack: ["React", "Vite", "PokéAPI", "CSS"],
-    image: "/Project_images/memory-game.png",
-    color: "#61DAFB",
-    github: "https://github.com/itslokeshx/memory-game",
-    demo: "https://memory-card-zeta-woad.vercel.app/",
   },
 
   // TypeScript/Electron
