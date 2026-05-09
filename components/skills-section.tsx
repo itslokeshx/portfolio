@@ -118,7 +118,9 @@ export function SkillsSection() {
         const outerCount = SKILLS_DATA.filter(s => s.orbit === "outer").length
         const count = isInner ? innerCount : outerCount
         const indexInOrbit = isInner ? i : i - innerCount
-        const baseAngle = (indexInOrbit * Math.PI * 2) / count
+        // Offset outer orbit by 45° so planets sit between inner ones (left/right spread)
+        const orbitOffset = isInner ? 0 : Math.PI / 4
+        const baseAngle = (indexInOrbit * Math.PI * 2) / count + orbitOffset
 
         return {
           ...skill,
@@ -285,11 +287,12 @@ export function SkillsSection() {
       ctx.stroke()
       ctx.setLineDash([])
 
-      const rotationSpeed = 0.002
+      const innerRotationSpeed = 0.002
+      const outerRotationSpeed = 0.0014
 
       skillsRef.current.forEach((skill) => {
-        // Update angle with consistent rotation
-        skill.angle += rotationSpeed
+        // Update angle — inner and outer rotate at different speeds for visual variety
+        skill.angle += skill.orbit === "inner" ? innerRotationSpeed : outerRotationSpeed
 
         // Target position on orbit
         const targetX = Math.cos(skill.angle) * skill.orbitRadius
