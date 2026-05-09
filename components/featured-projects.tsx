@@ -93,6 +93,18 @@ const allProjects: Project[] = [
     demo: "https://soul-sync-beta.vercel.app/",
   },
   {
+    id: 2,
+    title: "Ollama Chat",
+    category: "DESKTOP APP",
+    description:
+      "**Problem:** Ollama on Linux has no native desktop UI — users are stuck in terminals or bloated Docker-based web UIs.\n**Impact:** Model switching, file uploads, and chat history require memorizing CLI commands or running heavy 500MB+ containers.\n**Solution:** Ollama Chat — a ~3.5MB native Linux desktop app built with Tauri and React for instant local AI chat with streaming, model management, and drag-and-drop file uploads.",
+    stack: ["Tauri 2.0", "React", "TypeScript", "Zustand", "Vite"],
+    image: "/Project_images/ollama-chat.png",
+    color: "#3B82F6",
+    github: "https://github.com/itslokeshx/ollama-chat",
+    demo: "https://github.com/itslokeshx/ollama-chat",
+  },
+  {
     id: 8,
     title: "YaaziCut",
     category: "DESKTOP APP",
@@ -117,18 +129,6 @@ const allProjects: Project[] = [
     color: "#6D28D9",
     github: "https://github.com/itslokeshx/CorteXia",
     demo: "https://corte-xia.vercel.app/",
-  },
-  {
-    id: 2,
-    title: "Ollama Chat",
-    category: "DESKTOP APP",
-    description:
-      "**Problem:** Ollama on Linux has no native desktop UI — users are stuck in terminals or bloated Docker-based web UIs.\n**Impact:** Model switching, file uploads, and chat history require memorizing CLI commands or running heavy 500MB+ containers.\n**Solution:** Ollama Chat — a ~3.5MB native Linux desktop app built with Tauri and React for instant local AI chat with streaming, model management, and drag-and-drop file uploads.",
-    stack: ["Tauri 2.0", "React", "TypeScript", "Zustand", "Vite"],
-    image: "/Project_images/ollama-chat.png",
-    color: "#3B82F6",
-    github: "https://github.com/itslokeshx/ollama-chat",
-    demo: "https://github.com/itslokeshx/ollama-chat",
   },
   {
     id: 41,
