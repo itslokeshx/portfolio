@@ -83,7 +83,7 @@ const allProjects: Project[] = [
   {
     id: 39,
     title: "SoulSync",
-    category: "DESKTOP APP",
+    category: "MERN STACK",
     description:
       "**Problem:** Music streaming requires expensive subscriptions while offering fragmented features.\n**Impact:** Users pay ₹119/month for basic features and miss collaborative listening tools.\n**Solution:** SoulSync — a free, open-source music streaming platform with AI-powered playlists, real-time duo sessions, intelligent search, and native Android support.",
     stack: ["React", "Node.js", "MongoDB", "Socket.io", "Groq AI", "Capacitor"],
@@ -121,7 +121,7 @@ const allProjects: Project[] = [
   {
     id: 2,
     title: "Ollama Chat",
-    category: "TAURI / REACT",
+    category: "DESKTOP APP",
     description:
       "**Problem:** Ollama on Linux has no native desktop UI — users are stuck in terminals or bloated Docker-based web UIs.\n**Impact:** Model switching, file uploads, and chat history require memorizing CLI commands or running heavy 500MB+ containers.\n**Solution:** Ollama Chat — a ~3.5MB native Linux desktop app built with Tauri and React for instant local AI chat with streaming, model management, and drag-and-drop file uploads.",
     stack: ["Tauri 2.0", "React", "TypeScript", "Zustand", "Vite"],
@@ -165,6 +165,18 @@ const allProjects: Project[] = [
     color: "#0F172A",
     github: "https://github.com/itslokeshx/Second-Brain",
     demo: "https://second-brain-hub.vercel.app/",
+  },
+  {
+    id: 43,
+    title: "Mini Message Board",
+    category: "MERN STACK",
+    description:
+      "A clean, minimal full-stack message board application for sharing thoughts instantly. Features full CRUD operations, inline editing with modals, toast notifications, keyboard shortcuts, and a keep-alive cron system.",
+    stack: ["React 19", "Express 5", "MongoDB", "Vite", "Axios"],
+    image: "/Project_images/message_board.png",
+    color: "#00F0FF",
+    github: "https://github.com/itslokeshx/Mini-Message-Board",
+    demo: "https://mini-message-board-seven.vercel.app/",
   },
 
   // HTML/CSS Projects (in specified order)
@@ -508,6 +520,18 @@ const allProjects: Project[] = [
     color: "#61DAFB",
     github: "https://github.com/itslokeshx/Business-card",
     demo: "https://business-card-chi-plum.vercel.app/",
+  },
+  {
+    id: 44,
+    title: "Memory Game",
+    category: "REACT",
+    description:
+      "A Pokémon memory card game built with React and Vite. Test your memory by clicking cards without repeating — features difficulty levels, dark mode UI, Fisher-Yates shuffling, persistent high scores, and PokéAPI integration.",
+    stack: ["React", "Vite", "PokéAPI", "CSS"],
+    image: "/Project_images/memory-game.png",
+    color: "#61DAFB",
+    github: "https://github.com/itslokeshx/memory-game",
+    demo: "https://memory-card-zeta-woad.vercel.app/",
   },
 
   // TypeScript/Electron
