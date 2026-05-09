@@ -39,7 +39,7 @@ export function AboutSection() {
   const nodesRef = useRef<OrbitNode[]>([...ORBIT_NODES])
   const [typedText, setTypedText] = useState("")
 
-  const fullText = "I am a web developer with 2+ years of experience in HTML, CSS and JavaScript and growing experience in React, Node.js, Express and MongoDB. I have strong fundamentals in programming and problem-solving, actively build real-world projects, maintain open-source repositories, and continuously improve my engineering skills through hands-on development."
+  const fullText = "I'm a full-stack developer focused on building real-world products, modern web applications, automation tools, and interactive digital experiences.\n\nOver the past few years, I've worked across the MERN stack, REST APIs, authentication systems, real-time applications, database architecture, and open-source development.\n\nI built SoulSync — a music platform used by 100+ users with 4000+ songs streamed and 100+ playlists created — gaining hands-on experience in building scalable user-focused applications.\n\nI enjoy transforming ideas into functional products — from minimal utilities to complete full-stack applications — while continuously improving my problem-solving, development workflow, and engineering skills through hands-on building."
 
   // Typing effect with faster speed
   useEffect(() => {
@@ -335,7 +335,7 @@ export function AboutSection() {
               <div className="p-6 font-mono text-sm leading-relaxed">
                 <div className="text-cyan mb-2">$ cat about.txt</div>
                 <div
-                  className="mt-4 text-mist/80"
+                  className="mt-4 text-mist/80 whitespace-pre-line"
                 >
                   {isInView && typedText.length > 0 ? typedText : ""}
                   {isInView && typedText.length < fullText.length && (
