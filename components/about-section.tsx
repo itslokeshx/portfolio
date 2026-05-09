@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from "react"
 import { motion, useInView } from "framer-motion"
-import { Clock, Rocket, Settings, Database } from "lucide-react"
+import { Rocket, Settings, Database, Sparkles } from "lucide-react"
 
 interface OrbitNode {
   id: string
@@ -23,10 +23,10 @@ const ORBIT_NODES: OrbitNode[] = [
 ]
 
 const STATS = [
-  { value: "2+", label: "YEARS OF PROGRAMMING", icon: Clock },
-  { value: "35+", label: "PROJECTS", icon: Rocket },
-  { value: "1500+", label: "HOURS OF CODING", icon: Settings },
-  { value: "5+", label: "REAL WORLD PRODUCTS", icon: Database },
+  { value: "35+", label: "PROJECTS BUILT", icon: Rocket },
+  { value: "4+", label: "REAL-WORLD PRODUCTS", icon: Database },
+  { value: "2000+", label: "DEV HOURS", icon: Settings },
+  { value: "∞", label: "CURIOSITY LEVEL", icon: Sparkles },
 ]
 
 export function AboutSection() {
