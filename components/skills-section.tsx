@@ -51,51 +51,37 @@ const SKILLS_DATA = [
   },
   {
     name: "React",
-    proficiency: 60,
-    experience: "Beginner",
+    proficiency: 80,
+    experience: "Intermediate",
     projects: ["CV Application", "Travel Journal", "Business Card", "DevIntel", "Second Brain"],
     orbit: "inner",
   },
   {
     name: "Node.js",
-    proficiency: 40,
-    experience: "Learning",
+    proficiency: 80,
+    experience: "Intermediate",
     projects: ["Automated WhatsApp Messager", "QR Code Generator", "Advice Generator"],
     orbit: "inner",
   },
   {
     name: "Express.js",
-    proficiency: 40,
-    experience: "Learning",
+    proficiency: 80,
+    experience: "Intermediate",
     projects: ["Automated WhatsApp Messager", "Second Brain", "DevIntel"],
     orbit: "outer",
   },
   {
     name: "MongoDB",
-    proficiency: 40,
-    experience: "Learning",
+    proficiency: 80,
+    experience: "Intermediate",
     projects: ["Second Brain", "DevIntel"],
     orbit: "outer",
   },
   {
-    name: "SQL / MySQL",
-    proficiency: 50,
-    experience: "Beginner",
-    projects: ["Hostel Management"],
-    orbit: "outer",
-  },
-  {
-    name: "C",
+    name: "C++",
     proficiency: 40,
     experience: "Learning",
     projects: ["DSA Practice"],
-    orbit: "outer",
-  },
-  {
-    name: "Python",
-    proficiency: 40,
-    experience: "Learning",
-    projects: ["MindfulAI"],
     orbit: "outer",
   },
   {
@@ -128,8 +114,11 @@ export function SkillsSection() {
       skillsRef.current = SKILLS_DATA.map((skill, i) => {
         const isInner = skill.orbit === "inner"
         const radius = isInner ? innerRadius : outerRadius
-        const count = isInner ? 4 : 6
-        const baseAngle = isInner ? (i * Math.PI * 2) / count : ((i - 4) * Math.PI * 2) / count
+        const innerCount = SKILLS_DATA.filter(s => s.orbit === "inner").length
+        const outerCount = SKILLS_DATA.filter(s => s.orbit === "outer").length
+        const count = isInner ? innerCount : outerCount
+        const indexInOrbit = isInner ? i : i - innerCount
+        const baseAngle = (indexInOrbit * Math.PI * 2) / count
 
         return {
           ...skill,
@@ -431,8 +420,8 @@ export function SkillsSection() {
             <span className="text-mist/60">80-89%</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-4 h-1 bg-cyan opacity-30" />
-            <span className="text-mist/60">70-79%</span>
+            <div className="w-4 h-1 bg-cyan opacity-20" />
+            <span className="text-mist/60">&lt;50%</span>
           </div>
         </div>
 
