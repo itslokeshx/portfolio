@@ -85,7 +85,7 @@ const allProjects: Project[] = [
     title: "SoulSync",
     category: "MERN STACK",
     description:
-      "**Problem:** Music streaming requires expensive subscriptions while offering fragmented features.\n**Impact:** Users pay ₹119/month for basic features and miss collaborative listening tools.\n**Solution:** SoulSync — a free, open-source music streaming platform with AI-powered playlists, real-time duo sessions, intelligent search, and native Android support.",
+      "SoulSync is a free, open-source music streaming platform featuring AI-powered playlists, real-time duo listening sessions, intelligent search, and native Android support via Capacitor. No ads, no subscriptions.",
     stack: ["React", "Node.js", "MongoDB", "Socket.io", "Groq AI", "Capacitor"],
     image: "/Project_images/soulsync.png",
     color: "#00F0FF",
@@ -97,7 +97,7 @@ const allProjects: Project[] = [
     title: "Ollama Chat",
     category: "DESKTOP APP",
     description:
-      "**Problem:** Ollama on Linux has no native desktop UI — users are stuck in terminals or bloated Docker-based web UIs.\n**Impact:** Model switching, file uploads, and chat history require memorizing CLI commands or running heavy 500MB+ containers.\n**Solution:** Ollama Chat — a ~3.5MB native Linux desktop app built with Tauri and React for instant local AI chat with streaming, model management, and drag-and-drop file uploads.",
+      "A lightweight ~3.5MB native Linux desktop app for local AI chat with Ollama. Features streaming responses, model management, conversation history, and drag-and-drop file uploads — all without Docker overhead.",
     stack: ["Tauri 2.0", "React", "TypeScript", "Zustand", "Vite"],
     image: "/Project_images/ollama-chat.png",
     color: "#3B82F6",
@@ -123,7 +123,7 @@ const allProjects: Project[] = [
     title: "CorteXia",
     category: "MERN STACK",
     description:
-      "**Problem:** Productivity tools are fragmented and AI lacks real context.\n**Impact:** Users lose clarity, consistency, and alignment between daily actions and long-term goals.\n**Solution:** CorteXia — an AI-powered unified workspace connecting tasks, goals, habits, finance, and journaling into one intelligent system.",
+      "An AI-powered unified workspace that connects tasks, goals, habits, finance, and journaling into one intelligent system. Features real-time AI context, offline-first architecture, and seamless data synchronization.",
     stack: ["MongoDB", "Express", "React", "Node.js", "AI"],
     image: "/Project_images/Cortexia.png",
     color: "#6D28D9",
@@ -135,7 +135,7 @@ const allProjects: Project[] = [
     title: "Roots",
     category: "MERN STACK",
     description:
-      "**Problem:** Mental health apps focus on surface-level mood tracking without uncovering underlying psychological patterns.\n**Impact:** Users manage symptoms but never understand the root causes driving their anxiety, burnout, or relationship struggles.\n**Solution:** Roots — an AI-guided psychological excavation app with 40-question depth sessions, living memory profiles, and personalized healing practices.",
+      "An AI-guided psychological excavation app that helps users uncover root causes behind anxiety, burnout, and relationship struggles through 40-question depth sessions, living memory profiles, and personalized healing practices.",
     stack: ["React", "Node.js", "MongoDB", "Groq AI", "SSE"],
     image: "/Project_images/Roots.png",
     color: "#FFD700",
@@ -147,7 +147,7 @@ const allProjects: Project[] = [
     title: "Chatty",
     category: "MERN STACK",
     description:
-      "**Problem:** Real-time chat applications are often over-engineered with cluttered interfaces and unnecessary complexity.\n**Impact:** Users face distracting UIs that prioritize features over focused, clean communication experiences.\n**Solution:** Chatty — a minimalist real-time global chat app with JWT authentication, Socket.IO messaging, and a premium monochrome design inspired by Notion.",
+      "A minimalist real-time global chat application with JWT authentication, Socket.IO messaging, and a premium monochrome design inspired by Notion. Clean, focused, and distraction-free.",
     stack: ["React", "Node.js", "MongoDB", "Socket.io"],
     image: "/Project_images/Chatty.png",
     color: "#FFFFFF",
@@ -171,7 +171,7 @@ const allProjects: Project[] = [
     title: "Second Brain",
     category: "MERN STACK",
     description:
-      "**Problem:** Most productivity tools fail to protect years of focus data, locking backups behind paywalls and fragile local storage.\n**Impact:** When systems crash, long-term progress disappears, breaking consistency and trust.\n**Solution:** I built a local-first productivity system that works fully offline while securely backing up data for permanent ownership.",
+      "A local-first productivity system that works fully offline while securely backing up data to the cloud. Features IndexedDB for instant access, MongoDB sync for persistence, and permanent data ownership.",
     stack: ["MongoDB", "Express", "React", "Node.js", "IndexedDB"],
     image: "/Project_images/second-brain.png",
     color: "#0F172A",
@@ -428,7 +428,7 @@ const allProjects: Project[] = [
     title: "SaveMyTab",
     category: "JAVASCRIPT",
     description:
-      "**Problem:** Modern workflows encourage tab overload, silently draining focus and mental clarity.\n**Impact:** Constant context switching slows productivity and increases cognitive fatigue.\n**Solution:** I built a lightweight browser extension that saves essential tabs instantly and keeps workspaces clean.",
+      "A lightweight Chrome extension that saves and organizes open browser tabs instantly. One-click save, restore sessions, and keep your workspace clean without tab overload.",
     stack: ["JavaScript", "Chrome API", "HTML/CSS"],
     image: "/Project_images/SaveMyTab.jpeg",
     color: "#FF9F00",
@@ -502,7 +502,7 @@ const allProjects: Project[] = [
     title: "CV Application",
     category: "REACT",
     description:
-      "**Problem:** Traditional CV builders provide feedback only after exporting, forcing users to guess layouts.\n**Impact:** Users waste time with repeated revisions and unnecessary exports.\n**Solution:** I built a real-time CV builder that updates the resume instantly as users edit.",
+      "A real-time CV builder that updates the resume preview instantly as users type. No exports needed to see changes — edit and preview side by side with a clean, responsive interface.",
     stack: ["React", "Vite"],
     image: "/Project_images/CV.jpeg",
     color: "#9333EA",
@@ -554,7 +554,7 @@ const allProjects: Project[] = [
     title: "Automated WA Messenger",
     category: "NODE/EXPRESS",
     description:
-      "**Problem:** Small businesses were forced to pay recurring fees for basic WhatsApp automation.\n**Impact:** These unnecessary subscriptions reduced profit margins and limited customer engagement.\n**Solution:** I built a zero-subscription automation system using the WhatsApp Cloud API to send and schedule messages reliably.",
+      "A zero-subscription WhatsApp automation system using the WhatsApp Cloud API. Schedule and send messages reliably with cron jobs — built for small businesses without recurring fees.",
     stack: ["Node.js", "Express", "Cron", "WhatsApp Cloud API"],
     image: "/Project_images/Whatsapp_Automation.png",
     color: "#00FF94",
