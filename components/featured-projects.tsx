@@ -67,7 +67,7 @@ const featuredProjects: Project[] = [
   {
     id: 5,
     title: "Chatty",
-    category: "FULL STACK",
+    category: "MERN STACK",
     description:
       "**Problem:** Real-time chat applications are often over-engineered with cluttered interfaces and unnecessary complexity.\n**Impact:** Users face distracting UIs that prioritize features over focused, clean communication experiences.\n**Solution:** Chatty — a minimalist real-time global chat app with JWT authentication, Socket.IO messaging, and a premium monochrome design inspired by Notion.",
     stack: ["React", "Node.js", "MongoDB", "Socket.io"],
@@ -79,11 +79,11 @@ const featuredProjects: Project[] = [
 ];
 
 const allProjects: Project[] = [
-  // MERN STACK Projects
+  // Desktop App
   {
     id: 39,
     title: "SoulSync",
-    category: "MERN STACK",
+    category: "DESKTOP APP",
     description:
       "**Problem:** Music streaming requires expensive subscriptions while offering fragmented features.\n**Impact:** Users pay ₹119/month for basic features and miss collaborative listening tools.\n**Solution:** SoulSync — a free, open-source music streaming platform with AI-powered playlists, real-time duo sessions, intelligent search, and native Android support.",
     stack: ["React", "Node.js", "MongoDB", "Socket.io", "Groq AI", "Capacitor"],
@@ -92,7 +92,20 @@ const allProjects: Project[] = [
     github: "https://github.com/itslokeshx/SoulSync",
     demo: "https://soul-sync-beta.vercel.app/",
   },
+  {
+    id: 8,
+    title: "YaaziCut",
+    category: "DESKTOP APP",
+    description:
+      "YaaziCut is a minimal, lossless video splitter for Linux and Windows—drag your video, pick how many segments, and split instantly. No frills, no re-encoding, just fast and simple video division.",
+    stack: ["Electron", "TypeScript", "Node.js"],
+    image: "/Project_images/YaaziCut.png",
+    color: "#3178C6",
+    github: "https://github.com/itslokeshx/YaaziCut",
+    demo: "https://github.com/itslokeshx/YaaziCut",
+  },
 
+  // MERN STACK Projects
   {
     id: 1,
     title: "CorteXia",
@@ -132,7 +145,7 @@ const allProjects: Project[] = [
   {
     id: 42,
     title: "Chatty",
-    category: "FULL STACK",
+    category: "MERN STACK",
     description:
       "**Problem:** Real-time chat applications are often over-engineered with cluttered interfaces and unnecessary complexity.\n**Impact:** Users face distracting UIs that prioritize features over focused, clean communication experiences.\n**Solution:** Chatty — a minimalist real-time global chat app with JWT authentication, Socket.IO messaging, and a premium monochrome design inspired by Notion.",
     stack: ["React", "Node.js", "MongoDB", "Socket.io"],
@@ -398,6 +411,55 @@ const allProjects: Project[] = [
     demo: "https://itslokeshx.github.io/counter/",
   },
 
+  {
+    id: 4,
+    title: "SaveMyTab",
+    category: "JAVASCRIPT",
+    description:
+      "**Problem:** Modern workflows encourage tab overload, silently draining focus and mental clarity.\n**Impact:** Constant context switching slows productivity and increases cognitive fatigue.\n**Solution:** I built a lightweight browser extension that saves essential tabs instantly and keeps workspaces clean.",
+    stack: ["JavaScript", "Chrome API", "HTML/CSS"],
+    image: "/Project_images/SaveMyTab.jpeg",
+    color: "#FF9F00",
+    github: "https://github.com/itslokeshx/SaveMyTab",
+    demo: "https://github.com/itslokeshx/SaveMyTab",
+  },
+  {
+    id: 11,
+    title: "Github User Details",
+    category: "JAVASCRIPT",
+    description:
+      "📊 GitHub User Details – Fetch and display any GitHub user's profile info in real-time. Built with HTML, CSS, and vanilla JavaScript using the GitHub API.",
+    stack: ["JavaScript", "API"],
+    image: "/Project_images/GIthub_user_details.jpeg",
+    color: "#68A063",
+    github: "https://github.com/itslokeshx/Github_user_details",
+    demo: "https://itslokeshx.github.io/Github_user_details/",
+  },
+  {
+    id: 12,
+    title: "Advice Generator",
+    category: "JAVASCRIPT",
+    description:
+      "A Frontend Mentor project – Random Advice Generator built with HTML, CSS, and JavaScript. Uses an API to fetch and display random pieces of advice with a single click.",
+    stack: ["JavaScript", "API"],
+    image: "/Project_images/Advice_Gen.jpeg",
+    color: "#68A063",
+    github: "https://github.com/itslokeshx/Advice-Generator",
+    demo: "https://itslokeshx.github.io/Advice-Generator/",
+  },
+  {
+    id: 23,
+    title: "Color Scheme Generator",
+    category: "JAVASCRIPT",
+    description:
+      "🎨 Color Scheme Generator – A Scrimba API project that generates dynamic color palettes using the Color API. Pick a base color & scheme type, get instant palettes.",
+    stack: ["JavaScript", "API"],
+    image: "/Project_images/Color_scheme.png",
+    color: "#F7DF1E",
+    github: "https://github.com/itslokeshx/color-scheme-generator",
+    demo: "https://itslokeshx.github.io/color-scheme-generator/",
+  },
+
   // React Projects
   {
     id: 40,
@@ -449,18 +511,7 @@ const allProjects: Project[] = [
   },
 
   // TypeScript/Electron
-  {
-    id: 8,
-    title: "YaaziCut",
-    category: "TYPESCRIPT",
-    description:
-      "YaaziCut is a minimal, lossless video splitter for Linux and Windows—drag your video, pick how many segments, and split instantly. No frills, no re-encoding, just fast and simple video division.",
-    stack: ["Electron", "TypeScript", "Node.js"],
-    image: "/Project_images/YaaziCut.png",
-    color: "#3178C6",
-    github: "https://github.com/itslokeshx/YaaziCut",
-    demo: "https://github.com/itslokeshx/YaaziCut",
-  },
+
   {
     id: 9,
     title: "Billzy",
@@ -473,7 +524,7 @@ const allProjects: Project[] = [
     demo: "https://billzy-psi.vercel.app/",
   },
 
-  // Node.js & APIs
+  // Node.js
   {
     id: 3,
     title: "Automated WA Messenger",
@@ -498,60 +549,12 @@ const allProjects: Project[] = [
     github: "https://github.com/itslokeshx/QR-Code-Generator",
     demo: "https://github.com/itslokeshx/QR-Code-Generator",
   },
-  {
-    id: 4,
-    title: "SaveMyTab",
-    category: "API",
-    description:
-      "**Problem:** Modern workflows encourage tab overload, silently draining focus and mental clarity.\n**Impact:** Constant context switching slows productivity and increases cognitive fatigue.\n**Solution:** I built a lightweight browser extension that saves essential tabs instantly and keeps workspaces clean.",
-    stack: ["JavaScript", "Chrome API", "HTML/CSS"],
-    image: "/Project_images/SaveMyTab.jpeg",
-    color: "#FF9F00",
-    github: "https://github.com/itslokeshx/SaveMyTab",
-    demo: "https://github.com/itslokeshx/SaveMyTab",
-  },
-  {
-    id: 11,
-    title: "Github User Details",
-    category: "API",
-    description:
-      "📊 GitHub User Details – Fetch and display any GitHub user's profile info in real-time. Built with HTML, CSS, and vanilla JavaScript using the GitHub API.",
-    stack: ["JavaScript", "API"],
-    image: "/Project_images/GIthub_user_details.jpeg",
-    color: "#68A063",
-    github: "https://github.com/itslokeshx/Github_user_details",
-    demo: "https://itslokeshx.github.io/Github_user_details/",
-  },
-  {
-    id: 12,
-    title: "Advice Generator",
-    category: "API",
-    description:
-      "A Frontend Mentor project – Random Advice Generator built with HTML, CSS, and JavaScript. Uses an API to fetch and display random pieces of advice with a single click.",
-    stack: ["JavaScript", "API"],
-    image: "/Project_images/Advice_Gen.jpeg",
-    color: "#68A063",
-    github: "https://github.com/itslokeshx/Advice-Generator",
-    demo: "https://itslokeshx.github.io/Advice-Generator/",
-  },
-  {
-    id: 23,
-    title: "Color Scheme Generator",
-    category: "API",
-    description:
-      "🎨 Color Scheme Generator – A Scrimba API project that generates dynamic color palettes using the Color API. Pick a base color & scheme type, get instant palettes.",
-    stack: ["JavaScript", "API"],
-    image: "/Project_images/Color_scheme.png",
-    color: "#F7DF1E",
-    github: "https://github.com/itslokeshx/color-scheme-generator",
-    demo: "https://itslokeshx.github.io/color-scheme-generator/",
-  },
 
   // PHP & MySQL
   {
     id: 35,
     title: "Hostel Management",
-    category: "PHP & SQL",
+    category: "FULL STACK",
     description:
       "🏫 Hostel Management System – A responsive web app for managing student registrations, room availability, and complaints. 💻 Built with PHP, MySQL, HTML, CSS, and JavaScript.",
     stack: ["PHP", "MySQL", "HTML"],
@@ -565,7 +568,7 @@ const allProjects: Project[] = [
   {
     id: 37,
     title: "MindfulAI",
-    category: "PYTHON",
+    category: "FULL STACK",
     description:
       "🧠 MindfulAI is an intelligent and empathetic web app providing AI-powered mental health support. It features emotion detection 💬, personalized recommendations 🧾, a user dashboard 👤, and secure login 🔐. Built with Flask, Supabase, and Gemini API.",
     stack: ["Python", "AI/ML"],
@@ -987,15 +990,14 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
   }, [showArchive]);
 
   const categories = [
+    "DESKTOP APP",
     "HTML/CSS",
     "JAVASCRIPT",
-    "API",
     "REACT",
     "NODE/EXPRESS",
     "TYPESCRIPT",
+    "FULL STACK",
     "MERN STACK",
-    "PHP & SQL",
-    "PYTHON",
   ];
 
   const filteredProjects = allProjects.filter(
