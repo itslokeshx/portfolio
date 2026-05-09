@@ -48,7 +48,7 @@ const featuredProjects: Project[] = [
       "**Problem:** Ollama on Linux has no native desktop UI — users are stuck in terminals or bloated Docker-based web UIs.\n**Impact:** Model switching, file uploads, and chat history require memorizing CLI commands or running heavy 500MB+ containers.\n**Solution:** Ollama Chat — a ~3.5MB native Linux desktop app built with Tauri and React for instant local AI chat with streaming, model management, and drag-and-drop file uploads.",
     stack: ["Tauri 2.0", "React", "TypeScript", "Zustand", "Vite"],
     image: "/Project_images/ollama-chat.png",
-    color: "#0F172A",
+    color: "#3B82F6",
     github: "https://github.com/itslokeshx/ollama-chat",
     demo: "https://github.com/itslokeshx/ollama-chat",
   },
@@ -60,7 +60,7 @@ const featuredProjects: Project[] = [
       "**Problem:** Mental health apps focus on surface-level mood tracking without uncovering underlying psychological patterns.\n**Impact:** Users manage symptoms but never understand the root causes driving their anxiety, burnout, or relationship struggles.\n**Solution:** Roots — an AI-guided psychological excavation app with 40-question depth sessions, living memory profiles, and personalized healing practices.",
     stack: ["React", "Node.js", "MongoDB", "Groq AI", "SSE"],
     image: "/Project_images/Roots.png",
-    color: "#00FF94",
+    color: "#FFD700",
     github: "https://github.com/itslokeshx/Roots",
     demo: "https://find-your-root.vercel.app/",
   },
@@ -72,7 +72,7 @@ const featuredProjects: Project[] = [
       "**Problem:** Real-time chat applications are often over-engineered with cluttered interfaces and unnecessary complexity.\n**Impact:** Users face distracting UIs that prioritize features over focused, clean communication experiences.\n**Solution:** Chatty — a minimalist real-time global chat app with JWT authentication, Socket.IO messaging, and a premium monochrome design inspired by Notion.",
     stack: ["React", "Node.js", "MongoDB", "Socket.io"],
     image: "/Project_images/Chatty.png",
-    color: "#9333EA",
+    color: "#FFFFFF",
     github: "https://github.com/itslokeshx/Chatty",
     demo: "https://chatty-six-flax.vercel.app/",
   },
@@ -113,7 +113,7 @@ const allProjects: Project[] = [
       "**Problem:** Ollama on Linux has no native desktop UI — users are stuck in terminals or bloated Docker-based web UIs.\n**Impact:** Model switching, file uploads, and chat history require memorizing CLI commands or running heavy 500MB+ containers.\n**Solution:** Ollama Chat — a ~3.5MB native Linux desktop app built with Tauri and React for instant local AI chat with streaming, model management, and drag-and-drop file uploads.",
     stack: ["Tauri 2.0", "React", "TypeScript", "Zustand", "Vite"],
     image: "/Project_images/ollama-chat.png",
-    color: "#0F172A",
+    color: "#3B82F6",
     github: "https://github.com/itslokeshx/ollama-chat",
     demo: "https://github.com/itslokeshx/ollama-chat",
   },
@@ -125,7 +125,7 @@ const allProjects: Project[] = [
       "**Problem:** Mental health apps focus on surface-level mood tracking without uncovering underlying psychological patterns.\n**Impact:** Users manage symptoms but never understand the root causes driving their anxiety, burnout, or relationship struggles.\n**Solution:** Roots — an AI-guided psychological excavation app with 40-question depth sessions, living memory profiles, and personalized healing practices.",
     stack: ["React", "Node.js", "MongoDB", "Groq AI", "SSE"],
     image: "/Project_images/Roots.png",
-    color: "#00FF94",
+    color: "#FFD700",
     github: "https://github.com/itslokeshx/Roots",
     demo: "https://find-your-root.vercel.app/",
   },
@@ -137,7 +137,7 @@ const allProjects: Project[] = [
       "**Problem:** Real-time chat applications are often over-engineered with cluttered interfaces and unnecessary complexity.\n**Impact:** Users face distracting UIs that prioritize features over focused, clean communication experiences.\n**Solution:** Chatty — a minimalist real-time global chat app with JWT authentication, Socket.IO messaging, and a premium monochrome design inspired by Notion.",
     stack: ["React", "Node.js", "MongoDB", "Socket.io"],
     image: "/Project_images/Chatty.png",
-    color: "#9333EA",
+    color: "#FFFFFF",
     github: "https://github.com/itslokeshx/Chatty",
     demo: "https://chatty-six-flax.vercel.app/",
   },
@@ -673,24 +673,10 @@ function ProjectRow({
               initial={{ opacity: 0 }}
               animate={{ opacity: isHovered && !isExpanded ? 1 : 0 }}
               transition={{ duration: 0.3 }}
-              className={`absolute inset-0 rounded-lg overflow-hidden border-2 ${
-                project.id === 1
-                  ? "border-cyan shadow-[0_0_20px_rgba(0,240,255,0.25)]"
-                  : project.id === 2
-                    ? "border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.25)]"
-                    : project.id === 5
-                      ? "border-slate-600 shadow-[0_0_20px_rgba(71,85,105,0.25)]"
-                      : ""
-              }`}
+              className="absolute inset-0 rounded-lg overflow-hidden border-2"
               style={{
-                borderColor:
-                  project.id === 1 || project.id === 2
-                    ? undefined
-                    : project.color,
-                boxShadow:
-                  project.id === 1 || project.id === 2
-                    ? undefined
-                    : `0 0 20px ${project.color}40`,
+                borderColor: project.color,
+                boxShadow: `0 0 20px ${project.color}40`,
               }}
             >
               <img
