@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useEffect, useState, useMemo } from "react"
+import { useRef, useEffect, useState, useMemo, useCallback } from "react"
 import { motion, useInView } from "framer-motion"
 
 interface ContributionDay {
@@ -106,6 +106,14 @@ export function GitHubStreak() {
   const [data, setData] = useState<ContributionData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640)
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
 
   useEffect(() => {
     if (!isInView) return
@@ -152,8 +160,9 @@ export function GitHubStreak() {
     [data]
   )
 
-  const cellSize = 13
-  const cellGap = 3
+  // Responsive cell sizing
+  const cellSize = isMobile ? 10 : 13
+  const cellGap = isMobile ? 2 : 3
   const totalCellSize = cellSize + cellGap
 
   return (
@@ -180,7 +189,7 @@ export function GitHubStreak() {
           <p className="font-mono text-cyan/60 text-sm mb-4">
             // COMMIT_HISTORY
           </p>
-          <h2 className="text-5xl md:text-6xl font-black text-white mb-4">
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-white mb-4">
             GITHUB <span className="text-cyan">ACTIVITY</span>
             <span className="text-cyan animate-pulse ml-2">▮</span>
           </h2>
@@ -195,7 +204,7 @@ export function GitHubStreak() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15 }}
           viewport={{ once: true }}
-          className="bg-[#0a0a0a] rounded-2xl border-2 border-cyan/20 overflow-hidden hover:border-cyan/30 transition-colors duration-500 w-fit mx-auto"
+          className="bg-[#0a0a0a] rounded-2xl border-2 border-cyan/20 overflow-hidden hover:border-cyan/30 transition-colors duration-500 w-full sm:w-fit mx-auto"
         >
           {/* Terminal header */}
           <div className="flex items-center gap-2 px-4 py-3 bg-titanium/80 border-b border-cyan/20">
@@ -231,7 +240,7 @@ export function GitHubStreak() {
           </div>
 
           {/* Graph Body */}
-          <div className="p-5 md:p-8">
+          <div className="p-3 sm:p-5 md:p-8">
             {loading ? (
               <div className="flex items-center justify-center py-16">
                 <div className="flex items-center gap-3">
@@ -258,8 +267,8 @@ export function GitHubStreak() {
             ) : (
               <>
                 {/* Scrollable graph area */}
-                <div className="overflow-hidden pb-2">
-                  <div className="relative inline-block" style={{ paddingLeft: 32 }}>
+                <div className="overflow-x-auto pb-2 -mx-1 px-1 scrollbar-thin scrollbar-thumb-cyan/20 scrollbar-track-transparent">
+                  <div className="relative inline-block" style={{ paddingLeft: isMobile ? 24 : 32 }}>
                     {/* Month labels — absolutely positioned above grid columns */}
                     <div className="relative" style={{ height: 20, marginBottom: 4 }}>
                       {monthPositions.map((month, i) => (
@@ -282,7 +291,7 @@ export function GitHubStreak() {
                       {/* Day labels column */}
                       <div
                         className="flex flex-col flex-shrink-0"
-                        style={{ width: 32, marginLeft: -32 }}
+                        style={{ width: isMobile ? 24 : 32, marginLeft: isMobile ? -24 : -32 }}
                       >
                         {[0, 1, 2, 3, 4, 5, 6].map((dayIndex) => (
                           <div
@@ -295,7 +304,7 @@ export function GitHubStreak() {
                               paddingRight: 6,
                             }}
                           >
-                            <span className="text-[10px] font-mono text-mist/40 leading-none">
+                            <span className="text-[9px] sm:text-[10px] font-mono text-mist/40 leading-none">
                               {dayIndex === 1
                                 ? "Mon"
                                 : dayIndex === 3
@@ -309,11 +318,11 @@ export function GitHubStreak() {
                       </div>
 
                       {/* Contribution cells grid */}
-                      <div className="flex gap-[3px]">
+                      <div className="flex" style={{ gap: cellGap }}>
                         {weeks.map((week, weekIndex) => (
                           <div
                             key={weekIndex}
-                            className="flex flex-col gap-[3px]"
+                            className="flex flex-col" style={{ gap: cellGap }}
                           >
                             {week.map((day, dayIndex) => (
                               <motion.div
@@ -378,7 +387,7 @@ export function GitHubStreak() {
                 </div>
 
                 {/* Footer: Total + Legend */}
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-5 pt-4 border-t border-white/5 gap-3">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-4 sm:mt-5 pt-3 sm:pt-4 border-t border-white/5 gap-2 sm:gap-3">
                   <div className="flex items-center gap-4 flex-wrap">
                     <a
                       href={`https://github.com/${GITHUB_USERNAME}`}
@@ -389,7 +398,8 @@ export function GitHubStreak() {
                       <span className="text-mist/70 font-semibold">
                         {data?.total?.lastYear?.toLocaleString() ?? "—"}
                       </span>{" "}
-                      contributions in the last year
+                      <span className="hidden sm:inline">contributions in the last year</span>
+                      <span className="sm:hidden">contributions</span>
                     </a>
                     {currentStreak > 0 && (
                       <span className="text-sm font-mono text-mist/50 flex items-center gap-1.5">
