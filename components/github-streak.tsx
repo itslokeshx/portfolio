@@ -32,52 +32,7 @@ const LEVEL_COLORS = [
   "rgba(57, 211, 83, 1.0)",      // Level 4
 ]
 
-function getLevel(count: number): number {
-  if (count === 0) return 0
-  if (count <= 2) return 1
-  if (count <= 5) return 2
-  if (count <= 9) return 3
-  return 4
-}
 
-function generateFallbackData(): ContributionData {
-  const contributions: ContributionDay[] = []
-  const today = new Date()
-  const oneYearAgo = new Date(today)
-  oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1)
-
-  // Start from the Sunday of the week one year ago
-  const start = new Date(oneYearAgo)
-  start.setDate(start.getDate() - start.getDay())
-
-  let total = 0
-  const current = new Date(start)
-
-  while (current <= today) {
-    const dayOfWeek = current.getDay()
-    // Generate realistic-looking random data
-    const isWeekday = dayOfWeek > 0 && dayOfWeek < 6
-    const rand = Math.random()
-    let count = 0
-
-    if (isWeekday) {
-      if (rand > 0.3) count = Math.floor(Math.random() * 8) + 1
-    } else {
-      if (rand > 0.6) count = Math.floor(Math.random() * 5)
-    }
-
-    total += count
-    contributions.push({
-      date: current.toISOString().split("T")[0],
-      count,
-      level: getLevel(count),
-    })
-
-    current.setDate(current.getDate() + 1)
-  }
-
-  return { total: { lastYear: total }, contributions }
-}
 
 function processContributions(data: ContributionData) {
   const weeks: ContributionDay[][] = []
@@ -177,9 +132,8 @@ export function GitHubStreak() {
           contributions,
         })
       } catch {
-        console.warn("GitHub contributions API failed, using fallback")
+        console.warn("GitHub contributions API failed")
         setError(true)
-        setData(generateFallbackData())
       } finally {
         setLoading(false)
       }
@@ -286,6 +240,20 @@ export function GitHubStreak() {
                     Loading contributions...
                   </span>
                 </div>
+              </div>
+            ) : error || !data ? (
+              <div className="flex flex-col items-center justify-center py-16 gap-3">
+                <p className="text-mist/50 font-mono text-sm">
+                  Unable to load contribution data
+                </p>
+                <a
+                  href={`https://github.com/${GITHUB_USERNAME}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-cyan text-sm font-mono hover:underline"
+                >
+                  View on GitHub →
+                </a>
               </div>
             ) : (
               <>
@@ -422,11 +390,6 @@ export function GitHubStreak() {
                         {data?.total?.lastYear?.toLocaleString() ?? "—"}
                       </span>{" "}
                       contributions in the last year
-                      {error && (
-                        <span className="text-mist/30 text-xs ml-2">
-                          (estimated)
-                        </span>
-                      )}
                     </a>
                     {currentStreak > 0 && (
                       <span className="text-sm font-mono text-mist/50 flex items-center gap-1.5">
