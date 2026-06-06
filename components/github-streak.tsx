@@ -222,7 +222,7 @@ export function GitHubStreak() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15 }}
           viewport={{ once: true }}
-          className="bg-[#0a0a0a] rounded-2xl border-2 border-cyan/20 overflow-hidden hover:border-cyan/30 transition-colors duration-500"
+          className="bg-[#0a0a0a] rounded-2xl border-2 border-cyan/20 overflow-hidden hover:border-cyan/30 transition-colors duration-500 w-fit mx-auto"
         >
           {/* Terminal header */}
           <div className="flex items-center gap-2 px-4 py-3 bg-titanium/80 border-b border-cyan/20">
