@@ -25,11 +25,11 @@ const DAY_LABELS = ["Mon", "Wed", "Fri"]
 
 // Cyan-themed intensity levels matching the portfolio
 const LEVEL_COLORS = [
-  "rgba(0, 240, 255, 0.04)",  // Level 0 - empty
-  "rgba(0, 240, 255, 0.15)",  // Level 1
-  "rgba(0, 240, 255, 0.35)",  // Level 2
-  "rgba(0, 240, 255, 0.60)",  // Level 3
-  "rgba(0, 240, 255, 0.90)",  // Level 4
+  "rgba(255, 255, 255, 0.03)",   // Level 0 - empty
+  "rgba(57, 211, 83, 0.25)",     // Level 1
+  "rgba(57, 211, 83, 0.50)",     // Level 2
+  "rgba(57, 211, 83, 0.75)",     // Level 3
+  "rgba(57, 211, 83, 1.0)",      // Level 4
 ]
 
 function getLevel(count: number): number {
@@ -357,11 +357,11 @@ export function GitHubStreak() {
                                       day.level === -1
                                         ? "none"
                                         : day.level === 0
-                                          ? "1px solid rgba(0, 240, 255, 0.06)"
+                                          ? "1px solid rgba(57, 211, 83, 0.08)"
                                           : "none",
                                     transition: "all 0.2s ease",
                                   }}
-                                  className="hover:ring-1 hover:ring-cyan/50 hover:scale-125 cursor-default"
+                                  className="hover:ring-1 hover:ring-green-400/50 hover:scale-125 cursor-default"
                                 />
                                 {/* Tooltip */}
                                 {day.date && (
