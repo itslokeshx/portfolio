@@ -267,7 +267,7 @@ export function GitHubStreak() {
             ) : (
               <>
                 {/* Scrollable graph area */}
-                <div className="overflow-x-auto pb-2 -mx-1 px-1" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}>
+                <div className="overflow-x-auto pb-2 -mx-1 px-1 no-scrollbar">
                   <div className="relative inline-block" style={{ paddingLeft: isMobile ? 24 : 32 }}>
                     {/* Month labels — absolutely positioned above grid columns */}
                     <div className="relative" style={{ height: 20, marginBottom: 4 }}>
