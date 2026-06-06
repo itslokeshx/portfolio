@@ -9,6 +9,7 @@ import { BootSequence } from "@/components/boot-sequence"
 import { HeroSection } from "@/components/hero-section"
 import { AboutSection } from "@/components/about-section"
 import { SkillsSection } from "@/components/skills-section"
+import { GitHubStreak } from "@/components/github-streak"
 import { FeaturedProjects } from "@/components/featured-projects"
 import { ContactSection } from "@/components/contact-section"
 import { SiteHeader } from "@/components/site-header"
@@ -31,6 +32,7 @@ export default function Home() {
           <main className="relative">
             <HeroSection />
             <AboutSection />
+            <GitHubStreak />
             <SkillsSection />
             <FeaturedProjects onViewAll={() => { }} />
             <ContactSection />
