@@ -130,6 +130,21 @@ function getMonthPositions(weeks: ContributionDay[][]) {
   return months
 }
 
+function calculateStreak(contributions: ContributionDay[]): number {
+  let streak = 0
+  // Walk backwards from today
+  for (let i = contributions.length - 1; i >= 0; i--) {
+    if (contributions[i].count > 0) {
+      streak++
+    } else {
+      // Allow today to be 0 (day might not be over yet)
+      if (i === contributions.length - 1) continue
+      break
+    }
+  }
+  return streak
+}
+
 export function GitHubStreak() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(sectionRef, { once: true, margin: "-50px" })
@@ -177,6 +192,10 @@ export function GitHubStreak() {
   const monthPositions = useMemo(
     () => (weeks.length > 0 ? getMonthPositions(weeks) : []),
     [weeks]
+  )
+  const currentStreak = useMemo(
+    () => (data ? calculateStreak(data.contributions) : 0),
+    [data]
   )
 
   const cellSize = 13
@@ -392,22 +411,30 @@ export function GitHubStreak() {
 
                 {/* Footer: Total + Legend */}
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-5 pt-4 border-t border-white/5 gap-3">
-                  <a
-                    href={`https://github.com/${GITHUB_USERNAME}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm font-mono text-mist/50 hover:text-cyan transition-colors"
-                  >
-                    <span className="text-mist/70 font-semibold">
-                      {data?.total?.lastYear?.toLocaleString() ?? "—"}
-                    </span>{" "}
-                    contributions in the last year
-                    {error && (
-                      <span className="text-mist/30 text-xs ml-2">
-                        (estimated)
+                  <div className="flex items-center gap-4 flex-wrap">
+                    <a
+                      href={`https://github.com/${GITHUB_USERNAME}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-mono text-mist/50 hover:text-cyan transition-colors"
+                    >
+                      <span className="text-mist/70 font-semibold">
+                        {data?.total?.lastYear?.toLocaleString() ?? "—"}
+                      </span>{" "}
+                      contributions in the last year
+                      {error && (
+                        <span className="text-mist/30 text-xs ml-2">
+                          (estimated)
+                        </span>
+                      )}
+                    </a>
+                    {currentStreak > 0 && (
+                      <span className="text-sm font-mono text-mist/50 flex items-center gap-1.5">
+                        <span className="text-orange-400">🔥</span>
+                        <span className="text-mist/70 font-semibold">{currentStreak}</span> day streak
                       </span>
                     )}
-                  </a>
+                  </div>
 
                   <div className="flex items-center gap-1.5">
                     <span className="text-[11px] font-mono text-mist/35 mr-1">
@@ -423,7 +450,7 @@ export function GitHubStreak() {
                           background: color,
                           border:
                             i === 0
-                              ? "1px solid rgba(0, 240, 255, 0.06)"
+                              ? "1px solid rgba(57, 211, 83, 0.08)"
                               : "none",
                         }}
                       />
