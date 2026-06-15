@@ -207,10 +207,12 @@ export function GitHubStreak() {
           className="bg-[#0a0a0a] rounded-2xl border-2 border-cyan/20 overflow-hidden hover:border-cyan/30 transition-colors duration-500 w-full sm:w-fit mx-auto"
         >
           {/* Terminal header */}
-          <div className="flex items-center gap-2 px-4 py-3 bg-titanium/80 border-b border-cyan/20">
-            <div className="w-3 h-3 rounded-full bg-red-500" />
-            <div className="w-3 h-3 rounded-full bg-yellow-500" />
-            <div className="w-3 h-3 rounded-full bg-green-500" />
+          <div className="flex items-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 bg-titanium/80 border-b border-cyan/20">
+            <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+              <div className="rounded-full bg-red-500 flex-shrink-0" style={{ width: 12, height: 12, minWidth: 12, minHeight: 12 }} />
+              <div className="rounded-full bg-yellow-500 flex-shrink-0" style={{ width: 12, height: 12, minWidth: 12, minHeight: 12 }} />
+              <div className="rounded-full bg-green-500 flex-shrink-0" style={{ width: 12, height: 12, minWidth: 12, minHeight: 12 }} />
+            </div>
             <span className="ml-4 text-xs font-mono text-cyan/70">
               contributions.graph
             </span>
