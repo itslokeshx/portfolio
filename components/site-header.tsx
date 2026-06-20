@@ -130,7 +130,7 @@ export function SiteHeader() {
                         onClick={() => window.dispatchEvent(new CustomEvent("trigger-resume"))}
                         className="flex items-center gap-2 px-3 py-1.5 sm:px-5 sm:py-2 border border-cyan/30 rounded text-cyan text-[10px] sm:text-[11px] tracking-widest font-medium hover:bg-cyan/10 transition-all shadow-[0_0_10px_rgba(0,240,255,0.1)] hover:shadow-[0_0_15px_rgba(0,240,255,0.3)] backdrop-blur-md bg-void/30 group"
                     >
-                        RESUME
+                        RESUME.PDF
                         <div className="w-1.5 h-1.5 rounded-full bg-cyan/50 group-hover:bg-cyan transition-all" />
                     </button>
                 </div>
