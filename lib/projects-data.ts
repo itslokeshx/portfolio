@@ -116,7 +116,7 @@ export const unmaskedProject: Project = {
 export const docChatProject: Project = {
   id: "docchat",
   title: "DocChat",
-  category: "AI Engineering",
+  category: "AI ENGINEERING",
   subtitle: "RAG-Powered PDF Chatbot",
   summary:
     "A RAG-powered PDF chatbot that ingests, embeds, and queries PDF documents using Groq-hosted LLMs and ChromaDB to provide context-aware answers.",
@@ -140,7 +140,7 @@ export const docChatProject: Project = {
 export const queryNestProject: Project = {
   id: "querynest",
   title: "QueryNest",
-  category: "AI Engineering",
+  category: "AI ENGINEERING",
   subtitle: "Natural-Language Query Engine for MongoDB",
   summary:
     "A natural-language query engine for MongoDB that translates English questions into safe MongoDB queries and explains the results.",
@@ -164,7 +164,7 @@ export const queryNestProject: Project = {
 export const engineeringTeamProject: Project = {
   id: "engineering_team",
   title: "Engineering_team",
-  category: "AI Engineering",
+  category: "AI ENGINEERING",
   subtitle: "Multi-Agent CrewAI Sandbox & Debates",
   summary:
     "A multi-agent CrewAI setup for building Python applications in a sandbox and running AI debates.",

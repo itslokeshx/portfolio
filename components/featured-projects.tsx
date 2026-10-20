@@ -9,6 +9,9 @@ import {
 } from "@/lib/projects-data";
 
 const allProjects: Project[] = [
+  // AI Engineering Projects
+  ...aiEngineeringProjects,
+
   // Desktop App
   {
     id: 39,
@@ -531,66 +534,6 @@ const allProjects: Project[] = [
     github: "https://github.com/itslokeshx/mindfulAI",
     demo: "https://mindfulai-cggh.onrender.com/",
   },
-  {
-    id: 101,
-    title: "LookOut",
-    category: "PHP/PYTHON",
-    description:
-      "Multi-agent AI system on MongoDB using LangChain and FastAPI for natural-language database querying and human-approved email campaign workflows.",
-    stack: ["Python", "FastAPI", "React", "LangChain", "MongoDB", "LLMs"],
-    image: "",
-    color: "#00F0FF",
-    github: "https://github.com/itslokeshx/Lookout",
-    demo: "#",
-  },
-  {
-    id: 102,
-    title: "Unmasked",
-    category: "PHP/PYTHON",
-    description:
-      "Conversational RAG application integrating LangChain, ChromaDB, and Groq-hosted Llama 3.1 8B with history-aware query rewriting.",
-    stack: ["Python", "LangChain", "Groq", "Llama 3.1 8B", "ChromaDB"],
-    image: "",
-    color: "#8B5CF6",
-    github: "https://github.com/itslokeshx/Unmasked",
-    demo: "#",
-  },
-  {
-    id: 103,
-    title: "DocChat",
-    category: "PHP/PYTHON",
-    description:
-      "A RAG-powered PDF chatbot that ingests, embeds, and queries PDF documents using Groq-hosted LLMs and ChromaDB to provide context-aware answers.",
-    stack: ["Python", "RAG", "Groq", "ChromaDB", "embeddings", "LLMs"],
-    image: "",
-    color: "#10B981",
-    github: "https://github.com/itslokeshx/DocChat",
-    demo: "#",
-  },
-  {
-    id: 104,
-    title: "QueryNest",
-    category: "PHP/PYTHON",
-    description:
-      "A natural-language query engine for MongoDB that translates English questions into safe MongoDB queries and explains the results.",
-    stack: ["Python", "MongoDB", "LangChain", "Groq", "LLMs"],
-    image: "",
-    color: "#F59E0B",
-    github: "https://github.com/itslokeshx/QueryNest",
-    demo: "#",
-  },
-  {
-    id: 105,
-    title: "Engineering_team",
-    category: "PHP/PYTHON",
-    description:
-      "A multi-agent CrewAI setup for building Python applications in a sandbox and running AI debates.",
-    stack: ["Python", "CrewAI", "multi-agent systems", "sandboxed execution", "LLMs"],
-    image: "",
-    color: "#EC4899",
-    github: "https://github.com/itslokeshx/Engineering_team",
-    demo: "#",
-  },
 ];
 
 // Shuffle Text Effect Component
@@ -932,11 +875,32 @@ function ArchiveCard({ project }: { project: Project }) {
     >
       {/* Card Image */}
       <div className="h-48 w-full relative overflow-hidden bg-black/50">
-        <img
-          src={project.image || "/placeholder.svg"}
-          alt={project.title}
-          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 opacity-80 group-hover:opacity-100"
-        />
+        {project.image ? (
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 opacity-80 group-hover:opacity-100"
+          />
+        ) : (
+          <div className="w-full h-full flex flex-col items-center justify-center p-4 text-center bg-gradient-to-b from-white/[0.03] to-transparent relative">
+            <div
+              className="absolute inset-0 opacity-[0.05] pointer-events-none"
+              style={{
+                backgroundImage: `linear-gradient(rgba(0, 240, 255, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 240, 255, 0.4) 1px, transparent 1px)`,
+                backgroundSize: "20px 20px",
+              }}
+            />
+            <div className="w-12 h-12 rounded-xl bg-cyan/5 border border-cyan/20 flex items-center justify-center text-cyan mb-2 group-hover:border-cyan/50 group-hover:shadow-[0_0_15px_rgba(0,240,255,0.2)] transition-all duration-300">
+              <span className="font-mono text-base font-bold text-cyan">{"{ }"}</span>
+            </div>
+            <span className="font-mono text-[11px] text-cyan/80 tracking-widest uppercase font-semibold">
+              // {project.title}
+            </span>
+            <span className="font-mono text-[10px] text-slate-500 mt-0.5 line-clamp-1 max-w-[85%]">
+              {project.subtitle || project.category}
+            </span>
+          </div>
+        )}
 
         {/* Overlay Links */}
         <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 backdrop-blur-sm">
@@ -949,60 +913,71 @@ function ArchiveCard({ project }: { project: Project }) {
           >
             <Github size={20} />
           </a>
-          <a
-            href={project.demo}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-3.5 bg-black/50 border border-white/10 rounded-full hover:bg-cyan hover:text-black hover:border-cyan text-slate-200 transition-all duration-300 backdrop-blur-md hover:scale-110"
-            title="Live Demo"
-          >
-            <ExternalLink size={20} />
-          </a>
+          {project.demo && project.demo !== "#" && (
+            <a
+              href={project.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3.5 bg-black/50 border border-white/10 rounded-full hover:bg-cyan hover:text-black hover:border-cyan text-slate-200 transition-all duration-300 backdrop-blur-md hover:scale-110"
+              title="Live Demo"
+            >
+              <ExternalLink size={20} />
+            </a>
+          )}
         </div>
       </div>
 
       {/* Card Content */}
       <div className="p-6 flex flex-col flex-grow">
         <div className="flex items-start justify-between mb-3">
-          <h3 className="text-xl font-bold text-slate-200 group-hover:text-cyan transition-colors">
-            {project.title}
-          </h3>
-          <span className="text-[10px] font-mono text-cyan/70 border border-cyan/20 px-2 py-1 rounded">
+          <div>
+            <h3 className="text-xl font-bold text-slate-200 group-hover:text-cyan transition-colors">
+              {project.title}
+            </h3>
+            {project.subtitle && (
+              <p className="text-xs font-mono text-cyan/70 mt-0.5">
+                {project.subtitle}
+              </p>
+            )}
+          </div>
+          <span className="text-[10px] font-mono text-cyan/70 border border-cyan/20 px-2 py-1 rounded bg-cyan/5 whitespace-nowrap ml-2">
             {project.category}
           </span>
         </div>
 
         <p className="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">
-          {project.description}
+          {project.summary || project.description.split("\n")[0]}
         </p>
 
         <div className="flex flex-wrap gap-2 mt-auto">
-          {project.stack.slice(0, 3).map((tech) => (
+          {project.stack.slice(0, 4).map((tech) => (
             <span
               key={tech}
-              className="text-[10px] text-slate-500 bg-white/5 px-2 py-1 rounded font-mono"
+              className="text-[10px] text-slate-400 bg-white/5 border border-white/5 px-2 py-1 rounded font-mono"
             >
               {tech}
             </span>
           ))}
-          {project.stack.length > 3 && (
+          {project.stack.length > 4 && (
             <span className="text-[10px] text-slate-500 bg-white/5 px-2 py-1 rounded font-mono">
-              +{project.stack.length - 3}
+              +{project.stack.length - 4}
             </span>
           )}
         </div>
 
         {/* Mobile-only buttons */}
         <div className="flex gap-2 mt-3 md:hidden">
-          <a
-            href={project.demo}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className="flex-1 bg-cyan/5 border border-cyan/20 text-cyan text-xs font-semibold px-3 py-2.5 rounded-lg text-center hover:bg-cyan hover:text-black hover:border-cyan transition-all duration-300 active:scale-95 flex items-center justify-center gap-2"
-          >
-            Live Demo ↗
-          </a>
+          {project.demo && project.demo !== "#" && (
+            <a
+              href={project.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="flex-1 bg-cyan/5 border border-cyan/20 text-cyan text-xs font-semibold px-3 py-2.5 rounded-lg text-center hover:bg-cyan hover:text-black hover:border-cyan transition-all duration-300 active:scale-95 flex items-center justify-center gap-2"
+            >
+              Live Demo ↗
+            </a>
+          )}
           <a
             href={project.github}
             target="_blank"
@@ -1023,7 +998,7 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
   const [expandedFeatured, setExpandedFeatured] = useState<number | null>(null);
   const [showArchive, setShowArchive] = useState(false);
   const [isArchiveTriggerHovered, setIsArchiveTriggerHovered] = useState(false);
-  const [activeFilter, setActiveFilter] = useState("HTML/CSS");
+  const [activeFilter, setActiveFilter] = useState("AI ENGINEERING");
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
@@ -1043,13 +1018,14 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
   }, [showArchive]);
 
   const categories = [
-    "HTML/CSS",
-    "JAVASCRIPT",
+    "AI ENGINEERING",
+    "MERN STACK",
     "REACT",
     "NODE/EXPRESS",
-    "MERN STACK",
     "DESKTOP APP",
+    "JAVASCRIPT",
     "TYPESCRIPT",
+    "HTML/CSS",
     "PHP/PYTHON",
   ];
 
