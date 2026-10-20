@@ -1,83 +1,473 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
-import { motion, useInView } from "framer-motion";
-import { Rocket, Settings, Database, Sparkles } from "lucide-react";
+import React, { useRef, useEffect, useState } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import {
+  FolderGit2,
+  Boxes,
+  Users,
+  Sparkles,
+  Cpu,
+  Bot,
+  Search,
+  Workflow,
+  Layers,
+  Rocket,
+  Server,
+  Database,
+  GitBranch,
+  Lightbulb,
+  Terminal,
+  Code2,
+  Blocks,
+} from "lucide-react";
 
-interface OrbitNode {
+interface ConstellationNode {
   id: string;
   label: string;
-  icon: string;
-  angle: number;
-  orbitRadius: number;
-  speed: number;
+  category: string;
+  description: string;
+  orbit: "inner" | "outer";
+  x: number;
+  y: number;
+  icon: React.ComponentType<{ className?: string; size?: number }>;
 }
 
-// Base orbit radii for desktop
-const ORBIT_NODES: OrbitNode[] = [
+const CENTRAL_NODE: ConstellationNode = {
+  id: "building",
+  label: "BUILDING",
+  category: "Core Philosophy",
+  description:
+    "Creating software that people actually use. Learning by building, maintaining, and refining real products.",
+  orbit: "inner",
+  x: 0,
+  y: 0,
+  icon: Blocks,
+};
+
+const ABOUT_NODES: ConstellationNode[] = [
+  // Inner Orbit (Radius = 110)
   {
-    id: "html",
-    label: "HTML / CSS",
-    icon: "pen",
-    angle: Math.PI * 0.8,
-    orbitRadius: 180,
-    speed: 0.0008,
+    id: "ai-eng",
+    label: "AI Engineering",
+    category: "AI Engineering",
+    description:
+      "Applied intelligence, model orchestration, and integrating neural capabilities into production.",
+    orbit: "inner",
+    x: 110,
+    y: 0,
+    icon: Cpu,
   },
   {
-    id: "js",
-    label: "JavaScript",
-    icon: "code",
-    angle: Math.PI * 0.2,
-    orbitRadius: 180,
-    speed: 0.0008,
+    id: "llm",
+    label: "LLM Applications",
+    category: "AI Engineering",
+    description:
+      "Developing context-aware, structured applications on foundation language models.",
+    orbit: "inner",
+    x: 55,
+    y: 95,
+    icon: Bot,
+  },
+  {
+    id: "full-stack",
+    label: "Full-Stack Development",
+    category: "Full-Stack Development",
+    description:
+      "Architecting end-to-end applications from responsive client UIs to distributed backend services.",
+    orbit: "inner",
+    x: -55,
+    y: 95,
+    icon: Layers,
+  },
+  {
+    id: "product",
+    label: "Product Development",
+    category: "Product Development",
+    description:
+      "Iterating from raw concept to shipped products with user empathy and sustainable design.",
+    orbit: "inner",
+    x: -110,
+    y: 0,
+    icon: Rocket,
+  },
+  {
+    id: "apis",
+    label: "APIs & Backend Systems",
+    category: "Backend Architecture",
+    description:
+      "Designing secure RESTful endpoints, authentication systems, and resilient server backends.",
+    orbit: "inner",
+    x: -55,
+    y: -95,
+    icon: Server,
+  },
+  {
+    id: "problem-solving",
+    label: "Problem Solving",
+    category: "Core Engineering",
+    description:
+      "Pragmatic engineering mindset focused on root-cause analysis and robust, useful software.",
+    orbit: "inner",
+    x: 55,
+    y: -95,
+    icon: Lightbulb,
+  },
+
+  // Outer Orbit (Radius = 195)
+  {
+    id: "agents",
+    label: "AI Agents",
+    category: "AI Engineering",
+    description:
+      "Autonomous multi-agent systems, tool execution, and self-directing task workflows.",
+    orbit: "outer",
+    x: 169,
+    y: 98,
+    icon: Workflow,
+  },
+  {
+    id: "rag",
+    label: "RAG Systems",
+    category: "AI Engineering",
+    description:
+      "Semantic retrieval, vector search pipelines, and grounding LLMs in dynamic proprietary data.",
+    orbit: "outer",
+    x: 0,
+    y: 195,
+    icon: Search,
   },
   {
     id: "mern",
     label: "MERN Stack",
-    icon: "layers",
-    angle: Math.PI * 1.3,
-    orbitRadius: 180,
-    speed: 0.0008,
+    category: "Full-Stack Development",
+    description:
+      "Building full-featured production systems with MongoDB, Express.js, React, and Node.js.",
+    orbit: "outer",
+    x: -169,
+    y: 98,
+    icon: Code2,
   },
   {
-    id: "api",
-    label: "REST APIs",
-    icon: "cloud",
-    angle: Math.PI * 1.7,
-    orbitRadius: 180,
-    speed: 0.0008,
+    id: "opensource",
+    label: "Open Source",
+    category: "Engineering Culture",
+    description:
+      "Building in the open, contributing to developer tooling, and sharing transparent code.",
+    orbit: "outer",
+    x: -169,
+    y: -98,
+    icon: GitBranch,
   },
   {
-    id: "github",
-    label: "GitHub",
-    icon: "database",
-    angle: Math.PI * 0.5,
-    orbitRadius: 140,
-    speed: 0.001,
+    id: "databases",
+    label: "Databases",
+    category: "Database Architecture",
+    description:
+      "Schema design, query optimization, indexing, relational modeling, and vector stores.",
+    orbit: "outer",
+    x: 0,
+    y: -195,
+    icon: Database,
   },
+  {
+    id: "automation",
+    label: "Automation",
+    category: "Systems & Automation",
+    description:
+      "Automating repetitive workflows, data sync jobs, and human-in-the-loop task runners.",
+    orbit: "outer",
+    x: 169,
+    y: -98,
+    icon: Terminal,
+  },
+];
+
+const CONSTELLATION_CONNECTIONS: [string, string][] = [
+  // Rays from central BUILDING node to inner core
+  ["building", "ai-eng"],
+  ["building", "llm"],
+  ["building", "full-stack"],
+  ["building", "product"],
+  ["building", "apis"],
+  ["building", "problem-solving"],
+
+  // Inner hexagonal ring
+  ["ai-eng", "llm"],
+  ["llm", "full-stack"],
+  ["full-stack", "product"],
+  ["product", "apis"],
+  ["apis", "problem-solving"],
+  ["problem-solving", "ai-eng"],
+
+  // Outer spokes connecting to adjacent inner hubs
+  ["agents", "ai-eng"],
+  ["agents", "llm"],
+  ["rag", "llm"],
+  ["rag", "full-stack"],
+  ["mern", "full-stack"],
+  ["mern", "product"],
+  ["opensource", "product"],
+  ["opensource", "apis"],
+  ["databases", "apis"],
+  ["databases", "problem-solving"],
+  ["automation", "problem-solving"],
+  ["automation", "ai-eng"],
 ];
 
 const STATS = [
-  { value: "35+", label: "PROJECTS BUILT", icon: Rocket },
-  { value: "4+", label: "REAL-WORLD PRODUCTS", icon: Database },
-  { value: "2000+", label: "DEV HOURS", icon: Settings },
+  { value: "50+", label: "PROJECTS BUILT", icon: FolderGit2 },
+  { value: "10+", label: "PRODUCTS BUILT", icon: Boxes },
+  { value: "500+", label: "USERS REACHED", icon: Users },
   { value: "∞", label: "CURIOSITY LEVEL", icon: Sparkles },
 ];
 
+function AboutConstellation() {
+  const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null);
+  const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
+
+  const activeId = hoveredNodeId || selectedNodeId || "building";
+  const activeNode =
+    activeId === "building"
+      ? CENTRAL_NODE
+      : ABOUT_NODES.find((n) => n.id === activeId) || CENTRAL_NODE;
+
+  const nodeCoordsMap: Record<string, { x: number; y: number }> = {
+    building: { x: CENTRAL_NODE.x, y: CENTRAL_NODE.y },
+    ...Object.fromEntries(ABOUT_NODES.map((n) => [n.id, { x: n.x, y: n.y }])),
+  };
+
+  return (
+    <div className="w-full flex flex-col items-center">
+      {/* Constellation Canvas Container */}
+      <div className="relative aspect-square w-full max-w-[420px] sm:max-w-[460px] lg:max-w-[460px] xl:max-w-[480px] mx-auto select-none">
+        {/* SVG Graphic Layer */}
+        <svg
+          viewBox="-250 -250 500 500"
+          className="absolute inset-0 w-full h-full pointer-events-none overflow-visible"
+          aria-hidden="true"
+        >
+          <defs>
+            {/* Subtle soft cyan radial glow */}
+            <radialGradient id="about-center-glow" cx="0%" cy="0%" r="50%">
+              <stop offset="0%" stopColor="rgba(0, 240, 255, 0.08)" />
+              <stop offset="65%" stopColor="rgba(0, 240, 255, 0.01)" />
+              <stop offset="100%" stopColor="transparent" />
+            </radialGradient>
+            <filter id="about-glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="2.5" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+          </defs>
+
+          {/* Center ambient glow */}
+          <circle cx="0" cy="0" r="210" fill="url(#about-center-glow)" />
+
+          {/* Gentle slow-rotating background orbital guides */}
+          <motion.g
+            animate={{ rotate: 360 }}
+            transition={{ duration: 160, repeat: Infinity, ease: "linear" }}
+            style={{ transformOrigin: "0px 0px" }}
+          >
+            {/* Outer orbit */}
+            <circle
+              cx="0"
+              cy="0"
+              r="195"
+              fill="none"
+              stroke="rgba(255, 255, 255, 0.05)"
+              strokeWidth="1"
+              strokeDasharray="3 8"
+            />
+            {/* Inner orbit */}
+            <circle
+              cx="0"
+              cy="0"
+              r="110"
+              fill="none"
+              stroke="rgba(0, 240, 255, 0.1)"
+              strokeWidth="1"
+              strokeDasharray="3 6"
+            />
+            {/* Core orbit */}
+            <circle
+              cx="0"
+              cy="0"
+              r="50"
+              fill="none"
+              stroke="rgba(0, 240, 255, 0.15)"
+              strokeWidth="1"
+              strokeDasharray="2 4"
+            />
+
+            {/* Subtle alignment ticks */}
+            <line x1="-198" y1="0" x2="-192" y2="0" stroke="rgba(0, 240, 255, 0.25)" strokeWidth="1" />
+            <line x1="192" y1="0" x2="198" y2="0" stroke="rgba(0, 240, 255, 0.25)" strokeWidth="1" />
+            <line x1="0" y1="-198" x2="0" y2="-192" stroke="rgba(0, 240, 255, 0.25)" strokeWidth="1" />
+            <line x1="0" y1="192" x2="0" y2="198" stroke="rgba(0, 240, 255, 0.25)" strokeWidth="1" />
+          </motion.g>
+
+          {/* Stable Minimal Connection Lines */}
+          {CONSTELLATION_CONNECTIONS.map(([fromId, toId]) => {
+            const from = nodeCoordsMap[fromId];
+            const to = nodeCoordsMap[toId];
+            if (!from || !to) return null;
+
+            const isDirectlyActive =
+              activeId === fromId || activeId === toId;
+            const isCenterConnected =
+              activeId === "building" && (fromId === "building" || toId === "building");
+            const isHighlighted = isDirectlyActive || isCenterConnected;
+
+            return (
+              <line
+                key={`${fromId}-${toId}`}
+                x1={from.x}
+                y1={from.y}
+                x2={to.x}
+                y2={to.y}
+                stroke={isHighlighted ? "#00F0FF" : "rgba(255, 255, 255, 0.07)"}
+                strokeWidth={isHighlighted ? 1.5 : 1}
+                strokeOpacity={isHighlighted ? 0.9 : 0.35}
+                filter={isHighlighted ? "url(#about-glow-cyan)" : undefined}
+                className="transition-all duration-300 ease-out"
+              />
+            );
+          })}
+        </svg>
+
+        {/* Central Node (BUILDING) */}
+        <div
+          className="absolute -translate-x-1/2 -translate-y-1/2 z-20"
+          style={{ left: "50%", top: "50%" }}
+        >
+          <motion.button
+            type="button"
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.96 }}
+            transition={{ type: "spring", stiffness: 400, damping: 25 }}
+            onClick={() => setSelectedNodeId("building")}
+            onMouseEnter={() => setHoveredNodeId("building")}
+            onMouseLeave={() => setHoveredNodeId(null)}
+            onFocus={() => setHoveredNodeId("building")}
+            onBlur={() => setHoveredNodeId(null)}
+            aria-label="Central Domain Node: BUILDING (Core Philosophy)"
+            className={`group relative w-16 h-16 sm:w-20 sm:h-20 rounded-full flex flex-col items-center justify-center transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan ${
+              activeId === "building"
+                ? "bg-[#080808] border-2 border-cyan shadow-[0_0_25px_rgba(0,240,255,0.35)]"
+                : "bg-[#080808] border border-cyan/40 hover:border-cyan hover:shadow-[0_0_20px_rgba(0,240,255,0.25)]"
+            }`}
+          >
+            <div className="absolute inset-0 rounded-full bg-cyan/[0.04] animate-pulse pointer-events-none" />
+            <Blocks className="w-5 h-5 sm:w-6 sm:h-6 text-cyan transition-transform duration-300 group-hover:scale-110" />
+            <span className="text-[8px] sm:text-[9px] font-mono font-bold tracking-[0.2em] text-cyan mt-0.5">
+              BUILDING
+            </span>
+          </motion.button>
+        </div>
+
+        {/* 12 Surrounding Nodes */}
+        {ABOUT_NODES.map((node) => {
+          const isSelected = activeId === node.id;
+          const leftPercent = ((node.x + 250) / 500) * 100;
+          const topPercent = ((node.y + 250) / 500) * 100;
+          const Icon = node.icon;
+
+          return (
+            <div
+              key={node.id}
+              className="absolute -translate-x-1/2 -translate-y-1/2 z-10"
+              style={{ left: `${leftPercent}%`, top: `${topPercent}%` }}
+            >
+              <motion.button
+                type="button"
+                whileHover={{ scale: 1.15 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                onClick={() => setSelectedNodeId(node.id)}
+                onMouseEnter={() => setHoveredNodeId(node.id)}
+                onMouseLeave={() => setHoveredNodeId(null)}
+                onFocus={() => setHoveredNodeId(node.id)}
+                onBlur={() => setHoveredNodeId(null)}
+                aria-label={`${node.label} (${node.category}): ${node.description}`}
+                className={`group relative w-9 h-9 sm:w-11 sm:h-11 rounded-full flex items-center justify-center transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan ${
+                  isSelected
+                    ? "bg-cyan/10 border-2 border-cyan shadow-[0_0_20px_rgba(0,240,255,0.4)] z-20"
+                    : "bg-[#0a0a0a]/95 border border-white/10 hover:border-cyan/50 hover:bg-cyan/[0.05] hover:shadow-[0_0_15px_rgba(0,240,255,0.2)]"
+                }`}
+              >
+                <Icon
+                  className={`w-4 h-4 sm:w-4.5 sm:h-4.5 transition-colors duration-300 ${
+                    isSelected
+                      ? "text-cyan"
+                      : "text-mist/60 group-hover:text-cyan"
+                  }`}
+                />
+
+                {/* Clean Minimal Hover Tooltip */}
+                {hoveredNodeId === node.id && (
+                  <motion.div
+                    initial={{ opacity: 0, y: node.y > 0 ? 4 : -4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.15 }}
+                    className={`absolute z-30 pointer-events-none px-2.5 py-1 rounded-md bg-[#050505]/95 border border-white/15 text-slate-200 text-[10px] font-mono whitespace-nowrap shadow-xl tracking-wide ${
+                      node.y > 0 ? "-top-8" : "top-11"
+                    } left-1/2 -translate-x-1/2`}
+                  >
+                    {node.label}
+                  </motion.div>
+                )}
+              </motion.button>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Cyberpunk Minimal HUD Card (Domain Inspector) */}
+      <div className="w-full max-w-[420px] sm:max-w-[460px] lg:max-w-[460px] xl:max-w-[480px] mt-4 min-h-[92px]">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeNode.id}
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="w-full p-4 rounded-xl bg-white/[0.02] border border-white/10 backdrop-blur-md"
+          >
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan/80 animate-pulse" />
+                <span className="text-[10px] font-mono text-cyan tracking-wider uppercase">
+                  // {activeNode.category.toUpperCase()}
+                </span>
+              </div>
+              <span className="text-[9px] font-mono text-mist/40 uppercase tracking-widest">
+                {activeId === "building" ? "ROOT_NODE" : "DOMAIN_NODE"}
+              </span>
+            </div>
+            <div className="text-sm sm:text-base font-semibold text-white/95 flex items-center gap-2.5">
+              <activeNode.icon className="w-4 h-4 text-cyan flex-shrink-0" />
+              <span>{activeNode.label}</span>
+            </div>
+            <p className="text-xs sm:text-sm text-mist/60 font-mono mt-1.5 leading-relaxed">
+              {activeNode.description}
+            </p>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+}
+
 export function AboutSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const isInView = useInView(sectionRef, { once: false, margin: "-20%" });
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-  const [isMobile, setIsMobile] = useState(false);
-  const animationRef = useRef<number>(0);
-  const nodesRef = useRef<OrbitNode[]>([...ORBIT_NODES]);
   const [typedText, setTypedText] = useState("");
 
   const fullText =
-    "I'm a developer interested in building useful products through full-stack development and AI engineering.\n\nI work across the MERN stack, REST APIs, authentication systems, real-time applications, database architecture, and automation tools. I'm also exploring AI engineering through LLM-powered applications, retrieval-augmented generation (RAG), embeddings, vector databases, and AI agents.\n\nI built SoulSync, a music platform that has crossed 350+ users, 50,000+ song streams, and 280+ playlists created. Working on SoulSync has given me hands-on experience taking a product from an idea to something people use, maintaining it, and improving it over time.\n\nI enjoy solving practical problems, experimenting with ideas, and learning through building. My focus is on developing software that is useful, functional, and thoughtfully engineered.";
+    "I'm a developer interested in building useful products through full-stack development and AI engineering.\n\nI work across the MERN stack, REST APIs, authentication systems, real-time applications, database architecture, and automation tools. I'm also exploring AI engineering through LLM-powered applications, retrieval-augmented generation (RAG), embeddings, vector databases, and AI agents.\n\nI built SoulSync, a music platform that has crossed 350+ users, 50,000+ song streams, and 100+ playlists created. Working on SoulSync has given me hands-on experience taking a product from an idea to something people use, maintaining it, and improving it over time.\n\nI enjoy solving practical problems, experimenting with ideas, and learning through building. My focus is on developing software that is useful, functional, and thoughtfully engineered.";
 
-  // Typing effect with faster speed
+  // Typing effect with responsive speed
   useEffect(() => {
     if (!isInView) return;
     let index = 0;
@@ -88,252 +478,15 @@ export function AboutSection() {
       } else {
         clearInterval(interval);
       }
-    }, 15); // Much faster typing (15ms instead of 50ms)
+    }, 15);
     return () => clearInterval(interval);
   }, [isInView]);
-
-  useEffect(() => {
-    const updateDimensions = () => {
-      if (canvasRef.current && canvasRef.current.parentElement) {
-        const rect = canvasRef.current.parentElement.getBoundingClientRect();
-        const mobile = window.innerWidth < 768;
-        setIsMobile(mobile);
-
-        // Get device pixel ratio for high-DPI displays (Retina, etc.)
-        const dpr = window.devicePixelRatio || 1;
-
-        // Set display size (CSS pixels)
-        setDimensions({ width: rect.width, height: rect.height });
-
-        // Set actual canvas size (device pixels) for full HD quality
-        canvasRef.current.width = rect.width * dpr;
-        canvasRef.current.height = rect.height * dpr;
-
-        // Scale context to match device pixel ratio
-        const ctx = canvasRef.current.getContext("2d");
-        if (ctx) {
-          ctx.scale(dpr, dpr);
-        }
-      }
-    };
-    updateDimensions();
-    window.addEventListener("resize", updateDimensions);
-    return () => window.removeEventListener("resize", updateDimensions);
-  }, []);
-
-  useEffect(() => {
-    if (!canvasRef.current || !isInView || dimensions.width === 0) return;
-
-    const ctx = canvasRef.current.getContext("2d");
-    if (!ctx) return;
-
-    const centerX = dimensions.width / 2;
-    const centerY = dimensions.height / 2;
-
-    // Scale orbit radii for mobile
-    const scaleFactor = isMobile ? 0.75 : 1;
-    const outerOrbitRadius = 180 * scaleFactor;
-    const innerOrbitRadius = 140 * scaleFactor;
-
-    const drawIcon = (x: number, y: number, iconType: string, size: number) => {
-      ctx.strokeStyle = "#E2E8F0";
-      ctx.lineWidth = 1.5;
-      ctx.fillStyle = "transparent";
-
-      switch (iconType) {
-        case "layers":
-          ctx.beginPath();
-          ctx.moveTo(x - size / 2, y);
-          ctx.lineTo(x, y - size / 3);
-          ctx.lineTo(x + size / 2, y);
-          ctx.lineTo(x, y + size / 3);
-          ctx.closePath();
-          ctx.stroke();
-          ctx.beginPath();
-          ctx.moveTo(x - size / 2, y + size / 4);
-          ctx.lineTo(x, y + size / 3 + size / 4);
-          ctx.lineTo(x + size / 2, y + size / 4);
-          ctx.stroke();
-          break;
-        case "code":
-          ctx.beginPath();
-          ctx.moveTo(x - size / 3, y - size / 4);
-          ctx.lineTo(x - size / 2, y);
-          ctx.lineTo(x - size / 3, y + size / 4);
-          ctx.stroke();
-          ctx.beginPath();
-          ctx.moveTo(x + size / 3, y - size / 4);
-          ctx.lineTo(x + size / 2, y);
-          ctx.lineTo(x + size / 3, y + size / 4);
-          ctx.stroke();
-          break;
-        case "pen":
-          ctx.beginPath();
-          ctx.moveTo(x - size / 4, y + size / 4);
-          ctx.lineTo(x + size / 4, y - size / 4);
-          ctx.stroke();
-          ctx.beginPath();
-          ctx.arc(x - size / 4, y + size / 4, 3, 0, Math.PI * 2);
-          ctx.stroke();
-          break;
-        case "database":
-          ctx.beginPath();
-          ctx.ellipse(x, y - size / 4, size / 3, size / 6, 0, 0, Math.PI * 2);
-          ctx.stroke();
-          ctx.beginPath();
-          ctx.moveTo(x - size / 3, y - size / 4);
-          ctx.lineTo(x - size / 3, y + size / 4);
-          ctx.stroke();
-          ctx.beginPath();
-          ctx.moveTo(x + size / 3, y - size / 4);
-          ctx.lineTo(x + size / 3, y + size / 4);
-          ctx.stroke();
-          ctx.beginPath();
-          ctx.ellipse(x, y + size / 4, size / 3, size / 6, 0, 0, Math.PI);
-          ctx.stroke();
-          break;
-        case "cloud":
-          ctx.beginPath();
-          ctx.arc(x - size / 4, y, size / 4, Math.PI * 0.5, Math.PI * 1.5);
-          ctx.arc(x, y - size / 4, size / 4, Math.PI, Math.PI * 2);
-          ctx.arc(x + size / 4, y, size / 4, Math.PI * 1.5, Math.PI * 0.5);
-          ctx.lineTo(x - size / 4, y + size / 4);
-          ctx.stroke();
-          break;
-      }
-    };
-
-    const animate = () => {
-      if (!isInView) return;
-      ctx.clearRect(0, 0, dimensions.width, dimensions.height);
-
-      // Draw orbit rings
-      ctx.strokeStyle = "rgba(0, 240, 255, 0.15)";
-      ctx.lineWidth = 1;
-      ctx.setLineDash([5, 10]);
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, outerOrbitRadius, 0, Math.PI * 2);
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, innerOrbitRadius, 0, Math.PI * 2);
-      ctx.stroke();
-      ctx.setLineDash([]);
-
-      // Draw connection lines to center
-      nodesRef.current.forEach((node) => {
-        const nodeRadius =
-          node.orbitRadius === 180 ? outerOrbitRadius : innerOrbitRadius;
-        const x = centerX + Math.cos(node.angle) * nodeRadius;
-        const y = centerY + Math.sin(node.angle) * nodeRadius;
-
-        ctx.beginPath();
-        ctx.strokeStyle = "rgba(0, 240, 255, 0.2)";
-        ctx.moveTo(centerX, centerY);
-        ctx.lineTo(x, y);
-        ctx.stroke();
-      });
-
-      // Draw center node (</>)
-      const centerPulse = 1 + Math.sin(Date.now() * 0.003) * 0.05;
-      const centerRotation = (Date.now() * 0.0003) % (Math.PI * 2);
-
-      // Multi-layer glow circles
-      const glowLayers = [
-        { radius: 40, opacity: 0.2 },
-        { radius: 50, opacity: 0.15 },
-        { radius: 60, opacity: 0.1 },
-        { radius: 70, opacity: 0.05 },
-        { radius: 80, opacity: 0.03 },
-      ];
-
-      glowLayers.forEach((layer, index) => {
-        ctx.beginPath();
-        const gradient = ctx.createRadialGradient(
-          centerX,
-          centerY,
-          0,
-          centerX,
-          centerY,
-          layer.radius * centerPulse,
-        );
-        const color = index % 2 === 0 ? "0, 240, 255" : "157, 0, 255";
-        gradient.addColorStop(0, `rgba(${color}, ${layer.opacity})`);
-        gradient.addColorStop(1, `rgba(${color}, 0)`);
-        ctx.fillStyle = gradient;
-        ctx.arc(centerX, centerY, layer.radius * centerPulse, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      // Inner ring
-      ctx.beginPath();
-      ctx.strokeStyle = "#00F0FF";
-      ctx.lineWidth = 2;
-      ctx.arc(centerX, centerY, 50 * centerPulse, 0, Math.PI * 2);
-      ctx.stroke();
-
-      // Code symbol </>
-      ctx.save();
-      ctx.translate(centerX, centerY);
-      ctx.rotate(centerRotation);
-      ctx.font = "bold 48px 'Space Grotesk', monospace";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-
-      // Left bracket <
-      ctx.fillStyle = "#00F0FF";
-      ctx.fillText("<", -20, 0);
-
-      // Slash /
-      ctx.fillStyle = "#9D00FF";
-      ctx.fillText("/", 0, 0);
-
-      // Right bracket >
-      ctx.fillStyle = "#0077FF";
-      ctx.fillText(">", 20, 0);
-
-      ctx.restore();
-
-      // Draw orbit nodes
-      nodesRef.current.forEach((node) => {
-        node.angle += node.speed;
-
-        const nodeRadius =
-          node.orbitRadius === 180 ? outerOrbitRadius : innerOrbitRadius;
-        const x = centerX + Math.cos(node.angle) * nodeRadius;
-        const y = centerY + Math.sin(node.angle) * nodeRadius;
-
-        // Node background circle
-        ctx.beginPath();
-        ctx.fillStyle = "#0a0a0a";
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
-        ctx.lineWidth = 1;
-        ctx.arc(x, y, 28, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.stroke();
-
-        // Draw icon
-        drawIcon(x, y, node.icon, 24);
-
-        // Label below
-        ctx.fillStyle = "#94A3B8";
-        ctx.font = "10px 'Space Grotesk', sans-serif";
-        ctx.textAlign = "center";
-        ctx.fillText(node.label, x, y + 45);
-      });
-
-      animationRef.current = requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    return () => cancelAnimationFrame(animationRef.current);
-  }, [isInView, dimensions]);
 
   return (
     <section
       id="about"
       ref={sectionRef}
-      className="relative min-h-[600px] py-20 pb-16 md:py-20 md:pb-16 px-4 md:px-8 overflow-hidden bg-void"
+      className="relative min-h-[600px] py-20 pb-16 md:py-24 md:pb-20 px-4 md:px-8 overflow-hidden bg-void"
     >
       <motion.div
         className="max-w-7xl mx-auto"
@@ -348,76 +501,49 @@ export function AboutSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-14 md:mb-16"
         >
           <p className="font-mono text-cyan/60 text-sm mb-4">
             // SYSTEM_PROFILE
           </p>
-          <h2 className="text-5xl md:text-6xl font-black text-white mb-4">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-4">
             ABOUT <span className="text-cyan">ME</span>
           </h2>
-          <p className="text-mist/60 max-w-2xl mx-auto">
+          <p className="text-mist/60 max-w-2xl mx-auto text-sm sm:text-base">
             Exploring the digital frontier through code, creativity, and
             constant learning.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left: Orbital Constellation */}
-          <div className="relative h-[450px] md:h-[450px]">
-            <canvas
-              ref={canvasRef}
-              className="absolute inset-0 w-full h-full"
-            />
+        <div className="grid lg:grid-cols-2 gap-10 xl:gap-14 items-start">
+          {/* Left: Distinct Engineering Constellation */}
+          <div className="w-full flex justify-center">
+            <AboutConstellation />
           </div>
 
-          {/* Right: Terminal + Content */}
-          <div className="space-y-8">
+          {/* Right: Terminal Bio + Statistics */}
+          <div className="space-y-6 sm:space-y-8 w-full">
             {/* Terminal Window */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-30%" }}
               transition={{ duration: 0.6 }}
-              className="bg-[#0a0a0a] rounded-2xl overflow-hidden border-2 border-cyan/30 max-w-3xl"
+              className="bg-[#0a0a0a]/90 rounded-2xl overflow-hidden border border-white/10 hover:border-cyan/30 shadow-[0_0_30px_rgba(0,0,0,0.5)] transition-colors duration-300"
             >
-              <div className="flex items-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 bg-titanium/80 border-b border-cyan/20">
+              <div className="flex items-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 bg-white/[0.03] border-b border-white/5">
                 <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
-                  <div
-                    className="rounded-full bg-red-500 flex-shrink-0"
-                    style={{
-                      width: 12,
-                      height: 12,
-                      minWidth: 12,
-                      minHeight: 12,
-                    }}
-                  />
-                  <div
-                    className="rounded-full bg-yellow-500 flex-shrink-0"
-                    style={{
-                      width: 12,
-                      height: 12,
-                      minWidth: 12,
-                      minHeight: 12,
-                    }}
-                  />
-                  <div
-                    className="rounded-full bg-green-500 flex-shrink-0"
-                    style={{
-                      width: 12,
-                      height: 12,
-                      minWidth: 12,
-                      minHeight: 12,
-                    }}
-                  />
+                  <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500/80" />
+                  <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500/80" />
+                  <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500/80" />
                 </div>
-                <span className="ml-4 text-xs font-mono text-cyan/70">
+                <span className="ml-3 sm:ml-4 text-xs font-mono text-cyan/70 tracking-wider">
                   lokesh.bio
                 </span>
               </div>
-              <div className="p-6 font-mono text-sm leading-relaxed">
-                <div className="text-cyan mb-2">$ cat about.txt</div>
-                <div className="mt-4 text-mist/80 whitespace-pre-line">
+              <div className="p-4 sm:p-6 font-mono text-xs sm:text-sm leading-relaxed">
+                <div className="text-cyan/90 font-semibold mb-2">$ cat about.txt</div>
+                <div className="mt-3 sm:mt-4 text-mist/80 whitespace-pre-line leading-relaxed">
                   {isInView && typedText.length > 0 ? typedText : ""}
                   {isInView && typedText.length < fullText.length && (
                     <span className="text-cyan animate-pulse">_</span>
@@ -429,26 +555,26 @@ export function AboutSection() {
               </div>
             </motion.div>
 
-            {/* Stats Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-12">
+            {/* Stats Grid: 50+ Projects, 10+ Products, 500+ Users, ∞ Curiosity */}
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               {STATS.map((stat, index) => (
                 <motion.div
                   key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  transition={{ duration: 0.4, delay: index * 0.08 }}
                   viewport={{ once: true }}
-                  className="bg-[#111] border border-white/5 rounded-xl p-4 flex items-start justify-between hover:border-cyan/30 transition-colors"
+                  className="group bg-[#0a0a0a]/80 border border-white/5 rounded-xl p-3.5 sm:p-4 flex items-start justify-between hover:border-cyan/30 hover:bg-white/[0.02] transition-all duration-300"
                 >
                   <div>
-                    <div className="text-xl sm:text-2xl md:text-3xl font-black text-cyan">
+                    <div className="text-xl sm:text-2xl md:text-3xl font-black text-cyan tracking-tight transition-transform duration-300 group-hover:translate-x-0.5">
                       {stat.value}
                     </div>
-                    <div className="text-[10px] sm:text-xs font-mono text-mist/50 tracking-wider mt-1">
+                    <div className="text-[10px] sm:text-xs font-mono text-mist/50 tracking-wider mt-1 uppercase">
                       {stat.label}
                     </div>
                   </div>
-                  <stat.icon className="w-4 h-4 sm:w-5 sm:h-5 text-mist/30" />
+                  <stat.icon className="w-4 h-4 sm:w-5 sm:h-5 text-mist/30 mt-1 flex-shrink-0 group-hover:text-cyan/60 transition-colors duration-300" />
                 </motion.div>
               ))}
             </div>
