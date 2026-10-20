@@ -81,7 +81,7 @@ const SKILLS_DATA = [
     name: "Python",
     proficiency: 80,
     experience: "Intermediate",
-    projects: ["LookOut", "Unmasked", "DocChat", "QueryNest", "Engineering_team"],
+    projects: ["LookOut", "Unmasked", "DocChat", "QueryNest", "LinkLens"],
     orbit: "outer",
   },
   {

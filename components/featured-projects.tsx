@@ -874,12 +874,12 @@ function ArchiveCard({ project }: { project: Project }) {
       className="group relative bg-white/[0.03] border border-white/5 rounded-xl overflow-hidden hover:border-cyan/30 hover:bg-white/[0.05] transition-all duration-300 flex flex-col h-full"
     >
       {/* Card Image */}
-      <div className="h-48 w-full relative overflow-hidden bg-black/50">
+      <div className="aspect-video w-full relative overflow-hidden bg-black/60">
         {project.image ? (
           <img
             src={project.image}
-            alt={project.title}
-            className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 opacity-80 group-hover:opacity-100"
+            alt={`${project.title} cover screenshot`}
+            className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
           />
         ) : (
           <div className="w-full h-full flex flex-col items-center justify-center p-4 text-center bg-gradient-to-b from-white/[0.03] to-transparent relative">
@@ -998,7 +998,7 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
   const [expandedFeatured, setExpandedFeatured] = useState<number | null>(null);
   const [showArchive, setShowArchive] = useState(false);
   const [isArchiveTriggerHovered, setIsArchiveTriggerHovered] = useState(false);
-  const [activeFilter, setActiveFilter] = useState("AI ENGINEERING");
+  const [activeFilter, setActiveFilter] = useState("MERN STACK");
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
@@ -1018,8 +1018,8 @@ export function FeaturedProjects({ onViewAll }: { onViewAll: () => void }) {
   }, [showArchive]);
 
   const categories = [
-    "AI ENGINEERING",
     "MERN STACK",
+    "AI ENGINEERING",
     "REACT",
     "NODE/EXPRESS",
     "DESKTOP APP",

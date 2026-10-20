@@ -30,30 +30,47 @@ const DevTo = (props: any) => (
   </svg>
 );
 
+const LeetCodeIcon = (props: any) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+    <path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z" />
+  </svg>
+);
+
 const SOCIAL_LINKS = [
   {
     name: "GitHub",
     icon: Github,
     url: "https://github.com/itslokeshx",
     handle: "@itslokeshx",
+    ariaLabel: "View my GitHub profile and repositories",
   },
   {
     name: "LinkedIn",
     icon: Linkedin,
     url: "https://www.linkedin.com/in/itslokeshx/",
     handle: "/in/itslokeshx",
+    ariaLabel: "Connect with me on LinkedIn",
+  },
+  {
+    name: "LeetCode",
+    icon: LeetCodeIcon,
+    url: "https://leetcode.com/u/itslokeshx/",
+    handle: "itslokeshx",
+    ariaLabel: "View my LeetCode profile and coding practice.",
   },
   {
     name: "X",
     icon: XIcon,
     url: "https://x.com/itslokeshx",
     handle: "@itslokeshx",
+    ariaLabel: "Follow me on X",
   },
   {
     name: "Dev.to",
     icon: DevTo,
     url: "https://dev.to/itslokeshx",
     handle: "itslokeshx",
+    ariaLabel: "Read my technical articles on Dev.to",
   },
 ];
 
@@ -61,10 +78,12 @@ function MagneticButton({
   children,
   href,
   label,
+  ariaLabel,
 }: {
   children: React.ReactNode;
   href: string;
   label: string;
+  ariaLabel?: string;
 }) {
   const ref = useRef<HTMLAnchorElement>(null);
   const x = useMotionValue(0);
@@ -100,12 +119,13 @@ function MagneticButton({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
+      aria-label={ariaLabel || label}
       style={{ x: springX, y: springY }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      className="group flex flex-col items-center gap-2 sm:gap-3 touch-none"
+      className="group flex flex-col items-center gap-2 sm:gap-3 touch-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/60 rounded-2xl"
     >
       <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-[#0a0a0a] border border-white/10 rounded-xl sm:rounded-2xl flex items-center justify-center group-hover:border-cyan/50 group-hover:shadow-[0_0_30px_rgba(0,240,255,0.3)] transition-all duration-300">
         {children}
@@ -296,10 +316,14 @@ export function ContactSection() {
               <div className="text-[10px] sm:text-xs text-mist/40 mb-4 sm:mb-6 text-center">
                 // SOCIAL_UPLINKS
               </div>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 justify-center max-w-2xl mx-auto">
+              <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8 max-w-3xl mx-auto">
                 {SOCIAL_LINKS.map((link) => (
                   <div key={link.name} className="flex justify-center">
-                    <MagneticButton href={link.url} label={link.handle}>
+                    <MagneticButton
+                      href={link.url}
+                      label={link.handle}
+                      ariaLabel={link.ariaLabel}
+                    >
                       <link.icon className="w-6 h-6 sm:w-7 sm:h-7 text-mist/60 group-hover:text-cyan transition-colors" />
                     </MagneticButton>
                   </div>

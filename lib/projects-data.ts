@@ -49,8 +49,7 @@ export const lookoutProject: Project = {
     "Validated on a dataset of 187 users with zero failed sends.",
   ],
   stack: ["Python", "FastAPI", "React", "LangChain", "MongoDB", "LLMs"],
-  // Centralized screenshot path: add screenshot path here when uploaded (e.g. "/Project_images/lookout.png")
-  image: "",
+  image: "/Project_images/lookout_cover_1920x1080.png",
   color: "#00F0FF",
   github: "https://github.com/itslokeshx/Lookout",
   demo: "#",
@@ -106,8 +105,7 @@ export const unmaskedProject: Project = {
     "ChromaDB",
     "Hugging Face",
   ],
-  // Centralized screenshot path: add screenshot path here when uploaded (e.g. "/Project_images/unmasked.png")
-  image: "",
+  image: "/Project_images/unmasked_cover_1920x1080.png",
   color: "#8B5CF6",
   github: "https://github.com/itslokeshx/Unmasked",
   demo: "#",
@@ -129,8 +127,7 @@ export const docChatProject: Project = {
     "Public repository, MIT License.",
   ],
   stack: ["Python", "RAG", "Groq", "ChromaDB", "embeddings", "LLMs"],
-  // Centralized screenshot path: add screenshot path here when uploaded (e.g. "/Project_images/docchat.png")
-  image: "",
+  image: "/Project_images/docchat_cover_1920x1080.png",
   color: "#10B981",
   github: "https://github.com/itslokeshx/DocChat",
   demo: "#",
@@ -153,8 +150,7 @@ export const queryNestProject: Project = {
     "Public repository, MIT License.",
   ],
   stack: ["Python", "MongoDB", "LangChain", "Groq", "LLMs"],
-  // Centralized screenshot path: add screenshot path here when uploaded (e.g. "/Project_images/querynest.png")
-  image: "",
+  image: "/Project_images/querynest_cover_1920x1080.png",
   color: "#F59E0B",
   github: "https://github.com/itslokeshx/QueryNest",
   demo: "#",
@@ -163,7 +159,7 @@ export const queryNestProject: Project = {
 
 export const engineeringTeamProject: Project = {
   id: "engineering_team",
-  title: "Engineering_team",
+  title: "Engineering Team",
   category: "AI ENGINEERING",
   subtitle: "Multi-Agent CrewAI Sandbox & Debates",
   summary:
@@ -176,11 +172,42 @@ export const engineeringTeamProject: Project = {
     "Automated multi-agent debate and reasoning workflows.",
   ],
   stack: ["Python", "CrewAI", "multi-agent systems", "sandboxed execution", "LLMs"],
-  // Centralized screenshot path: add screenshot path here when uploaded (e.g. "/Project_images/engineering_team.png")
   image: "",
   color: "#EC4899",
   github: "https://github.com/itslokeshx/Engineering_team",
   demo: "#",
+};
+
+export const linkLensProject: Project = {
+  id: "linklens",
+  title: "LinkLens",
+  category: "AI ENGINEERING",
+  subtitle: "AI-Powered Webpage and YouTube Summarizer",
+  summary:
+    "A minimal tool for summarizing web pages and YouTube videos using LangChain and Groq-hosted language models.",
+  description:
+    "LinkLens is a minimal tool for summarizing web pages and YouTube videos using LangChain and Groq-hosted language models. Features dual document-loading paths for standard URLs and YouTube transcripts, Groq ChatGroq integration, and expandable thinking-process displays in a clean light/dark interface.",
+  highlights: [
+    "Summarizes standard web pages and articles from a URL.",
+    "Supports YouTube video summarization through transcript extraction.",
+    "Uses LangChain with the Groq ChatGroq API to generate summaries.",
+    "Supports expandable thinking-process content in the interface.",
+    "Provides a minimal interface that adapts to dark and light modes.",
+    "Uses different document-loading paths for web pages and YouTube transcripts.",
+  ],
+  stack: [
+    "Python",
+    "Streamlit",
+    "LangChain",
+    "Groq",
+    "Unstructured",
+    "YouTube Transcript API",
+  ],
+  image: "/Project_images/linklens_cover_1920x1080.png",
+  color: "#38BDF8",
+  github: "https://github.com/itslokeshx/LinkLens",
+  demo: "#",
+  license: "MIT",
 };
 
 // ==========================================
@@ -195,7 +222,7 @@ export const featuredProjects: Project[] = [
 ];
 
 // ==========================================
-// 2. Dedicated AI Engineering Projects (Exact Order: LookOut, Unmasked, DocChat, QueryNest, Engineering_team)
+// 2. Dedicated AI Engineering Projects (Exact Order: LookOut, Unmasked, DocChat, QueryNest, Engineering Team, LinkLens)
 // ==========================================
 export const aiEngineeringProjects: Project[] = [
   lookoutProject,
@@ -203,4 +230,5 @@ export const aiEngineeringProjects: Project[] = [
   docChatProject,
   queryNestProject,
   engineeringTeamProject,
+  linkLensProject,
 ];
