@@ -78,10 +78,10 @@ const SKILLS_DATA = [
     orbit: "outer",
   },
   {
-    name: "C++",
-    proficiency: 40,
-    experience: "Learning",
-    projects: ["DSA Practice"],
+    name: "Python",
+    proficiency: 80,
+    experience: "Intermediate",
+    projects: ["LookOut", "Unmasked", "DocChat", "QueryNest", "Engineering_team"],
     orbit: "outer",
   },
   {

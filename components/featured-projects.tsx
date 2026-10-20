@@ -2,81 +2,11 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Github, ExternalLink, Plus, ChevronDown } from "lucide-react";
-
-interface Project {
-  id: number;
-  title: string;
-  category: string;
-  description: string;
-  stack: string[];
-  image: string;
-  color: string;
-  github: string;
-  demo: string;
-}
-
-const featuredProjects: Project[] = [
-  {
-    id: 0,
-    title: "SoulSync",
-    category: "FULL STACK",
-    description:
-      "**Problem:** Music streaming requires expensive subscriptions while offering fragmented features.\n**Impact:** Users pay ₹119/month for basic features and lack collaborative listening experiences.\n**Solution:** SoulSync — a free, open-source music streaming platform with AI-powered playlists, real-time duo sessions, intelligent search, and native Android support. No ads. No limits. Ever.",
-    stack: ["React", "Node.js", "MongoDB", "Socket.io", "Groq AI", "Capacitor"],
-    image: "/Project_images/soulsync.png",
-    color: "#00F0FF",
-    github: "https://github.com/itslokeshx/SoulSync",
-    demo: "https://soul-sync-beta.vercel.app/",
-  },
-  {
-    id: 1,
-    title: "CorteXia",
-    category: "MERN STACK",
-    description:
-      "**Problem:** Productivity tools are fragmented and AI lacks real context.\n**Impact:** Users lose clarity, consistency, and alignment between daily actions and long-term goals.\n**Solution:** CorteXia — an AI-powered unified workspace connecting tasks, goals, habits, finance, and journaling into one intelligent system.",
-    stack: ["MongoDB", "Express", "React", "Node.js", "AI"],
-    image: "/Project_images/Cortexia.png",
-    color: "#6D28D9",
-    github: "https://github.com/itslokeshx/CorteXia",
-    demo: "https://corte-xia.vercel.app/",
-  },
-  {
-    id: 2,
-    title: "Ollama Chat",
-    category: "TAURI / REACT",
-    description:
-      "**Problem:** Ollama on Linux has no native desktop UI — users are stuck in terminals or bloated Docker-based web UIs.\n**Impact:** Model switching, file uploads, and chat history require memorizing CLI commands or running heavy 500MB+ containers.\n**Solution:** Ollama Chat — a ~3.5MB native Linux desktop app built with Tauri and React for instant local AI chat with streaming, model management, and drag-and-drop file uploads.",
-    stack: ["Tauri 2.0", "React", "TypeScript", "Zustand", "Vite"],
-    image: "/Project_images/ollama-chat.png",
-    color: "#3B82F6",
-    github: "https://github.com/itslokeshx/ollama-chat",
-    demo: "https://github.com/itslokeshx/ollama-chat",
-  },
-  {
-    id: 3,
-    title: "Roots",
-    category: "MERN STACK",
-    description:
-      "**Problem:** Mental health apps focus on surface-level mood tracking without uncovering underlying psychological patterns.\n**Impact:** Users manage symptoms but never understand the root causes driving their anxiety, burnout, or relationship struggles.\n**Solution:** Roots — an AI-guided psychological excavation app with 40-question depth sessions, living memory profiles, and personalized healing practices.",
-    stack: ["React", "Node.js", "MongoDB", "Groq AI", "SSE"],
-    image: "/Project_images/Roots.png",
-    color: "#FFD700",
-    github: "https://github.com/itslokeshx/Roots",
-    demo: "https://find-your-root.vercel.app/",
-  },
-  {
-    id: 5,
-    title: "Chatty",
-    category: "MERN STACK",
-    description:
-      "**Problem:** Real-time chat applications are often over-engineered with cluttered interfaces and unnecessary complexity.\n**Impact:** Users face distracting UIs that prioritize features over focused, clean communication experiences.\n**Solution:** Chatty — a minimalist real-time global chat app with JWT authentication, Socket.IO messaging, and a premium monochrome design inspired by Notion.",
-    stack: ["React", "Node.js", "MongoDB", "Socket.io"],
-    image: "/Project_images/Chatty.png",
-    color: "#FFFFFF",
-    github: "https://github.com/itslokeshx/Chatty",
-    demo: "https://chatty-six-flax.vercel.app/",
-  },
-];
+import {
+  Project,
+  featuredProjects,
+  aiEngineeringProjects,
+} from "@/lib/projects-data";
 
 const allProjects: Project[] = [
   // Desktop App
@@ -601,6 +531,66 @@ const allProjects: Project[] = [
     github: "https://github.com/itslokeshx/mindfulAI",
     demo: "https://mindfulai-cggh.onrender.com/",
   },
+  {
+    id: 101,
+    title: "LookOut",
+    category: "PHP/PYTHON",
+    description:
+      "Multi-agent AI system on MongoDB using LangChain and FastAPI for natural-language database querying and human-approved email campaign workflows.",
+    stack: ["Python", "FastAPI", "React", "LangChain", "MongoDB", "LLMs"],
+    image: "",
+    color: "#00F0FF",
+    github: "https://github.com/itslokeshx/Lookout",
+    demo: "#",
+  },
+  {
+    id: 102,
+    title: "Unmasked",
+    category: "PHP/PYTHON",
+    description:
+      "Conversational RAG application integrating LangChain, ChromaDB, and Groq-hosted Llama 3.1 8B with history-aware query rewriting.",
+    stack: ["Python", "LangChain", "Groq", "Llama 3.1 8B", "ChromaDB"],
+    image: "",
+    color: "#8B5CF6",
+    github: "https://github.com/itslokeshx/Unmasked",
+    demo: "#",
+  },
+  {
+    id: 103,
+    title: "DocChat",
+    category: "PHP/PYTHON",
+    description:
+      "A RAG-powered PDF chatbot that ingests, embeds, and queries PDF documents using Groq-hosted LLMs and ChromaDB to provide context-aware answers.",
+    stack: ["Python", "RAG", "Groq", "ChromaDB", "embeddings", "LLMs"],
+    image: "",
+    color: "#10B981",
+    github: "https://github.com/itslokeshx/DocChat",
+    demo: "#",
+  },
+  {
+    id: 104,
+    title: "QueryNest",
+    category: "PHP/PYTHON",
+    description:
+      "A natural-language query engine for MongoDB that translates English questions into safe MongoDB queries and explains the results.",
+    stack: ["Python", "MongoDB", "LangChain", "Groq", "LLMs"],
+    image: "",
+    color: "#F59E0B",
+    github: "https://github.com/itslokeshx/QueryNest",
+    demo: "#",
+  },
+  {
+    id: 105,
+    title: "Engineering_team",
+    category: "PHP/PYTHON",
+    description:
+      "A multi-agent CrewAI setup for building Python applications in a sandbox and running AI debates.",
+    stack: ["Python", "CrewAI", "multi-agent systems", "sandboxed execution", "LLMs"],
+    image: "",
+    color: "#EC4899",
+    github: "https://github.com/itslokeshx/Engineering_team",
+    demo: "#",
+  },
 ];
 
 // Shuffle Text Effect Component
@@ -694,23 +684,29 @@ function ProjectRow({
           </div>
 
           {/* Inline Image Preview (Static, appears on hover) */}
-          {/* Inline Image Preview (Static, reserved space) */}
           <div className="hidden md:block w-40 h-24 flex-shrink-0 relative">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: isHovered && !isExpanded ? 1 : 0 }}
               transition={{ duration: 0.3 }}
-              className="absolute inset-0 rounded-lg overflow-hidden border-2"
+              className="absolute inset-0 rounded-lg overflow-hidden border-2 bg-[#0a0a0a]"
               style={{
                 borderColor: project.color,
                 boxShadow: `0 0 20px ${project.color}40`,
               }}
             >
-              <img
-                src={project.image || "/placeholder.svg"}
-                alt={project.title}
-                className="w-full h-full object-cover"
-              />
+              {project.image ? (
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full flex flex-col items-center justify-center p-2 text-center bg-black/60">
+                  <span className="font-mono text-[10px] text-cyan font-bold tracking-wider">// {project.title}</span>
+                  <span className="font-mono text-[8px] text-slate-500 uppercase mt-0.5">{project.category}</span>
+                </div>
+              )}
               <div className="absolute inset-0 pointer-events-none overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan/5 to-transparent animate-scan" />
               </div>
@@ -747,59 +743,87 @@ function ProjectRow({
                 {/* Left: Project Image */}
                 <div className="md:col-span-5">
                   <div className="aspect-video w-full rounded-xl overflow-hidden border border-white/10 relative group bg-black">
-                    {/* Noise texture overlay */}
-                    <motion.div
-                      initial={{ opacity: 0.4 }}
-                      animate={{ opacity: 0 }}
-                      transition={{ duration: 1.5, delay: 0.3 }}
-                      className="absolute inset-0 z-10 pointer-events-none"
-                      style={{
-                        backgroundImage:
-                          "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E\")",
-                        mixBlendMode: "overlay",
-                      }}
-                    />
+                    {project.image ? (
+                      <>
+                        {/* Noise texture overlay */}
+                        <motion.div
+                          initial={{ opacity: 0.4 }}
+                          animate={{ opacity: 0 }}
+                          transition={{ duration: 1.5, delay: 0.3 }}
+                          className="absolute inset-0 z-10 pointer-events-none"
+                          style={{
+                            backgroundImage:
+                              "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E\")",
+                            mixBlendMode: "overlay",
+                          }}
+                        />
 
-                    {/* Main image with smooth multi-stage blur */}
-                    <motion.img
-                      src={project.image || "/placeholder.svg"}
-                      alt={project.title}
-                      initial={{
-                        filter:
-                          "blur(60px) brightness(0.4) contrast(1.3) saturate(0.3)",
-                        opacity: 0.3,
-                      }}
-                      animate={{
-                        filter: [
-                          "blur(60px) brightness(0.4) contrast(1.3) saturate(0.3)",
-                          "blur(30px) brightness(0.7) contrast(1.15) saturate(0.7)",
-                          "blur(10px) brightness(0.9) contrast(1.05) saturate(0.95)",
-                          "blur(0px) brightness(1) contrast(1) saturate(1)",
-                        ],
-                        opacity: [0.3, 0.6, 0.9, 1],
-                      }}
-                      transition={{
-                        duration: 0.8,
-                        times: [0, 0.3, 0.65, 1],
-                        ease: [0.22, 1, 0.36, 1],
-                      }}
-                      className="w-full h-full object-cover"
-                      style={{
-                        willChange: "filter, opacity",
-                      }}
-                    />
+                        {/* Main image with smooth multi-stage blur */}
+                        <motion.img
+                          src={project.image}
+                          alt={project.title}
+                          initial={{
+                            filter:
+                              "blur(60px) brightness(0.4) contrast(1.3) saturate(0.3)",
+                            opacity: 0.3,
+                          }}
+                          animate={{
+                            filter: [
+                              "blur(60px) brightness(0.4) contrast(1.3) saturate(0.3)",
+                              "blur(30px) brightness(0.7) contrast(1.15) saturate(0.7)",
+                              "blur(10px) brightness(0.9) contrast(1.05) saturate(0.95)",
+                              "blur(0px) brightness(1) contrast(1) saturate(1)",
+                            ],
+                            opacity: [0.3, 0.6, 0.9, 1],
+                          }}
+                          transition={{
+                            duration: 0.8,
+                            times: [0, 0.3, 0.65, 1],
+                            ease: [0.22, 1, 0.36, 1],
+                          }}
+                          className="w-full h-full object-cover"
+                          style={{
+                            willChange: "filter, opacity",
+                          }}
+                        />
 
-                    {/* Scanline overlay */}
-                    <motion.div
-                      initial={{ opacity: 0.3 }}
-                      animate={{ opacity: 0 }}
-                      transition={{ duration: 1.5, delay: 0.5 }}
-                      className="absolute inset-0 pointer-events-none z-20"
-                      style={{
-                        backgroundImage:
-                          "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 240, 255, 0.03) 2px, rgba(0, 240, 255, 0.03) 4px)",
-                      }}
-                    />
+                        {/* Scanline overlay */}
+                        <motion.div
+                          initial={{ opacity: 0.3 }}
+                          animate={{ opacity: 0 }}
+                          transition={{ duration: 1.5, delay: 0.5 }}
+                          className="absolute inset-0 pointer-events-none z-20"
+                          style={{
+                            backgroundImage:
+                              "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 240, 255, 0.03) 2px, rgba(0, 240, 255, 0.03) 4px)",
+                          }}
+                        />
+                      </>
+                    ) : (
+                      <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-[#0a0a0a] relative">
+                        <div
+                          className="absolute inset-0 opacity-[0.06] pointer-events-none"
+                          style={{
+                            backgroundImage: `linear-gradient(rgba(0, 240, 255, 0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 240, 255, 0.4) 1px, transparent 1px)`,
+                            backgroundSize: "24px 24px",
+                          }}
+                        />
+                        <div className="w-16 h-16 rounded-2xl bg-cyan/5 border border-cyan/20 flex items-center justify-center text-cyan mb-3 shadow-[0_0_20px_rgba(0,240,255,0.15)]">
+                          <span className="font-mono text-2xl font-bold">{"{ }"}</span>
+                        </div>
+                        <span className="font-mono text-sm text-cyan tracking-widest uppercase font-bold">
+                          // {project.title}
+                        </span>
+                        {project.subtitle && (
+                          <span className="font-mono text-xs text-slate-400 mt-1 max-w-xs">
+                            {project.subtitle}
+                          </span>
+                        )}
+                        <span className="font-mono text-[10px] text-cyan/50 mt-3 border border-cyan/20 px-2 py-0.5 rounded">
+                          [ SYSTEM_MODULE // ACTIVE ]
+                        </span>
+                      </div>
+                    )}
 
                     {/* Hologram Scanlines */}
                     <div className="absolute inset-0 pointer-events-none">
@@ -812,9 +836,14 @@ function ProjectRow({
                 {/* Right: Details */}
                 <div className="md:col-span-7 flex flex-col gap-6">
                   <div>
-                    <h4 className="text-xs text-cyan uppercase tracking-wider mb-3 font-mono border-b border-cyan/20 pb-2 inline-block">
+                    <h4 className="text-xs text-cyan uppercase tracking-wider mb-2 font-mono border-b border-cyan/20 pb-2 inline-block">
                       // DOSSIER
                     </h4>
+                    {project.subtitle && (
+                      <p className="text-xs font-mono text-cyan/70 mb-3">
+                        {project.subtitle}
+                      </p>
+                    )}
                     <div className="text-sm text-slate-300 leading-relaxed mb-4 space-y-2">
                       {project.description.split("\n").map((line, i) => {
                         const parts = line.split("**");
