@@ -74,19 +74,19 @@ export function HeroSection() {
   const textDelay = isMobile ? startDelay + 0.3 : startDelay;
   const terminalDelay = isMobile ? startDelay : startDelay + 0.4;
 
-  const handleResumeClick = () => {
-    const link = document.createElement("a");
-    link.href = "/Resume.pdf";
-    link.download = "Resume.pdf";
-    link.click();
-  };
+  // const handleResumeClick = () => {
+  //   const link = document.createElement("a");
+  //   link.href = "/Resume.pdf";
+  //   link.download = "Resume.pdf";
+  //   link.click();
+  // };
 
-  useEffect(() => {
-    const handleResumeEvent = () => handleResumeClick();
-    window.addEventListener("trigger-resume", handleResumeEvent);
-    return () =>
-      window.removeEventListener("trigger-resume", handleResumeEvent);
-  }, []);
+  // useEffect(() => {
+  //   const handleResumeEvent = () => handleResumeClick();
+  //   window.addEventListener("trigger-resume", handleResumeEvent);
+  //   return () =>
+  //     window.removeEventListener("trigger-resume", handleResumeEvent);
+  // }, []);
 
   return (
     <section
